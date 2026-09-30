@@ -35,8 +35,6 @@ button.n.rompe{border-style:dashed;border-color:#C98F7B;color:var(--tomateO)}
 button.n.avisa{background:#C87A28;color:#fff;border-color:#9A5C1B;border-style:solid;animation:tiembla .28s}
 @keyframes tiembla{25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
 .mandos .botones{margin-top:10px}
-.aviso{margin:8px 0 0;font-size:14px;color:var(--tenue);min-height:20px}
-.aviso b{color:var(--oro)}
 
 /* ── LA PIZARRA DE NICK: el signo, antes de poder contar ── */
 .pizarra{margin-top:10px;background:var(--pizarra);border:6px solid #6E4A2E;border-radius:8px;padding:10px 12px 12px;

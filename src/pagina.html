@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="src/piel.css">
 <link rel="stylesheet" href="src/mesa.css">
 <link rel="stylesheet" href="src/arranque.css">
+<link rel="stylesheet" href="src/entrevistas.css">
 <script>
   /* los ajustes se ponen antes de pintar nada, para que no haya un fogonazo del otro fondo */
   document.documentElement.dataset.tema = 'dia';
@@ -43,6 +44,7 @@
         <button type="button" id="bAjustes" aria-pressed="false" aria-controls="ajustes">Ajustes</button>
         <button type="button" id="bAula" aria-pressed="false">Aula</button>
         <button type="button" id="bActa">Acta</button>
+        <button type="button" id="bEntrevista" aria-label="Entrevistas"><svg class="micro" viewBox="0 0 16 20" aria-hidden="true"><rect x="5" y="1" width="6" height="11" rx="3" fill="currentColor"/><path d="M2.5 9 Q2.5 15 8 15 Q13.5 15 13.5 9 M8 15 V19 M5 19 H11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
       </nav>
     </div>
     <div class="juegos" role="group" aria-label="Los tres juegos">
@@ -92,7 +94,7 @@
       <div class="fila" id="filaMaq"><span class="etq">la máquina</span><span class="tiras" id="botMaq"></span></div>
       <div class="botones"><button type="button" class="b ok" id="bGrapar">Grapar lo elegido</button><button type="button" class="b" id="bSoltar">Quitar grapas</button><button type="button" class="b" id="bLimpiar">Empezar el pedido</button></div>
     </div>
-    <p class="aviso" id="aviso" role="status"></p>
+    <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
   </section>
 
   <section class="panel tique" id="tique" aria-label="El tique">
@@ -122,6 +124,20 @@
       <span class="botones"><button type="button" class="b" id="guiaSalir">Salir</button><button type="button" class="b ok" id="guiaSig">Siguiente</button></span></div>
   </div>
 </div>
+<div class="modal" id="mEntrevista" hidden>
+  <div class="caja2 entrevista" id="entrevista" role="dialog" aria-modal="true" aria-labelledby="evTit" tabindex="-1">
+    <h2 id="evTit">Entrevistas en la cocina</h2>
+    <div class="ev-quien" role="group" aria-label="A quién entrevistar"></div>
+    <p class="ev-cartel"></p>
+    <div class="ev-escena">
+      <div class="ev-cara" aria-hidden="true"></div>
+      <div class="ev-globo"><p class="ev-pregunta"></p><p class="ev-respuesta" aria-live="polite"></p></div>
+    </div>
+    <p class="ev-rotulo">Pregúntale:</p>
+    <div class="ev-lista"></div>
+    <div class="botones"><button type="button" class="b" id="evCierra">Volver al mostrador</button></div>
+  </div>
+</div>
 <div class="modal" id="mActa" hidden>
   <div class="caja2 acta" role="dialog" aria-modal="true" aria-labelledby="actaTit" tabindex="-1">
     <h2 id="actaTit">El acta del mostrador</h2>
@@ -142,6 +158,7 @@
 <script src="src/pizza.js"></script>
 <script src="src/personajes.js"></script>
 <script src="src/arranque.js"></script>
+<script src="src/entrevistas.js"></script>
 <script>
 (function(){
 'use strict';
@@ -255,11 +272,17 @@ function pintaPizarra(){
   }
 }
 
+/* ── MIGAS, el pinche: los avisos del cortador y de la grapadora los da él ── */
+function migas(html){
+  const a = $('aviso');
+  a.innerHTML = html ? '<span class="cara" aria-hidden="true">' + PJ.MIGAS + '</span><div><span class="quien">Migas, el pinche</span>' + html + '</div>' : '';
+}
+
 /* ── LA MESA ── */
 function pintaMesa(){
   const tel = esTel();
   $('cajas').hidden = tel || !P; $('mandos').hidden = tel || !P; $('papel').hidden = !tel || !P;
-  $('aviso').innerHTML = '';
+  migas('');
   if(!P) return;
   if(tel){ pintaPapel(); return; }
   const cont = $('cajas'); cont.innerHTML = '';
@@ -295,8 +318,8 @@ function pintaMesa(){
     b.addEventListener('click', () => {
       const r = M.industrial(c, x); if(!r.ok) return;
       ultimaOp = r.op; sonar('grapa'); clac(); pintaMesa(); lee();
-      if(r.nota) $('aviso').innerHTML = 'La máquina une la pizza <b>entera</b> de ' + x + ' en ' + x + ': tus ' + r.nota.kAntes + '/' + r.nota.bAntes + ' no llenaban piezas enteras, así que te quedas con las piezas que los contienen. Aquí no hay división que enseñar.';
-      else if(!c.sel.size) $('aviso').innerHTML = 'La pizza queda en <b>' + M.grupos(c).length + '</b> piezas iguales. Ahora elige la tuya.';
+      if(r.nota) migas('La máquina une la pizza <b>entera</b> de ' + x + ' en ' + x + ': tus ' + r.nota.kAntes + '/' + r.nota.bAntes + ' no llenaban piezas enteras, así que te quedas con las piezas que los contienen. Aquí no hay división que enseñar.');
+      else if(!c.sel.size) migas('La pizza queda en <b>' + M.grupos(c).length + '</b> piezas iguales. Ahora elige la tuya.');
       quitaGrapasLuego();
     });
     bm.appendChild(b);
@@ -310,7 +333,7 @@ function corta(n){
     armado = {caja: activa, n};
     clearTimeout(corta.aviso); corta.aviso = setTimeout(() => { armado = null; pintaMesa(); }, 3200);
     pintaMesa(); sonar('mal');
-    $('aviso').innerHTML = 'De ' + c.cortes + ' a ' + n + ' el cortador <b>no respeta las piezas</b>: se pierde lo grapado y lo elegido. Toca otra vez para cortar de cero.';
+    migas('De ' + c.cortes + ' a ' + n + ' el cortador <b>no respeta las piezas</b>: se pierde lo grapado y lo elegido. Toca otra vez para cortar de cero.');
     return;
   }
   armado = null;
@@ -321,11 +344,11 @@ $('bGrapar').addEventListener('click', () => {
   const c = cajas[activa]; if(!c) return;
   const r = M.grapa(c);
   if(!r.ok){
-    $('aviso').innerHTML = r.por === 'pocas' ? 'La grapadora necesita <b>dos piezas o más</b>, y pegadas.' : 'Esas piezas <b>no están pegadas</b>: sueltas suman lo mismo, pero no forman una.';
+    migas(r.por === 'pocas' ? 'La grapadora necesita <b>dos piezas o más</b>, y pegadas.' : 'Esas piezas <b>no están pegadas</b>: sueltas suman lo mismo, pero no forman una.');
     sonar('mal'); return;
   }
   ultimaOp = r.op; sonar('grapa'); clac(); pintaMesa(); lee();
-  if(!r.op && r.m > 1) $('aviso').innerHTML = 'Una pieza de <b>' + r.m + '/' + c.cortes + '</b>… pero ' + r.m + ' no cabe en ' + c.cortes + ': esa pieza no es 1 de nada entero, y por eso aquí no hay división que enseñar.';
+  if(!r.op && r.m > 1) migas('Una pieza de <b>' + r.m + '/' + c.cortes + '</b>… pero ' + r.m + ' no cabe en ' + c.cortes + ': esa pieza no es 1 de nada entero, y por eso aquí no hay división que enseñar.');
   quitaGrapasLuego();
 });
 function quitaGrapasLuego(){ clearTimeout(reloj); reloj = setTimeout(() => { cajas.forEach(x => x.recien.clear()); pintaMesa(); }, 2600); }
@@ -476,13 +499,13 @@ function revisa(){
     const okA = casi(M.valor(cajas[0]), fVal(P.fA)), okB = casi(M.valor(cajas[1]), fVal(P.fB)), igual = cajas[0].cortes === cajas[1].cortes;
     /* la pregunta no se abre hasta que las dos pizzas están cortadas igual; solo el peldaño del mismo numerador va libre */
     if(okA && okB && (P.tipo === 'num' || igual)) ponPregunta();
-    else if(okA && okB && !igual) $('aviso').innerHTML = 'Los dos pedidos están listos: ahora pásales el <b>mismo cortador</b>. Con trozos distintos no hay cuenta que valga.';
+    else if(okA && okB && !igual) migas('Los dos pedidos están listos: ahora pásales el <b>mismo cortador</b>. Con trozos distintos no hay cuenta que valga.');
     return;
   }
   const ps = M.partes(cajas), juntable = ps.length < 2 || M.mismoCorte(ps), v = M.total(cajas);
   const pieza = !P.pieza || cajas.some(c => M.piezaDe(c, P.f[1]));
   if(juntable && casi(v, fVal(P.f)) && pieza) acierta(P.ok);
-  else if(juntable && casi(v, fVal(P.f)) && !pieza) $('aviso').innerHTML = 'Suman ' + fTxt(P.f) + ', sí. Pero el cliente quiere <b>una pieza</b>: grápalos.';
+  else if(juntable && casi(v, fVal(P.f)) && !pieza) migas('Suman ' + fTxt(P.f) + ', sí. Pero el cliente quiere <b>una pieza</b>: grápalos.');
 }
 function ponPregunta(){
   const q = $('pregunta'); if(!q.hidden) return;
@@ -505,7 +528,7 @@ function ponPregunta(){
 function acierta(txt){
   resuelto = true; sonar('bien');
   nickDice(txt, true);
-  $('pregunta').hidden = true; $('pregunta').innerHTML = ''; $('aviso').innerHTML = '';
+  $('pregunta').hidden = true; $('pregunta').innerHTML = ''; migas('');
   const s = est.stats[est.juego];
   if(est.practica){ if(!fallos) s.bien++; }
   else s.ruta = Math.max(s.ruta, est.ruta[est.juego] + 1);
@@ -560,6 +583,14 @@ $('acBaja').addEventListener('click', () => {
   $('acMsg').textContent = '✓ Acta descargada.';
 });
 
+/* ── LAS ENTREVISTAS ── */
+const EV = window.Entrevistas.monta($('entrevista'), PJ);
+function abreEntrevista(){ ajustes(false); $('mEntrevista').hidden = false; EV.abre(); $('entrevista').focus(); }
+const cierraEntrevista = () => { EV.calla(); $('mEntrevista').hidden = true; $('bEntrevista').focus(); };
+$('bEntrevista').addEventListener('click', abreEntrevista);
+$('evCierra').addEventListener('click', cierraEntrevista);
+$('mEntrevista').addEventListener('click', ev => { if(ev.target.id === 'mEntrevista') cierraEntrevista(); });
+
 /* ── EMPEZAR DE CERO: a la segunda pulsación ── */
 let cero = 0;
 $('ajCero').addEventListener('click', () => {
@@ -581,6 +612,7 @@ const GUIA = [
   {sel: '#bGrapar', c: 'La grapadora', t: 'Une los trozos elegidos, si están <b>pegados</b>. Dos cuartos grapados son media pizza: la misma cantidad con otro nombre.'},
   {sel: '#papel', c: 'El papel', t: 'Aquí no hay pizza que valga. Multiplica cada fracción <b>arriba y abajo</b> hasta que las dos estén en la misma secuencia; entonces se comparan.'},
   {sel: '#tique', c: 'El tique', t: 'La regla es la que manda: <b>el 1 es una pizza entera</b>, y cada pedido acaba en su marca. Debajo, la operación que ha hecho tu gesto: cortar multiplica, grapar divide.'},
+  {sel: '#bEntrevista', c: 'Las entrevistas', t: 'Pregúntales lo que quieras a <b>Nick</b>, a su hermana <b>Nicoleta</b> y a <b>Migas</b>, el pinche del cortador.'},
   {sel: '#bPracticar', c: 'Practicar', t: 'Pedidos <b>nuevos cada vez</b>, sin fin, con tres dificultades.'},
   {sel: '#bActa', c: 'El acta', t: 'Un resumen de lo que has hecho, con tu nombre y un código, para <b>entregárselo a tu profesor</b>.'},
   {sel: '#bAjustes', c: 'Ajustes', t: 'La encimera o la pizarra, la apuesta antes de comparar, el sonido y la animación.'},
@@ -619,7 +651,8 @@ $('guiaSalir').addEventListener('click', ev => { ev.stopPropagation(); cierraGui
 $('guiaGlobo').addEventListener('click', ev => ev.stopPropagation());
 $('guia').addEventListener('click', () => vaGuia(guiaI + 1));
 addEventListener('keydown', ev => { if(!$('guia').hidden){ ev.stopPropagation(); if(ev.key === 'Escape') cierraGuia(); else if(ev.key === 'ArrowRight' || ev.key === 'Enter'){ ev.preventDefault(); vaGuia(guiaI + 1); } return; }
-  if(ev.key === 'Escape' && !$('mActa').hidden) cierraActa(); }, true);
+  if(ev.key === 'Escape' && !$('mActa').hidden) cierraActa();
+  if(ev.key === 'Escape' && !$('mEntrevista').hidden) cierraEntrevista(); }, true);
 addEventListener('scroll', colocaGuia, {passive: true});
 addEventListener('resize', colocaGuia);
 

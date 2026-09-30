@@ -10,7 +10,9 @@ Fracciones equivalentes y comparación para 1.º y 2.º de ESO, rehechas desde c
 - **Comparar** — dos mesas, dos fracciones: ¿quién se lleva más? La escalera, en el orden en que se demuestra: mismo denominador, mismo numerador, un corte cabe en el otro, ninguno cabe (el denominador común) e iguales disfrazados. Antes de tocar nada, la pizarra pide el signo: la comparación es una apuesta que se comprueba.
 - **Por teléfono** — Nicoleta llama desde la pastelería con dos fracciones que el cortador no alcanza. Se cortan sobre el papel, y de ahí salen, demostrados, los productos en cruz.
 
-Cada juego tiene su ruta de pedidos fijos y, en **Practicar**, pedidos nuevos sin fin con tres dificultades. Nick contesta a cada respuesta mala diciendo en voz alta el razonamiento que la produjo.
+Cada juego tiene su ruta de pedidos fijos y, en **Practicar**, pedidos nuevos sin fin con tres dificultades. Nick contesta a cada respuesta mala diciendo en voz alta el razonamiento que la produjo. En la cocina le ayuda **Migas**, un ratón pinche que se encarga del cortador y da los avisos de la mesa.
+
+**Entrevistas** (el micrófono de arriba): Nick, Nicoleta y Migas contestan a lo que se les pregunte.
 
 ## Las reglas de la casa
 
@@ -26,12 +28,13 @@ La app es **un solo `index.html`**: se genera con `node construye.mjs` a partir 
 - `src/pagina.html` — la página: la cabecera, el encargo, la mesa, el tique, los ajustes, la guía y el acta.
 - `src/motor.js` — la caja de pizza: cortar, grapar, la máquina, el valor. No dibuja nada; vale en el navegador y en Node.
 - `src/pedidos.js` — los pedidos fijos de los tres juegos y los generadores de Practicar.
-- `src/pizza.js` — la pizza en SVG. `src/personajes.js` — Nick y Nicoleta. `src/sonido.js` — el clac, el cortador, la tiza y el teléfono, sintetizados.
+- `src/pizza.js` — la pizza en SVG. `src/personajes.js` — Nick, Nicoleta y Migas. `src/entrevistas.*` — las entrevistas. `src/sonido.js` — el clac, el cortador, la tiza y el teléfono, sintetizados.
 - `src/piel.css` — la encimera de mármol, las hojas y los botones (el formato de Miut). `src/mesa.css` — la mesa, la pizarra y el tique. `src/arranque.*` — la escena de inicio.
 - `pruebas/` — `node --test pruebas/*.test.mjs`: el motor, los pedidos y que `index.html` esté construido.
 
 ## Historial
 
 1. ✅ Versión 0.1: los tres juegos, la ruta, Practicar, la guía, los ajustes, el acta y la escena de inicio.
+2. ✅ Versión 0.2: pizzas con textura (corteza tostada, tomate, queso fundido, pepperoni, aceitunas, albahaca); Migas, el ratón pinche del cortador, que da los avisos de la mesa; y las entrevistas a Nick, Nicoleta y Migas.
 
 © 2026 Andrés Asensio · [CC BY-NC-ND 4.0](LICENSE.md) · [La pizzería de Nick](https://diazepamina-creator.github.io/pizzeria-de-nick/), la app anterior.
