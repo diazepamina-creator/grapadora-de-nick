@@ -1,0 +1,213 @@
+/* ══════════════════════════════════════════════════════════════════════
+   LA GRAPADORA DE NICK · la piel
+   La disposición de Las piezas de Miut —la cabecera en una hoja con sus
+   pestañas, las hojas de papel, los botones, el acta— sobre la encimera de
+   mármol de la pizzería: clara, con sus vetas y un poco de harina. De
+   noche, la pizarra verde del local. Proyector: papel blanco y tinta negra.
+   ══════════════════════════════════════════════════════════════════════ */
+:root{
+  --fondo1:#EFE9DD; --fondo2:#DED5C4; --luz:rgba(255,252,240,.7);
+  --veta:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='520'><filter id='v'><feTurbulence type='fractalNoise' baseFrequency='.004 .012' numOctaves='3' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .40  0 0 0 0 .34  0 0 0 9 -4.2'/></filter><rect width='520' height='520' filter='url(%23v)' opacity='.16'/></svg>");
+  --harina:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='h'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='1' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 7 -4.6'/></filter><rect width='180' height='180' filter='url(%23h)' opacity='.5'/></svg>");
+  --noche:#F6EEDF; --panel:#FFFCF4; --panel2:#FBF4E6; --linea:#D9C6A6;
+  --tinta:#2E2218; --tenue:#7D6650;
+  --morado:#8A6A9E; --oro:#A8661B; --rojo:#B0442C; --verde:#4F7A2E;
+  --sombra:rgba(70,45,20,.22); --brillo:rgba(214,150,50,.18);
+  /* los de la casa */
+  --tomate:#C4462F; --tomateO:#9E3423; --azul:#2F6E8C; --albahaca:#5C7A3E;
+  --corteza:#C98A3E; --cortezaO:#A96C28; --queso:#F3DCA2; --carton:#C89A63; --grapa:#C6CBD1;
+  --pizarra:#2E4034; --tizaV:#8FA894; --tizaB:#EFF3EA;
+  --sello:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path d='M1.5 4.5 h9 a1.6 1.6 0 0 1 1.6 1.6 v1.2 h-2.4 v-.8 h-8.2 z'/><rect x='1.5' y='7.3' width='9.3' height='2.4' rx='.6'/><rect x='2.2' y='10' width='7.9' height='2.2' rx='.5'/><path d='M4 12.2 v1.3 M8.4 12.2 v1.3' stroke='black' stroke-width='1.2'/></svg>");
+  --rotulo:'Bree Serif',Georgia,serif; --letra:'Nunito',system-ui,sans-serif;
+}
+/* la pizarra del local: verde oscuro, con el polvo de la tiza */
+html[data-tema="noche"]{
+  --fondo1:#2C3D33; --fondo2:#1E2B24; --luz:rgba(240,240,220,.10);
+  --veta:none;
+  --harina:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='h'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='5' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 .95  0 0 0 5 -3.2'/></filter><rect width='180' height='180' filter='url(%23h)' opacity='.35'/></svg>");
+  --noche:#1F1A16; --panel:#2B241F; --panel2:#342C26; --linea:#57493D;
+  --tinta:#F4EADB; --tenue:#C4B29A;
+  --morado:#B79CCB; --oro:#E6A84A; --rojo:#D2644B; --verde:#8DB36A;
+  --tomate:#E2725B; --azul:#57B8D6; --albahaca:#8DB36A;
+  --sombra:rgba(0,0,0,.45); --brillo:rgba(230,168,74,.16);
+  color-scheme:dark}
+html[data-tema="proyector"]{
+  --noche:#F4F4F4; --panel:#FFFFFF; --panel2:#FFFFFF; --linea:#1A1A1A;
+  --tinta:#000000; --tenue:#2B2B2B;
+  --oro:#8A5A00; --rojo:#B3261E; --verde:#1D6B12; --tomate:#B3261E; --azul:#0B5F86;
+  --sombra:rgba(0,0,0,.12); --brillo:rgba(138,90,0,.10)}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{background:var(--fondo2)}
+body{margin:0;color:var(--tinta);font-family:var(--letra);font-size:15px;line-height:1.5;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%, var(--luz), transparent 70%),
+    var(--harina),
+    var(--veta),
+    linear-gradient(180deg, var(--fondo1), var(--fondo2));
+  background-size:auto, 180px 180px, 520px 520px, auto;
+  background-attachment:fixed;-webkit-text-size-adjust:100%;min-height:100vh}
+html[data-tema="proyector"], html[data-tema="proyector"] body{background:#FFFFFF}
+.lienzo{max-width:760px;margin:0 auto;padding:12px 12px 36px;display:flex;flex-direction:column}
+html[data-movimiento="menos"] *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+
+/* ── LA CABECERA: una sola hoja con el nombre y, en letra pequeña y sin
+   cajas, las acciones; debajo, los tres juegos como pestañas ── */
+.cab{padding:9px 14px 0;border:1px solid var(--linea);border-radius:13px;overflow:hidden;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 6px 18px var(--sombra)}
+.rotulo{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rotulo > div{flex:1 1 0;min-width:0}
+.cab .sello{width:26px;height:26px;flex:0 0 26px;background:var(--oro);
+  -webkit-mask:var(--sello) center/contain no-repeat;mask:var(--sello) center/contain no-repeat}
+.cab h1{font-family:var(--rotulo);font-weight:400;font-size:19px;letter-spacing:1.8px;text-transform:uppercase;margin:0;color:var(--oro);line-height:1.1}
+.cab .sub{font-family:var(--rotulo);font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--tenue);margin:0}
+.cab .acc{margin-left:auto;display:flex;gap:16px}
+.cab .acc button{font-family:var(--rotulo);font-size:12.5px;letter-spacing:1.3px;text-transform:uppercase;color:var(--tenue);
+  background:none;border:0;border-bottom:1px solid transparent;padding:4px 0;cursor:pointer}
+.cab .acc button:hover,.cab .acc button:focus-visible,.cab .acc button[aria-pressed="true"]{color:var(--oro);border-bottom-color:var(--oro);outline:none}
+@media (max-width:620px){
+  .cab .acc{width:100%;margin:5px 0 0;padding-top:4px;border-top:1px solid var(--linea);justify-content:space-around;gap:6px}
+}
+.juegos{display:grid;grid-template-columns:repeat(3,1fr);margin:8px -14px 0;border-top:1px solid var(--linea)}
+.juegos button{font:inherit;cursor:pointer;text-align:center;color:var(--tinta);background:none;border:0;border-bottom:3px solid transparent;
+  border-radius:0;padding:6px 4px 4px;line-height:1.2}
+.juegos button + button{border-left:1px solid var(--linea)}
+.juegos button b{display:block;font-family:var(--rotulo);font-weight:400;font-size:15px;letter-spacing:1.3px;text-transform:uppercase;color:var(--oro)}
+.juegos button span{display:block;font-size:11.5px;color:var(--tenue)}
+.juegos button:hover{background:var(--brillo)}
+.juegos button[aria-pressed="true"]{border-bottom-color:var(--oro);background:var(--brillo)}
+@media (max-width:480px){ .juegos button span{display:none} .juegos button b{font-size:13.5px;letter-spacing:.6px} .juegos button{padding:8px 2px 6px} }
+
+/* ── LAS HOJAS ── */
+.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--linea);border-radius:13px;
+  padding:12px 13px;margin-top:9px;box-shadow:0 6px 18px var(--sombra)}
+.panel h2, .etq{font-family:var(--rotulo);font-weight:400;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tenue);margin:0}
+.panel > h2{margin-bottom:8px}
+.caja{border:1px solid var(--linea);border-radius:12px;background:var(--noche);padding:9px 10px}
+
+/* ── LOS BOTONES ── */
+.botones{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+button.b{font-family:var(--rotulo);font-weight:400;font-size:14px;letter-spacing:1px;text-transform:uppercase;
+  padding:8px 14px;min-height:42px;border-radius:9px;border:1px solid var(--linea);cursor:pointer;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));color:var(--tinta);box-shadow:0 2px 0 rgba(0,0,0,.28)}
+button.b:hover{border-color:var(--morado)}
+button.b:active{transform:translateY(2px);box-shadow:none}
+button.b.ok{background:linear-gradient(180deg,#F4CB72,#DDA23A);color:#2A1D06;border-color:#A8661B;box-shadow:0 2px 0 #7E4C12}
+button.b:disabled{opacity:.4;cursor:default;transform:none}
+button.b.borrar.seguro{background:var(--rojo);border-color:var(--rojo);color:#fff}
+button.b:focus-visible{outline:2px solid var(--oro);outline-offset:2px}
+button.enlace{background:none;border:0;color:var(--tenue);text-decoration:underline;font:inherit;font-size:13.5px;cursor:pointer;padding:6px 4px}
+button.enlace:hover{color:var(--oro)}
+
+/* ── LOS AJUSTES, una hoja que se abre bajo la cabecera ── */
+.ajustes .aj{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px 0;border-bottom:1px dashed var(--linea)}
+.ajustes .aj > .etq{min-width:130px}
+.ajustes .aj small{flex-basis:100%;color:var(--tenue);font-size:12.5px;margin-top:-2px}
+.ops{display:inline-flex;border:1px solid var(--linea);border-radius:20px;overflow:hidden;flex-wrap:wrap}
+.ops button{font-family:var(--rotulo);font-weight:400;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+  background:none;border:0;color:var(--tenue);padding:6px 12px;min-height:34px}
+.ops button + button{border-left:1px solid var(--linea)}
+.ops button[aria-pressed="true"]{background:var(--oro);color:var(--panel)}
+
+/* ── EL ENCARGO: el cliente pide, Nick contesta; y por dónde se va ── */
+.enc-cab{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.enc-cab .puntos{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto;align-items:center}
+.puntos i{width:10px;height:10px;border-radius:50%;background:var(--linea);display:block}
+.puntos i.hecho{background:var(--oro)}
+.puntos i.aqui{box-shadow:0 0 0 2px var(--oro)}
+.cliente{margin:0;padding:8px 12px;border-left:4px solid var(--tomate);border-radius:0 9px 9px 0;background:var(--noche);font-size:16px;line-height:1.45}
+.cliente .quien{display:block;font-family:var(--rotulo);font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tomate);margin-bottom:1px}
+.cliente.tel{border-left-color:var(--azul)} .cliente.tel .quien{color:var(--azul)}
+.cliente .fA, .habla .fA, .tique .fA, .pizarra .fA, .opera .fA{color:var(--tomate)}
+.cliente .fB, .habla .fB, .tique .fB, .pizarra .fB, .opera .fB{color:var(--azul)}
+.habla{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:start;margin-top:9px;padding:9px 12px;
+  border:1px solid var(--linea);border-radius:11px;background:var(--noche)}
+.habla .cara{width:52px;display:block}
+.habla .cara svg{display:block;width:100%;height:auto;overflow:visible}
+.habla .quien{font-family:var(--rotulo);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--albahaca)}
+.habla p{margin:2px 0 0;font-size:15.5px;line-height:1.45}
+.habla p b{color:var(--oro)}
+.habla.feliz .quien{color:var(--oro)}
+.practica{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px dashed var(--linea)}
+.practica .etq{min-width:0}
+
+/* Nick vive: parpadea, el brazo da el clac al grapar y salta con el pedido redondo */
+.cara .ojo{transform-box:fill-box;transform-origin:center;animation:parpadea 4.4s infinite}
+@keyframes parpadea{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.cara .brazo{transform-box:fill-box;transform-origin:15% 100%}
+.habla.grapando .cara .brazo{animation:clac .5s ease-in-out}
+@keyframes clac{35%{transform:rotate(22deg)}60%{transform:rotate(-4deg)}}
+.habla.feliz .cara svg{animation:salta .55s cubic-bezier(.3,1.5,.5,1)}
+@keyframes salta{30%{transform:translateY(-6px) rotate(-3deg)}60%{transform:translateY(1px)}}
+.cara .boca-f{display:none}
+.habla.feliz .cara .boca{display:none}
+.habla.feliz .cara .boca-f{display:block}
+@media (prefers-reduced-motion: reduce){ .cara .ojo,.habla.grapando .cara .brazo,.habla.feliz .cara svg{animation:none} }
+
+/* ── LAS VENTANAS: la guía, el acta ── */
+.modal{position:fixed;inset:0;background:rgba(12,8,20,.82);display:grid;place-items:center;padding:16px;z-index:60;overflow:auto}
+.modal .caja2{width:min(600px,100%);max-height:92vh;overflow:auto;border:1px solid var(--linea);border-radius:16px;padding:18px 20px;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.modal .caja2:focus{outline:none}
+.modal h2{font-family:var(--rotulo);font-weight:400;color:var(--oro);letter-spacing:1.5px;text-transform:uppercase;font-size:18px;margin:0 0 8px}
+.modal h3{font-family:var(--rotulo);font-weight:400;color:var(--oro);font-size:15px;letter-spacing:1px;margin:14px 0 4px}
+.modal p,.modal li{font-size:14.5px}
+.acta .actaSub{margin:0 0 10px;color:var(--tenue)}
+.actaNombre{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.actaNombre input{flex:1;font:inherit;font-size:16px;padding:8px 10px;border-radius:9px;border:1px solid var(--linea);background:var(--noche);color:var(--tinta)}
+.actaDatos{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:6px;margin-bottom:10px}
+.actaDatos div{background:var(--noche);border:1px solid var(--linea);border-radius:9px;padding:6px 9px}
+.actaDatos b{display:block;font-family:'Space Mono',monospace;font-size:18px}
+.actaTabla{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:10px}
+.actaTabla th{font-family:var(--rotulo);font-weight:400;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--tenue);text-align:left;padding:4px 6px;border-bottom:1px solid var(--linea)}
+.actaTabla td{padding:6px;border-bottom:1px dashed var(--linea);vertical-align:top}
+.actaTabla td b{color:var(--oro)}
+.actaCodigos{display:grid;gap:6px;margin:6px 0 4px}
+.actaCodigos b{font-family:'Space Mono',monospace;font-size:18px;letter-spacing:2px;color:var(--oro);margin-left:8px}
+.actaMsg{min-height:20px;color:var(--verde);margin:6px 0 0}
+.ac-det{margin:0 0 6px} .ac-det summary{cursor:pointer;color:var(--tenue);font-size:13.5px}
+.ac-ej{margin:6px 0 0;padding-left:0;list-style:none;font-size:13px}
+.ac-ej li{display:flex;gap:8px;padding:3px 0;border-bottom:1px dashed var(--linea);flex-wrap:wrap}
+.ac-ej .ac-h{font-family:'Space Mono',monospace;color:var(--tenue);font-size:11px;min-width:44px}
+.ac-ej .ac-c{font-family:'Space Mono',monospace}
+.ac-ej li.ok .ac-como::before{content:"✓ ";color:var(--verde)} .ac-ej li.no .ac-como::before{content:"✗ ";color:var(--rojo)}
+
+/* ── LA GUÍA: un foco sobre cada parte del mostrador y un papel que la explica ── */
+.guia{position:fixed;inset:0;z-index:80;cursor:pointer}
+.guia-foco{position:fixed;border-radius:13px;border:2px solid #F0C75E;pointer-events:none;
+  box-shadow:0 0 0 9999px rgba(30,16,6,.72),0 0 22px rgba(240,199,94,.55);
+  transition:top .28s ease,left .28s ease,width .28s ease,height .28s ease}
+.guia-globo{position:fixed;z-index:81;width:min(340px,calc(100vw - 32px));cursor:default;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--oro);border-radius:14px;padding:13px 15px;
+  box-shadow:0 18px 44px rgba(0,0,0,.5);transition:top .28s ease,left .28s ease}
+.guia-globo .tit{display:flex;align-items:center;gap:8px;font-family:var(--rotulo);font-size:15px;letter-spacing:1.4px;text-transform:uppercase;color:var(--oro);margin-bottom:4px}
+.guia-globo .tit::before{content:'';width:18px;height:18px;flex:0 0 18px;background:var(--oro);-webkit-mask:var(--sello) center/contain no-repeat;mask:var(--sello) center/contain no-repeat}
+.guia-globo:focus{outline:none}
+.guia-globo p{margin:0;font-size:14.5px;line-height:1.5}
+.guia-globo p b{color:var(--oro)}
+.guia-pie{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:11px}
+.guia-pie span{font-family:'Space Mono',monospace;font-size:11px;color:var(--tenue)}
+.guia-pie .botones{margin:0}
+.guia-pie button.b{min-height:36px;padding:5px 12px}
+
+/* ── EL PIE ── */
+footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--linea);text-align:center;
+  font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--tenue)}
+footer a{color:var(--tenue)}
+html:not([data-tema="noche"]):not([data-tema="proyector"]) footer{color:#5a4a36;border-top-color:rgba(90,66,38,.3)}
+
+/* ── EL AULA: todo un tercio más grande y, si cabe, el encargo y el tique
+   a la izquierda y la mesa a la derecha, siempre a la vista ── */
+@media (min-width:900px){ html[data-aula="si"] body{zoom:1.32;padding-left:22px;padding-right:22px} }
+@media (min-width:900px) and (max-height:820px){ html[data-aula="si"] body{zoom:1.12} }
+html[data-aula="si"] .lienzo{max-width:860px}
+@media (min-width:1100px){
+  html[data-aula="si"] .lienzo{max-width:1500px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:0 18px;align-items:start}
+  html[data-aula="si"] .lienzo > *{grid-column:1}
+  html[data-aula="si"] .lienzo > .cab{grid-column:1 / -1}
+  html[data-aula="si"] .lienzo > #mesa{grid-column:2;grid-row:2 / span 12;position:sticky;top:8px}
+}
+@media print{
+  body{background:#fff} .cab .acc,.mandos,.botones,.guia,.modal,.inicio{display:none !important}
+  .panel{box-shadow:none;break-inside:avoid}
+}

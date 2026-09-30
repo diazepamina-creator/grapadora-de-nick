@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta name="author" content="Andrés Asensio">
+<title>La grapadora de Nick</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Nunito:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="src/piel.css">
+<link rel="stylesheet" href="src/mesa.css">
+<link rel="stylesheet" href="src/arranque.css">
+<script>
+  /* los ajustes se ponen antes de pintar nada, para que no haya un fogonazo del otro fondo */
+  document.documentElement.dataset.tema = 'dia';
+  try{ const a = JSON.parse(localStorage.getItem('grapadora.ajustes.v1') || '{}');
+    if(a.tema === 'noche' || a.tema === 'proyector') document.documentElement.dataset.tema = a.tema;
+    if(a.aula) document.documentElement.dataset.aula = 'si';
+    const vista = sessionStorage.getItem('grapadora.inicio') === 'visto';
+    const quieto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(a.inicio !== false && !vista && !quieto) document.documentElement.dataset.inicio = 'si'; }catch(err){}
+</script>
+</head>
+<body>
+<div class="inicio" id="escenaInicio" hidden>
+  <div class="inEscena">
+    <p class="inLema">cortar reparte · grapar junta</p>
+    <div class="inCaja" aria-hidden="true"></div>
+    <p class="inTitulo">La grapadora de Nick</p>
+  </div>
+  <p class="inSalta">toca para empezar</p>
+</div>
+<main class="lienzo">
+  <header class="cab">
+    <div class="rotulo">
+      <span class="sello" aria-hidden="true"></span>
+      <div><h1>La grapadora de Nick</h1><p class="sub">fracciones · cortar reparte, grapar junta</p></div>
+      <nav class="acc" aria-label="Acciones">
+        <button type="button" id="bGuia">Guía</button>
+        <button type="button" id="bPracticar" aria-pressed="false">Practicar</button>
+        <button type="button" id="bAjustes" aria-pressed="false" aria-controls="ajustes">Ajustes</button>
+        <button type="button" id="bAula" aria-pressed="false">Aula</button>
+        <button type="button" id="bActa">Acta</button>
+      </nav>
+    </div>
+    <div class="juegos" role="group" aria-label="Los tres juegos">
+      <button type="button" data-j="servir" aria-pressed="true"><b>Servir</b><span>la misma cantidad</span></button>
+      <button type="button" data-j="comparar" aria-pressed="false"><b>Comparar</b><span>¿quién se lleva más?</span></button>
+      <button type="button" data-j="telefono" aria-pressed="false"><b>Por teléfono</b><span>sobre el papel</span></button>
+    </div>
+  </header>
+
+  <section class="panel ajustes" id="ajustes" hidden aria-label="Ajustes">
+    <div class="aj"><span class="etq">El fondo</span>
+      <span class="ops" data-aj="tema" role="group" aria-label="El fondo"><button type="button" data-v="dia">La encimera</button><button type="button" data-v="noche">La pizarra</button><button type="button" data-v="proyector">Proyector</button></span>
+      <small>El mármol de la encimera, con algo de harina. La pizarra del local, para un aula con poca luz. Proyector: papel blanco y tinta negra.</small></div>
+    <div class="aj"><span class="etq">Antes de comparar</span>
+      <span class="ops" data-aj="apuesta" role="group" aria-label="La pizarra"><button type="button" data-v="si">Apostar el signo</button><button type="button" data-v="no">Sin pizarra</button></span>
+      <small>Con la pizarra, cada comparación empieza apostando &gt;, = o &lt; antes de poder contar nada.</small></div>
+    <div class="aj"><span class="etq">El sonido</span>
+      <span class="ops" data-aj="sonido" role="group" aria-label="El sonido"><button type="button" data-v="si">Con sonido</button><button type="button" data-v="no">Sin sonido</button></span>
+      <small>Bajito: el clac de la grapadora, el cortador, la tiza y el teléfono.</small></div>
+    <div class="aj"><span class="etq">Al abrir</span>
+      <span class="ops" data-aj="inicio" role="group" aria-label="La animación de inicio"><button type="button" data-v="si">Con animación</button><button type="button" data-v="no">Sin animación</button></span></div>
+    <div class="aj"><span class="etq">Empezar de cero</span>
+      <small id="ajCeroTxt">Borra de este aparato los pedidos servidos y el acta de este turno, para el siguiente alumno o la siguiente clase. Hay que pulsar dos veces. Los ajustes se quedan.</small>
+      <button type="button" class="b borrar" id="ajCero">Borrar todo</button></div>
+    <div class="botones"><button type="button" class="b ok" id="ajCierra">Cerrar</button></div>
+  </section>
+
+  <section class="panel encargo" id="encargo" aria-label="El encargo">
+    <div class="enc-cab"><h2 id="encCab">Pedido 1 de 5</h2><div class="puntos" id="puntos"></div></div>
+    <p class="cliente" id="cliente"></p>
+    <div class="habla" id="nick"><span class="cara" id="caraNick" aria-hidden="true"></span><div><div class="quien">Nick, el pizzero</div><p id="nickTxt" role="status"></p></div></div>
+    <div id="pizarra"></div>
+    <div class="botones" id="encBotones">
+      <button type="button" class="b ok" id="bSiguiente" hidden>Siguiente pedido</button>
+      <button type="button" class="b ok" id="bOtro" hidden>Otro pedido</button>
+      <button type="button" class="enlace" id="bSaltar">Saltar este pedido</button>
+    </div>
+    <div class="practica" id="practica" hidden><span class="etq">Dificultad</span>
+      <span class="ops" id="difOps" role="group" aria-label="Dificultad"><button type="button" data-d="0">Fácil</button><button type="button" data-d="1">Media</button><button type="button" data-d="2">Difícil</button></span></div>
+  </section>
+
+  <section class="panel mesa" id="mesa" aria-label="La mesa">
+    <div class="cajas" id="cajas"></div>
+    <div class="papel" id="papel" hidden></div>
+    <div class="mandos" id="mandos">
+      <div class="fila"><span class="etq">cortar en</span><span class="tiras" id="botCortes"></span></div>
+      <div class="fila" id="filaMaq"><span class="etq">la máquina</span><span class="tiras" id="botMaq"></span></div>
+      <div class="botones"><button type="button" class="b ok" id="bGrapar">Grapar lo elegido</button><button type="button" class="b" id="bSoltar">Quitar grapas</button><button type="button" class="b" id="bLimpiar">Empezar el pedido</button></div>
+    </div>
+    <p class="aviso" id="aviso" role="status"></p>
+  </section>
+
+  <section class="panel tique" id="tique" aria-label="El tique">
+    <h2>Tique</h2>
+    <p class="lectura" id="lec">—</p>
+    <p class="desglose" id="des"></p>
+    <div class="regla"><div class="cinta" id="cinta"></div><div id="marcas"></div></div>
+    <div class="opera" id="opera" hidden></div>
+    <div class="pregunta" id="pregunta" hidden></div>
+    <p class="nota">El 1 es la superficie de una pizza entera de la casa. La pizza es el envase; el número vive en la regla.</p>
+  </section>
+
+  <footer>
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" rel="license">© 2026 Andrés Asensio · CC BY-NC-ND 4.0</a>
+    · <a href="https://diazepamina-creator.github.io/pizzeria-de-nick/">La pizzería de Nick (anterior)</a>
+    · <a href="https://diazepamina-creator.github.io/">Materiales</a>
+    · versión {{versión}}
+  </footer>
+</main>
+
+<div class="guia" id="guia" hidden>
+  <div class="guia-foco" id="guiaFoco"></div>
+  <div class="guia-globo" id="guiaGlobo" role="dialog" aria-modal="true" aria-labelledby="guiaTit" tabindex="-1">
+    <div class="tit" id="guiaTit"></div>
+    <p id="guiaTxt"></p>
+    <div class="guia-pie"><span id="guiaNum"></span>
+      <span class="botones"><button type="button" class="b" id="guiaSalir">Salir</button><button type="button" class="b ok" id="guiaSig">Siguiente</button></span></div>
+  </div>
+</div>
+<div class="modal" id="mActa" hidden>
+  <div class="caja2 acta" role="dialog" aria-modal="true" aria-labelledby="actaTit" tabindex="-1">
+    <h2 id="actaTit">El acta del mostrador</h2>
+    <p class="actaSub">Lo que has hecho en este turno. Cópiala o descárgala para dársela a tu profesor.</p>
+    <label class="actaNombre"><span class="etq">Tu nombre</span><input id="acNombre" autocomplete="name" placeholder="Escribe tu nombre"></label>
+    <div class="actaDatos" id="acDatos"></div>
+    <table class="actaTabla"><thead><tr><th>Juego</th><th>La ruta</th><th>Practicar</th></tr></thead><tbody id="acFilas"></tbody></table>
+    <details class="ac-det" id="acDet"><summary>Pedido a pedido</summary><ol class="ac-ej" id="acEj"></ol></details>
+    <div class="actaCodigos"><div><span class="etq">Código de verificación</span><b id="acFirma">—</b></div></div>
+    <div class="botones"><button type="button" class="b ok" id="acCopia">Copiar el acta</button><button type="button" class="b" id="acBaja">Descargar .txt</button><button type="button" class="b" id="acCierra">Volver al mostrador</button></div>
+    <p class="actaMsg" id="acMsg" role="status"></p>
+  </div>
+</div>
+
+<script src="src/motor.js"></script>
+<script src="src/pedidos.js"></script>
+<script src="src/sonido.js"></script>
+<script src="src/pizza.js"></script>
+<script src="src/personajes.js"></script>
+<script src="src/arranque.js"></script>
+<script>
+(function(){
+'use strict';
+const M = window.Motor, PD = window.Pedidos, PZ = window.Pizza, PJ = window.Personajes;
+const $ = id => document.getElementById(id);
+const sonar = n => { if(window.Sonido) window.Sonido.toca(n); };
+const casi = M.casi, fTxt = M.fTxt, fVal = M.fVal;
+const ro = t => '<b class="fA">' + t + '</b>', az = t => '<b class="fB">' + t + '</b>';
+const MESAS = ['Mesa 4', 'Mesa 7'];
+
+/* ── LOS AJUSTES ── */
+const AJ = 'grapadora.ajustes.v1';
+const aj = {tema: 'dia', aula: false, apuesta: true, sonido: true, inicio: true};
+try{ Object.assign(aj, JSON.parse(localStorage.getItem(AJ) || '{}')); }catch(err){}
+const guardaAjustes = () => { try{ localStorage.setItem(AJ, JSON.stringify(aj)); }catch(err){} };
+function aplicaAjustes(){
+  const h = document.documentElement;
+  h.dataset.tema = aj.tema;
+  if(aj.aula) h.dataset.aula = 'si'; else delete h.dataset.aula;
+  const v = {tema: aj.tema, apuesta: aj.apuesta ? 'si' : 'no', sonido: aj.sonido ? 'si' : 'no', inicio: aj.inicio ? 'si' : 'no'};
+  document.querySelectorAll('.ajustes [data-aj]').forEach(g => g.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(v[g.dataset.aj] === b.dataset.v))));
+  $('bAula').setAttribute('aria-pressed', String(aj.aula)); $('bAula').textContent = aj.aula ? 'Salir del aula' : 'Aula';
+  if(window.Sonido) window.Sonido.activo(aj.sonido);
+}
+document.querySelectorAll('.ajustes [data-aj]').forEach(g => g.addEventListener('click', ev => {
+  const b = ev.target.closest('button'); if(!b) return;
+  const k = g.dataset.aj, v = b.dataset.v;
+  aj[k] = k === 'tema' ? v : v === 'si';
+  guardaAjustes(); aplicaAjustes();
+  if(k === 'apuesta') pintaPizarra();
+}));
+const ajustes = si => { $('ajustes').hidden = !si; $('bAjustes').setAttribute('aria-pressed', String(si)); };
+$('bAjustes').addEventListener('click', () => ajustes($('ajustes').hidden));
+$('ajCierra').addEventListener('click', () => ajustes(false));
+$('bAula').addEventListener('click', () => { aj.aula = !aj.aula; guardaAjustes(); aplicaAjustes(); pintaRegla(); });
+addEventListener('resize', () => pintaRegla());
+
+/* ── EL TURNO: lo hecho en este aparato, que caduca a las cuatro horas ── */
+const TURNO = 'grapadora.turno.v1', CADUCA = 4 * 60 * 60 * 1000;
+const nuevoTurno = () => ({juego: 'servir', ruta: {servir: 0, comparar: 0, telefono: 0}, practica: false, dif: 1, nombre: '', t0: Date.now(), ts: Date.now(),
+  stats: {servir: {ruta: 0, bien: 0, mal: 0}, comparar: {ruta: 0, bien: 0, mal: 0}, telefono: {ruta: 0, bien: 0, mal: 0}}, ejercicios: []});
+let est = nuevoTurno();
+try{ const d = JSON.parse(localStorage.getItem(TURNO) || 'null'); if(d && d.v === 1 && Date.now() - d.ts < CADUCA) est = Object.assign(nuevoTurno(), d); }catch(err){}
+const guarda = () => { est.ts = Date.now(); est.v = 1; try{ localStorage.setItem(TURNO, JSON.stringify(est)); }catch(err){} };
+
+/* ── EL PEDIDO EN CURSO ── */
+let P = null, cajas = [], activa = 0, resuelto = false, prediccion = null, armado = null, ultimaOp = null, papel = {A: null, B: null}, fallos = 0, tPedido = 0, reloj = 0;
+const enRuta = () => PD.RUTA[est.juego], rutaHecha = () => est.ruta[est.juego] >= enRuta().length;
+const esCompara = () => est.juego === 'comparar', esTel = () => est.juego === 'telefono';
+function montaPedido(){
+  resuelto = false; prediccion = null; armado = null; ultimaOp = null; papel = {A: null, B: null}; fallos = 0; tPedido = Date.now(); clearTimeout(reloj);
+  if(est.practica) P = PD.GENERA[est.juego](est.dif);
+  else P = rutaHecha() ? null : enRuta()[est.ruta[est.juego]];
+  cajas = P && !esTel() ? (P.cajas || [P.fA[1], P.fB[1]]).map(M.nuevaCaja) : [];
+  activa = 0;
+  if(P && esTel()) sonar('timbre');
+  pintaEncargo(); pintaMesa(); lee();
+}
+function pintaPestanas(){
+  document.querySelectorAll('.juegos button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.j === est.juego)));
+  $('bPracticar').setAttribute('aria-pressed', String(est.practica));
+  $('practica').hidden = !est.practica;
+  $('difOps').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.d) === est.dif)));
+}
+document.querySelectorAll('.juegos button').forEach(b => b.addEventListener('click', () => { est.juego = b.dataset.j; guarda(); pintaPestanas(); montaPedido(); }));
+$('bPracticar').addEventListener('click', () => { est.practica = !est.practica; guarda(); pintaPestanas(); montaPedido(); });
+$('difOps').addEventListener('click', ev => { const b = ev.target.closest('button'); if(!b) return; est.dif = Number(b.dataset.d); guarda(); pintaPestanas(); montaPedido(); });
+$('bOtro').addEventListener('click', montaPedido);
+$('bSiguiente').addEventListener('click', () => { est.ruta[est.juego]++; guarda(); montaPedido(); });
+$('bSaltar').addEventListener('click', () => { if(est.practica) montaPedido(); else if(!rutaHecha()){ est.ruta[est.juego]++; guarda(); montaPedido(); } });
+
+/* ── EL ENCARGO ── */
+function pintaEncargo(){
+  const R = enRuta(), i = est.ruta[est.juego];
+  $('encCab').textContent = est.practica ? 'Practicar · ' + PD.NOMBRE_J[est.juego] : P ? 'Pedido ' + (i + 1) + ' de ' + R.length : PD.NOMBRE_J[est.juego] + ' · ruta hecha';
+  $('puntos').innerHTML = est.practica ? '' : R.map((q, k) => '<i class="' + (k < i ? 'hecho' : k === i ? 'aqui' : '') + '"></i>').join('');
+  $('bSiguiente').hidden = true; $('bOtro').hidden = true; $('bSaltar').hidden = est.practica || !P;
+  $('caraNick').innerHTML = PJ.NICK;
+  if(!P){
+    $('cliente').innerHTML = '<span class="quien">El mostrador</span>Los ' + R.length + ' pedidos de la ruta están servidos.';
+    nickDice('Ruta hecha. Si quieres más, en <b>Practicar</b> hay pedidos nuevos sin fin; y en las otras pestañas, más trabajo.', false);
+    $('pizarra').innerHTML = ''; return;
+  }
+  const quien = esTel() ? 'Al teléfono · Nicoleta, desde la pastelería' : esCompara() ? 'Dos clientes · ' + MESAS[0] + ' y ' + MESAS[1] : 'Cliente';
+  $('cliente').className = 'cliente' + (esTel() ? ' tel' : '');
+  $('cliente').innerHTML = '<span class="quien">' + quien + '</span>' + P.cli;
+  nickDice(P.nick, false);
+  pintaPizarra();
+}
+function nickDice(html, feliz){
+  const n = $('nick'); n.classList.toggle('feliz', !!feliz);
+  $('nickTxt').innerHTML = html;
+}
+function clac(){ const n = $('nick'); n.classList.remove('grapando'); void n.offsetWidth; n.classList.add('grapando'); }
+
+/* ── LA PIZARRA: el signo, antes de poder contar ── */
+const signoReal = () => M.signo(P.fA, P.fB);
+function pintaPizarra(){
+  const el = $('pizarra');
+  if(!P || !(esCompara() || esTel()) || !aj.apuesta){ el.innerHTML = ''; return; }
+  const izq = '<span class="fA">' + fTxt(P.fA) + '</span>', der = '<span class="fB">' + fTxt(P.fB) + '</span>';
+  if(!prediccion){
+    el.innerHTML = '<div class="pizarra"><div class="rot">LA PIZARRA DE NICK</div><div class="linea">' + izq + '<span class="hueco-signo">?</span>' + der + '</div>' +
+      '<div class="bots"><button type="button" data-s="&gt;" aria-label="mayor">&gt;</button><button type="button" data-s="=" aria-label="igual">=</button><button type="button" data-s="&lt;" aria-label="menor">&lt;</button></div>' +
+      '<div class="apuesta">SIN CORTAR NADA TODAVÍA: ¿QUÉ SE APUESTA?</div></div>';
+    el.querySelectorAll('.bots button').forEach(b => b.addEventListener('click', () => { prediccion = b.dataset.s; sonar('tiza'); pintaPizarra(); }));
+  }else{
+    const bien = prediccion === signoReal();
+    el.innerHTML = '<div class="pizarra"><div class="rot">LA PIZARRA DE NICK</div><div class="linea">' + izq + '<span class="signo">' + prediccion + '</span>' + der + '</div>' +
+      '<div class="apuesta">' + (resuelto ? (bien ? 'LA APUESTA AGUANTÓ' : 'LA APUESTA NO AGUANTÓ') : 'ESO DICE LA PIZARRA. LA CUENTA LO DIRÁ.') + '</div></div>';
+  }
+}
+
+/* ── LA MESA ── */
+function pintaMesa(){
+  const tel = esTel();
+  $('cajas').hidden = tel || !P; $('mandos').hidden = tel || !P; $('papel').hidden = !tel || !P;
+  $('aviso').innerHTML = '';
+  if(!P) return;
+  if(tel){ pintaPapel(); return; }
+  const cont = $('cajas'); cont.innerHTML = '';
+  cajas.forEach((c, i) => {
+    const caja = document.createElement('div');
+    caja.className = 'cajaP' + (i === activa && cajas.length > 1 ? ' activa' : '') + (esCompara() ? (i ? ' mB' : ' mA') : '');
+    const tapa = document.createElement('div'); tapa.className = 'tapa';
+    tapa.textContent = (esCompara() ? MESAS[i].toUpperCase() : 'CAJA ' + (i + 1)) + ' · EN ' + c.cortes;
+    caja.appendChild(tapa);
+    caja.appendChild(PZ.dibuja(c, k => { activa = i; M.toca(c, k); ultimaOp = null; pintaMesa(); lee(); }));
+    caja.addEventListener('click', () => { if(activa !== i){ activa = i; pintaMesa(); } });
+    cont.appendChild(caja);
+  });
+  const c = cajas[activa];
+  /* la carta de cortes: los que no respetan las piezas van punteados y piden un segundo toque */
+  const bc = $('botCortes'); bc.innerHTML = '';
+  const enJuego = c.sel.size > 0 || c.grapas.some(Boolean);
+  P.menu.forEach(n => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = n;
+    const rompe = n !== c.cortes && n % c.cortes !== 0 && enJuego;
+    if(rompe) b.classList.add('rompe');
+    if(armado && armado.caja === activa && armado.n === n) b.classList.add('avisa');
+    b.setAttribute('aria-pressed', String(c.cortes === n));
+    b.addEventListener('click', () => corta(n));
+    bc.appendChild(b);
+  });
+  /* la máquina grande: une de x en x toda la pizza, sin elegir nada */
+  const bm = $('botMaq'); bm.innerHTML = '';
+  const xs = [2, 3, 4, 5].filter(x => c.cortes % x === 0 && c.cortes / x >= 1);
+  $('filaMaq').hidden = !xs.length;
+  xs.forEach(x => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = 'de ' + x + ' en ' + x;
+    b.addEventListener('click', () => {
+      const r = M.industrial(c, x); if(!r.ok) return;
+      ultimaOp = r.op; sonar('grapa'); clac(); pintaMesa(); lee();
+      if(r.nota) $('aviso').innerHTML = 'La máquina une la pizza <b>entera</b> de ' + x + ' en ' + x + ': tus ' + r.nota.kAntes + '/' + r.nota.bAntes + ' no llenaban piezas enteras, así que te quedas con las piezas que los contienen. Aquí no hay división que enseñar.';
+      else if(!c.sel.size) $('aviso').innerHTML = 'La pizza queda en <b>' + M.grupos(c).length + '</b> piezas iguales. Ahora elige la tuya.';
+      quitaGrapasLuego();
+    });
+    bm.appendChild(b);
+  });
+}
+function corta(n){
+  const c = cajas[activa];
+  if(n === c.cortes) return;
+  const destruye = n % c.cortes !== 0 && (c.sel.size > 0 || c.grapas.some(Boolean));
+  if(destruye && !(armado && armado.caja === activa && armado.n === n)){
+    armado = {caja: activa, n};
+    clearTimeout(corta.aviso); corta.aviso = setTimeout(() => { armado = null; pintaMesa(); }, 3200);
+    pintaMesa(); sonar('mal');
+    $('aviso').innerHTML = 'De ' + c.cortes + ' a ' + n + ' el cortador <b>no respeta las piezas</b>: se pierde lo grapado y lo elegido. Toca otra vez para cortar de cero.';
+    return;
+  }
+  armado = null;
+  const r = M.recorta(c, n); ultimaOp = r.op;
+  sonar('corte'); pintaMesa(); lee();
+}
+$('bGrapar').addEventListener('click', () => {
+  const c = cajas[activa]; if(!c) return;
+  const r = M.grapa(c);
+  if(!r.ok){
+    $('aviso').innerHTML = r.por === 'pocas' ? 'La grapadora necesita <b>dos piezas o más</b>, y pegadas.' : 'Esas piezas <b>no están pegadas</b>: sueltas suman lo mismo, pero no forman una.';
+    sonar('mal'); return;
+  }
+  ultimaOp = r.op; sonar('grapa'); clac(); pintaMesa(); lee();
+  if(!r.op && r.m > 1) $('aviso').innerHTML = 'Una pieza de <b>' + r.m + '/' + c.cortes + '</b>… pero ' + r.m + ' no cabe en ' + c.cortes + ': esa pieza no es 1 de nada entero, y por eso aquí no hay división que enseñar.';
+  quitaGrapasLuego();
+});
+function quitaGrapasLuego(){ clearTimeout(reloj); reloj = setTimeout(() => { cajas.forEach(x => x.recien.clear()); pintaMesa(); }, 2600); }
+$('bSoltar').addEventListener('click', () => { const c = cajas[activa]; if(!c) return; M.suelta(c); ultimaOp = null; pintaMesa(); lee(); });
+$('bLimpiar').addEventListener('click', () => { if(!P || resuelto) return; cajas = (P.cajas || [P.fA[1], P.fB[1]]).map(M.nuevaCaja); activa = 0; ultimaOp = null; armado = null; pintaMesa(); lee(); });
+
+/* ── EL PAPEL: por teléfono, cada fracción se multiplica arriba y abajo ── */
+const stackSVG = (k, b, col, x, y, tam) => '<text x="' + x + '" y="' + (y - 6) + '" font-size="' + tam + '" fill="' + col + '">' + k + '</text>' +
+  '<text x="' + x + '" y="' + (y + tam - 2) + '" font-size="' + tam + '" fill="' + col + '">' + b + '</text>' +
+  '<path d="M' + (x - tam * .7) + ' ' + (y + 4) + ' H' + (x + tam * .7) + '" stroke="' + col + '" stroke-width="2.4" stroke-linecap="round"/>';
+function pintaPapel(){
+  const cont = $('papel'); cont.innerHTML = '';
+  [['A', P.fA, P.fB, 'mA', 'var(--tomate)'], ['B', P.fB, P.fA, 'mB', 'var(--azul)']].forEach(([L, f, otra, cls, col]) => {
+    const m = papel[L];
+    const fr = document.createElement('div'); fr.className = 'fr ' + cls;
+    const svg = '<svg viewBox="0 0 150 70" aria-hidden="true"><g font-family="Bree Serif,serif" text-anchor="middle">' + stackSVG(f[0], f[1], col, 30, 34, 24) +
+      (m ? '<text x="70" y="42" font-size="22" fill="var(--tinta)">=</text>' + stackSVG(f[0] * m, f[1] * m, col, 112, 34, 24) : '') + '</g>' +
+      (m ? '<path d="M44 16 Q70 0 96 14" fill="none" stroke="' + col + '" stroke-width="2.2" stroke-linecap="round"/><text x="70" y="8" font-size="12" fill="' + col + '" text-anchor="middle" font-family="Bree Serif,serif">·' + m + '</text>' : '') + '</svg>';
+    fr.innerHTML = '<span class="quien">' + (L === 'A' ? 'Nicoleta' : 'El pinche') + ' · ' + fTxt(f) + '</span>' + svg + '<div class="tiras"></div>';
+    const t = fr.querySelector('.tiras');
+    if(m){
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.textContent = 'Deshacer';
+      b.addEventListener('click', () => { papel[L] = null; pintaPapel(); lee(); }); t.appendChild(b);
+    }else{
+      t.innerHTML = '<span class="etq">multiplicar arriba y abajo por</span>';
+      [...new Set([2, f[1], otra[1]])].sort((a, b) => a - b).forEach(x => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = '×' + x;
+        b.addEventListener('click', () => { papel[L] = x; sonar('corte'); pintaPapel(); lee(); }); t.appendChild(b);
+      });
+    }
+    cont.appendChild(fr);
+  });
+}
+const denPapel = L => (L === 'A' ? P.fA[1] : P.fB[1]) * (papel[L] || 1);
+const numPapel = L => (L === 'A' ? P.fA[0] : P.fB[0]) * (papel[L] || 1);
+
+/* ── EL TIQUE ── */
+function lee(){
+  const lec = $('lec'), des = $('des');
+  $('pregunta').hidden = true; $('pregunta').innerHTML = '';
+  if(!P){ lec.innerHTML = '—'; des.innerHTML = ''; $('opera').hidden = true; pintaRegla(); return; }
+  if(esTel()){
+    const igual = papel.A && papel.B && denPapel('A') === denPapel('B');
+    lec.innerHTML = ro(numPapel('A') + '/' + denPapel('A')) + ' frente a ' + az(numPapel('B') + '/' + denPapel('B'));
+    des.innerHTML = igual ? 'Misma secuencia de ' + denPapel('A') + ': ahora sí se comparan.' : (papel.A || papel.B) && !igual && papel.A && papel.B ? 'Todavía no están en la <b>misma secuencia</b>: ' + denPapel('A') + ' y ' + denPapel('B') + ' no casan.' : 'El cortador no llega a ' + P.fA[1] * P.fB[1] + '. Se corta sobre el papel: cada una, arriba y abajo.';
+    $('opera').hidden = true;
+    pintaRegla(); pintaPizarra();
+    if(igual && !resuelto) ponPregunta();
+    return;
+  }
+  if(esCompara()){
+    const a = M.trozosDe(cajas[0]), b = M.trozosDe(cajas[1]);
+    lec.innerHTML = MESAS[0] + ': ' + ro(a ? a + '/' + cajas[0].cortes : '—') + ' &nbsp;·&nbsp; ' + MESAS[1] + ': ' + az(b ? b + '/' + cajas[1].cortes : '—');
+    des.innerHTML = a && b ? 'Dos pedidos distintos: no se suman, se comparan.' : 'Prepara los dos pedidos, uno en cada caja.';
+    pintaRegla(); pintaOperacion(); pintaPizarra(); revisa(); return;
+  }
+  const ps = M.partes(cajas);
+  if(!ps.length){ lec.innerHTML = '—'; des.innerHTML = 'Toca los trozos que te llevas.'; }
+  else if(ps.length === 1){
+    lec.innerHTML = 'Te llevas <b>' + ps[0].k + '/' + ps[0].b + '</b>';
+    const g = M.grupos(cajas[activa]), s = g[0].length, uniforme = g.length > 1 && s > 1 && g.every(t => t.length === s);
+    des.innerHTML = uniforme ? 'La pizza está en <b>' + g.length + '</b> piezas iguales: has dividido arriba y abajo entre ' + s + '.' : 'de pizza.';
+  }else if(M.mismoCorte(ps)){
+    const k = ps.reduce((s2, t) => s2 + t.k, 0), b = ps[0].b;
+    lec.innerHTML = 'Te llevas <b>' + k + '/' + b + '</b>';
+    des.innerHTML = ps.map(t => t.k + '/' + t.b).join(' + ') + ' = ' + k + '/' + b + (k > b ? ' · más de una pizza entera' : '');
+  }else{
+    lec.innerHTML = ps.map(t => '<b>' + t.k + '/' + t.b + '</b>').join(' &nbsp;y&nbsp; ');
+    des.innerHTML = 'Trozos distintos: todavía no se juntan. Pásales el <b>mismo cortador</b>.';
+  }
+  pintaRegla(); pintaOperacion(); revisa();
+}
+function pintaRegla(){
+  const cinta = $('cinta'), marcas = $('marcas');
+  cinta.innerHTML = ''; marcas.innerHTML = '';
+  if(!P) return;
+  const an = cinta.getBoundingClientRect().width || 300;
+  const compara = esCompara() || esTel();
+  const tope = compara ? 1 : Math.max(cajas.length, 1);
+  const raya = (x, st) => { const i = document.createElement('div'); Object.assign(i.style, {position: 'absolute', left: x + 'px', width: '1px'}, st); cinta.appendChild(i); };
+  /* la regla de dos peines: mientras las pizzas están cortadas distinto, cada mesa peina por su lado,
+     y las púas no casan. Cuando llega el corte común, los dos peines se funden en uno */
+  const peines = (bA, bB) => {
+    if(bA === bB) for(let k = 1; k < bA; k++) raya(k * an / bA, {top: '0', height: '26px', background: 'rgba(110,98,80,.45)'});
+    else{ for(let k = 1; k < bA; k++) raya(k * an / bA, {top: '0', height: '11px', background: 'rgba(196,70,47,.65)'});
+          for(let k = 1; k < bB; k++) raya(k * an / bB, {bottom: '0', height: '11px', background: 'rgba(47,110,140,.7)'}); }
+  };
+  if(esTel()) peines(denPapel('A'), denPapel('B'));
+  else if(esCompara()) peines(cajas[0].cortes, cajas[1].cortes);
+  else for(let u = 0; u < tope; u++){ const fin = (cajas[u] || cajas[0]).cortes; for(let k = 1; k < fin; k++) raya((u + k / fin) * an / tope, {top: '0', height: '14px', background: '#8A7A63'}); }
+  for(let u = 0; u <= tope; u++){ raya(u * an / tope, {top: '0', height: '26px', background: '#6E6250'}); const b = document.createElement('b'); b.textContent = u; b.style.left = (u * an / tope) + 'px'; cinta.appendChild(b); }
+  const marca = (v, clase, txt) => { if(v <= 0) return; const m = document.createElement('div'); m.className = 'marca ' + clase; m.style.left = (v * an / tope) + 'px'; m.innerHTML = '<em></em><u>' + txt + '</u>'; marcas.appendChild(m); };
+  let kA = 0, kB = 0, den = 0;
+  if(esTel()){ kA = numPapel('A'); kB = numPapel('B'); den = denPapel('A') === denPapel('B') ? denPapel('A') : 0;
+    marca(fVal(P.fA), '', numPapel('A') + '/' + denPapel('A')); marca(fVal(P.fB), 'dos', numPapel('B') + '/' + denPapel('B')); }
+  else if(esCompara()){ kA = M.trozosDe(cajas[0]); kB = M.trozosDe(cajas[1]); den = cajas[0].cortes === cajas[1].cortes ? cajas[0].cortes : 0;
+    marca(M.valor(cajas[0]), '', kA + '/' + cajas[0].cortes); marca(M.valor(cajas[1]), 'dos', kB + '/' + cajas[1].cortes); }
+  else{ const ps = M.partes(cajas); if(ps.length && M.mismoCorte(ps)) marca(M.total(cajas), '', ps.reduce((s, t) => s + t.k, 0) + '/' + ps[0].b); }
+  /* al resolver, el hueco entre las dos marcas se raya y se nombra: quién gana, y por cuánto */
+  if(compara && resuelto && den && kA !== kB && kA > 0 && kB > 0){
+    const x0 = Math.min(kA, kB) / den * an, x1 = Math.max(kA, kB) / den * an;
+    const h = document.createElement('div'); h.className = 'hueco'; h.style.left = x0 + 'px'; h.style.width = (x1 - x0) + 'px';
+    if(x1 - x0 >= 16){ const s = document.createElement('span'); s.textContent = Math.abs(kA - kB) + '/' + den; h.appendChild(s); }
+    cinta.appendChild(h);
+  }
+  const ms = marcas.querySelectorAll('.marca');
+  if(ms.length === 2 && Math.abs(parseFloat(ms[0].style.left) - parseFloat(ms[1].style.left)) < 52) ms[1].classList.add('baja');
+}
+/* la operación, como en el cuaderno: la punta de la flecha sale de la tangente de la curva */
+function punta(x1, y1, cx, cy, col, largo){
+  largo = largo || 13;
+  const tx = x1 - cx, ty = y1 - cy, L = Math.hypot(tx, ty), ux = tx / L, uy = ty / L, ang = 24 * Math.PI / 180;
+  const Pt = s => [(x1 - largo * (ux * Math.cos(s * ang) - uy * Math.sin(s * ang))).toFixed(1), (y1 - largo * (ux * Math.sin(s * ang) + uy * Math.cos(s * ang))).toFixed(1)];
+  const [ax, ay] = Pt(1), [bx, by] = Pt(-1);
+  return '<path d="M' + x1 + ' ' + y1 + ' L' + ax + ' ' + ay + ' L' + bx + ' ' + by + ' Z" fill="' + col + '"/>';
+}
+function pintaOperacion(){
+  const cont = $('opera');
+  /* el cara a cara: con las dos pizzas cortadas igual y los pedidos preparados, dos numeradores sobre el mismo denominador */
+  if(esCompara() && cajas[0].cortes === cajas[1].cortes){
+    const kA = M.trozosDe(cajas[0]), kB = M.trozosDe(cajas[1]), b = cajas[0].cortes;
+    if(kA && kB && casi(M.valor(cajas[0]), fVal(P.fA)) && casi(M.valor(cajas[1]), fVal(P.fB))){
+      cont.hidden = false;
+      cont.innerHTML = '<div class="rot">MISMOS TROZOS · SE PUEDE COMPARAR</div><svg viewBox="0 0 300 110"><g font-family="Bree Serif,serif" text-anchor="middle">' +
+        stackSVG(kA, b, 'var(--tomate)', 88, 50, 36) + stackSVG(kB, b, 'var(--azul)', 212, 50, 36) +
+        '<text x="150" y="60" font-size="9" letter-spacing="2" fill="var(--tenue)" font-family="Space Mono,monospace">FRENTE A</text></g></svg>' +
+        '<div class="frase">' + (kA === kB ? 'Mismo numerador también: el <b>mismo punto</b> con dos nombres.' : 'Misma secuencia de ' + b + ': gana el numerador mayor.') + '</div>';
+      return;
+    }
+  }
+  if(!ultimaOp){ cont.hidden = true; cont.innerHTML = ''; return; }
+  const {tipo, c, ka, ba, kd, bd} = ultimaOp;
+  const signo = tipo === 'corte' ? '·' : ':', col = tipo === 'corte' ? 'var(--tomate)' : 'var(--albahaca)';
+  const flecha = (y, dy, txt) => { const x0 = 92, x1 = 208, cx = 150, cy = y + dy;
+    return '<path d="M' + x0 + ' ' + y + ' Q' + cx + ' ' + cy + ' ' + (x1 - 6) + ' ' + y + '" fill="none" stroke="' + col + '" stroke-width="3" stroke-linecap="round"/>' + punta(x1, y, cx, cy, col) +
+      '<text x="150" y="' + (dy < 0 ? 24 : 150) + '" text-anchor="middle" font-family="Bree Serif,serif" font-size="19" fill="' + col + '">' + txt + '</text>'; };
+  cont.hidden = false;
+  cont.innerHTML = '<div class="rot">' + (tipo === 'corte' ? 'HAS CORTADO' : 'HAS GRAPADO') + '</div><svg viewBox="0 0 300 156"><g font-family="Bree Serif,serif" text-anchor="middle">' +
+    stackSVG(ka, ba, 'var(--tinta)', 80, 84, 27) + '<text x="150" y="94" font-size="27" fill="var(--tinta)">=</text>' + stackSVG(kd, bd, 'var(--tinta)', 220, 84, 27) + '</g>' +
+    flecha(56, -30, signo + c) + flecha(114, 30, signo + c) + '</svg>' +
+    '<div class="frase">' + (tipo === 'corte' ? 'Cortar en ' + c + ' <b>multiplica arriba y abajo por ' + c + '</b>.' : 'Grapar de ' + c + ' en ' + c + ' <b>divide arriba y abajo entre ' + c + '</b>.') + '</div>';
+}
+
+/* ── LA COMPROBACIÓN ── */
+function revisa(){
+  if(resuelto) return;
+  if(esCompara()){
+    const okA = casi(M.valor(cajas[0]), fVal(P.fA)), okB = casi(M.valor(cajas[1]), fVal(P.fB)), igual = cajas[0].cortes === cajas[1].cortes;
+    /* la pregunta no se abre hasta que las dos pizzas están cortadas igual; solo el peldaño del mismo numerador va libre */
+    if(okA && okB && (P.tipo === 'num' || igual)) ponPregunta();
+    else if(okA && okB && !igual) $('aviso').innerHTML = 'Los dos pedidos están listos: ahora pásales el <b>mismo cortador</b>. Con trozos distintos no hay cuenta que valga.';
+    return;
+  }
+  const ps = M.partes(cajas), juntable = ps.length < 2 || M.mismoCorte(ps), v = M.total(cajas);
+  const pieza = !P.pieza || cajas.some(c => M.piezaDe(c, P.f[1]));
+  if(juntable && casi(v, fVal(P.f)) && pieza) acierta(P.ok);
+  else if(juntable && casi(v, fVal(P.f)) && !pieza) $('aviso').innerHTML = 'Suman ' + fTxt(P.f) + ', sí. Pero el cliente quiere <b>una pieza</b>: grápalos.';
+}
+function ponPregunta(){
+  const q = $('pregunta'); if(!q.hidden) return;
+  q.hidden = false; q.innerHTML = '<span class="etq">¿quién se lleva más?</span>';
+  const va = fVal(P.fA), vb = fVal(P.fB), iguales = casi(va, vb);
+  [['El de ' + fTxt(P.fA), !iguales && va > vb, 'A'], ['El de ' + fTxt(P.fB), !iguales && vb > va, 'B'], ['Los dos igual', iguales, 'ig']].forEach(([txt, bien, clave]) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.textContent = txt;
+    b.addEventListener('click', () => {
+      if(bien){
+        const guiño = !prediccion ? '' : prediccion === signoReal() ? 'Lo que apuntaste en la pizarra iba bien encaminado. ' : 'La pizarra decía otra cosa, ¿eh? Por algo se cuenta antes de cobrar. ';
+        acierta(guiño + P.ok);
+      }else{
+        fallos++; est.stats[est.juego].mal += fallos === 1 ? 1 : 0; sonar('mal');
+        nickDice((P.rep || {})[clave] || 'Mira la regla: se lleva más el que cae más a la derecha.', false);
+      }
+    });
+    q.appendChild(b);
+  });
+}
+function acierta(txt){
+  resuelto = true; sonar('bien');
+  nickDice(txt, true);
+  $('pregunta').hidden = true; $('pregunta').innerHTML = ''; $('aviso').innerHTML = '';
+  const s = est.stats[est.juego];
+  if(est.practica){ if(!fallos) s.bien++; }
+  else s.ruta = Math.max(s.ruta, est.ruta[est.juego] + 1);
+  est.ejercicios.push({t: Date.now(), j: est.juego, c: esTel() || esCompara() ? fTxt(P.fA) + ' y ' + fTxt(P.fB) : fTxt(P.f), p: est.practica ? 1 : 0, f: fallos, s: Math.round((Date.now() - tPedido) / 1000)});
+  guarda();
+  if(est.practica) $('bOtro').hidden = false;
+  else{ $('bSiguiente').hidden = false; $('bSaltar').hidden = true; }
+  pintaRegla(); pintaOperacion(); pintaPizarra();
+}
+
+/* ── EL ACTA ── */
+const firma = txt => { let h = 2166136261; for(let i = 0; i < txt.length; i++){ h ^= txt.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } const x = h.toString(16).toUpperCase().padStart(8, '0'); return x.slice(0, 4) + '-' + x.slice(4); };
+const hora = t => { const d = new Date(t), dos = x => String(x).padStart(2, '0'); return dos(d.getHours()) + ':' + dos(d.getMinutes()); };
+const tiempo = ms => { const m = Math.round(ms / 60000); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + (m % 60) + ' min'; };
+function textoActa(){
+  const J = ['servir', 'comparar', 'telefono'];
+  const l = ['LA GRAPADORA DE NICK · ACTA', 'Nombre: ' + (est.nombre || '—'), 'Fecha: ' + new Date().toLocaleString('es-ES'), 'Tiempo: ' + tiempo(Date.now() - est.t0), ''];
+  J.forEach(j => { const s = est.stats[j]; l.push(PD.NOMBRE_J[j] + ': ruta ' + s.ruta + '/' + PD.RUTA[j].length + ' · practicar ' + s.bien + ' a la primera, ' + s.mal + ' con fallos'); });
+  l.push('');
+  est.ejercicios.forEach(e => l.push(hora(e.t) + ' ' + PD.NOMBRE_J[e.j] + (e.p ? ' (practicar)' : '') + ' ' + e.c + ' · ' + (e.f ? e.f + ' fallo' + (e.f > 1 ? 's' : '') : 'a la primera') + ' · ' + e.s + ' s'));
+  return l.join('\n');
+}
+function pintaActa(){
+  const J = ['servir', 'comparar', 'telefono'], dato = (n, v) => '<div><span class="etq">' + n + '</span><b>' + v + '</b></div>';
+  const ruta = J.reduce((s, j) => s + est.stats[j].ruta, 0), total = J.reduce((s, j) => s + PD.RUTA[j].length, 0);
+  const pb = J.reduce((s, j) => s + est.stats[j].bien, 0), pm = J.reduce((s, j) => s + est.stats[j].mal, 0);
+  $('acDatos').innerHTML = dato('La ruta', ruta + ' / ' + total) + dato('Practicar', pb + ' a la primera') + dato('Con fallos', pm) + dato('Tiempo', tiempo(Date.now() - est.t0));
+  $('acFilas').innerHTML = J.map(j => { const s = est.stats[j]; return '<tr><td><b>' + PD.NOMBRE_J[j] + '</b></td><td>' + s.ruta + ' de ' + PD.RUTA[j].length + '</td><td>' + (s.bien + s.mal ? s.bien + ' a la primera · ' + s.mal + ' con fallos' : '—') + '</td></tr>'; }).join('');
+  $('acDet').hidden = !est.ejercicios.length;
+  $('acDet').querySelector('summary').textContent = 'Pedido a pedido (' + est.ejercicios.length + ')';
+  $('acEj').innerHTML = est.ejercicios.map(e => '<li class="' + (e.f ? 'no' : 'ok') + '"><span class="ac-h">' + hora(e.t) + '</span><span>' + PD.NOMBRE_J[e.j] + (e.p ? ' · practicar' : '') + '</span><span class="ac-c">' + e.c + '</span><span class="ac-como">' + (e.f ? e.f + ' fallo' + (e.f > 1 ? 's' : '') : 'a la primera') + '</span></li>').join('');
+  $('acNombre').value = est.nombre || '';
+  $('acFirma').textContent = firma(textoActa());
+}
+function abreActa(){ ajustes(false); $('acMsg').textContent = ''; pintaActa(); $('mActa').hidden = false; $('mActa').querySelector('.caja2').focus(); }
+const cierraActa = () => { $('mActa').hidden = true; $('bActa').focus(); };
+$('bActa').addEventListener('click', abreActa);
+$('acCierra').addEventListener('click', cierraActa);
+$('mActa').addEventListener('click', ev => { if(ev.target.id === 'mActa') cierraActa(); });
+$('acNombre').addEventListener('input', () => { est.nombre = $('acNombre').value; guarda(); $('acFirma').textContent = firma(textoActa()); });
+$('acCopia').addEventListener('click', () => {
+  const t = textoActa() + '\n\nCódigo de verificación: ' + firma(textoActa()), no = () => { $('acMsg').textContent = 'No se ha podido copiar: usa «Descargar .txt».'; };
+  try{ navigator.clipboard.writeText(t).then(() => { $('acMsg').textContent = '✓ Acta copiada: pégala donde te diga tu profesor.'; }, no); }catch(err){ no(); }
+});
+$('acBaja').addEventListener('click', () => {
+  const f = new Date(), dos = x => String(x).padStart(2, '0');
+  const nombre = (est.nombre || 'sin-nombre').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'sin-nombre';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([textoActa() + '\n\nCódigo de verificación: ' + firma(textoActa())], {type: 'text/plain;charset=utf-8'}));
+  a.download = 'acta-grapadora-' + nombre + '-' + f.getFullYear() + dos(f.getMonth() + 1) + dos(f.getDate()) + '.txt';
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  $('acMsg').textContent = '✓ Acta descargada.';
+});
+
+/* ── EMPEZAR DE CERO: a la segunda pulsación ── */
+let cero = 0;
+$('ajCero').addEventListener('click', () => {
+  if(!cero){ cero = setTimeout(() => { cero = 0; $('ajCero').classList.remove('seguro'); $('ajCero').textContent = 'Borrar todo'; }, 5000);
+    $('ajCero').classList.add('seguro'); $('ajCero').textContent = 'Pulsa otra vez para borrarlo'; return; }
+  clearTimeout(cero); cero = 0; $('ajCero').classList.remove('seguro'); $('ajCero').textContent = 'Borrar todo';
+  try{ localStorage.removeItem(TURNO); }catch(err){}
+  est = nuevoTurno(); ajustes(false); pintaPestanas(); montaPedido();
+});
+
+/* ── LA GUÍA: un foco sobre cada parte del mostrador ── */
+const GUIA = [
+  {sel: '.juegos', c: 'Los tres juegos', t: '<b>Servir</b> lo que pide el cliente aunque la pizza venga cortada de otra manera; <b>comparar</b> dos pedidos, la escalera de la comparación; y <b>por teléfono</b>, cuando el cortador no llega y se corta sobre el papel.'},
+  {sel: '#cliente', c: 'El encargo', t: 'Lo que pide el cliente. Debajo, Nick te dice por dónde ir; y los puntos, por dónde va la ruta.'},
+  {sel: '#pizarra', c: 'La pizarra', t: 'Antes de cortar nada, <b>apuesta el signo</b>: &gt;, = o &lt;. Cuando la cuenta esté hecha, verás si tu apuesta aguantó.'},
+  {sel: '#cajas', c: 'Las cajas', t: 'Toca un trozo y se levanta: es lo que te llevas. Si hay dos cajas, la que tiene el borde dorado es la que mandan los botones.'},
+  {sel: '#botCortes', c: 'El cortador', t: 'Vuelve a cortar la pizza. <b>Lo grapado aguanta</b>: media pizza sigue siendo una pieza, solo cambia de nombre. Un corte punteado no respeta las piezas y pide un segundo toque.'},
+  {sel: '#botMaq', c: 'La máquina', t: 'Grapa la pizza <b>entera</b> de 2 en 2, de 3 en 3… Es lo contrario de cortar: cambia en cuántas partes está la pizza. Luego eliges tu pieza.'},
+  {sel: '#bGrapar', c: 'La grapadora', t: 'Une los trozos elegidos, si están <b>pegados</b>. Dos cuartos grapados son media pizza: la misma cantidad con otro nombre.'},
+  {sel: '#papel', c: 'El papel', t: 'Aquí no hay pizza que valga. Multiplica cada fracción <b>arriba y abajo</b> hasta que las dos estén en la misma secuencia; entonces se comparan.'},
+  {sel: '#tique', c: 'El tique', t: 'La regla es la que manda: <b>el 1 es una pizza entera</b>, y cada pedido acaba en su marca. Debajo, la operación que ha hecho tu gesto: cortar multiplica, grapar divide.'},
+  {sel: '#bPracticar', c: 'Practicar', t: 'Pedidos <b>nuevos cada vez</b>, sin fin, con tres dificultades.'},
+  {sel: '#bActa', c: 'El acta', t: 'Un resumen de lo que has hecho, con tu nombre y un código, para <b>entregárselo a tu profesor</b>.'},
+  {sel: '#bAjustes', c: 'Ajustes', t: 'La encimera o la pizarra, la apuesta antes de comparar, el sonido y la animación.'},
+  {sel: '#bAula', c: 'El aula', t: 'Todo más grande y en una sola pantalla, para la pizarra digital. <b>A servir.</b>'}
+];
+let guiaI = -1, guiaParadas = [], guiaRetoque = 0;
+const seVe = e => !!(e && e.offsetParent !== null && e.getBoundingClientRect().height > 0);
+function cierraGuia(){ $('guia').hidden = true; guiaI = -1; clearTimeout(guiaRetoque); try{ localStorage.setItem('grapadora.guia', 'vista'); }catch(err){} $('bGuia').focus(); }
+function vaGuia(i){
+  if(i >= guiaParadas.length) return cierraGuia();
+  guiaI = i;
+  const g = guiaParadas[i], e = document.querySelector(g.sel);
+  if(!seVe(e)) return vaGuia(i + 1);
+  $('guiaTit').textContent = g.c; $('guiaTxt').innerHTML = g.t;
+  $('guiaNum').textContent = (i + 1) + ' de ' + guiaParadas.length;
+  $('guiaSig').textContent = i === guiaParadas.length - 1 ? 'A servir' : 'Siguiente';
+  $('guia').hidden = false;
+  e.scrollIntoView({block: 'center', behavior: 'instant'});
+  colocaGuia(); requestAnimationFrame(() => requestAnimationFrame(colocaGuia));
+  clearTimeout(guiaRetoque); guiaRetoque = setTimeout(colocaGuia, 180);
+}
+function colocaGuia(){
+  const g = guiaParadas[guiaI]; if(!g || $('guia').hidden) return;
+  const e = document.querySelector(g.sel); if(!seVe(e)) return;
+  const r = e.getBoundingClientRect(), m = 7, f = $('guiaFoco'), gl = $('guiaGlobo');
+  f.style.top = (r.top - m) + 'px'; f.style.left = (r.left - m) + 'px'; f.style.width = (r.width + 2 * m) + 'px'; f.style.height = (r.height + 2 * m) + 'px';
+  const alto = gl.offsetHeight || 180, ancho = gl.offsetWidth || 320;
+  const abajo = r.bottom + m + 12, arriba = r.top - m - 12 - alto;
+  gl.style.top = (abajo + alto < innerHeight - 8 ? abajo : arriba > 8 ? arriba : Math.max(8, innerHeight - alto - 8)) + 'px';
+  gl.style.left = Math.min(Math.max(12, r.left + r.width / 2 - ancho / 2), innerWidth - ancho - 12) + 'px';
+}
+function abreGuia(){ ajustes(false); guiaParadas = GUIA.filter(g => seVe(document.querySelector(g.sel))); vaGuia(0); $('guiaGlobo').focus(); }
+$('bGuia').addEventListener('click', abreGuia);
+$('guiaSig').addEventListener('click', ev => { ev.stopPropagation(); vaGuia(guiaI + 1); });
+$('guiaSalir').addEventListener('click', ev => { ev.stopPropagation(); cierraGuia(); });
+$('guiaGlobo').addEventListener('click', ev => ev.stopPropagation());
+$('guia').addEventListener('click', () => vaGuia(guiaI + 1));
+addEventListener('keydown', ev => { if(!$('guia').hidden){ ev.stopPropagation(); if(ev.key === 'Escape') cierraGuia(); else if(ev.key === 'ArrowRight' || ev.key === 'Enter'){ ev.preventDefault(); vaGuia(guiaI + 1); } return; }
+  if(ev.key === 'Escape' && !$('mActa').hidden) cierraActa(); }, true);
+addEventListener('scroll', colocaGuia, {passive: true});
+addEventListener('resize', colocaGuia);
+
+/* ── LA APERTURA ── */
+aplicaAjustes(); pintaPestanas(); montaPedido();
+const primeraVez = (() => { try{ return localStorage.getItem('grapadora.guia') !== 'vista'; }catch(err){ return false; } })();
+const arranca = () => { if(primeraVez) setTimeout(abreGuia, 400); };
+if(document.documentElement.dataset.inicio === 'si' && window.Arranque) window.Arranque.escena($('escenaInicio'), arranca);
+else arranca();
+})();
+</script>
+</body>
+</html>

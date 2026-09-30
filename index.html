@@ -1,0 +1,1581 @@
+<!doctype html>
+<!-- Generado por construye.mjs a partir de src/: edita src/pagina.html y los módulos, no este fichero. -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta name="author" content="Andrés Asensio">
+<title>La grapadora de Nick</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Nunito:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* ══════════════════════════════════════════════════════════════════════
+   LA GRAPADORA DE NICK · la piel
+   La disposición de Las piezas de Miut —la cabecera en una hoja con sus
+   pestañas, las hojas de papel, los botones, el acta— sobre la encimera de
+   mármol de la pizzería: clara, con sus vetas y un poco de harina. De
+   noche, la pizarra verde del local. Proyector: papel blanco y tinta negra.
+   ══════════════════════════════════════════════════════════════════════ */
+:root{
+  --fondo1:#EFE9DD; --fondo2:#DED5C4; --luz:rgba(255,252,240,.7);
+  --veta:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='520'><filter id='v'><feTurbulence type='fractalNoise' baseFrequency='.004 .012' numOctaves='3' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .40  0 0 0 0 .34  0 0 0 9 -4.2'/></filter><rect width='520' height='520' filter='url(%23v)' opacity='.16'/></svg>");
+  --harina:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='h'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='1' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 7 -4.6'/></filter><rect width='180' height='180' filter='url(%23h)' opacity='.5'/></svg>");
+  --noche:#F6EEDF; --panel:#FFFCF4; --panel2:#FBF4E6; --linea:#D9C6A6;
+  --tinta:#2E2218; --tenue:#7D6650;
+  --morado:#8A6A9E; --oro:#A8661B; --rojo:#B0442C; --verde:#4F7A2E;
+  --sombra:rgba(70,45,20,.22); --brillo:rgba(214,150,50,.18);
+  /* los de la casa */
+  --tomate:#C4462F; --tomateO:#9E3423; --azul:#2F6E8C; --albahaca:#5C7A3E;
+  --corteza:#C98A3E; --cortezaO:#A96C28; --queso:#F3DCA2; --carton:#C89A63; --grapa:#C6CBD1;
+  --pizarra:#2E4034; --tizaV:#8FA894; --tizaB:#EFF3EA;
+  --sello:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path d='M1.5 4.5 h9 a1.6 1.6 0 0 1 1.6 1.6 v1.2 h-2.4 v-.8 h-8.2 z'/><rect x='1.5' y='7.3' width='9.3' height='2.4' rx='.6'/><rect x='2.2' y='10' width='7.9' height='2.2' rx='.5'/><path d='M4 12.2 v1.3 M8.4 12.2 v1.3' stroke='black' stroke-width='1.2'/></svg>");
+  --rotulo:'Bree Serif',Georgia,serif; --letra:'Nunito',system-ui,sans-serif;
+}
+/* la pizarra del local: verde oscuro, con el polvo de la tiza */
+html[data-tema="noche"]{
+  --fondo1:#2C3D33; --fondo2:#1E2B24; --luz:rgba(240,240,220,.10);
+  --veta:none;
+  --harina:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='h'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='5' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 .95  0 0 0 5 -3.2'/></filter><rect width='180' height='180' filter='url(%23h)' opacity='.35'/></svg>");
+  --noche:#1F1A16; --panel:#2B241F; --panel2:#342C26; --linea:#57493D;
+  --tinta:#F4EADB; --tenue:#C4B29A;
+  --morado:#B79CCB; --oro:#E6A84A; --rojo:#D2644B; --verde:#8DB36A;
+  --tomate:#E2725B; --azul:#57B8D6; --albahaca:#8DB36A;
+  --sombra:rgba(0,0,0,.45); --brillo:rgba(230,168,74,.16);
+  color-scheme:dark}
+html[data-tema="proyector"]{
+  --noche:#F4F4F4; --panel:#FFFFFF; --panel2:#FFFFFF; --linea:#1A1A1A;
+  --tinta:#000000; --tenue:#2B2B2B;
+  --oro:#8A5A00; --rojo:#B3261E; --verde:#1D6B12; --tomate:#B3261E; --azul:#0B5F86;
+  --sombra:rgba(0,0,0,.12); --brillo:rgba(138,90,0,.10)}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{background:var(--fondo2)}
+body{margin:0;color:var(--tinta);font-family:var(--letra);font-size:15px;line-height:1.5;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%, var(--luz), transparent 70%),
+    var(--harina),
+    var(--veta),
+    linear-gradient(180deg, var(--fondo1), var(--fondo2));
+  background-size:auto, 180px 180px, 520px 520px, auto;
+  background-attachment:fixed;-webkit-text-size-adjust:100%;min-height:100vh}
+html[data-tema="proyector"], html[data-tema="proyector"] body{background:#FFFFFF}
+.lienzo{max-width:760px;margin:0 auto;padding:12px 12px 36px;display:flex;flex-direction:column}
+html[data-movimiento="menos"] *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+
+/* ── LA CABECERA: una sola hoja con el nombre y, en letra pequeña y sin
+   cajas, las acciones; debajo, los tres juegos como pestañas ── */
+.cab{padding:9px 14px 0;border:1px solid var(--linea);border-radius:13px;overflow:hidden;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 6px 18px var(--sombra)}
+.rotulo{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rotulo > div{flex:1 1 0;min-width:0}
+.cab .sello{width:26px;height:26px;flex:0 0 26px;background:var(--oro);
+  -webkit-mask:var(--sello) center/contain no-repeat;mask:var(--sello) center/contain no-repeat}
+.cab h1{font-family:var(--rotulo);font-weight:400;font-size:19px;letter-spacing:1.8px;text-transform:uppercase;margin:0;color:var(--oro);line-height:1.1}
+.cab .sub{font-family:var(--rotulo);font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--tenue);margin:0}
+.cab .acc{margin-left:auto;display:flex;gap:16px}
+.cab .acc button{font-family:var(--rotulo);font-size:12.5px;letter-spacing:1.3px;text-transform:uppercase;color:var(--tenue);
+  background:none;border:0;border-bottom:1px solid transparent;padding:4px 0;cursor:pointer}
+.cab .acc button:hover,.cab .acc button:focus-visible,.cab .acc button[aria-pressed="true"]{color:var(--oro);border-bottom-color:var(--oro);outline:none}
+@media (max-width:620px){
+  .cab .acc{width:100%;margin:5px 0 0;padding-top:4px;border-top:1px solid var(--linea);justify-content:space-around;gap:6px}
+}
+.juegos{display:grid;grid-template-columns:repeat(3,1fr);margin:8px -14px 0;border-top:1px solid var(--linea)}
+.juegos button{font:inherit;cursor:pointer;text-align:center;color:var(--tinta);background:none;border:0;border-bottom:3px solid transparent;
+  border-radius:0;padding:6px 4px 4px;line-height:1.2}
+.juegos button + button{border-left:1px solid var(--linea)}
+.juegos button b{display:block;font-family:var(--rotulo);font-weight:400;font-size:15px;letter-spacing:1.3px;text-transform:uppercase;color:var(--oro)}
+.juegos button span{display:block;font-size:11.5px;color:var(--tenue)}
+.juegos button:hover{background:var(--brillo)}
+.juegos button[aria-pressed="true"]{border-bottom-color:var(--oro);background:var(--brillo)}
+@media (max-width:480px){ .juegos button span{display:none} .juegos button b{font-size:13.5px;letter-spacing:.6px} .juegos button{padding:8px 2px 6px} }
+
+/* ── LAS HOJAS ── */
+.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--linea);border-radius:13px;
+  padding:12px 13px;margin-top:9px;box-shadow:0 6px 18px var(--sombra)}
+.panel h2, .etq{font-family:var(--rotulo);font-weight:400;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tenue);margin:0}
+.panel > h2{margin-bottom:8px}
+.caja{border:1px solid var(--linea);border-radius:12px;background:var(--noche);padding:9px 10px}
+
+/* ── LOS BOTONES ── */
+.botones{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+button.b{font-family:var(--rotulo);font-weight:400;font-size:14px;letter-spacing:1px;text-transform:uppercase;
+  padding:8px 14px;min-height:42px;border-radius:9px;border:1px solid var(--linea);cursor:pointer;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));color:var(--tinta);box-shadow:0 2px 0 rgba(0,0,0,.28)}
+button.b:hover{border-color:var(--morado)}
+button.b:active{transform:translateY(2px);box-shadow:none}
+button.b.ok{background:linear-gradient(180deg,#F4CB72,#DDA23A);color:#2A1D06;border-color:#A8661B;box-shadow:0 2px 0 #7E4C12}
+button.b:disabled{opacity:.4;cursor:default;transform:none}
+button.b.borrar.seguro{background:var(--rojo);border-color:var(--rojo);color:#fff}
+button.b:focus-visible{outline:2px solid var(--oro);outline-offset:2px}
+button.enlace{background:none;border:0;color:var(--tenue);text-decoration:underline;font:inherit;font-size:13.5px;cursor:pointer;padding:6px 4px}
+button.enlace:hover{color:var(--oro)}
+
+/* ── LOS AJUSTES, una hoja que se abre bajo la cabecera ── */
+.ajustes .aj{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px 0;border-bottom:1px dashed var(--linea)}
+.ajustes .aj > .etq{min-width:130px}
+.ajustes .aj small{flex-basis:100%;color:var(--tenue);font-size:12.5px;margin-top:-2px}
+.ops{display:inline-flex;border:1px solid var(--linea);border-radius:20px;overflow:hidden;flex-wrap:wrap}
+.ops button{font-family:var(--rotulo);font-weight:400;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+  background:none;border:0;color:var(--tenue);padding:6px 12px;min-height:34px}
+.ops button + button{border-left:1px solid var(--linea)}
+.ops button[aria-pressed="true"]{background:var(--oro);color:var(--panel)}
+
+/* ── EL ENCARGO: el cliente pide, Nick contesta; y por dónde se va ── */
+.enc-cab{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.enc-cab .puntos{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto;align-items:center}
+.puntos i{width:10px;height:10px;border-radius:50%;background:var(--linea);display:block}
+.puntos i.hecho{background:var(--oro)}
+.puntos i.aqui{box-shadow:0 0 0 2px var(--oro)}
+.cliente{margin:0;padding:8px 12px;border-left:4px solid var(--tomate);border-radius:0 9px 9px 0;background:var(--noche);font-size:16px;line-height:1.45}
+.cliente .quien{display:block;font-family:var(--rotulo);font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tomate);margin-bottom:1px}
+.cliente.tel{border-left-color:var(--azul)} .cliente.tel .quien{color:var(--azul)}
+.cliente .fA, .habla .fA, .tique .fA, .pizarra .fA, .opera .fA{color:var(--tomate)}
+.cliente .fB, .habla .fB, .tique .fB, .pizarra .fB, .opera .fB{color:var(--azul)}
+.habla{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:start;margin-top:9px;padding:9px 12px;
+  border:1px solid var(--linea);border-radius:11px;background:var(--noche)}
+.habla .cara{width:52px;display:block}
+.habla .cara svg{display:block;width:100%;height:auto;overflow:visible}
+.habla .quien{font-family:var(--rotulo);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--albahaca)}
+.habla p{margin:2px 0 0;font-size:15.5px;line-height:1.45}
+.habla p b{color:var(--oro)}
+.habla.feliz .quien{color:var(--oro)}
+.practica{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px dashed var(--linea)}
+.practica .etq{min-width:0}
+
+/* Nick vive: parpadea, el brazo da el clac al grapar y salta con el pedido redondo */
+.cara .ojo{transform-box:fill-box;transform-origin:center;animation:parpadea 4.4s infinite}
+@keyframes parpadea{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.cara .brazo{transform-box:fill-box;transform-origin:15% 100%}
+.habla.grapando .cara .brazo{animation:clac .5s ease-in-out}
+@keyframes clac{35%{transform:rotate(22deg)}60%{transform:rotate(-4deg)}}
+.habla.feliz .cara svg{animation:salta .55s cubic-bezier(.3,1.5,.5,1)}
+@keyframes salta{30%{transform:translateY(-6px) rotate(-3deg)}60%{transform:translateY(1px)}}
+.cara .boca-f{display:none}
+.habla.feliz .cara .boca{display:none}
+.habla.feliz .cara .boca-f{display:block}
+@media (prefers-reduced-motion: reduce){ .cara .ojo,.habla.grapando .cara .brazo,.habla.feliz .cara svg{animation:none} }
+
+/* ── LAS VENTANAS: la guía, el acta ── */
+.modal{position:fixed;inset:0;background:rgba(12,8,20,.82);display:grid;place-items:center;padding:16px;z-index:60;overflow:auto}
+.modal .caja2{width:min(600px,100%);max-height:92vh;overflow:auto;border:1px solid var(--linea);border-radius:16px;padding:18px 20px;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.modal .caja2:focus{outline:none}
+.modal h2{font-family:var(--rotulo);font-weight:400;color:var(--oro);letter-spacing:1.5px;text-transform:uppercase;font-size:18px;margin:0 0 8px}
+.modal h3{font-family:var(--rotulo);font-weight:400;color:var(--oro);font-size:15px;letter-spacing:1px;margin:14px 0 4px}
+.modal p,.modal li{font-size:14.5px}
+.acta .actaSub{margin:0 0 10px;color:var(--tenue)}
+.actaNombre{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.actaNombre input{flex:1;font:inherit;font-size:16px;padding:8px 10px;border-radius:9px;border:1px solid var(--linea);background:var(--noche);color:var(--tinta)}
+.actaDatos{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:6px;margin-bottom:10px}
+.actaDatos div{background:var(--noche);border:1px solid var(--linea);border-radius:9px;padding:6px 9px}
+.actaDatos b{display:block;font-family:'Space Mono',monospace;font-size:18px}
+.actaTabla{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:10px}
+.actaTabla th{font-family:var(--rotulo);font-weight:400;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--tenue);text-align:left;padding:4px 6px;border-bottom:1px solid var(--linea)}
+.actaTabla td{padding:6px;border-bottom:1px dashed var(--linea);vertical-align:top}
+.actaTabla td b{color:var(--oro)}
+.actaCodigos{display:grid;gap:6px;margin:6px 0 4px}
+.actaCodigos b{font-family:'Space Mono',monospace;font-size:18px;letter-spacing:2px;color:var(--oro);margin-left:8px}
+.actaMsg{min-height:20px;color:var(--verde);margin:6px 0 0}
+.ac-det{margin:0 0 6px} .ac-det summary{cursor:pointer;color:var(--tenue);font-size:13.5px}
+.ac-ej{margin:6px 0 0;padding-left:0;list-style:none;font-size:13px}
+.ac-ej li{display:flex;gap:8px;padding:3px 0;border-bottom:1px dashed var(--linea);flex-wrap:wrap}
+.ac-ej .ac-h{font-family:'Space Mono',monospace;color:var(--tenue);font-size:11px;min-width:44px}
+.ac-ej .ac-c{font-family:'Space Mono',monospace}
+.ac-ej li.ok .ac-como::before{content:"✓ ";color:var(--verde)} .ac-ej li.no .ac-como::before{content:"✗ ";color:var(--rojo)}
+
+/* ── LA GUÍA: un foco sobre cada parte del mostrador y un papel que la explica ── */
+.guia{position:fixed;inset:0;z-index:80;cursor:pointer}
+.guia-foco{position:fixed;border-radius:13px;border:2px solid #F0C75E;pointer-events:none;
+  box-shadow:0 0 0 9999px rgba(30,16,6,.72),0 0 22px rgba(240,199,94,.55);
+  transition:top .28s ease,left .28s ease,width .28s ease,height .28s ease}
+.guia-globo{position:fixed;z-index:81;width:min(340px,calc(100vw - 32px));cursor:default;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--oro);border-radius:14px;padding:13px 15px;
+  box-shadow:0 18px 44px rgba(0,0,0,.5);transition:top .28s ease,left .28s ease}
+.guia-globo .tit{display:flex;align-items:center;gap:8px;font-family:var(--rotulo);font-size:15px;letter-spacing:1.4px;text-transform:uppercase;color:var(--oro);margin-bottom:4px}
+.guia-globo .tit::before{content:'';width:18px;height:18px;flex:0 0 18px;background:var(--oro);-webkit-mask:var(--sello) center/contain no-repeat;mask:var(--sello) center/contain no-repeat}
+.guia-globo:focus{outline:none}
+.guia-globo p{margin:0;font-size:14.5px;line-height:1.5}
+.guia-globo p b{color:var(--oro)}
+.guia-pie{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:11px}
+.guia-pie span{font-family:'Space Mono',monospace;font-size:11px;color:var(--tenue)}
+.guia-pie .botones{margin:0}
+.guia-pie button.b{min-height:36px;padding:5px 12px}
+
+/* ── EL PIE ── */
+footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--linea);text-align:center;
+  font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--tenue)}
+footer a{color:var(--tenue)}
+html:not([data-tema="noche"]):not([data-tema="proyector"]) footer{color:#5a4a36;border-top-color:rgba(90,66,38,.3)}
+
+/* ── EL AULA: todo un tercio más grande y, si cabe, el encargo y el tique
+   a la izquierda y la mesa a la derecha, siempre a la vista ── */
+@media (min-width:900px){ html[data-aula="si"] body{zoom:1.32;padding-left:22px;padding-right:22px} }
+@media (min-width:900px) and (max-height:820px){ html[data-aula="si"] body{zoom:1.12} }
+html[data-aula="si"] .lienzo{max-width:860px}
+@media (min-width:1100px){
+  html[data-aula="si"] .lienzo{max-width:1500px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:0 18px;align-items:start}
+  html[data-aula="si"] .lienzo > *{grid-column:1}
+  html[data-aula="si"] .lienzo > .cab{grid-column:1 / -1}
+  html[data-aula="si"] .lienzo > #mesa{grid-column:2;grid-row:2 / span 12;position:sticky;top:8px}
+}
+@media print{
+  body{background:#fff} .cab .acc,.mandos,.botones,.guia,.modal,.inicio{display:none !important}
+  .panel{box-shadow:none;break-inside:avoid}
+}
+</style>
+<style>
+/* ── LA MESA: las cajas de cartón con su pizza, y debajo los mandos ── */
+.mesa .cajas{display:flex;gap:10px;justify-content:center;align-items:flex-start;padding:10px;border-radius:12px;
+  background:repeating-linear-gradient(94deg,#9A6A42 0 30px,#8A5E3B 30px 60px);box-shadow:inset 0 0 0 4px #6E4A2E}
+html[data-tema="proyector"] .mesa .cajas{background:#eee;box-shadow:inset 0 0 0 2px #1a1a1a}
+.cajaP{flex:1;max-width:280px;background:var(--carton);border-radius:10px;padding:7px;
+  box-shadow:inset 0 0 0 2px #A87C48, 0 3px 6px rgba(0,0,0,.25);cursor:pointer;transition:box-shadow .15s}
+.cajaP.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--oro), 0 4px 10px rgba(0,0,0,.3)}
+.cajaP .tapa{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:1px;color:#6E4A2E;text-align:center;margin-bottom:3px}
+/* en las comparaciones cada caja es de una mesa y lo lleva puesto: una cinta del color de su marca */
+.cajaP.mA{border-top:5px solid var(--tomate)} .cajaP.mA .tapa{color:var(--tomateO)}
+.cajaP.mB{border-top:5px solid var(--azul)}  .cajaP.mB .tapa{color:var(--azul)}
+.cajaP.mA.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--tomate), 0 4px 10px rgba(0,0,0,.3)}
+.cajaP.mB.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--azul), 0 4px 10px rgba(0,0,0,.3)}
+svg.pizza{display:block;width:100%;height:auto;touch-action:manipulation}
+.corte{cursor:pointer;transition:transform .14s ease-out}
+/* la porción elegida se separa de la pizza, como cuando la levantas de la caja */
+.corte.apagada{opacity:.55}
+.corte.elegida{filter:drop-shadow(0 4px 5px rgba(60,40,20,.45))}
+.grapa-nueva{animation:seva 2.6s ease-out forwards;transform-box:view-box}
+.costura-nueva{animation:seCose 2.6s ease-out forwards}
+@keyframes seva{0%{opacity:0;transform:scale(1.7)}8%{opacity:1;transform:scale(1)}82%{opacity:1}100%{opacity:0}}
+@keyframes seCose{0%{opacity:0}8%{opacity:.85}48%{opacity:.85}66%{opacity:0}100%{opacity:0}}
+
+/* los mandos: una fila por cosa que se puede tocar, con su etiqueta */
+.mandos .fila{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.mandos .fila .etq{min-width:86px}
+.mandos .tiras{display:flex;gap:6px;flex-wrap:wrap}
+button.n{font-family:'Space Mono',monospace;font-weight:700;font-size:15px;min-width:42px;min-height:42px;padding:5px 10px;border-radius:9px;
+  border:1px solid var(--linea);background:var(--noche);color:var(--tinta);cursor:pointer;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+button.n:hover{border-color:var(--morado)}
+button.n:active{transform:translateY(2px);box-shadow:none}
+button.n[aria-pressed="true"]{background:var(--oro);border-color:var(--oro);color:var(--panel)}
+/* los cortes que no respetan las piezas van punteados: el primer toque avisa, el segundo corta */
+button.n.rompe{border-style:dashed;border-color:#C98F7B;color:var(--tomateO)}
+button.n.avisa{background:#C87A28;color:#fff;border-color:#9A5C1B;border-style:solid;animation:tiembla .28s}
+@keyframes tiembla{25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+.mandos .botones{margin-top:10px}
+.aviso{margin:8px 0 0;font-size:14px;color:var(--tenue);min-height:20px}
+.aviso b{color:var(--oro)}
+
+/* ── LA PIZARRA DE NICK: el signo, antes de poder contar ── */
+.pizarra{margin-top:10px;background:var(--pizarra);border:6px solid #6E4A2E;border-radius:8px;padding:10px 12px 12px;
+  box-shadow:inset 0 0 26px rgba(0,0,0,.45);text-align:center}
+.pizarra .rot{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--tizaV);margin-bottom:6px}
+.pizarra .linea{font-family:var(--rotulo);font-size:22px;color:var(--tizaB);display:flex;gap:11px;align-items:center;justify-content:center;flex-wrap:wrap}
+.pizarra .fA{color:#F0A79A} .pizarra .fB{color:#9FD0E6}
+.pizarra .hueco-signo{display:inline-block;min-width:44px;padding:1px 8px;border-radius:5px;border:2px dashed #7E9686;color:var(--tizaV)}
+.pizarra .signo{display:inline-block;min-width:44px;font-size:27px;color:#F7E9A0}
+.pizarra .apuesta{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1px;color:var(--tizaV);margin-top:6px}
+.pizarra .bots{display:flex;gap:8px;justify-content:center;margin-top:9px}
+.pizarra .bots button{font-family:var(--rotulo);font-size:21px;width:56px;min-height:42px;border-radius:8px;border:2px solid #7E9686;
+  background:rgba(255,255,255,.07);color:var(--tizaB);cursor:pointer}
+.pizarra .bots button:hover{background:rgba(255,255,255,.16)}
+html[data-tema="proyector"] .pizarra{background:#F4F1E6;border-color:#555;box-shadow:none}
+html[data-tema="proyector"] .pizarra .linea,html[data-tema="proyector"] .pizarra .signo,html[data-tema="proyector"] .pizarra .bots button{color:#000}
+html[data-tema="proyector"] .pizarra .rot,html[data-tema="proyector"] .pizarra .apuesta{color:#444}
+
+/* ── EL PAPEL: el encargo por teléfono se corta sobre el papel ── */
+.papel{display:grid;gap:10px}
+.papel .fr{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;padding:8px 10px;border:1px solid var(--linea);border-radius:11px;background:var(--noche)}
+.papel .fr .quien{grid-column:1 / -1;font-family:var(--rotulo);font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase}
+.papel .fr.mA .quien{color:var(--tomate)} .papel .fr.mB .quien{color:var(--azul)}
+.papel .fr svg{width:150px;height:auto;display:block}
+.papel .fr .tiras{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.papel .fr .tiras .etq{flex-basis:100%}
+
+/* ── EL TIQUE: la regla y la operación escrita ── */
+.tique h2{text-align:center;letter-spacing:3px}
+.lectura{font-size:16px;margin:0 0 2px;text-align:center}
+.lectura b{font-family:var(--rotulo);font-size:22px;color:var(--oro)}
+.desglose{font-size:13px;color:var(--tenue);text-align:center;margin:0 0 8px;min-height:18px}
+.desglose b{color:var(--tinta)}
+.regla{position:relative;height:84px;margin:6px 4px 0}
+.cinta{position:absolute;left:0;right:0;top:30px;height:26px;border-radius:2px;
+  background:linear-gradient(180deg,#F3EAD3,#E4D8B8);border:1px solid #C9BB9E}
+html[data-tema="noche"] .cinta{background:linear-gradient(180deg,#4A4036,#3A3128);border-color:#6a5c4a}
+.cinta b{position:absolute;top:28px;font-family:'Space Mono',monospace;font-size:12px;color:var(--tenue);transform:translateX(-50%);font-weight:700}
+.marca{position:absolute;top:2px;transform:translateX(-50%);text-align:center;pointer-events:none}
+.marca em{display:block;width:3px;height:52px;margin:0 auto;background:var(--tomate);border-radius:2px}
+.marca u{display:block;font-family:var(--rotulo);font-size:14px;color:var(--tomate);text-decoration:none;background:var(--panel);padding:0 3px;border-radius:5px;line-height:1.2}
+.marca.dos em{background:var(--azul)} .marca.dos u{color:var(--azul)}
+.marca.baja u{transform:translateY(17px)}
+.hueco{position:absolute;top:0;height:26px;background:repeating-linear-gradient(45deg,rgba(196,70,47,.32) 0 4px,rgba(196,70,47,.08) 4px 8px)}
+.hueco span{position:absolute;left:50%;top:-19px;transform:translateX(-50%);font-family:var(--rotulo);font-size:12px;color:var(--tomateO);
+  background:var(--panel);padding:0 5px;border-radius:7px;border:1px solid var(--linea);white-space:nowrap}
+.nota{font-size:12px;color:var(--tenue);margin:10px 0 0;line-height:1.5;text-align:center}
+/* la operación, como en el cuaderno: cortar multiplica arriba y abajo; grapar divide */
+.opera{margin-top:10px;padding:8px 10px 4px;border-top:1px dashed var(--linea)}
+.opera .rot{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:2px;color:var(--tenue);text-align:center;margin-bottom:2px}
+.opera svg{display:block;width:100%;max-width:320px;margin:0 auto;height:auto}
+.opera .frase{font-size:13px;color:var(--tenue);text-align:center;margin:2px 0 4px}
+.opera .frase b{color:var(--tinta)}
+/* la pregunta, en el tique: ¿quién se lleva más? */
+.pregunta{margin-top:10px;padding-top:10px;border-top:1px dashed var(--linea);display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
+.pregunta .etq{flex-basis:100%;text-align:center}
+</style>
+<style>
+/* ── LA ESCENA DE INICIO, como en Las piezas de Miut: cae una pizza en la
+   caja, el cortador la parte en cuatro, dos cuartos se levantan, la
+   grapadora los junta y sale el nombre. Mientras dura, solo la encimera. ── */
+.inicio{position:fixed;inset:0;z-index:36;display:none;place-items:center;cursor:pointer;padding:20px 16px;
+  background:radial-gradient(ellipse 70% 55% at 50% 42%, rgba(255,250,230,.35), transparent 70%);transition:opacity .5s ease;
+  -webkit-user-select:none;user-select:none}
+html[data-inicio="si"] .inicio{display:grid}
+html[data-inicio="si"] main{visibility:hidden}
+.inicio[hidden]{display:none !important}
+.inicio.fuera{opacity:0}
+.inEscena{display:flex;flex-direction:column;align-items:center;gap:14px;width:min(360px,100%);text-align:center}
+.inCaja{width:min(250px,70vw);background:var(--carton);border-radius:10px;padding:7px;box-shadow:inset 0 0 0 2px #A87C48, 0 6px 14px rgba(0,0,0,.25);
+  animation:inCae .6s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes inCae{from{transform:translateY(-60vh) rotate(-6deg);opacity:0}}
+.inCaja svg.pizza{display:block;width:100%;height:auto}
+.inTitulo{font-family:var(--rotulo);font-weight:400;font-size:clamp(28px,7vw,46px);letter-spacing:4px;text-transform:uppercase;
+  color:var(--oro);margin:4px 0 0;line-height:1.05;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.inTitulo.ve{opacity:1;transform:none}
+.inLema{margin:0;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--tenue)}
+.inSalta{position:absolute;bottom:26px;left:0;right:0;margin:0;text-align:center;font-family:var(--rotulo);font-size:13px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--tenue);opacity:.8}
+@media (prefers-reduced-motion: reduce){ .inicio{display:none !important} html[data-inicio="si"] main{visibility:visible} }
+</style>
+<script>
+  /* los ajustes se ponen antes de pintar nada, para que no haya un fogonazo del otro fondo */
+  document.documentElement.dataset.tema = 'dia';
+  try{ const a = JSON.parse(localStorage.getItem('grapadora.ajustes.v1') || '{}');
+    if(a.tema === 'noche' || a.tema === 'proyector') document.documentElement.dataset.tema = a.tema;
+    if(a.aula) document.documentElement.dataset.aula = 'si';
+    const vista = sessionStorage.getItem('grapadora.inicio') === 'visto';
+    const quieto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(a.inicio !== false && !vista && !quieto) document.documentElement.dataset.inicio = 'si'; }catch(err){}
+</script>
+</head>
+<body>
+<div class="inicio" id="escenaInicio" hidden>
+  <div class="inEscena">
+    <p class="inLema">cortar reparte · grapar junta</p>
+    <div class="inCaja" aria-hidden="true"></div>
+    <p class="inTitulo">La grapadora de Nick</p>
+  </div>
+  <p class="inSalta">toca para empezar</p>
+</div>
+<main class="lienzo">
+  <header class="cab">
+    <div class="rotulo">
+      <span class="sello" aria-hidden="true"></span>
+      <div><h1>La grapadora de Nick</h1><p class="sub">fracciones · cortar reparte, grapar junta</p></div>
+      <nav class="acc" aria-label="Acciones">
+        <button type="button" id="bGuia">Guía</button>
+        <button type="button" id="bPracticar" aria-pressed="false">Practicar</button>
+        <button type="button" id="bAjustes" aria-pressed="false" aria-controls="ajustes">Ajustes</button>
+        <button type="button" id="bAula" aria-pressed="false">Aula</button>
+        <button type="button" id="bActa">Acta</button>
+      </nav>
+    </div>
+    <div class="juegos" role="group" aria-label="Los tres juegos">
+      <button type="button" data-j="servir" aria-pressed="true"><b>Servir</b><span>la misma cantidad</span></button>
+      <button type="button" data-j="comparar" aria-pressed="false"><b>Comparar</b><span>¿quién se lleva más?</span></button>
+      <button type="button" data-j="telefono" aria-pressed="false"><b>Por teléfono</b><span>sobre el papel</span></button>
+    </div>
+  </header>
+
+  <section class="panel ajustes" id="ajustes" hidden aria-label="Ajustes">
+    <div class="aj"><span class="etq">El fondo</span>
+      <span class="ops" data-aj="tema" role="group" aria-label="El fondo"><button type="button" data-v="dia">La encimera</button><button type="button" data-v="noche">La pizarra</button><button type="button" data-v="proyector">Proyector</button></span>
+      <small>El mármol de la encimera, con algo de harina. La pizarra del local, para un aula con poca luz. Proyector: papel blanco y tinta negra.</small></div>
+    <div class="aj"><span class="etq">Antes de comparar</span>
+      <span class="ops" data-aj="apuesta" role="group" aria-label="La pizarra"><button type="button" data-v="si">Apostar el signo</button><button type="button" data-v="no">Sin pizarra</button></span>
+      <small>Con la pizarra, cada comparación empieza apostando &gt;, = o &lt; antes de poder contar nada.</small></div>
+    <div class="aj"><span class="etq">El sonido</span>
+      <span class="ops" data-aj="sonido" role="group" aria-label="El sonido"><button type="button" data-v="si">Con sonido</button><button type="button" data-v="no">Sin sonido</button></span>
+      <small>Bajito: el clac de la grapadora, el cortador, la tiza y el teléfono.</small></div>
+    <div class="aj"><span class="etq">Al abrir</span>
+      <span class="ops" data-aj="inicio" role="group" aria-label="La animación de inicio"><button type="button" data-v="si">Con animación</button><button type="button" data-v="no">Sin animación</button></span></div>
+    <div class="aj"><span class="etq">Empezar de cero</span>
+      <small id="ajCeroTxt">Borra de este aparato los pedidos servidos y el acta de este turno, para el siguiente alumno o la siguiente clase. Hay que pulsar dos veces. Los ajustes se quedan.</small>
+      <button type="button" class="b borrar" id="ajCero">Borrar todo</button></div>
+    <div class="botones"><button type="button" class="b ok" id="ajCierra">Cerrar</button></div>
+  </section>
+
+  <section class="panel encargo" id="encargo" aria-label="El encargo">
+    <div class="enc-cab"><h2 id="encCab">Pedido 1 de 5</h2><div class="puntos" id="puntos"></div></div>
+    <p class="cliente" id="cliente"></p>
+    <div class="habla" id="nick"><span class="cara" id="caraNick" aria-hidden="true"></span><div><div class="quien">Nick, el pizzero</div><p id="nickTxt" role="status"></p></div></div>
+    <div id="pizarra"></div>
+    <div class="botones" id="encBotones">
+      <button type="button" class="b ok" id="bSiguiente" hidden>Siguiente pedido</button>
+      <button type="button" class="b ok" id="bOtro" hidden>Otro pedido</button>
+      <button type="button" class="enlace" id="bSaltar">Saltar este pedido</button>
+    </div>
+    <div class="practica" id="practica" hidden><span class="etq">Dificultad</span>
+      <span class="ops" id="difOps" role="group" aria-label="Dificultad"><button type="button" data-d="0">Fácil</button><button type="button" data-d="1">Media</button><button type="button" data-d="2">Difícil</button></span></div>
+  </section>
+
+  <section class="panel mesa" id="mesa" aria-label="La mesa">
+    <div class="cajas" id="cajas"></div>
+    <div class="papel" id="papel" hidden></div>
+    <div class="mandos" id="mandos">
+      <div class="fila"><span class="etq">cortar en</span><span class="tiras" id="botCortes"></span></div>
+      <div class="fila" id="filaMaq"><span class="etq">la máquina</span><span class="tiras" id="botMaq"></span></div>
+      <div class="botones"><button type="button" class="b ok" id="bGrapar">Grapar lo elegido</button><button type="button" class="b" id="bSoltar">Quitar grapas</button><button type="button" class="b" id="bLimpiar">Empezar el pedido</button></div>
+    </div>
+    <p class="aviso" id="aviso" role="status"></p>
+  </section>
+
+  <section class="panel tique" id="tique" aria-label="El tique">
+    <h2>Tique</h2>
+    <p class="lectura" id="lec">—</p>
+    <p class="desglose" id="des"></p>
+    <div class="regla"><div class="cinta" id="cinta"></div><div id="marcas"></div></div>
+    <div class="opera" id="opera" hidden></div>
+    <div class="pregunta" id="pregunta" hidden></div>
+    <p class="nota">El 1 es la superficie de una pizza entera de la casa. La pizza es el envase; el número vive en la regla.</p>
+  </section>
+
+  <footer>
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" rel="license">© 2026 Andrés Asensio · CC BY-NC-ND 4.0</a>
+    · <a href="https://diazepamina-creator.github.io/pizzeria-de-nick/">La pizzería de Nick (anterior)</a>
+    · <a href="https://diazepamina-creator.github.io/">Materiales</a>
+    · versión 0.1
+  </footer>
+</main>
+
+<div class="guia" id="guia" hidden>
+  <div class="guia-foco" id="guiaFoco"></div>
+  <div class="guia-globo" id="guiaGlobo" role="dialog" aria-modal="true" aria-labelledby="guiaTit" tabindex="-1">
+    <div class="tit" id="guiaTit"></div>
+    <p id="guiaTxt"></p>
+    <div class="guia-pie"><span id="guiaNum"></span>
+      <span class="botones"><button type="button" class="b" id="guiaSalir">Salir</button><button type="button" class="b ok" id="guiaSig">Siguiente</button></span></div>
+  </div>
+</div>
+<div class="modal" id="mActa" hidden>
+  <div class="caja2 acta" role="dialog" aria-modal="true" aria-labelledby="actaTit" tabindex="-1">
+    <h2 id="actaTit">El acta del mostrador</h2>
+    <p class="actaSub">Lo que has hecho en este turno. Cópiala o descárgala para dársela a tu profesor.</p>
+    <label class="actaNombre"><span class="etq">Tu nombre</span><input id="acNombre" autocomplete="name" placeholder="Escribe tu nombre"></label>
+    <div class="actaDatos" id="acDatos"></div>
+    <table class="actaTabla"><thead><tr><th>Juego</th><th>La ruta</th><th>Practicar</th></tr></thead><tbody id="acFilas"></tbody></table>
+    <details class="ac-det" id="acDet"><summary>Pedido a pedido</summary><ol class="ac-ej" id="acEj"></ol></details>
+    <div class="actaCodigos"><div><span class="etq">Código de verificación</span><b id="acFirma">—</b></div></div>
+    <div class="botones"><button type="button" class="b ok" id="acCopia">Copiar el acta</button><button type="button" class="b" id="acBaja">Descargar .txt</button><button type="button" class="b" id="acCierra">Volver al mostrador</button></div>
+    <p class="actaMsg" id="acMsg" role="status"></p>
+  </div>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   LA GRAPADORA DE NICK · el motor
+   Lo que pasa en una caja de pizza, sin dibujar nada: en cuántas partes
+   está cortada, qué juntas llevan grapa, qué trozos ha elegido el cliente.
+   Dos gestos y sus dos operaciones:
+     cortar en c   multiplica arriba y abajo por c   (reparte)
+     grapar de c   divide arriba y abajo entre c     (junta)
+   Vale en el navegador y en Node, para probarlo.
+   ══════════════════════════════════════════════════════════════════════ */
+(function (raiz) {
+'use strict';
+const casi = (a, b) => Math.abs(a - b) < 1e-9;
+const mcd = (a, b) => b ? mcd(b, a % b) : a;
+const mcm = (a, b) => a / mcd(a, b) * b;
+
+/* una caja: la pizza en «c» partes, sin grapas y sin nada elegido.
+   «grapas[i]» es la junta entre el trozo i y el i+1; «sel» guarda la
+   cabeza de cada pieza elegida; «recien», las grapas que acaban de ponerse */
+const nuevaCaja = c => ({cortes: c, grapas: new Array(c).fill(false), sel: new Set(), recien: new Set()});
+
+/* las piezas: cada una, los trozos que la forman, en orden; una pieza
+   puede dar la vuelta por el borde (el trozo n−1 grapado con el 0) */
+function grupos(c){
+  const n = c.cortes, g = [], usados = new Array(n).fill(false);
+  for(let i = 0; i < n; i++){
+    if(usados[i] || (c.grapas[(i - 1 + n) % n] && n > 1)) continue;
+    const t = [i]; usados[i] = true;
+    let j = i;
+    while(c.grapas[j] && t.length < n){ j = (j + 1) % n; if(usados[j]) break; t.push(j); usados[j] = true; }
+    g.push(t);
+  }
+  if(!g.length) g.push([...Array(n).keys()]);
+  return g;
+}
+const elegidas = c => grupos(c).filter(t => c.sel.has(t[0]));
+const trozosDe = c => elegidas(c).reduce((s, t) => s + t.length, 0);
+const valor = c => trozosDe(c) / c.cortes;
+/* ¿hay una pieza elegida que valga justo 1/b? (el pedido «en una pieza») */
+const piezaDe = (c, b) => elegidas(c).some(t => t.length * b === c.cortes);
+
+/* elegir o soltar el trozo i (o la pieza que lo contiene) */
+function toca(c, i){
+  const t = grupos(c).find(t => t.includes(i));
+  if(!t) return;
+  if(c.sel.has(t[0])) c.sel.delete(t[0]); else c.sel.add(t[0]);
+}
+
+/* ── VOLVER A CORTAR SIN PERDER LO GRAPADO ──
+   Si el corte nuevo es múltiplo del viejo, cada pieza grapada aguanta
+   entera (sus juntas nuevas nacen unidas) y solo cambia de nombre: 1/2 pasa
+   a 4/8. Un trozo suelto sí se parte. La elección se hereda entera.
+   Si no es múltiplo (de cuartos a tercios), no hay manera de respetar
+   nada: se empieza de cero, y «rompe» lo dice.
+   Devuelve la operación escrita, si hay algo elegido de lo que hablar */
+function recorta(c, nuevo){
+  const b = c.cortes;
+  if(nuevo === b) return {op: null, rompe: false};
+  if(nuevo % b !== 0){
+    const rompe = c.sel.size > 0 || c.grapas.some(Boolean);
+    c.cortes = nuevo; c.grapas = new Array(nuevo).fill(false); c.sel.clear(); c.recien.clear();
+    return {op: null, rompe};
+  }
+  const f = nuevo / b, ka = trozosDe(c), g2 = new Array(nuevo).fill(false), sel2 = new Set();
+  grupos(c).forEach(t => {
+    const unida = t.length > 1;
+    t.forEach((i, idx) => {
+      for(let k = 0; k < f - 1; k++) g2[i * f + k] = unida;
+      if(idx < t.length - 1) g2[i * f + f - 1] = true;       // junta interna de la pieza
+    });
+    if(!c.sel.has(t[0])) return;
+    if(unida) sel2.add(t[0] * f);
+    else for(let k = 0; k < f; k++) sel2.add(t[0] * f + k);
+  });
+  c.cortes = nuevo; c.grapas = g2; c.sel = sel2; c.recien.clear();
+  return {op: ka ? {tipo: 'corte', c: f, ka, ba: b, kd: ka * f, bd: nuevo} : null, rompe: false};
+}
+
+/* ── LA GRAPADORA DE MANO: une lo elegido, si son dos piezas o más y
+   están pegadas. Grapar n trozos de 1/b, si n cabe en b, es dividir arriba
+   y abajo entre n: la pieza pasa a ser 1 de las b/n. Si n no cabe (tres
+   octavos), la pieza existe pero no hay división que enseñar ── */
+function grapa(c){
+  const n = c.cortes, gs = elegidas(c);
+  if(gs.length < 2) return {ok: false, por: 'pocas'};
+  const todos = gs.flat(), dentro = new Set(todos);
+  let ini = -1;
+  for(let i = 0; i < n && ini < 0; i++){
+    if(!dentro.has(i)) continue;
+    let sigue = true;
+    for(let k = 0; k < todos.length; k++) if(!dentro.has((i + k) % n)){ sigue = false; break; }
+    if(sigue) ini = i;
+  }
+  if(ini < 0) return {ok: false, por: 'sueltas'};
+  c.recien.clear();
+  for(let k = 0; k < todos.length - 1; k++){
+    const j = (ini + k) % n;
+    if(!c.grapas[j]) c.recien.add(j);
+    c.grapas[j] = true;
+  }
+  c.sel.clear(); c.sel.add(ini);
+  const m = todos.length, divide = n % m === 0;
+  return {ok: true, m, op: divide ? {tipo: 'grapa', c: m, ka: m, ba: n, kd: 1, bd: n / m} : null};
+}
+
+/* ── LA MÁQUINA GRANDE: pasa por la pizza entera uniendo de x en x. Es la
+   operación inversa del cortador: cambia en cuántas partes está la pizza.
+   No elige nada por el cliente: lo que había elegido se queda en las piezas
+   que lo contienen, y si no había nada, no hay nada ── */
+function industrial(c, x){
+  if(c.cortes % x !== 0) return {ok: false};
+  const finos = elegidas(c).flat(), kAntes = finos.length, bAntes = c.cortes, vAntes = valor(c);
+  c.recien.clear(); c.grapas = new Array(c.cortes).fill(false);
+  for(let i = 0; i < c.cortes; i++) if((i + 1) % x !== 0){ c.grapas[i] = true; c.recien.add(i); }
+  c.sel.clear();
+  grupos(c).forEach(t => { if(t.some(i => finos.includes(i))) c.sel.add(t[0]); });
+  const exacta = kAntes > 0 && kAntes % x === 0 && casi(vAntes, valor(c));
+  return {ok: true, op: exacta ? {tipo: 'grapa', c: x, ka: kAntes, ba: bAntes, kd: kAntes / x, bd: bAntes / x} : null,
+          nota: kAntes && !exacta ? {kAntes, bAntes, x} : null};
+}
+function suelta(c){ c.grapas = new Array(c.cortes).fill(false); c.sel.clear(); c.recien.clear(); }
+
+/* ── LAS FRACCIONES ── [k, b] */
+const fVal = f => f[0] / f[1];
+const fTxt = f => f[0] + '/' + f[1];
+const signo = (a, b) => casi(fVal(a), fVal(b)) ? '=' : (fVal(a) > fVal(b) ? '>' : '<');
+const simplifica = f => { const d = mcd(f[0], f[1]); return [f[0] / d, f[1] / d]; };
+/* lo que hay en la mesa, caja por caja: [{k, b}] de las que tienen algo */
+const partes = cajas => cajas.map(c => ({k: trozosDe(c), b: c.cortes})).filter(t => t.k > 0);
+const mismoCorte = ps => ps.every(t => t.b === ps[0].b);
+const total = cajas => cajas.reduce((s, c) => s + valor(c), 0);
+
+const M = {casi, mcd, mcm, nuevaCaja, grupos, elegidas, trozosDe, valor, piezaDe, toca, recorta, grapa, industrial, suelta,
+           fVal, fTxt, signo, simplifica, partes, mismoCorte, total};
+if(typeof module !== 'undefined' && module.exports) module.exports = M;
+else raiz.Motor = M;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   LA GRAPADORA DE NICK · los pedidos
+   Tres juegos, cada uno con sus pedidos fijos (la ruta) y un generador
+   para Practicar:
+     servir     el cliente pide una fracción y la pizza viene cortada de
+                otra manera: cortar, grapar, y que salga la misma cantidad
+     comparar   dos mesas, dos fracciones: ¿quién se lleva más? La escalera,
+                en el orden en que se demuestra
+     telefono   el cortador no llega: se corta sobre el papel, y salen los
+                productos en cruz
+   Cada pedido es un objeto plano; el motor hace las cuentas. Vale en Node.
+   ══════════════════════════════════════════════════════════════════════ */
+(function (raiz) {
+'use strict';
+const M = typeof require === 'function' && typeof module !== 'undefined' ? require('./motor.js') : raiz.Motor;
+let azar = Math.random;
+const elige = xs => xs[Math.floor(azar() * xs.length)];
+const entre = (a, b) => a + Math.floor(azar() * (b - a + 1));
+const fTxt = M.fTxt, az = t => '<b class="fB">' + t + '</b>', ro = t => '<b class="fA">' + t + '</b>';
+const CARTA = [2, 3, 4, 5, 6, 8, 9, 10, 12, 15];              // hasta donde llega el cortador
+const NOMBRE = {2: 'mitades', 3: 'tercios', 4: 'cuartos', 5: 'quintos', 6: 'sextos', 7: 'séptimos', 8: 'octavos', 9: 'novenos', 10: 'décimos', 12: 'doceavos', 15: 'quinceavos'};
+const UNO = {2: 'media pizza', 3: 'un tercio', 4: 'un cuarto', 5: 'un quinto', 6: 'un sexto', 7: 'un séptimo', 8: 'un octavo', 9: 'un noveno', 10: 'un décimo', 12: 'un doceavo', 15: 'un quinceavo'};
+const enLetra = f => f[0] === 1 ? UNO[f[1]] : f[0] + ' ' + NOMBRE[f[1]];
+
+/* ── SERVIR ── f: lo que pide; cajas: cómo vienen; pieza: lo quiere de una
+   pieza (grapada); menu: la carta de cortes */
+const SERVIR = [
+  {id: 's1', f: [1, 2], cajas: [4], pieza: true, menu: [2, 4, 8],
+   cli: '—Perdone… yo la quería <b>en mitades</b>, no en cuartos. ¿Y ahora qué me llevo?',
+   nick: 'Es lo mismo, pero el cliente quiere <b>una pieza</b>. Toca dos cuartos pegados y grápalos.',
+   ok: '¡Media! Dos cuartos grapados ocupan lo mismo que una mitad: <b>2/4 y 1/2 son la misma cantidad</b>. Y mira la regla: la marca no se ha movido.'},
+  {id: 's2', f: [3, 8], cajas: [4], menu: [2, 4, 8],
+   cli: '—Yo quiero <b>tres octavos</b>. Y no me diga que no, que lo pone en la carta.',
+   nick: 'Viene en cuartos, pero el cortador vuelve a pasar cuando hace falta. Córtala en 8 y quédate con tres trozos.',
+   ok: 'Tres de ocho, ni uno más. Al cortar más fino, cada cuarto se ha hecho <b>dos octavos</b>: hay más trozos y son más pequeños.'},
+  {id: 's3', f: [5, 4], cajas: [4, 4], menu: [2, 4, 8],
+   cli: '—Somos cinco. Póngame <b>cinco cuartos</b>… si es que eso existe.',
+   nick: 'Existe, pero no cabe en una caja: he traído otra. Una pizza entera y un cuarto de la segunda.',
+   ok: 'Claro que existe: una pizza entera y un cuarto. Cuando el de arriba pasa al de abajo hace falta <b>más de una unidad</b>, y en la regla se ve pasado el 1.'},
+  {id: 's4', f: [1, 3], cajas: [6], pieza: true, menu: [3, 6, 12],
+   cli: '—Un <b>tercio</b> de pizza, por favor. Pero la veo cortada en seis…',
+   nick: 'Seis sextos, sí. Con la máquina de <b>2 en 2</b> quedan tercios, y luego eliges tu pieza. O grapa dos sextos pegados: es lo mismo.',
+   ok: 'Un tercio. Grapando de dos en dos, 2/6 se ha convertido en 1/3: <b>has dividido arriba y abajo entre 2</b>.'},
+  {id: 's5', f: [3, 4], cajas: [4, 4], menu: [2, 4, 8],
+   cli: '—Quiero <b>media pizza y un cuarto</b>. Todo junto, si puede ser.',
+   nick: 'Media y un cuarto no se juntan: no son del mismo tamaño. Media pizza son dos cuartos: tres cuartos en total.',
+   ok: 'Tres cuartos. Para juntar dos trozos hay que <b>cortarlos igual</b> primero: buscar el mismo denominador no es un capricho, es poder graparlos.'}
+];
+
+/* ── COMPARAR: la escalera ── tipo: den (mismo denominador), num (mismo
+   numerador, va libre: el argumento es el tamaño del trozo), cabe (uno
+   cabe en el otro), nadie (hay que cortar las dos), igual (disfrazados).
+   rep: lo que contesta Nick a cada respuesta mala, A, B o ig */
+const COMPARAR = [
+  {id: 'c1', tipo: 'den', fA: [3, 8], fB: [5, 8], menu: [2, 4, 8],
+   cli: '—Mesa 4 quiere ' + ro('tres octavos') + '; mesa 7, ' + az('cinco octavos') + '. ¿Quién se lleva más?',
+   nick: 'Las dos cajas ya vienen en octavos: trozos <b>iguales</b>. Prepara 3/8 y 5/8, y esto se cuenta solo.',
+   ok: 'Mesa 7, y de calle: cinco octavos contra tres. Con trozos iguales <b>basta contar los trozos</b>, y en la regla se ve la diferencia: dos octavos.',
+   rep: {A: '¿Tres trozos más que cinco? Son octavos los dos, del mismo tamaño exacto: gana quien tenga más trozos.',
+         ig: 'Iguales no: mira la regla, las dos marcas están en sitios distintos. Cuenta los octavos de cada caja.'}},
+  {id: 'c2', tipo: 'num', fA: [1, 3], fB: [1, 4], menu: [3, 4, 6, 12],
+   cli: '—Mesa 4 pide ' + ro('un tercio') + ' y mesa 7 ' + az('un cuarto') + ', y discuten: que si 4 es más que 3, que si el cuarto gana…',
+   nick: 'Más comensales tocan a menos, te lo digo yo. Pero prepáralo: un trozo en cada caja, y mira el tamaño de cada uno.',
+   ok: 'El del tercio. Cuantas <b>más</b> partes se hace una pizza, más pequeño toca cada trozo: por eso <b>1/4 &lt; 1/3 aunque 4 &gt; 3</b>. Si alguien protesta, córtalas las dos en 12 y cuenta: 4/12 contra 3/12.',
+   rep: {B: 'Ya sé lo que has pensado: que 4 es más que 3. Pero ese número dice <b>en cuántas partes se corta</b>, no cuánto toca. Más comensales, menos ración. Mira el tamaño de los dos trozos.',
+         ig: '¿Iguales? Pon un trozo encima del otro: el de la mesa 4 sobra por todas partes.'}},
+  {id: 'c3', tipo: 'cabe', fA: [3, 4], fB: [5, 8], menu: [2, 4, 8],
+   cli: '—Mesa 4, ' + ro('tres cuartos') + '; mesa 7, ' + az('cinco octavos') + '. Y va apuesta.',
+   nick: 'Cuartos contra octavos: trozos distintos, y con trozos distintos no hay cuenta que valga. Pero los cuartos se dejan recortar: pasa el cortador por <b>una</b> caja y quedan igualadas.',
+   ok: 'Mesa 4: seis octavos contra cinco. Bastaba recortar <b>una</b> caja, porque los cuartos caben justos en los octavos. Un octavo de diferencia.',
+   rep: {B: 'Cinco trozos contra tres, sí. Pero de distinto tamaño: <b>un octavo es la mitad de un cuarto</b>. Contar trozos que no miden lo mismo no vale para nada. Iguálalos y hablamos.',
+         ig: 'No caen en el mismo punto. Ponlas en octavos las dos y lo verás.'}},
+  {id: 'c4', tipo: 'nadie', fA: [2, 3], fB: [3, 5], menu: [3, 5, 6, 10, 15],
+   cli: '—Mesa 4 quiere ' + ro('dos tercios') + ' y mesa 7 quiere ' + az('tres quintos') + '. ¿Quién se lleva más pizza?',
+   nick: 'Tercios y quintos: ni unos caben en los otros ni al revés. Aquí toca cortar <b>las dos</b>… y hay un número de trozos donde caben los dos cortes.',
+   ok: 'Mesa 4, por un pelo: diez quinceavos contra nueve. Ponerlas en la <b>misma secuencia de trozos</b>: eso, y no otra cosa, es el denominador común. Un quinceavo de diferencia.',
+   rep: {B: 'Ya veo el razonamiento: 3 es más que 2 y 5 es más que 3, así que gana. Pues eso mismo pasaba hace dos pedidos con 1/3 y 1/4, y <b>ganaba el tercio</b>. Con trozos distintos, contar no sirve.',
+         ig: 'Iguales no, pero por poco: un solo quinceavo los separa. Córtalas las dos y cuenta.'}},
+  {id: 'c5', tipo: 'igual', fA: [2, 4], fB: [3, 6], menu: [2, 3, 4, 6, 8, 12],
+   cli: '—Mesa 4 pide ' + ro('dos cuartos') + '; mesa 7, ' + az('tres sextos') + '. Se han jugado un café.',
+   nick: 'Pues alguien va a pagar dos cafés. Córtalas igual y se acaba la apuesta.',
+   ok: 'Nadie paga el café: 6/12 y 6/12, <b>el mismo punto de la regla con dos nombres</b>. Comparar también puede acabar en empate.',
+   rep: {A: '¿Seguro? Córtalas las dos igual y mira las marcas de la regla antes de contestar.',
+         B: '¿Porque 3 es más que 2? Pero también 6 es más que 4. Córtalas igual y verás la sorpresa.'}}
+];
+
+/* ── POR TELÉFONO ── el cortador no llega: se corta sobre el papel */
+const TELEFONO = [
+  {id: 't1', fA: [7, 8], fB: [6, 7],
+   cli: '—Nick, soy Nicoleta. Dos encargos para la pastelería: ' + ro('siete octavos') + ' para mí y ' + az('seis séptimos') + ' para el pinche, que jura que lo suyo es más. ¿Quién tiene razón?',
+   nick: '¿Octavos contra séptimos? Harían falta 56 trozos y el cortador no hila tan fino. Esto se corta <b>sobre el papel</b>: multiplica cada una arriba y abajo por lo que haga falta hasta que estén en la misma secuencia.',
+   ok: 'El de 7/8, por un trozo de 56: 49 contra 48. Y fíjate en los números: <b>49 = 7×7 y 48 = 8×6</b>. Has multiplicado <b>en cruz</b> sin querer: la regla famosa no es un truco, es este corte sobre el papel.',
+   rep: {B: 'El pinche dice lo mismo, y por lo mismo: que a 6/7 le falta un séptimo y a 7/8 un octavo. Pero <b>al que le falta menos, se lleva más</b>, y un octavo es más pequeño que un séptimo.',
+         ig: 'Ni hablar: 49 y 48 no son el mismo número, por muy cerca que anden.'}}
+];
+
+/* ── PRACTICAR: pedidos nuevos, sin fin ── d: 0 fácil, 1 media, 2 difícil */
+/* la carta de cortes: lo que hace falta, y algún corte más de relleno, hasta seis */
+function carta(obligados, relleno){
+  const c = new Set(obligados);
+  for(const n of relleno) if(c.size < 6) c.add(n);
+  return [...c].filter(n => CARTA.includes(n)).sort((a, b) => a - b);
+}
+const IGUALES = [[[1, 2], [2, 4]], [[2, 4], [3, 6]], [[2, 4], [4, 8]], [[1, 3], [2, 6]], [[1, 3], [4, 12]], [[2, 6], [4, 12]], [[1, 4], [2, 8]],
+                 [[1, 4], [3, 12]], [[3, 4], [6, 8]], [[1, 5], [2, 10]], [[2, 5], [4, 10]], [[1, 6], [2, 12]], [[5, 6], [10, 12]], [[3, 6], [6, 12]]];
+const NADIE = [[2, 3], [2, 5], [3, 4], [3, 5], [4, 6]];
+const CABE = [[2, 4], [2, 6], [3, 6], [4, 8], [2, 8], [3, 9], [5, 10], [4, 12], [6, 12], [3, 12]];
+function generaServir(d){
+  let f, cajas, pieza = false, tipo;
+  if(d === 0){                                  // una caja, cortar o grapar
+    tipo = elige(['grapa', 'corta']);
+    if(tipo === 'grapa'){ const b = elige([2, 3, 4]), c = b * elige([2, 3].filter(x => b * x <= 12)); f = [1, b]; cajas = [c]; pieza = true; }
+    else{ const c = elige([2, 3, 4]), m = elige([2, 3].filter(x => c * x <= 12)), b = c * m; f = [entre(1, b - 1), b]; cajas = [c]; }
+  }else if(d === 1){                            // más de una pizza, o un pedido en dos trozos
+    tipo = elige(['mas', 'suma']);
+    const b = tipo === 'mas' ? elige([2, 3, 4, 6, 8]) : elige([4, 6, 8]);
+    if(tipo === 'mas'){ f = [b + entre(1, b - 1), b]; cajas = [b, b]; }
+    else{ f = [entre(2, b - 1), b]; cajas = [b / 2, b]; }      // una caja en mitades de la otra: hay que igualar
+  }else{                                        // hay que cortar y grapar a la vez
+    tipo = 'mixto';
+    const b = elige([3, 4, 5, 6]), c = elige([2, 3, 4].filter(x => x !== b && M.mcm(x, b) <= 15));
+    f = [entre(1, b - 1), b]; cajas = [c]; pieza = f[0] === 1;
+  }
+  const menu = carta([cajas[0], f[1], M.mcm(cajas[0], f[1])], d > 0 ? CARTA.filter(n => n % cajas[0] === 0 && n <= 12) : []);
+  return {id: 'sp' + Date.now(), f, cajas, pieza, menu, practica: true,
+    cli: '—Póngame <b>' + enLetra(f) + '</b>' + (cajas.length > 1 ? '. Y traiga otra caja, que no me cabe' : ', que la veo cortada en ' + NOMBRE[cajas[0]]) + '.',
+    nick: pieza ? 'Lo quiere de <b>una pieza</b>: corta o grapa lo que haga falta, y prepárala.' : 'Prepara <b>' + fTxt(f) + '</b>' + (cajas.length > 1 ? ' con las dos cajas' : '') + ': el cortador y la grapadora son tuyos.',
+    ok: 'Eso es: <b>' + fTxt(f) + '</b>. La marca de la regla no miente.'};
+}
+function generaComparar(d){
+  const tipo = elige([['den', 'num'], ['cabe', 'igual', 'den'], ['nadie', 'igual', 'cabe']][d]);
+  let fA, fB;
+  if(tipo === 'den'){ const b = elige([5, 6, 8, 10, 12]); let a = entre(1, b - 1), c = entre(1, b - 1); while(c === a) c = entre(1, b - 1); fA = [a, b]; fB = [c, b]; }
+  else if(tipo === 'num'){ const [b, c] = elige(NADIE.concat(CABE)), k = d && Math.min(b, c) > 2 ? elige([1, 2]) : 1; fA = [k, b]; fB = [k, c]; }
+  else if(tipo === 'cabe'){ const [b, c] = elige(CABE); let a = entre(1, b - 1), e = entre(1, c - 1); while(a * c === e * b) e = entre(1, c - 1); fA = [a, b]; fB = [e, c]; }
+  else if(tipo === 'nadie'){ const [b, c] = elige(NADIE); let a = entre(1, b - 1), e = entre(1, c - 1); while(a * c === e * b) e = entre(1, c - 1); fA = [a, b]; fB = [e, c]; }
+  else{ [fA, fB] = elige(IGUALES); }
+  if(azar() < .5) [fA, fB] = [fB, fA];
+  const m = M.mcm(fA[1], fB[1]);
+  const menu = carta([fA[1], fB[1], m], tipo === 'nadie' ? CARTA.filter(n => n % fA[1] === 0 || n % fB[1] === 0) : []);
+  const NICK = {den: 'Las dos cajas vienen en ' + NOMBRE[fA[1]] + ': trozos iguales. Prepara los dos pedidos y cuenta.',
+    num: 'Un trozo del mismo tamaño no es: mira cuál toca a más. Prepáralos y compara los trozos.',
+    cabe: 'Trozos distintos, pero unos caben en los otros: pasa el cortador por <b>una</b> caja y quedan igualadas.',
+    nadie: 'Ni unos caben en los otros ni al revés: hay que cortar <b>las dos</b> donde quepan los dos cortes.',
+    igual: 'Córtalas igual, y luego mira bien las dos marcas de la regla.'};
+  const OK = {den: 'Con trozos iguales <b>basta contar los trozos</b>.', num: 'Cuantas más partes, más pequeño toca cada trozo: <b>gana el denominador pequeño</b>.',
+    cabe: 'Bastaba recortar una caja: un corte cabía en el otro.', nadie: 'Las dos en la <b>misma secuencia de trozos</b>: eso es el denominador común.',
+    igual: '<b>El mismo punto con dos nombres.</b> Comparar también puede acabar en empate.'};
+  const REP = {den: 'Son ' + NOMBRE[fA[1]] + ' los dos, del mismo tamaño: gana quien tenga <b>más trozos</b>.',
+    num: 'Ese número dice en <b>cuántas partes</b> se corta la pizza, no cuánto toca. Más partes, menos ración.',
+    cabe: 'Trozos de distinto tamaño: contar no vale. <b>Iguálalos</b> y cuenta.', nadie: 'Trozos de distinto tamaño: contar no vale. <b>Iguálalos</b> y cuenta.',
+    igual: 'Córtalas igual y mira las marcas: caen en el <b>mismo punto</b>.'};
+  return {id: 'cp' + Date.now(), tipo, fA, fB, menu, practica: true,
+    cli: '—Mesa 4 quiere ' + ro(enLetra(fA)) + '; mesa 7, ' + az(enLetra(fB)) + '. ¿Quién se lleva más?',
+    nick: NICK[tipo], ok: OK[tipo], rep: {A: REP[tipo], B: REP[tipo], ig: REP[tipo]}};
+}
+const LEJOS = [[5, 7], [5, 8], [7, 8], [6, 7], [4, 7], [3, 7], [5, 9], [7, 9], [8, 9], [4, 9], [5, 6], [7, 10], [3, 8]];
+function generaTelefono(d){
+  const [b, c] = elige(LEJOS.filter(([x, y]) => M.mcm(x, y) > 15));
+  let a, e, dif;
+  do{ a = entre(1, b - 1); e = entre(1, c - 1); dif = Math.abs(a / b - e / c); }
+  while(dif === 0 || (d === 0 ? dif < .2 : d === 1 ? dif < .06 || dif > .25 : dif > .08));
+  const fA = [a, b], fB = [e, c];
+  return {id: 'tp' + Date.now(), fA, fB, practica: true,
+    cli: '—Nick, soy Nicoleta. ' + ro(enLetra(fA)) + ' para mí y ' + az(enLetra(fB)) + ' para el pinche. ¿Quién se lleva más?',
+    nick: NOMBRE[b] + ' contra ' + NOMBRE[c] + ': harían falta ' + b * c + ' trozos. Sobre el papel: multiplica cada una arriba y abajo por el denominador de la otra.',
+    ok: 'En la secuencia de ' + b * c + ': <b>' + a * c + ' contra ' + e * b + '</b>. Y ' + a * c + ' = ' + a + '×' + c + ', ' + e * b + ' = ' + e + '×' + b + ': los <b>productos en cruz</b>.',
+    rep: {A: 'En la secuencia de ' + b * c + ': ¿quién va más lejos, ' + a * c + ' o ' + e * b + '?', B: 'En la secuencia de ' + b * c + ': ¿quién va más lejos, ' + a * c + ' o ' + e * b + '?', ig: 'No son el mismo número, por muy cerca que anden.'}};
+}
+
+const RUTA = {servir: SERVIR, comparar: COMPARAR, telefono: TELEFONO};
+const GENERA = {servir: generaServir, comparar: generaComparar, telefono: generaTelefono};
+const NOMBRE_J = {servir: 'Servir', comparar: 'Comparar', telefono: 'Por teléfono'};
+const P = {RUTA, GENERA, NOMBRE_J, CARTA, NOMBRE, enLetra, conAzar: f => { azar = f; }};
+if(typeof module !== 'undefined' && module.exports) module.exports = P;
+else raiz.Pedidos = P;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   LA GRAPADORA DE NICK · el sonido del local
+   Sintetizado en el navegador, sin archivos. Se quita en Ajustes.
+     grapa    el clac de la grapadora
+     corte    el silbido del cortador
+     tiza     la tiza en la pizarra
+     timbre   el teléfono
+     bien     el pedido sale redondo
+     mal      eso no
+   El navegador no deja sonar nada hasta el primer toque.
+   ══════════════════════════════════════════════════════════════════════ */
+(function (raiz) {
+'use strict';
+let activo = true, A = null;
+function prepara(){
+  if(A) return A;
+  const AC = raiz.AudioContext || raiz.webkitAudioContext;
+  if(!AC) return null;
+  const ctx = new AC(), salida = ctx.createGain(); salida.gain.value = .8; salida.connect(ctx.destination);
+  const ruido = ctx.createBuffer(1, ctx.sampleRate * .5, ctx.sampleRate), d = ruido.getChannelData(0);
+  for(let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  return A = {ctx, salida, ruido};
+}
+function rafaga(t, f, dur, vol, q){
+  const s = A.ctx.createBufferSource(); s.buffer = A.ruido;
+  const fl = A.ctx.createBiquadFilter(); fl.type = 'bandpass'; fl.frequency.value = f; fl.Q.value = q || 1.2;
+  const g = A.ctx.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  s.connect(fl); fl.connect(g); g.connect(A.salida); s.start(t); s.stop(t + dur + .02);
+}
+function tono(t, f, dur, vol, tipo){
+  const o = A.ctx.createOscillator(); o.type = tipo || 'sine'; o.frequency.value = f;
+  const g = A.ctx.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .01);
+  g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  o.connect(g); g.connect(A.salida); o.start(t); o.stop(t + dur + .02);
+}
+const SONIDOS = {
+  grapa(t){ rafaga(t, 1400, .05, .35, 1.2); rafaga(t + .04, 600, .08, .3, 1); },
+  corte(t){ rafaga(t, 3200, .12, .16, .8); rafaga(t + .05, 4200, .08, .1, .8); },
+  tiza(t){ rafaga(t, 2400, .05, .14, 2); },
+  timbre(t){ for(let k = 0; k < 6; k++) tono(t + k * .08, k % 2 ? 1180 : 980, .07, .08, 'square'); },
+  bien(t){ tono(t, 659, .18, .14, 'triangle'); tono(t + .11, 988, .26, .12, 'triangle'); },
+  mal(t){ tono(t, 160, .22, .16, 'square'); }
+};
+function toca(nombre){
+  if(!activo || !SONIDOS[nombre]) return;
+  try{
+    if(!prepara()) return;
+    if(A.ctx.state === 'suspended') A.ctx.resume();
+    SONIDOS[nombre](A.ctx.currentTime + .02);
+  }catch(err){}
+}
+if(raiz.addEventListener) raiz.addEventListener('pointerdown', () => {
+  if(activo) try{ const a = prepara(); if(a && a.ctx.state === 'suspended') a.ctx.resume(); }catch(err){}
+}, {once: true});
+raiz.Sonido = {toca, activo: v => { activo = !!v; }};
+})(window);
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   LA GRAPADORA DE NICK · la pizza dibujada
+   Una caja del motor, en SVG: cada pieza (los trozos grapados van juntos)
+   con su corteza, su queso y sus ingredientes a escala del trozo. La
+   porción elegida se separa de la pizza siguiendo su bisectriz; las grapas
+   nuevas se ven y se van, en este orden: la costura y las grapas juntas,
+   luego se va la costura, y al final las grapas.
+   ══════════════════════════════════════════════════════════════════════ */
+(function (raiz) {
+'use strict';
+const M = raiz.Motor, NS = 'http://www.w3.org/2000/svg';
+const el = (tag, at) => { const e = document.createElementNS(NS, tag); for(const k in at) e.setAttribute(k, at[k]); return e; };
+function sector(cx, cy, r, a0, a1){
+  const rad = a => (a - 90) * Math.PI / 180;
+  if(a1 - a0 >= 359.9) return `M${cx - r} ${cy} a${r} ${r} 0 1 0 ${2 * r} 0 a${r} ${r} 0 1 0 ${-2 * r} 0 Z`;
+  const x0 = cx + r * Math.cos(rad(a0)), y0 = cy + r * Math.sin(rad(a0));
+  const x1 = cx + r * Math.cos(rad(a1)), y1 = cy + r * Math.sin(rad(a1));
+  return `M${cx} ${cy} L${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${(a1 - a0) > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z`;
+}
+/* c: la caja; alTocar(i): qué hacer al tocar el trozo i (si no hay, no se toca) */
+function dibuja(c, alTocar){
+  const svg = el('svg', {viewBox: '0 0 300 300', class: 'pizza'});
+  const cx = 150, cy = 148, R = 126, paso = 360 / c.cortes;
+  /* a quince cortes el trozo tiene 24 grados: huecos e ingredientes van a escala */
+  const gC = Math.min(.9, paso * .03), gQ = Math.min(2.6, paso * .09);
+  const esc = Math.max(.55, Math.min(1, paso / 70));
+  const nTop = paso >= 70 ? 4 : paso >= 40 ? 3 : paso >= 26 ? 2 : 1;
+  svg.appendChild(el('ellipse', {cx, cy: cy + R + 8, rx: R * .86, ry: 8, fill: 'rgba(60,40,20,.25)'}));
+  M.grupos(c).forEach(t => {
+    const a0 = t[0] * paso, a1 = a0 + t.length * paso, ele = c.sel.has(t[0]);
+    const g = el('g', {class: 'corte' + (ele ? ' elegida' : (c.sel.size ? ' apagada' : ''))});
+    if(ele){ const bis = ((a0 + a1) / 2 - 90) * Math.PI / 180; g.setAttribute('transform', `translate(${(10 * Math.cos(bis)).toFixed(1)} ${(10 * Math.sin(bis)).toFixed(1)})`); }
+    g.appendChild(el('path', {d: sector(cx, cy, R, a0 + gC, a1 - gC), fill: 'var(--corteza)', stroke: ele ? '#FFF3D0' : 'var(--cortezaO)', 'stroke-width': ele ? 6 : 2.5, 'stroke-linejoin': 'round'}));
+    g.appendChild(el('path', {d: sector(cx, cy, R - 13, a0 + gQ, a1 - gQ), fill: 'var(--queso)'}));
+    for(let k = 0; k < t.length; k++){
+      const a = (t[0] + k + .5) * paso - 90;
+      [[.60, 9.5, 1], [.80, 6, 0], [.36, 7, 1], [.72, 5, 0]].slice(0, nTop).forEach(([d, rr, tomate], q) => {
+        const ang = (a + (q - (nTop - 1) / 2) * Math.min(9, paso / 3.2)) * Math.PI / 180;
+        const px = cx + (R - 15) * d * Math.cos(ang), py = cy + (R - 15) * d * Math.sin(ang);
+        if(tomate){
+          g.appendChild(el('circle', {cx: px, cy: py + 1.4, r: rr * esc, fill: 'var(--tomateO)', opacity: .5}));
+          g.appendChild(el('circle', {cx: px, cy: py, r: rr * esc, fill: 'var(--tomate)'}));
+        }else g.appendChild(el('ellipse', {cx: px, cy: py, rx: rr * 1.5 * esc, ry: rr * .85 * esc, fill: 'var(--albahaca)', transform: `rotate(${a + 40} ${px} ${py})`}));
+      });
+    }
+    for(let k = 0; k < t.length - 1; k++){                 // las grapas, solo las nuevas
+      if(!c.recien.has(t[k])) continue;
+      const gr = (t[k] + 1) * paso, a = (gr - 90) * Math.PI / 180;
+      g.appendChild(el('path', {d: `M${cx} ${cy} L${(cx + R * Math.cos(a)).toFixed(1)} ${(cy + R * Math.sin(a)).toFixed(1)}`, stroke: 'var(--cortezaO)', 'stroke-width': 2.6, 'stroke-dasharray': '7 6', class: 'costura-nueva'}));
+      [[.38, 1], [.72, -1]].forEach(([d, lado], q) => {
+        const px = cx + R * d * Math.cos(a), py = cy + R * d * Math.sin(a);
+        const fuera = el('g', {transform: `translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${gr + (q ? 8 : -8)})`});
+        const dentro = el('g', {class: 'grapa-nueva'});
+        const forma = `M-12 ${6.5 * lado} L-12 0 L12 0 L12 ${6.5 * lado}`;
+        dentro.appendChild(el('path', {d: forma, fill: 'none', stroke: 'rgba(60,45,30,.35)', 'stroke-width': 7.2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', transform: 'translate(1 1.6)'}));
+        dentro.appendChild(el('path', {d: forma, fill: 'none', stroke: 'var(--grapa)', 'stroke-width': 5.2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}));
+        dentro.appendChild(el('path', {d: 'M-11 -1.5 L11 -1.5', fill: 'none', stroke: '#EDF1F4', 'stroke-width': 1.4, 'stroke-linecap': 'round'}));
+        fuera.appendChild(dentro); g.appendChild(fuera);
+      });
+    }
+    if(alTocar){ g.setAttribute('role', 'button'); g.setAttribute('tabindex', '0'); g.setAttribute('aria-label', 'trozo ' + (t[0] + 1) + (ele ? ', elegido' : ''));
+      g.addEventListener('click', ev => { ev.stopPropagation(); alTocar(t[0]); });
+      g.addEventListener('keydown', ev => { if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); alTocar(t[0]); } }); }
+    svg.appendChild(g);
+  });
+  return svg;
+}
+raiz.Pizza = {dibuja};
+})(window);
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   LA GRAPADORA DE NICK · los personajes
+   Nick, el pizzero: una morsa con gorro, delantal y la grapadora en alto.
+   Es el mismo dibujo que en La pizzería de Nick, la pastelería y la línea
+   del tiempo. Parpadea, el brazo da el clac al grapar y salta cuando el
+   pedido sale redondo (las clases .ojo, .brazo, .boca y .boca-f).
+   Nicoleta, su hermana, llama por teléfono desde la pastelería.
+   ══════════════════════════════════════════════════════════════════════ */
+(function (raiz) {
+'use strict';
+const NICK = `<svg viewBox="0 -12 78 108" class="cara">
+  <ellipse cx="39" cy="92" rx="26" ry="3.6" fill="rgba(60,40,20,.22)"/>
+  <path d="M12 92 Q12 64 26 57.5 L52 57.5 Q66 64 66 92 Z" fill="#F6EFE2" stroke="#3A2E22" stroke-width="1.7" stroke-linejoin="round"/>
+  <path d="M52 57.5 Q66 64 66 92 L54 92 Q56 70 48 60 Z" fill="#DFD6C2" stroke="#3A2E22" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M24 66 L54 66 Q56 82 53 92 L27 92 Q23 80 24 66 Z" fill="#C4462F" stroke="#3A2E22" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M24 66 Q39 71 54 66" stroke="#9E3423" stroke-width="2" fill="none"/>
+  <g fill="#E8B08F" opacity=".55"><circle cx="32" cy="78" r="2.4"/><circle cx="45" cy="84" r="1.8"/>
+    <circle cx="38" cy="88" r="1.4"/></g>
+  <path d="M50 58 Q60 56 63 63 Q57 64 54 70 Z" fill="#EFE6D2" stroke="#3A2E22" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M24 66 Q14 72 16 84" stroke="#3A2E22" stroke-width="7.5" fill="none" stroke-linecap="round"/>
+  <path d="M24 66 Q14 72 16 84" stroke="#F6EFE2" stroke-width="5.4" fill="none" stroke-linecap="round"/>
+  <circle cx="17" cy="85" r="4" fill="#C9A17C" stroke="#3A2E22" stroke-width="1.4"/>
+  <g class="brazo">
+  <path d="M54 64 Q66 58 68 46" stroke="#3A2E22" stroke-width="7.5" fill="none" stroke-linecap="round"/>
+  <path d="M54 64 Q66 58 68 46" stroke="#F6EFE2" stroke-width="5.4" fill="none" stroke-linecap="round"/>
+  <circle cx="68.5" cy="44" r="4.2" fill="#C9A17C" stroke="#3A2E22" stroke-width="1.4"/>
+  <g transform="translate(59 32) rotate(-18)">
+    <rect x="0" y="0" width="19" height="6.5" rx="2.2" fill="#9AA2AC" stroke="#3A2E22" stroke-width="1.3"/>
+    <rect x="1.5" y="6" width="16" height="4.4" rx="1.6" fill="#6E7680" stroke="#3A2E22" stroke-width="1.2"/>
+    <rect x="3" y="1.4" width="9" height="2" rx="1" fill="#C6CBD1"/>
+  </g>
+  </g>
+  <path d="M32.6 44 Q33.2 52 31.4 58.5 L45 58.5 Q43.2 52 43.8 44 Z"
+        fill="#C9A17C" stroke="#3A2E22" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M32.6 44 Q33.2 52 31.4 58.5 L36.6 58.5 Q35.8 52 36.2 44 Z" fill="#B08A6A"/>
+  <path d="M27.4 55 L38.2 65.5 L49 55 L52.4 57 L38.2 67.5 L24 57 Z"
+        fill="#FBF7EE" stroke="#3A2E22" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M38.2 65.5 L49 55 L52.4 57 L38.2 67.5 Z" fill="#E6DDC9"/>
+<g transform="translate(38 46) scale(1.18) translate(-38 -46)">  
+  <ellipse cx="38" cy="34.5" rx="16.5" ry="15" fill="#D3AC88" stroke="#6B4A32" stroke-width="1.7"/>
+  <path d="M23.5 32 Q25 44 30.5 48.5 Q26.5 42 26 31 Z" fill="#B08A6A"/>
+  <g transform="rotate(-7 38 20) translate(0 -2.5)">
+    <path d="M22 24 Q20 6 38 6.5 Q56 6 54 24 Z" fill="#FBF7EE" stroke="#3A2E22" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M25 12 Q30 3 38 5 Q46 3 51 12 Q44 8 38 9.5 Q32 8 25 12 Z" fill="#FFFFFF" opacity=".8"/>
+    <rect x="21" y="22.5" width="34" height="6" rx="2.4" fill="#EDE6D6" stroke="#3A2E22" stroke-width="1.5"/>
+  </g>
+  <ellipse cx="25" cy="39.5" rx="4.2" ry="2.8" fill="#E39A88" opacity=".5"/>
+  <ellipse cx="51" cy="39.5" rx="4.2" ry="2.8" fill="#E39A88" opacity=".5"/>
+  <ellipse cx="31.8" cy="34.4" rx="4.3" ry="4.6" fill="#FBF7EE" stroke="#6B4A32" stroke-width="1.3"/>
+  <ellipse cx="44.2" cy="34.4" rx="4.3" ry="4.6" fill="#FBF7EE" stroke="#6B4A32" stroke-width="1.3"/>
+  <circle class="ojo" cx="32.5" cy="35" r="2.7" fill="#241C14"/>
+  <circle class="ojo" cx="44.9" cy="35" r="2.7" fill="#241C14"/>
+  <circle cx="31.3" cy="33.6" r="1.15" fill="#fff"/><circle cx="43.7" cy="33.6" r="1.15" fill="#fff"/>
+  <circle cx="33.7" cy="36.4" r=".55" fill="#fff" opacity=".8"/>
+  <circle cx="46.1" cy="36.4" r=".55" fill="#fff" opacity=".8"/>
+  <path d="M29.6 42.4 Q29.2 49.6 34 50.2 Q38 50.6 38 48 Q38 50.6 42 50.2
+           Q46.8 49.6 46.4 42.4 Q42.6 40.2 38 40.4 Q33.4 40.2 29.6 42.4 Z"
+        fill="#EBD2B8" stroke="#6B4A32" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M38 40 V51.3" stroke="#C39F7E" stroke-width="1.1" opacity=".8"/>
+  <path d="M35.4 41 Q38 39.9 40.6 41 Q40.2 44.4 38 45.4 Q35.8 44.4 35.4 41 Z"
+        fill="#E39A88" stroke="#B9705F" stroke-width=".9" stroke-linejoin="round"/>
+  <ellipse cx="36.8" cy="41.6" rx=".6" ry=".45" fill="#fff" opacity=".7"/>
+  <g stroke="#F2E8D6" stroke-width=".9" stroke-linecap="round" opacity=".85">
+    <path d="M29.6 45 Q24.5 44.2 22.5 45.6"/><path d="M30.2 47.8 Q25.4 48.4 23.4 50"/>
+    <path d="M46.4 45 Q51.5 44.2 53.5 45.6"/><path d="M45.8 47.8 Q50.6 48.4 52.6 50"/>
+  </g>
+  <g fill="#B08A6A" opacity=".55">
+    <circle cx="31.4" cy="45.4" r=".7"/><circle cx="32.4" cy="48" r=".7"/>
+    <circle cx="44.6" cy="45.4" r=".7"/><circle cx="43.6" cy="48" r=".7"/>
+  </g>
+  <path d="M34.4 50.2 Q34.3 52 35.3 52.5 Q36.1 51.9 36 50 Z"
+        fill="#F6EEDC" stroke="#6B4A32" stroke-width="1" stroke-linejoin="round"/>
+  <path d="M41.6 50.2 Q41.7 52 40.7 52.5 Q39.9 51.9 40 50 Z"
+        fill="#F6EEDC" stroke="#6B4A32" stroke-width="1" stroke-linejoin="round"/>
+  <path class="boca" d="M36.2 48.4 Q38 49.6 39.8 48.4" stroke="#8E5A44" stroke-width="1.4"
+        fill="none" stroke-linecap="round"/>
+  <path class="boca-f" d="M35 47.4 Q38 52.2 41 47.4 Q38 49.2 35 47.4 Z"
+        fill="#8E5A44" stroke="#8E5A44" stroke-width="1.1" stroke-linejoin="round"/>
+</g></svg>`;
+const NICOLETA = `<svg viewBox="0 0 46 48" aria-hidden="true">
+  <path d="M6 46 Q6 33 16 29.5 L30 29.5 Q40 33 40 46 Z" fill="#F6EFE2" stroke="#3A2E22" stroke-width="1.3"/>
+  <path d="M13 33 L33 33 Q35 40 33.4 46 L12.6 46 Q11 40 13 33 Z" fill="#D98C9A" stroke="#3A2E22" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M13 33 Q23 36.6 33 33" stroke="#B96D7C" stroke-width="1.6" fill="none"/>
+  <g fill="#EFD9C6" opacity=".6"><circle cx="18" cy="39.5" r="1.7"/><circle cx="28" cy="42" r="1.3"/></g>
+  <path d="M31 32 Q39 28 39.6 21" stroke="#3A2E22" stroke-width="5.2" fill="none" stroke-linecap="round"/>
+  <path d="M31 32 Q39 28 39.6 21" stroke="#F6EFE2" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+  <path d="M36.8 20.6 L42.4 20.6 L40.4 12.6 Q39.6 11.2 38.8 12.6 Z" fill="#EFE7D6" stroke="#3A2E22" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M38.6 12.8 Q39.6 9.2 40.8 12" fill="none" stroke="#D98C9A" stroke-width="1.8" stroke-linecap="round"/>
+  <g fill="#B08A6A" stroke="#6B4A32" stroke-width="1.1" stroke-linejoin="round">
+    <path d="M12.4 16 Q8 21.6 10 28.4 Q13.8 29.2 15 25.4 Q11.4 22.2 13.8 16 Z"/>
+    <path d="M29.6 16 Q34 21.6 32 28 Q28.2 28.8 27 25.2 Q30.6 22.2 28.2 16 Z"/>
+  </g>
+  <ellipse cx="21" cy="18.6" rx="11.2" ry="10.2" fill="#D3AC88" stroke="#6B4A32" stroke-width="1.4"/>
+  <path d="M11 16.6 Q11.6 25.4 15.6 28.4 Q12.4 23.6 12 15.6 Z" fill="#B08A6A" opacity=".8"/>
+  <ellipse cx="12.8" cy="22" rx="2.8" ry="1.9" fill="#E39A88" opacity=".45"/>
+  <ellipse cx="29.2" cy="22" rx="2.8" ry="1.9" fill="#E39A88" opacity=".45"/>
+  <ellipse cx="16.9" cy="18.2" rx="3.1" ry="3.4" fill="#FBF7EE" stroke="#6B4A32" stroke-width="1.1"/>
+  <ellipse cx="25.1" cy="18.2" rx="3.1" ry="3.4" fill="#FBF7EE" stroke="#6B4A32" stroke-width="1.1"/>
+  <circle cx="17.4" cy="18.7" r="1.9" fill="#241C14"/><circle cx="25.6" cy="18.7" r="1.9" fill="#241C14"/>
+  <circle cx="16.6" cy="17.5" r=".8" fill="#fff"/><circle cx="24.8" cy="17.5" r=".8" fill="#fff"/>
+  <g stroke="#3A2E22" stroke-width="1" stroke-linecap="round" fill="none">
+    <path d="M13.7 16.2 Q12.4 15 11.8 13.8"/><path d="M13.4 18 Q11.8 17.4 10.9 16.5"/>
+    <path d="M28.3 16.2 Q29.6 15 30.2 13.8"/><path d="M28.6 18 Q30.2 17.4 31.1 16.5"/>
+  </g>
+  <path d="M16.4 23.6 Q16.2 28.4 18.9 28.8 Q21 29.1 21 27.4 Q21 29.1 23.1 28.8
+           Q25.8 28.4 25.6 23.6 Q23.5 22.2 21 22.3 Q18.5 22.2 16.4 23.6 Z"
+        fill="#EBD2B8" stroke="#6B4A32" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M19.3 22.8 Q21 22 22.7 22.8 Q22.4 24.9 21 25.6 Q19.6 24.9 19.3 22.8 Z"
+        fill="#E39A88" stroke="#B9705F" stroke-width=".7" stroke-linejoin="round"/>
+  <path d="M19 28.7 Q18.95 29.9 19.5 30.2 Q20.05 29.8 20 28.6 Z" fill="#F6EEDC" stroke="#6B4A32" stroke-width=".85" stroke-linejoin="round"/>
+  <path d="M23 28.7 Q23.05 29.9 22.5 30.2 Q21.95 29.8 22 28.6 Z" fill="#F6EEDC" stroke="#6B4A32" stroke-width=".85" stroke-linejoin="round"/>
+  <path d="M20.2 27.3 Q21 27.9 21.8 27.3" stroke="#8E5A44" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <path d="M10.6 13.6 Q21 4.6 31.4 13.6 Q21 9.4 10.6 13.6 Z" fill="#D98C9A" stroke="#3A2E22" stroke-width="1.3" stroke-linejoin="round"/>
+  <path d="M10.6 13.6 Q21 9.4 31.4 13.6 L31 15.8 Q21 11.8 11 15.8 Z" fill="#C97E8C" stroke="#3A2E22" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M30.6 11 Q34.4 10.4 35.4 13 Q33.2 14.4 30.2 13.6 Z" fill="#D98C9A" stroke="#3A2E22" stroke-width="1.1" stroke-linejoin="round"/>
+  <g fill="#F6EFE2" opacity=".65"><circle cx="16.4" cy="10.6" r=".9"/><circle cx="23" cy="8.8" r=".9"/><circle cx="27.4" cy="11" r=".9"/></g>
+</svg>`;
+raiz.Personajes = {NICK, NICOLETA};
+})(window);
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   LA GRAPADORA DE NICK · la escena de inicio
+   La app en pequeño: cae una pizza entera en la caja, el cortador la parte
+   en cuatro, dos cuartos se levantan y la grapadora los junta: sale media
+   pizza, y el nombre. Unos cuatro segundos; se salta tocando, o con Intro,
+   espacio o Esc. Solo al abrir la app, no al recargar en la misma sesión.
+   No hay dibujo propio: la pizza es la de verdad y los pasos, del motor.
+   ══════════════════════════════════════════════════════════════════════ */
+(function (raiz) {
+'use strict';
+const M = raiz.Motor, PZ = raiz.Pizza, S = raiz.Sonido;
+const VISTA = 'grapadora.inicio';
+function escena(el, alAcabar){
+  try{ raiz.sessionStorage.setItem(VISTA, 'visto'); }catch(err){}
+  const h = document.documentElement;
+  h.dataset.inicio = 'si';
+  el.hidden = false;
+  const caja = el.querySelector('.inCaja'), titulo = el.querySelector('.inTitulo');
+  const c = M.nuevaCaja(1);
+  const pinta = () => { caja.innerHTML = ''; caja.appendChild(PZ.dibuja(c)); };
+  pinta();
+  const ts = [];
+  let hecho = false;
+  const luego = (ms, fn) => ts.push(setTimeout(fn, ms));
+  function fin(){
+    if(hecho) return;
+    hecho = true;
+    ts.forEach(clearTimeout);
+    removeEventListener('keydown', tecla, true);
+    el.classList.add('fuera');
+    setTimeout(() => {
+      el.hidden = true; delete h.dataset.inicio;
+      const m = document.querySelector('main');
+      if(m && m.animate) m.animate([{opacity: 0}, {opacity: 1}], {duration: 350, easing: 'ease-out'});
+      if(alAcabar) alAcabar();
+    }, 480);
+  }
+  function tecla(ev){ ev.stopPropagation(); if(['Enter', ' ', 'Escape'].includes(ev.key)){ ev.preventDefault(); fin(); } }
+  el.addEventListener('click', fin);
+  addEventListener('keydown', tecla, true);
+  luego(900, () => { M.recorta(c, 4); pinta(); if(S) S.toca('corte'); });
+  luego(1700, () => { M.toca(c, 0); pinta(); });
+  luego(2100, () => { M.toca(c, 1); pinta(); });
+  luego(2700, () => { M.grapa(c); pinta(); if(S) S.toca('grapa'); });
+  luego(3200, () => titulo.classList.add('ve'));
+  luego(5000, fin);
+}
+raiz.Arranque = {escena};
+})(window);
+</script>
+<script>
+(function(){
+'use strict';
+const M = window.Motor, PD = window.Pedidos, PZ = window.Pizza, PJ = window.Personajes;
+const $ = id => document.getElementById(id);
+const sonar = n => { if(window.Sonido) window.Sonido.toca(n); };
+const casi = M.casi, fTxt = M.fTxt, fVal = M.fVal;
+const ro = t => '<b class="fA">' + t + '</b>', az = t => '<b class="fB">' + t + '</b>';
+const MESAS = ['Mesa 4', 'Mesa 7'];
+
+/* ── LOS AJUSTES ── */
+const AJ = 'grapadora.ajustes.v1';
+const aj = {tema: 'dia', aula: false, apuesta: true, sonido: true, inicio: true};
+try{ Object.assign(aj, JSON.parse(localStorage.getItem(AJ) || '{}')); }catch(err){}
+const guardaAjustes = () => { try{ localStorage.setItem(AJ, JSON.stringify(aj)); }catch(err){} };
+function aplicaAjustes(){
+  const h = document.documentElement;
+  h.dataset.tema = aj.tema;
+  if(aj.aula) h.dataset.aula = 'si'; else delete h.dataset.aula;
+  const v = {tema: aj.tema, apuesta: aj.apuesta ? 'si' : 'no', sonido: aj.sonido ? 'si' : 'no', inicio: aj.inicio ? 'si' : 'no'};
+  document.querySelectorAll('.ajustes [data-aj]').forEach(g => g.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(v[g.dataset.aj] === b.dataset.v))));
+  $('bAula').setAttribute('aria-pressed', String(aj.aula)); $('bAula').textContent = aj.aula ? 'Salir del aula' : 'Aula';
+  if(window.Sonido) window.Sonido.activo(aj.sonido);
+}
+document.querySelectorAll('.ajustes [data-aj]').forEach(g => g.addEventListener('click', ev => {
+  const b = ev.target.closest('button'); if(!b) return;
+  const k = g.dataset.aj, v = b.dataset.v;
+  aj[k] = k === 'tema' ? v : v === 'si';
+  guardaAjustes(); aplicaAjustes();
+  if(k === 'apuesta') pintaPizarra();
+}));
+const ajustes = si => { $('ajustes').hidden = !si; $('bAjustes').setAttribute('aria-pressed', String(si)); };
+$('bAjustes').addEventListener('click', () => ajustes($('ajustes').hidden));
+$('ajCierra').addEventListener('click', () => ajustes(false));
+$('bAula').addEventListener('click', () => { aj.aula = !aj.aula; guardaAjustes(); aplicaAjustes(); pintaRegla(); });
+addEventListener('resize', () => pintaRegla());
+
+/* ── EL TURNO: lo hecho en este aparato, que caduca a las cuatro horas ── */
+const TURNO = 'grapadora.turno.v1', CADUCA = 4 * 60 * 60 * 1000;
+const nuevoTurno = () => ({juego: 'servir', ruta: {servir: 0, comparar: 0, telefono: 0}, practica: false, dif: 1, nombre: '', t0: Date.now(), ts: Date.now(),
+  stats: {servir: {ruta: 0, bien: 0, mal: 0}, comparar: {ruta: 0, bien: 0, mal: 0}, telefono: {ruta: 0, bien: 0, mal: 0}}, ejercicios: []});
+let est = nuevoTurno();
+try{ const d = JSON.parse(localStorage.getItem(TURNO) || 'null'); if(d && d.v === 1 && Date.now() - d.ts < CADUCA) est = Object.assign(nuevoTurno(), d); }catch(err){}
+const guarda = () => { est.ts = Date.now(); est.v = 1; try{ localStorage.setItem(TURNO, JSON.stringify(est)); }catch(err){} };
+
+/* ── EL PEDIDO EN CURSO ── */
+let P = null, cajas = [], activa = 0, resuelto = false, prediccion = null, armado = null, ultimaOp = null, papel = {A: null, B: null}, fallos = 0, tPedido = 0, reloj = 0;
+const enRuta = () => PD.RUTA[est.juego], rutaHecha = () => est.ruta[est.juego] >= enRuta().length;
+const esCompara = () => est.juego === 'comparar', esTel = () => est.juego === 'telefono';
+function montaPedido(){
+  resuelto = false; prediccion = null; armado = null; ultimaOp = null; papel = {A: null, B: null}; fallos = 0; tPedido = Date.now(); clearTimeout(reloj);
+  if(est.practica) P = PD.GENERA[est.juego](est.dif);
+  else P = rutaHecha() ? null : enRuta()[est.ruta[est.juego]];
+  cajas = P && !esTel() ? (P.cajas || [P.fA[1], P.fB[1]]).map(M.nuevaCaja) : [];
+  activa = 0;
+  if(P && esTel()) sonar('timbre');
+  pintaEncargo(); pintaMesa(); lee();
+}
+function pintaPestanas(){
+  document.querySelectorAll('.juegos button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.j === est.juego)));
+  $('bPracticar').setAttribute('aria-pressed', String(est.practica));
+  $('practica').hidden = !est.practica;
+  $('difOps').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.d) === est.dif)));
+}
+document.querySelectorAll('.juegos button').forEach(b => b.addEventListener('click', () => { est.juego = b.dataset.j; guarda(); pintaPestanas(); montaPedido(); }));
+$('bPracticar').addEventListener('click', () => { est.practica = !est.practica; guarda(); pintaPestanas(); montaPedido(); });
+$('difOps').addEventListener('click', ev => { const b = ev.target.closest('button'); if(!b) return; est.dif = Number(b.dataset.d); guarda(); pintaPestanas(); montaPedido(); });
+$('bOtro').addEventListener('click', montaPedido);
+$('bSiguiente').addEventListener('click', () => { est.ruta[est.juego]++; guarda(); montaPedido(); });
+$('bSaltar').addEventListener('click', () => { if(est.practica) montaPedido(); else if(!rutaHecha()){ est.ruta[est.juego]++; guarda(); montaPedido(); } });
+
+/* ── EL ENCARGO ── */
+function pintaEncargo(){
+  const R = enRuta(), i = est.ruta[est.juego];
+  $('encCab').textContent = est.practica ? 'Practicar · ' + PD.NOMBRE_J[est.juego] : P ? 'Pedido ' + (i + 1) + ' de ' + R.length : PD.NOMBRE_J[est.juego] + ' · ruta hecha';
+  $('puntos').innerHTML = est.practica ? '' : R.map((q, k) => '<i class="' + (k < i ? 'hecho' : k === i ? 'aqui' : '') + '"></i>').join('');
+  $('bSiguiente').hidden = true; $('bOtro').hidden = true; $('bSaltar').hidden = est.practica || !P;
+  $('caraNick').innerHTML = PJ.NICK;
+  if(!P){
+    $('cliente').innerHTML = '<span class="quien">El mostrador</span>Los ' + R.length + ' pedidos de la ruta están servidos.';
+    nickDice('Ruta hecha. Si quieres más, en <b>Practicar</b> hay pedidos nuevos sin fin; y en las otras pestañas, más trabajo.', false);
+    $('pizarra').innerHTML = ''; return;
+  }
+  const quien = esTel() ? 'Al teléfono · Nicoleta, desde la pastelería' : esCompara() ? 'Dos clientes · ' + MESAS[0] + ' y ' + MESAS[1] : 'Cliente';
+  $('cliente').className = 'cliente' + (esTel() ? ' tel' : '');
+  $('cliente').innerHTML = '<span class="quien">' + quien + '</span>' + P.cli;
+  nickDice(P.nick, false);
+  pintaPizarra();
+}
+function nickDice(html, feliz){
+  const n = $('nick'); n.classList.toggle('feliz', !!feliz);
+  $('nickTxt').innerHTML = html;
+}
+function clac(){ const n = $('nick'); n.classList.remove('grapando'); void n.offsetWidth; n.classList.add('grapando'); }
+
+/* ── LA PIZARRA: el signo, antes de poder contar ── */
+const signoReal = () => M.signo(P.fA, P.fB);
+function pintaPizarra(){
+  const el = $('pizarra');
+  if(!P || !(esCompara() || esTel()) || !aj.apuesta){ el.innerHTML = ''; return; }
+  const izq = '<span class="fA">' + fTxt(P.fA) + '</span>', der = '<span class="fB">' + fTxt(P.fB) + '</span>';
+  if(!prediccion){
+    el.innerHTML = '<div class="pizarra"><div class="rot">LA PIZARRA DE NICK</div><div class="linea">' + izq + '<span class="hueco-signo">?</span>' + der + '</div>' +
+      '<div class="bots"><button type="button" data-s="&gt;" aria-label="mayor">&gt;</button><button type="button" data-s="=" aria-label="igual">=</button><button type="button" data-s="&lt;" aria-label="menor">&lt;</button></div>' +
+      '<div class="apuesta">SIN CORTAR NADA TODAVÍA: ¿QUÉ SE APUESTA?</div></div>';
+    el.querySelectorAll('.bots button').forEach(b => b.addEventListener('click', () => { prediccion = b.dataset.s; sonar('tiza'); pintaPizarra(); }));
+  }else{
+    const bien = prediccion === signoReal();
+    el.innerHTML = '<div class="pizarra"><div class="rot">LA PIZARRA DE NICK</div><div class="linea">' + izq + '<span class="signo">' + prediccion + '</span>' + der + '</div>' +
+      '<div class="apuesta">' + (resuelto ? (bien ? 'LA APUESTA AGUANTÓ' : 'LA APUESTA NO AGUANTÓ') : 'ESO DICE LA PIZARRA. LA CUENTA LO DIRÁ.') + '</div></div>';
+  }
+}
+
+/* ── LA MESA ── */
+function pintaMesa(){
+  const tel = esTel();
+  $('cajas').hidden = tel || !P; $('mandos').hidden = tel || !P; $('papel').hidden = !tel || !P;
+  $('aviso').innerHTML = '';
+  if(!P) return;
+  if(tel){ pintaPapel(); return; }
+  const cont = $('cajas'); cont.innerHTML = '';
+  cajas.forEach((c, i) => {
+    const caja = document.createElement('div');
+    caja.className = 'cajaP' + (i === activa && cajas.length > 1 ? ' activa' : '') + (esCompara() ? (i ? ' mB' : ' mA') : '');
+    const tapa = document.createElement('div'); tapa.className = 'tapa';
+    tapa.textContent = (esCompara() ? MESAS[i].toUpperCase() : 'CAJA ' + (i + 1)) + ' · EN ' + c.cortes;
+    caja.appendChild(tapa);
+    caja.appendChild(PZ.dibuja(c, k => { activa = i; M.toca(c, k); ultimaOp = null; pintaMesa(); lee(); }));
+    caja.addEventListener('click', () => { if(activa !== i){ activa = i; pintaMesa(); } });
+    cont.appendChild(caja);
+  });
+  const c = cajas[activa];
+  /* la carta de cortes: los que no respetan las piezas van punteados y piden un segundo toque */
+  const bc = $('botCortes'); bc.innerHTML = '';
+  const enJuego = c.sel.size > 0 || c.grapas.some(Boolean);
+  P.menu.forEach(n => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = n;
+    const rompe = n !== c.cortes && n % c.cortes !== 0 && enJuego;
+    if(rompe) b.classList.add('rompe');
+    if(armado && armado.caja === activa && armado.n === n) b.classList.add('avisa');
+    b.setAttribute('aria-pressed', String(c.cortes === n));
+    b.addEventListener('click', () => corta(n));
+    bc.appendChild(b);
+  });
+  /* la máquina grande: une de x en x toda la pizza, sin elegir nada */
+  const bm = $('botMaq'); bm.innerHTML = '';
+  const xs = [2, 3, 4, 5].filter(x => c.cortes % x === 0 && c.cortes / x >= 1);
+  $('filaMaq').hidden = !xs.length;
+  xs.forEach(x => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = 'de ' + x + ' en ' + x;
+    b.addEventListener('click', () => {
+      const r = M.industrial(c, x); if(!r.ok) return;
+      ultimaOp = r.op; sonar('grapa'); clac(); pintaMesa(); lee();
+      if(r.nota) $('aviso').innerHTML = 'La máquina une la pizza <b>entera</b> de ' + x + ' en ' + x + ': tus ' + r.nota.kAntes + '/' + r.nota.bAntes + ' no llenaban piezas enteras, así que te quedas con las piezas que los contienen. Aquí no hay división que enseñar.';
+      else if(!c.sel.size) $('aviso').innerHTML = 'La pizza queda en <b>' + M.grupos(c).length + '</b> piezas iguales. Ahora elige la tuya.';
+      quitaGrapasLuego();
+    });
+    bm.appendChild(b);
+  });
+}
+function corta(n){
+  const c = cajas[activa];
+  if(n === c.cortes) return;
+  const destruye = n % c.cortes !== 0 && (c.sel.size > 0 || c.grapas.some(Boolean));
+  if(destruye && !(armado && armado.caja === activa && armado.n === n)){
+    armado = {caja: activa, n};
+    clearTimeout(corta.aviso); corta.aviso = setTimeout(() => { armado = null; pintaMesa(); }, 3200);
+    pintaMesa(); sonar('mal');
+    $('aviso').innerHTML = 'De ' + c.cortes + ' a ' + n + ' el cortador <b>no respeta las piezas</b>: se pierde lo grapado y lo elegido. Toca otra vez para cortar de cero.';
+    return;
+  }
+  armado = null;
+  const r = M.recorta(c, n); ultimaOp = r.op;
+  sonar('corte'); pintaMesa(); lee();
+}
+$('bGrapar').addEventListener('click', () => {
+  const c = cajas[activa]; if(!c) return;
+  const r = M.grapa(c);
+  if(!r.ok){
+    $('aviso').innerHTML = r.por === 'pocas' ? 'La grapadora necesita <b>dos piezas o más</b>, y pegadas.' : 'Esas piezas <b>no están pegadas</b>: sueltas suman lo mismo, pero no forman una.';
+    sonar('mal'); return;
+  }
+  ultimaOp = r.op; sonar('grapa'); clac(); pintaMesa(); lee();
+  if(!r.op && r.m > 1) $('aviso').innerHTML = 'Una pieza de <b>' + r.m + '/' + c.cortes + '</b>… pero ' + r.m + ' no cabe en ' + c.cortes + ': esa pieza no es 1 de nada entero, y por eso aquí no hay división que enseñar.';
+  quitaGrapasLuego();
+});
+function quitaGrapasLuego(){ clearTimeout(reloj); reloj = setTimeout(() => { cajas.forEach(x => x.recien.clear()); pintaMesa(); }, 2600); }
+$('bSoltar').addEventListener('click', () => { const c = cajas[activa]; if(!c) return; M.suelta(c); ultimaOp = null; pintaMesa(); lee(); });
+$('bLimpiar').addEventListener('click', () => { if(!P || resuelto) return; cajas = (P.cajas || [P.fA[1], P.fB[1]]).map(M.nuevaCaja); activa = 0; ultimaOp = null; armado = null; pintaMesa(); lee(); });
+
+/* ── EL PAPEL: por teléfono, cada fracción se multiplica arriba y abajo ── */
+const stackSVG = (k, b, col, x, y, tam) => '<text x="' + x + '" y="' + (y - 6) + '" font-size="' + tam + '" fill="' + col + '">' + k + '</text>' +
+  '<text x="' + x + '" y="' + (y + tam - 2) + '" font-size="' + tam + '" fill="' + col + '">' + b + '</text>' +
+  '<path d="M' + (x - tam * .7) + ' ' + (y + 4) + ' H' + (x + tam * .7) + '" stroke="' + col + '" stroke-width="2.4" stroke-linecap="round"/>';
+function pintaPapel(){
+  const cont = $('papel'); cont.innerHTML = '';
+  [['A', P.fA, P.fB, 'mA', 'var(--tomate)'], ['B', P.fB, P.fA, 'mB', 'var(--azul)']].forEach(([L, f, otra, cls, col]) => {
+    const m = papel[L];
+    const fr = document.createElement('div'); fr.className = 'fr ' + cls;
+    const svg = '<svg viewBox="0 0 150 70" aria-hidden="true"><g font-family="Bree Serif,serif" text-anchor="middle">' + stackSVG(f[0], f[1], col, 30, 34, 24) +
+      (m ? '<text x="70" y="42" font-size="22" fill="var(--tinta)">=</text>' + stackSVG(f[0] * m, f[1] * m, col, 112, 34, 24) : '') + '</g>' +
+      (m ? '<path d="M44 16 Q70 0 96 14" fill="none" stroke="' + col + '" stroke-width="2.2" stroke-linecap="round"/><text x="70" y="8" font-size="12" fill="' + col + '" text-anchor="middle" font-family="Bree Serif,serif">·' + m + '</text>' : '') + '</svg>';
+    fr.innerHTML = '<span class="quien">' + (L === 'A' ? 'Nicoleta' : 'El pinche') + ' · ' + fTxt(f) + '</span>' + svg + '<div class="tiras"></div>';
+    const t = fr.querySelector('.tiras');
+    if(m){
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.textContent = 'Deshacer';
+      b.addEventListener('click', () => { papel[L] = null; pintaPapel(); lee(); }); t.appendChild(b);
+    }else{
+      t.innerHTML = '<span class="etq">multiplicar arriba y abajo por</span>';
+      [...new Set([2, f[1], otra[1]])].sort((a, b) => a - b).forEach(x => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = '×' + x;
+        b.addEventListener('click', () => { papel[L] = x; sonar('corte'); pintaPapel(); lee(); }); t.appendChild(b);
+      });
+    }
+    cont.appendChild(fr);
+  });
+}
+const denPapel = L => (L === 'A' ? P.fA[1] : P.fB[1]) * (papel[L] || 1);
+const numPapel = L => (L === 'A' ? P.fA[0] : P.fB[0]) * (papel[L] || 1);
+
+/* ── EL TIQUE ── */
+function lee(){
+  const lec = $('lec'), des = $('des');
+  $('pregunta').hidden = true; $('pregunta').innerHTML = '';
+  if(!P){ lec.innerHTML = '—'; des.innerHTML = ''; $('opera').hidden = true; pintaRegla(); return; }
+  if(esTel()){
+    const igual = papel.A && papel.B && denPapel('A') === denPapel('B');
+    lec.innerHTML = ro(numPapel('A') + '/' + denPapel('A')) + ' frente a ' + az(numPapel('B') + '/' + denPapel('B'));
+    des.innerHTML = igual ? 'Misma secuencia de ' + denPapel('A') + ': ahora sí se comparan.' : (papel.A || papel.B) && !igual && papel.A && papel.B ? 'Todavía no están en la <b>misma secuencia</b>: ' + denPapel('A') + ' y ' + denPapel('B') + ' no casan.' : 'El cortador no llega a ' + P.fA[1] * P.fB[1] + '. Se corta sobre el papel: cada una, arriba y abajo.';
+    $('opera').hidden = true;
+    pintaRegla(); pintaPizarra();
+    if(igual && !resuelto) ponPregunta();
+    return;
+  }
+  if(esCompara()){
+    const a = M.trozosDe(cajas[0]), b = M.trozosDe(cajas[1]);
+    lec.innerHTML = MESAS[0] + ': ' + ro(a ? a + '/' + cajas[0].cortes : '—') + ' &nbsp;·&nbsp; ' + MESAS[1] + ': ' + az(b ? b + '/' + cajas[1].cortes : '—');
+    des.innerHTML = a && b ? 'Dos pedidos distintos: no se suman, se comparan.' : 'Prepara los dos pedidos, uno en cada caja.';
+    pintaRegla(); pintaOperacion(); pintaPizarra(); revisa(); return;
+  }
+  const ps = M.partes(cajas);
+  if(!ps.length){ lec.innerHTML = '—'; des.innerHTML = 'Toca los trozos que te llevas.'; }
+  else if(ps.length === 1){
+    lec.innerHTML = 'Te llevas <b>' + ps[0].k + '/' + ps[0].b + '</b>';
+    const g = M.grupos(cajas[activa]), s = g[0].length, uniforme = g.length > 1 && s > 1 && g.every(t => t.length === s);
+    des.innerHTML = uniforme ? 'La pizza está en <b>' + g.length + '</b> piezas iguales: has dividido arriba y abajo entre ' + s + '.' : 'de pizza.';
+  }else if(M.mismoCorte(ps)){
+    const k = ps.reduce((s2, t) => s2 + t.k, 0), b = ps[0].b;
+    lec.innerHTML = 'Te llevas <b>' + k + '/' + b + '</b>';
+    des.innerHTML = ps.map(t => t.k + '/' + t.b).join(' + ') + ' = ' + k + '/' + b + (k > b ? ' · más de una pizza entera' : '');
+  }else{
+    lec.innerHTML = ps.map(t => '<b>' + t.k + '/' + t.b + '</b>').join(' &nbsp;y&nbsp; ');
+    des.innerHTML = 'Trozos distintos: todavía no se juntan. Pásales el <b>mismo cortador</b>.';
+  }
+  pintaRegla(); pintaOperacion(); revisa();
+}
+function pintaRegla(){
+  const cinta = $('cinta'), marcas = $('marcas');
+  cinta.innerHTML = ''; marcas.innerHTML = '';
+  if(!P) return;
+  const an = cinta.getBoundingClientRect().width || 300;
+  const compara = esCompara() || esTel();
+  const tope = compara ? 1 : Math.max(cajas.length, 1);
+  const raya = (x, st) => { const i = document.createElement('div'); Object.assign(i.style, {position: 'absolute', left: x + 'px', width: '1px'}, st); cinta.appendChild(i); };
+  /* la regla de dos peines: mientras las pizzas están cortadas distinto, cada mesa peina por su lado,
+     y las púas no casan. Cuando llega el corte común, los dos peines se funden en uno */
+  const peines = (bA, bB) => {
+    if(bA === bB) for(let k = 1; k < bA; k++) raya(k * an / bA, {top: '0', height: '26px', background: 'rgba(110,98,80,.45)'});
+    else{ for(let k = 1; k < bA; k++) raya(k * an / bA, {top: '0', height: '11px', background: 'rgba(196,70,47,.65)'});
+          for(let k = 1; k < bB; k++) raya(k * an / bB, {bottom: '0', height: '11px', background: 'rgba(47,110,140,.7)'}); }
+  };
+  if(esTel()) peines(denPapel('A'), denPapel('B'));
+  else if(esCompara()) peines(cajas[0].cortes, cajas[1].cortes);
+  else for(let u = 0; u < tope; u++){ const fin = (cajas[u] || cajas[0]).cortes; for(let k = 1; k < fin; k++) raya((u + k / fin) * an / tope, {top: '0', height: '14px', background: '#8A7A63'}); }
+  for(let u = 0; u <= tope; u++){ raya(u * an / tope, {top: '0', height: '26px', background: '#6E6250'}); const b = document.createElement('b'); b.textContent = u; b.style.left = (u * an / tope) + 'px'; cinta.appendChild(b); }
+  const marca = (v, clase, txt) => { if(v <= 0) return; const m = document.createElement('div'); m.className = 'marca ' + clase; m.style.left = (v * an / tope) + 'px'; m.innerHTML = '<em></em><u>' + txt + '</u>'; marcas.appendChild(m); };
+  let kA = 0, kB = 0, den = 0;
+  if(esTel()){ kA = numPapel('A'); kB = numPapel('B'); den = denPapel('A') === denPapel('B') ? denPapel('A') : 0;
+    marca(fVal(P.fA), '', numPapel('A') + '/' + denPapel('A')); marca(fVal(P.fB), 'dos', numPapel('B') + '/' + denPapel('B')); }
+  else if(esCompara()){ kA = M.trozosDe(cajas[0]); kB = M.trozosDe(cajas[1]); den = cajas[0].cortes === cajas[1].cortes ? cajas[0].cortes : 0;
+    marca(M.valor(cajas[0]), '', kA + '/' + cajas[0].cortes); marca(M.valor(cajas[1]), 'dos', kB + '/' + cajas[1].cortes); }
+  else{ const ps = M.partes(cajas); if(ps.length && M.mismoCorte(ps)) marca(M.total(cajas), '', ps.reduce((s, t) => s + t.k, 0) + '/' + ps[0].b); }
+  /* al resolver, el hueco entre las dos marcas se raya y se nombra: quién gana, y por cuánto */
+  if(compara && resuelto && den && kA !== kB && kA > 0 && kB > 0){
+    const x0 = Math.min(kA, kB) / den * an, x1 = Math.max(kA, kB) / den * an;
+    const h = document.createElement('div'); h.className = 'hueco'; h.style.left = x0 + 'px'; h.style.width = (x1 - x0) + 'px';
+    if(x1 - x0 >= 16){ const s = document.createElement('span'); s.textContent = Math.abs(kA - kB) + '/' + den; h.appendChild(s); }
+    cinta.appendChild(h);
+  }
+  const ms = marcas.querySelectorAll('.marca');
+  if(ms.length === 2 && Math.abs(parseFloat(ms[0].style.left) - parseFloat(ms[1].style.left)) < 52) ms[1].classList.add('baja');
+}
+/* la operación, como en el cuaderno: la punta de la flecha sale de la tangente de la curva */
+function punta(x1, y1, cx, cy, col, largo){
+  largo = largo || 13;
+  const tx = x1 - cx, ty = y1 - cy, L = Math.hypot(tx, ty), ux = tx / L, uy = ty / L, ang = 24 * Math.PI / 180;
+  const Pt = s => [(x1 - largo * (ux * Math.cos(s * ang) - uy * Math.sin(s * ang))).toFixed(1), (y1 - largo * (ux * Math.sin(s * ang) + uy * Math.cos(s * ang))).toFixed(1)];
+  const [ax, ay] = Pt(1), [bx, by] = Pt(-1);
+  return '<path d="M' + x1 + ' ' + y1 + ' L' + ax + ' ' + ay + ' L' + bx + ' ' + by + ' Z" fill="' + col + '"/>';
+}
+function pintaOperacion(){
+  const cont = $('opera');
+  /* el cara a cara: con las dos pizzas cortadas igual y los pedidos preparados, dos numeradores sobre el mismo denominador */
+  if(esCompara() && cajas[0].cortes === cajas[1].cortes){
+    const kA = M.trozosDe(cajas[0]), kB = M.trozosDe(cajas[1]), b = cajas[0].cortes;
+    if(kA && kB && casi(M.valor(cajas[0]), fVal(P.fA)) && casi(M.valor(cajas[1]), fVal(P.fB))){
+      cont.hidden = false;
+      cont.innerHTML = '<div class="rot">MISMOS TROZOS · SE PUEDE COMPARAR</div><svg viewBox="0 0 300 110"><g font-family="Bree Serif,serif" text-anchor="middle">' +
+        stackSVG(kA, b, 'var(--tomate)', 88, 50, 36) + stackSVG(kB, b, 'var(--azul)', 212, 50, 36) +
+        '<text x="150" y="60" font-size="9" letter-spacing="2" fill="var(--tenue)" font-family="Space Mono,monospace">FRENTE A</text></g></svg>' +
+        '<div class="frase">' + (kA === kB ? 'Mismo numerador también: el <b>mismo punto</b> con dos nombres.' : 'Misma secuencia de ' + b + ': gana el numerador mayor.') + '</div>';
+      return;
+    }
+  }
+  if(!ultimaOp){ cont.hidden = true; cont.innerHTML = ''; return; }
+  const {tipo, c, ka, ba, kd, bd} = ultimaOp;
+  const signo = tipo === 'corte' ? '·' : ':', col = tipo === 'corte' ? 'var(--tomate)' : 'var(--albahaca)';
+  const flecha = (y, dy, txt) => { const x0 = 92, x1 = 208, cx = 150, cy = y + dy;
+    return '<path d="M' + x0 + ' ' + y + ' Q' + cx + ' ' + cy + ' ' + (x1 - 6) + ' ' + y + '" fill="none" stroke="' + col + '" stroke-width="3" stroke-linecap="round"/>' + punta(x1, y, cx, cy, col) +
+      '<text x="150" y="' + (dy < 0 ? 24 : 150) + '" text-anchor="middle" font-family="Bree Serif,serif" font-size="19" fill="' + col + '">' + txt + '</text>'; };
+  cont.hidden = false;
+  cont.innerHTML = '<div class="rot">' + (tipo === 'corte' ? 'HAS CORTADO' : 'HAS GRAPADO') + '</div><svg viewBox="0 0 300 156"><g font-family="Bree Serif,serif" text-anchor="middle">' +
+    stackSVG(ka, ba, 'var(--tinta)', 80, 84, 27) + '<text x="150" y="94" font-size="27" fill="var(--tinta)">=</text>' + stackSVG(kd, bd, 'var(--tinta)', 220, 84, 27) + '</g>' +
+    flecha(56, -30, signo + c) + flecha(114, 30, signo + c) + '</svg>' +
+    '<div class="frase">' + (tipo === 'corte' ? 'Cortar en ' + c + ' <b>multiplica arriba y abajo por ' + c + '</b>.' : 'Grapar de ' + c + ' en ' + c + ' <b>divide arriba y abajo entre ' + c + '</b>.') + '</div>';
+}
+
+/* ── LA COMPROBACIÓN ── */
+function revisa(){
+  if(resuelto) return;
+  if(esCompara()){
+    const okA = casi(M.valor(cajas[0]), fVal(P.fA)), okB = casi(M.valor(cajas[1]), fVal(P.fB)), igual = cajas[0].cortes === cajas[1].cortes;
+    /* la pregunta no se abre hasta que las dos pizzas están cortadas igual; solo el peldaño del mismo numerador va libre */
+    if(okA && okB && (P.tipo === 'num' || igual)) ponPregunta();
+    else if(okA && okB && !igual) $('aviso').innerHTML = 'Los dos pedidos están listos: ahora pásales el <b>mismo cortador</b>. Con trozos distintos no hay cuenta que valga.';
+    return;
+  }
+  const ps = M.partes(cajas), juntable = ps.length < 2 || M.mismoCorte(ps), v = M.total(cajas);
+  const pieza = !P.pieza || cajas.some(c => M.piezaDe(c, P.f[1]));
+  if(juntable && casi(v, fVal(P.f)) && pieza) acierta(P.ok);
+  else if(juntable && casi(v, fVal(P.f)) && !pieza) $('aviso').innerHTML = 'Suman ' + fTxt(P.f) + ', sí. Pero el cliente quiere <b>una pieza</b>: grápalos.';
+}
+function ponPregunta(){
+  const q = $('pregunta'); if(!q.hidden) return;
+  q.hidden = false; q.innerHTML = '<span class="etq">¿quién se lleva más?</span>';
+  const va = fVal(P.fA), vb = fVal(P.fB), iguales = casi(va, vb);
+  [['El de ' + fTxt(P.fA), !iguales && va > vb, 'A'], ['El de ' + fTxt(P.fB), !iguales && vb > va, 'B'], ['Los dos igual', iguales, 'ig']].forEach(([txt, bien, clave]) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.textContent = txt;
+    b.addEventListener('click', () => {
+      if(bien){
+        const guiño = !prediccion ? '' : prediccion === signoReal() ? 'Lo que apuntaste en la pizarra iba bien encaminado. ' : 'La pizarra decía otra cosa, ¿eh? Por algo se cuenta antes de cobrar. ';
+        acierta(guiño + P.ok);
+      }else{
+        fallos++; est.stats[est.juego].mal += fallos === 1 ? 1 : 0; sonar('mal');
+        nickDice((P.rep || {})[clave] || 'Mira la regla: se lleva más el que cae más a la derecha.', false);
+      }
+    });
+    q.appendChild(b);
+  });
+}
+function acierta(txt){
+  resuelto = true; sonar('bien');
+  nickDice(txt, true);
+  $('pregunta').hidden = true; $('pregunta').innerHTML = ''; $('aviso').innerHTML = '';
+  const s = est.stats[est.juego];
+  if(est.practica){ if(!fallos) s.bien++; }
+  else s.ruta = Math.max(s.ruta, est.ruta[est.juego] + 1);
+  est.ejercicios.push({t: Date.now(), j: est.juego, c: esTel() || esCompara() ? fTxt(P.fA) + ' y ' + fTxt(P.fB) : fTxt(P.f), p: est.practica ? 1 : 0, f: fallos, s: Math.round((Date.now() - tPedido) / 1000)});
+  guarda();
+  if(est.practica) $('bOtro').hidden = false;
+  else{ $('bSiguiente').hidden = false; $('bSaltar').hidden = true; }
+  pintaRegla(); pintaOperacion(); pintaPizarra();
+}
+
+/* ── EL ACTA ── */
+const firma = txt => { let h = 2166136261; for(let i = 0; i < txt.length; i++){ h ^= txt.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } const x = h.toString(16).toUpperCase().padStart(8, '0'); return x.slice(0, 4) + '-' + x.slice(4); };
+const hora = t => { const d = new Date(t), dos = x => String(x).padStart(2, '0'); return dos(d.getHours()) + ':' + dos(d.getMinutes()); };
+const tiempo = ms => { const m = Math.round(ms / 60000); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + (m % 60) + ' min'; };
+function textoActa(){
+  const J = ['servir', 'comparar', 'telefono'];
+  const l = ['LA GRAPADORA DE NICK · ACTA', 'Nombre: ' + (est.nombre || '—'), 'Fecha: ' + new Date().toLocaleString('es-ES'), 'Tiempo: ' + tiempo(Date.now() - est.t0), ''];
+  J.forEach(j => { const s = est.stats[j]; l.push(PD.NOMBRE_J[j] + ': ruta ' + s.ruta + '/' + PD.RUTA[j].length + ' · practicar ' + s.bien + ' a la primera, ' + s.mal + ' con fallos'); });
+  l.push('');
+  est.ejercicios.forEach(e => l.push(hora(e.t) + ' ' + PD.NOMBRE_J[e.j] + (e.p ? ' (practicar)' : '') + ' ' + e.c + ' · ' + (e.f ? e.f + ' fallo' + (e.f > 1 ? 's' : '') : 'a la primera') + ' · ' + e.s + ' s'));
+  return l.join('\n');
+}
+function pintaActa(){
+  const J = ['servir', 'comparar', 'telefono'], dato = (n, v) => '<div><span class="etq">' + n + '</span><b>' + v + '</b></div>';
+  const ruta = J.reduce((s, j) => s + est.stats[j].ruta, 0), total = J.reduce((s, j) => s + PD.RUTA[j].length, 0);
+  const pb = J.reduce((s, j) => s + est.stats[j].bien, 0), pm = J.reduce((s, j) => s + est.stats[j].mal, 0);
+  $('acDatos').innerHTML = dato('La ruta', ruta + ' / ' + total) + dato('Practicar', pb + ' a la primera') + dato('Con fallos', pm) + dato('Tiempo', tiempo(Date.now() - est.t0));
+  $('acFilas').innerHTML = J.map(j => { const s = est.stats[j]; return '<tr><td><b>' + PD.NOMBRE_J[j] + '</b></td><td>' + s.ruta + ' de ' + PD.RUTA[j].length + '</td><td>' + (s.bien + s.mal ? s.bien + ' a la primera · ' + s.mal + ' con fallos' : '—') + '</td></tr>'; }).join('');
+  $('acDet').hidden = !est.ejercicios.length;
+  $('acDet').querySelector('summary').textContent = 'Pedido a pedido (' + est.ejercicios.length + ')';
+  $('acEj').innerHTML = est.ejercicios.map(e => '<li class="' + (e.f ? 'no' : 'ok') + '"><span class="ac-h">' + hora(e.t) + '</span><span>' + PD.NOMBRE_J[e.j] + (e.p ? ' · practicar' : '') + '</span><span class="ac-c">' + e.c + '</span><span class="ac-como">' + (e.f ? e.f + ' fallo' + (e.f > 1 ? 's' : '') : 'a la primera') + '</span></li>').join('');
+  $('acNombre').value = est.nombre || '';
+  $('acFirma').textContent = firma(textoActa());
+}
+function abreActa(){ ajustes(false); $('acMsg').textContent = ''; pintaActa(); $('mActa').hidden = false; $('mActa').querySelector('.caja2').focus(); }
+const cierraActa = () => { $('mActa').hidden = true; $('bActa').focus(); };
+$('bActa').addEventListener('click', abreActa);
+$('acCierra').addEventListener('click', cierraActa);
+$('mActa').addEventListener('click', ev => { if(ev.target.id === 'mActa') cierraActa(); });
+$('acNombre').addEventListener('input', () => { est.nombre = $('acNombre').value; guarda(); $('acFirma').textContent = firma(textoActa()); });
+$('acCopia').addEventListener('click', () => {
+  const t = textoActa() + '\n\nCódigo de verificación: ' + firma(textoActa()), no = () => { $('acMsg').textContent = 'No se ha podido copiar: usa «Descargar .txt».'; };
+  try{ navigator.clipboard.writeText(t).then(() => { $('acMsg').textContent = '✓ Acta copiada: pégala donde te diga tu profesor.'; }, no); }catch(err){ no(); }
+});
+$('acBaja').addEventListener('click', () => {
+  const f = new Date(), dos = x => String(x).padStart(2, '0');
+  const nombre = (est.nombre || 'sin-nombre').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'sin-nombre';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([textoActa() + '\n\nCódigo de verificación: ' + firma(textoActa())], {type: 'text/plain;charset=utf-8'}));
+  a.download = 'acta-grapadora-' + nombre + '-' + f.getFullYear() + dos(f.getMonth() + 1) + dos(f.getDate()) + '.txt';
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  $('acMsg').textContent = '✓ Acta descargada.';
+});
+
+/* ── EMPEZAR DE CERO: a la segunda pulsación ── */
+let cero = 0;
+$('ajCero').addEventListener('click', () => {
+  if(!cero){ cero = setTimeout(() => { cero = 0; $('ajCero').classList.remove('seguro'); $('ajCero').textContent = 'Borrar todo'; }, 5000);
+    $('ajCero').classList.add('seguro'); $('ajCero').textContent = 'Pulsa otra vez para borrarlo'; return; }
+  clearTimeout(cero); cero = 0; $('ajCero').classList.remove('seguro'); $('ajCero').textContent = 'Borrar todo';
+  try{ localStorage.removeItem(TURNO); }catch(err){}
+  est = nuevoTurno(); ajustes(false); pintaPestanas(); montaPedido();
+});
+
+/* ── LA GUÍA: un foco sobre cada parte del mostrador ── */
+const GUIA = [
+  {sel: '.juegos', c: 'Los tres juegos', t: '<b>Servir</b> lo que pide el cliente aunque la pizza venga cortada de otra manera; <b>comparar</b> dos pedidos, la escalera de la comparación; y <b>por teléfono</b>, cuando el cortador no llega y se corta sobre el papel.'},
+  {sel: '#cliente', c: 'El encargo', t: 'Lo que pide el cliente. Debajo, Nick te dice por dónde ir; y los puntos, por dónde va la ruta.'},
+  {sel: '#pizarra', c: 'La pizarra', t: 'Antes de cortar nada, <b>apuesta el signo</b>: &gt;, = o &lt;. Cuando la cuenta esté hecha, verás si tu apuesta aguantó.'},
+  {sel: '#cajas', c: 'Las cajas', t: 'Toca un trozo y se levanta: es lo que te llevas. Si hay dos cajas, la que tiene el borde dorado es la que mandan los botones.'},
+  {sel: '#botCortes', c: 'El cortador', t: 'Vuelve a cortar la pizza. <b>Lo grapado aguanta</b>: media pizza sigue siendo una pieza, solo cambia de nombre. Un corte punteado no respeta las piezas y pide un segundo toque.'},
+  {sel: '#botMaq', c: 'La máquina', t: 'Grapa la pizza <b>entera</b> de 2 en 2, de 3 en 3… Es lo contrario de cortar: cambia en cuántas partes está la pizza. Luego eliges tu pieza.'},
+  {sel: '#bGrapar', c: 'La grapadora', t: 'Une los trozos elegidos, si están <b>pegados</b>. Dos cuartos grapados son media pizza: la misma cantidad con otro nombre.'},
+  {sel: '#papel', c: 'El papel', t: 'Aquí no hay pizza que valga. Multiplica cada fracción <b>arriba y abajo</b> hasta que las dos estén en la misma secuencia; entonces se comparan.'},
+  {sel: '#tique', c: 'El tique', t: 'La regla es la que manda: <b>el 1 es una pizza entera</b>, y cada pedido acaba en su marca. Debajo, la operación que ha hecho tu gesto: cortar multiplica, grapar divide.'},
+  {sel: '#bPracticar', c: 'Practicar', t: 'Pedidos <b>nuevos cada vez</b>, sin fin, con tres dificultades.'},
+  {sel: '#bActa', c: 'El acta', t: 'Un resumen de lo que has hecho, con tu nombre y un código, para <b>entregárselo a tu profesor</b>.'},
+  {sel: '#bAjustes', c: 'Ajustes', t: 'La encimera o la pizarra, la apuesta antes de comparar, el sonido y la animación.'},
+  {sel: '#bAula', c: 'El aula', t: 'Todo más grande y en una sola pantalla, para la pizarra digital. <b>A servir.</b>'}
+];
+let guiaI = -1, guiaParadas = [], guiaRetoque = 0;
+const seVe = e => !!(e && e.offsetParent !== null && e.getBoundingClientRect().height > 0);
+function cierraGuia(){ $('guia').hidden = true; guiaI = -1; clearTimeout(guiaRetoque); try{ localStorage.setItem('grapadora.guia', 'vista'); }catch(err){} $('bGuia').focus(); }
+function vaGuia(i){
+  if(i >= guiaParadas.length) return cierraGuia();
+  guiaI = i;
+  const g = guiaParadas[i], e = document.querySelector(g.sel);
+  if(!seVe(e)) return vaGuia(i + 1);
+  $('guiaTit').textContent = g.c; $('guiaTxt').innerHTML = g.t;
+  $('guiaNum').textContent = (i + 1) + ' de ' + guiaParadas.length;
+  $('guiaSig').textContent = i === guiaParadas.length - 1 ? 'A servir' : 'Siguiente';
+  $('guia').hidden = false;
+  e.scrollIntoView({block: 'center', behavior: 'instant'});
+  colocaGuia(); requestAnimationFrame(() => requestAnimationFrame(colocaGuia));
+  clearTimeout(guiaRetoque); guiaRetoque = setTimeout(colocaGuia, 180);
+}
+function colocaGuia(){
+  const g = guiaParadas[guiaI]; if(!g || $('guia').hidden) return;
+  const e = document.querySelector(g.sel); if(!seVe(e)) return;
+  const r = e.getBoundingClientRect(), m = 7, f = $('guiaFoco'), gl = $('guiaGlobo');
+  f.style.top = (r.top - m) + 'px'; f.style.left = (r.left - m) + 'px'; f.style.width = (r.width + 2 * m) + 'px'; f.style.height = (r.height + 2 * m) + 'px';
+  const alto = gl.offsetHeight || 180, ancho = gl.offsetWidth || 320;
+  const abajo = r.bottom + m + 12, arriba = r.top - m - 12 - alto;
+  gl.style.top = (abajo + alto < innerHeight - 8 ? abajo : arriba > 8 ? arriba : Math.max(8, innerHeight - alto - 8)) + 'px';
+  gl.style.left = Math.min(Math.max(12, r.left + r.width / 2 - ancho / 2), innerWidth - ancho - 12) + 'px';
+}
+function abreGuia(){ ajustes(false); guiaParadas = GUIA.filter(g => seVe(document.querySelector(g.sel))); vaGuia(0); $('guiaGlobo').focus(); }
+$('bGuia').addEventListener('click', abreGuia);
+$('guiaSig').addEventListener('click', ev => { ev.stopPropagation(); vaGuia(guiaI + 1); });
+$('guiaSalir').addEventListener('click', ev => { ev.stopPropagation(); cierraGuia(); });
+$('guiaGlobo').addEventListener('click', ev => ev.stopPropagation());
+$('guia').addEventListener('click', () => vaGuia(guiaI + 1));
+addEventListener('keydown', ev => { if(!$('guia').hidden){ ev.stopPropagation(); if(ev.key === 'Escape') cierraGuia(); else if(ev.key === 'ArrowRight' || ev.key === 'Enter'){ ev.preventDefault(); vaGuia(guiaI + 1); } return; }
+  if(ev.key === 'Escape' && !$('mActa').hidden) cierraActa(); }, true);
+addEventListener('scroll', colocaGuia, {passive: true});
+addEventListener('resize', colocaGuia);
+
+/* ── LA APERTURA ── */
+aplicaAjustes(); pintaPestanas(); montaPedido();
+const primeraVez = (() => { try{ return localStorage.getItem('grapadora.guia') !== 'vista'; }catch(err){ return false; } })();
+const arranca = () => { if(primeraVez) setTimeout(abreGuia, 400); };
+if(document.documentElement.dataset.inicio === 'si' && window.Arranque) window.Arranque.escena($('escenaInicio'), arranca);
+else arranca();
+})();
+</script>
+</body>
+</html>

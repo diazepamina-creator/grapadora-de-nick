@@ -1,0 +1,22 @@
+/* ── LA ESCENA DE INICIO, como en Las piezas de Miut: cae una pizza en la
+   caja, el cortador la parte en cuatro, dos cuartos se levantan, la
+   grapadora los junta y sale el nombre. Mientras dura, solo la encimera. ── */
+.inicio{position:fixed;inset:0;z-index:36;display:none;place-items:center;cursor:pointer;padding:20px 16px;
+  background:radial-gradient(ellipse 70% 55% at 50% 42%, rgba(255,250,230,.35), transparent 70%);transition:opacity .5s ease;
+  -webkit-user-select:none;user-select:none}
+html[data-inicio="si"] .inicio{display:grid}
+html[data-inicio="si"] main{visibility:hidden}
+.inicio[hidden]{display:none !important}
+.inicio.fuera{opacity:0}
+.inEscena{display:flex;flex-direction:column;align-items:center;gap:14px;width:min(360px,100%);text-align:center}
+.inCaja{width:min(250px,70vw);background:var(--carton);border-radius:10px;padding:7px;box-shadow:inset 0 0 0 2px #A87C48, 0 6px 14px rgba(0,0,0,.25);
+  animation:inCae .6s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes inCae{from{transform:translateY(-60vh) rotate(-6deg);opacity:0}}
+.inCaja svg.pizza{display:block;width:100%;height:auto}
+.inTitulo{font-family:var(--rotulo);font-weight:400;font-size:clamp(28px,7vw,46px);letter-spacing:4px;text-transform:uppercase;
+  color:var(--oro);margin:4px 0 0;line-height:1.05;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.inTitulo.ve{opacity:1;transform:none}
+.inLema{margin:0;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--tenue)}
+.inSalta{position:absolute;bottom:26px;left:0;right:0;margin:0;text-align:center;font-family:var(--rotulo);font-size:13px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--tenue);opacity:.8}
+@media (prefers-reduced-motion: reduce){ .inicio{display:none !important} html[data-inicio="si"] main{visibility:visible} }
