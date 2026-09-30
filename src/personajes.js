@@ -5,8 +5,10 @@
    del tiempo. Parpadea, el brazo da el clac al grapar y salta cuando el
    pedido sale redondo (las clases .ojo, .brazo, .boca y .boca-f).
    Nicoleta, su hermana, llama por teléfono desde la pastelería.
-   Migas, el pinche: un ratón gris con gorrito de papel, pañuelo rojo de
-   lunares y el cortador de pizza, más grande que su cara. Nick junta con
+   Migas, el ratón del obrador de Nicoleta (el mismo de la pastelería:
+   gris pardo, orejas grandes, cabeza en pera, delantal y gorro), que baja
+   a echar una mano con el pañuelo rojo de la pizzería y el cortador de
+   pizza, más grande que su cara. Nick junta con
    la grapadora; Migas reparte con el cortador. De pequeño cortaba tan
    fino que solo quedaban migas.
    ══════════════════════════════════════════════════════════════════════ */
@@ -27,12 +29,13 @@ const NICK = `<svg viewBox="0 -12 78 108" class="cara">
   <g class="brazo">
   <path d="M54 64 Q66 58 68 46" stroke="#3A2E22" stroke-width="7.5" fill="none" stroke-linecap="round"/>
   <path d="M54 64 Q66 58 68 46" stroke="#F6EFE2" stroke-width="5.4" fill="none" stroke-linecap="round"/>
-  <circle cx="68.5" cy="44" r="4.2" fill="#C9A17C" stroke="#3A2E22" stroke-width="1.4"/>
-  <g transform="translate(59 32) rotate(-18)">
+  <g transform="translate(56.8 34.4) rotate(-18)">
     <rect x="0" y="0" width="19" height="6.5" rx="2.2" fill="#9AA2AC" stroke="#3A2E22" stroke-width="1.3"/>
     <rect x="1.5" y="6" width="16" height="4.4" rx="1.6" fill="#6E7680" stroke="#3A2E22" stroke-width="1.2"/>
     <rect x="3" y="1.4" width="9" height="2" rx="1" fill="#C6CBD1"/>
   </g>
+  <circle cx="68.5" cy="44" r="4.2" fill="#C9A17C" stroke="#3A2E22" stroke-width="1.4"/>
+  <path d="M65.6 42.6 Q68.4 41.4 71.2 42.6 M65.4 44.8 Q68.4 43.6 71.4 44.8" fill="none" stroke="#8E6A4E" stroke-width=".9" stroke-linecap="round"/>
   </g>
   <path d="M32.6 44 Q33.2 52 31.4 58.5 L45 58.5 Q43.2 52 43.8 44 Z"
         fill="#C9A17C" stroke="#3A2E22" stroke-width="1.6" stroke-linejoin="round"/>
@@ -90,6 +93,8 @@ const NICOLETA = `<svg viewBox="0 0 46 48" aria-hidden="true">
   <path d="M31 32 Q39 28 39.6 21" stroke="#F6EFE2" stroke-width="3.6" fill="none" stroke-linecap="round"/>
   <path d="M36.8 20.6 L42.4 20.6 L40.4 12.6 Q39.6 11.2 38.8 12.6 Z" fill="#EFE7D6" stroke="#3A2E22" stroke-width="1.2" stroke-linejoin="round"/>
   <path d="M38.6 12.8 Q39.6 9.2 40.8 12" fill="none" stroke="#D98C9A" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="39.6" cy="20.8" r="2.4" fill="#D3AC88" stroke="#3A2E22" stroke-width="1"/>
+  <path d="M38.2 20 Q39.6 19.4 41 20" fill="none" stroke="#8E6A4E" stroke-width=".7" stroke-linecap="round"/>
   <g fill="#B08A6A" stroke="#6B4A32" stroke-width="1.1" stroke-linejoin="round">
     <path d="M12.4 16 Q8 21.6 10 28.4 Q13.8 29.2 15 25.4 Q11.4 22.2 13.8 16 Z"/>
     <path d="M29.6 16 Q34 21.6 32 28 Q28.2 28.8 27 25.2 Q30.6 22.2 28.2 16 Z"/>
@@ -122,70 +127,90 @@ const NICOLETA = `<svg viewBox="0 0 46 48" aria-hidden="true">
 const MIGAS = `<svg viewBox="0 0 100 100" class="cara-migas" aria-hidden="true">
   <!-- la sombra -->
   <ellipse cx="46" cy="96" rx="30" ry="3.2" fill="#140F1F" opacity=".22"/>
-  <!-- la cola, que asoma por detrás y se enrosca -->
-  <path d="M30 82 Q10 84 9 70 Q8 60 16 58" fill="none" stroke="#3A2E22" stroke-width="4.2" stroke-linecap="round"/>
-  <path d="M30 82 Q10 84 9 70 Q8 60 16 58" fill="none" stroke="#E8A6A0" stroke-width="2.4" stroke-linecap="round"/>
-  <!-- los pies -->
-  <ellipse cx="37" cy="93" rx="7" ry="3.4" fill="#E8A6A0" stroke="#3A2E22" stroke-width="1.3"/>
-  <ellipse cx="55" cy="93" rx="7" ry="3.4" fill="#E8A6A0" stroke="#3A2E22" stroke-width="1.3"/>
-  <!-- el cuerpo: una pera gris, con la barriga clara -->
-  <path d="M28 90 Q24 68 34 58 Q46 50 58 58 Q68 68 64 90 Z" fill="#A99C92" stroke="#3A2E22" stroke-width="1.6" stroke-linejoin="round"/>
-  <!-- el delantal de pinche, blanco y con harina -->
-  <path d="M33 66 Q46 62 59 66 Q62 80 60 90 L32 90 Q30 80 33 66 Z" fill="#FBF7EE" stroke="#3A2E22" stroke-width="1.3" stroke-linejoin="round"/>
-  <path d="M40 76 H52" stroke="#D9CDB8" stroke-width="1.2" stroke-linecap="round"/>
-  <g fill="#E8DFCF"><circle cx="38" cy="83" r="1.3"/><circle cx="53" cy="80" r="1"/><circle cx="47" cy="86" r="1.1"/></g>
-  <!-- el pañuelo rojo al cuello, con sus lunares -->
-  <path d="M33 60 Q46 67 59 60 L57 65 Q46 71 35 65 Z" fill="#C4462F" stroke="#3A2E22" stroke-width="1.2" stroke-linejoin="round"/>
-  <path d="M44 66 L40 73 L47 69 Z" fill="#C4462F" stroke="#3A2E22" stroke-width="1.1" stroke-linejoin="round"/>
-  <g fill="#FBF7EE"><circle cx="39" cy="63.5" r=".9"/><circle cx="46" cy="66" r=".9"/><circle cx="53" cy="63.5" r=".9"/></g>
-  <!-- el brazo de atrás -->
-  <path d="M35 68 Q29 74 33 80" fill="none" stroke="#3A2E22" stroke-width="5.4" stroke-linecap="round"/>
-  <path d="M35 68 Q29 74 33 80" fill="none" stroke="#A99C92" stroke-width="3.4" stroke-linecap="round"/>
-  <circle cx="33.5" cy="80.5" r="2.6" fill="#E8A6A0" stroke="#3A2E22" stroke-width="1.1"/>
-  <!-- el cortador de pizza: la rueda, más grande que su cara -->
+  <!-- la cola, que sale de detrás y se enrosca -->
+  <g class="cola">
+    <path d="M31 84 Q12 86 10 72 Q9 61 17 59" fill="none" stroke="#3A2E22" stroke-width="4" stroke-linecap="round"/>
+    <path d="M31 84 Q12 86 10 72 Q9 61 17 59" fill="none" stroke="#E8A9B4" stroke-width="2.3" stroke-linecap="round"/>
+  </g>
+  <!-- los pies, con sus tres deditos -->
+  <g stroke="#3A2E22" stroke-width="1.2" stroke-linejoin="round">
+    <path d="M31 94.6 Q30 90.6 36.4 90.4 Q43 90.6 42.4 94.6 Z" fill="#E8A9B4"/>
+    <path d="M50 94.6 Q49.4 90.6 56 90.4 Q62.4 90.6 61.4 94.6 Z" fill="#E8A9B4"/>
+  </g>
+  <g stroke="#B9707C" stroke-width=".8" stroke-linecap="round"><path d="M34.4 94.4 V92.8 M36.8 94.4 V92.4 M39.2 94.4 V92.8 M53.4 94.4 V92.8 M55.8 94.4 V92.4 M58.2 94.4 V92.8"/></g>
+  <!-- el cuerpo, en pera -->
+  <path d="M28.6 91 Q25 70 35 60 Q46 54 57 60 Q67 70 63.4 91 Z" fill="#9A8A80" stroke="#3A2E22" stroke-width="1.6" stroke-linejoin="round"/>
+  <!-- el delantal blanco, con sus tirantes y la harina del día -->
+  <path d="M34 67 Q46 64 58 67 Q61 80 59.6 91 L32.4 91 Q31 80 34 67 Z" fill="#F6EFE2" stroke="#3A2E22" stroke-width="1.3" stroke-linejoin="round"/>
+  <path d="M34 67 Q46 70 58 67" fill="none" stroke="#DCCFB4" stroke-width="1.4"/>
+  <path d="M39 79 H53 V85 Q46 87 39 85 Z" fill="none" stroke="#DCCFB4" stroke-width="1.2" stroke-linejoin="round"/>
+  <g fill="#E4D9C4"><circle cx="37.6" cy="73" r="1.2"/><circle cx="54" cy="75" r="1"/><circle cx="48" cy="88" r="1.1"/></g>
+  <!-- el brazo de atrás, con la mano abierta -->
+  <path d="M36 66 Q29.6 72 32.6 79" fill="none" stroke="#3A2E22" stroke-width="5.4" stroke-linecap="round"/>
+  <path d="M36 66 Q29.6 72 32.6 79" fill="none" stroke="#9A8A80" stroke-width="3.4" stroke-linecap="round"/>
+  <g stroke="#3A2E22" stroke-width="1" stroke-linejoin="round">
+    <path d="M30.4 79.4 Q30.8 76.8 33.2 77 Q35.6 77.4 35 80 Q34.4 82.4 32.2 82 Q30.2 81.6 30.4 79.4 Z" fill="#E8A9B4"/>
+  </g>
+  <path d="M31 81.4 L30 83 M32.6 82.2 L32.4 84 M34.2 81.6 L34.8 83.2" stroke="#3A2E22" stroke-width=".9" stroke-linecap="round"/>
+  <!-- el cortador de pizza: el mango de madera, la horquilla y la rueda -->
   <g class="cortador">
-    <path d="M60 72 L71 60" stroke="#3A2E22" stroke-width="5.6" stroke-linecap="round"/>
-    <path d="M60 72 L71 60" stroke="#B07A45" stroke-width="3.6" stroke-linecap="round"/>
-    <circle cx="80" cy="51" r="13" fill="#C6CBD1" stroke="#3A2E22" stroke-width="1.6"/>
-    <circle cx="80" cy="51" r="10.2" fill="none" stroke="#EDF1F4" stroke-width="1.4"/>
-    <path d="M71 60 L80 51" stroke="#6E7680" stroke-width="3" stroke-linecap="round"/>
-    <circle cx="80" cy="51" r="3" fill="#6E7680" stroke="#3A2E22" stroke-width="1.1"/>
-    <path d="M72 44 Q76 40 81 40" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" opacity=".8"/>
+    <path d="M58.6 75.6 L68.4 64.6" stroke="#3A2E22" stroke-width="6" stroke-linecap="round"/>
+    <path d="M58.6 75.6 L68.4 64.6" stroke="#B07A45" stroke-width="4" stroke-linecap="round"/>
+    <path d="M60.4 72 L63.6 68.4" stroke="#8A5A2E" stroke-width="1" stroke-linecap="round"/>
+    <path d="M68 65 L78.6 53.2" stroke="#3A2E22" stroke-width="3.8" stroke-linecap="round"/>
+    <path d="M68 65 L78.6 53.2" stroke="#8C949E" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="80" cy="51.6" r="12.6" fill="#C6CBD1" stroke="#3A2E22" stroke-width="1.6"/>
+    <circle cx="80" cy="51.6" r="9.8" fill="none" stroke="#EDF1F4" stroke-width="1.3"/>
+    <path d="M71.4 45.2 Q75 40.6 80.4 40.4" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity=".85"/>
+    <circle cx="80" cy="51.6" r="2.8" fill="#6E7680" stroke="#3A2E22" stroke-width="1.1"/>
   </g>
-  <!-- el brazo que empuña el cortador -->
-  <path d="M56 66 Q61 70 62 72" fill="none" stroke="#3A2E22" stroke-width="5.4" stroke-linecap="round"/>
-  <path d="M56 66 Q61 70 62 72" fill="none" stroke="#A99C92" stroke-width="3.4" stroke-linecap="round"/>
-  <circle cx="61.5" cy="71.5" r="2.8" fill="#E8A6A0" stroke="#3A2E22" stroke-width="1.1"/>
-  <!-- las orejas: grandes, redondas y rosas por dentro -->
-  <circle cx="28" cy="24" r="12" fill="#A99C92" stroke="#3A2E22" stroke-width="1.6"/>
-  <circle cx="28.6" cy="24.6" r="7.6" fill="#E8A6A0"/>
-  <circle cx="64" cy="24" r="12" fill="#A99C92" stroke="#3A2E22" stroke-width="1.6"/>
-  <circle cx="63.4" cy="24.6" r="7.6" fill="#E8A6A0"/>
-  <!-- la cabeza -->
-  <path d="M46 57 Q30 57 29 42 Q29 28 46 27 Q63 28 63 42 Q62 57 46 57 Z" fill="#B7AA9F" stroke="#3A2E22" stroke-width="1.6" stroke-linejoin="round"/>
-  <path d="M46 57 Q37 56 35 49 Q41 46 46 46 Q51 46 57 49 Q55 56 46 57 Z" fill="#E6DCD2"/>
-  <!-- el gorrito de papel de pinche, ladeado -->
-  <g transform="rotate(-8 46 28)">
-    <path d="M35 30 Q35 20 46 19 Q57 20 57 30 Z" fill="#FBF7EE" stroke="#3A2E22" stroke-width="1.3" stroke-linejoin="round"/>
-    <rect x="33.5" y="28.4" width="25" height="4.2" rx="1.6" fill="#EDE6D6" stroke="#3A2E22" stroke-width="1.2"/>
+  <!-- el brazo que empuña el cortador, y la mano que rodea el mango -->
+  <path d="M56 65 Q60.4 69.6 60.8 72.6" fill="none" stroke="#3A2E22" stroke-width="5.4" stroke-linecap="round"/>
+  <path d="M56 65 Q60.4 69.6 60.8 72.6" fill="none" stroke="#9A8A80" stroke-width="3.4" stroke-linecap="round"/>
+  <path d="M58.2 73.4 Q58.4 70.4 61.2 70.6 Q64 71 63.6 73.8 Q63 76.6 60.4 76.2 Q58 75.8 58.2 73.4 Z" fill="#E8A9B4" stroke="#3A2E22" stroke-width="1" stroke-linejoin="round"/>
+  <path d="M59.6 72.4 Q61.6 71.8 62.6 73.2 M59.4 74.4 Q61.4 73.8 62.4 75" fill="none" stroke="#B9707C" stroke-width=".8" stroke-linecap="round"/>
+  <!-- las orejas, grandes y redondas, rosas por dentro -->
+  <g stroke="#3A2E22" stroke-width="1.6">
+    <circle cx="29.6" cy="26" r="11.6" fill="#9A8A80"/>
+    <circle cx="62.4" cy="26" r="11.6" fill="#9A8A80"/>
   </g>
+  <circle cx="30.4" cy="26.8" r="7" fill="#E8A9B4"/><circle cx="61.6" cy="26.8" r="7" fill="#E8A9B4"/>
+  <!-- la cabeza, en pera hacia el hocico, como en la pastelería -->
+  <path d="M46 25.6 Q63.6 25.6 62.6 42.6 Q61.4 54.4 46 58.2 Q30.6 54.4 29.4 42.6 Q28.4 25.6 46 25.6 Z" fill="#B0A196" stroke="#3A2E22" stroke-width="1.6" stroke-linejoin="round"/>
+  <!-- el hocico claro -->
+  <ellipse cx="46" cy="50.4" rx="8.6" ry="5.8" fill="#D9CDC2"/>
+  <!-- el pañuelo rojo de la pizzería, anudado al cuello, justo bajo la barbilla -->
+  <path d="M34.6 55.4 Q46 62.6 57.4 55.4 L58.6 59.6 Q46 67 33.4 59.6 Z" fill="#C4462F" stroke="#3A2E22" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M52.8 60.6 L58.4 67.4 L51 64.8 Z" fill="#C4462F" stroke="#3A2E22" stroke-width="1.1" stroke-linejoin="round"/>
+  <circle cx="52.6" cy="61.8" r="2.1" fill="#B03C27" stroke="#3A2E22" stroke-width="1"/>
+  <g fill="#F6EFE2"><circle cx="38.6" cy="59.6" r=".9"/><circle cx="44" cy="61.8" r=".9"/><circle cx="49.4" cy="61.6" r=".9"/><circle cx="55.6" cy="58.4" r=".8"/></g>
   <!-- los mofletes -->
-  <ellipse cx="34" cy="47" rx="3.4" ry="2.2" fill="#E8A6A0" opacity=".6"/>
-  <ellipse cx="58" cy="47" rx="3.4" ry="2.2" fill="#E8A6A0" opacity=".6"/>
-  <!-- los ojos, grandes y con brillo -->
-  <ellipse cx="39.5" cy="40" rx="3.6" ry="4.2" fill="#241C14"/>
-  <ellipse cx="52.5" cy="40" rx="3.6" ry="4.2" fill="#241C14"/>
-  <circle class="ojo" cx="38.4" cy="38.6" r="1.4" fill="#fff"/><circle class="ojo" cx="51.4" cy="38.6" r="1.4" fill="#fff"/>
-  <circle cx="40.6" cy="41.6" r=".6" fill="#fff" opacity=".8"/><circle cx="53.6" cy="41.6" r=".6" fill="#fff" opacity=".8"/>
-  <!-- la nariz, los bigotes y los dos dientes -->
-  <ellipse cx="46" cy="47" rx="2.6" ry="2" fill="#D9707A" stroke="#8E4A50" stroke-width=".8"/>
-  <g stroke="#3A2E22" stroke-width=".7" stroke-linecap="round" opacity=".7">
-    <path d="M40 48 L30 46.5"/><path d="M40 49.5 L30.5 51"/><path d="M52 48 L62 46.5"/><path d="M52 49.5 L61.5 51"/>
+  <ellipse cx="35.4" cy="48" rx="3" ry="1.9" fill="#E8A9B4" opacity=".55"/>
+  <ellipse cx="56.6" cy="48" rx="3" ry="1.9" fill="#E8A9B4" opacity=".55"/>
+  <!-- los ojos -->
+  <ellipse cx="40" cy="40.6" rx="3.3" ry="3.8" fill="#241C14"/>
+  <ellipse cx="52" cy="40.6" rx="3.3" ry="3.8" fill="#241C14"/>
+  <circle class="ojo" cx="38.9" cy="39.2" r="1.3" fill="#fff"/><circle class="ojo" cx="50.9" cy="39.2" r="1.3" fill="#fff"/>
+  <circle cx="41" cy="42.2" r=".55" fill="#fff" opacity=".8"/><circle cx="53" cy="42.2" r=".55" fill="#fff" opacity=".8"/>
+  <!-- los bigotes: salen de las almohadillas del hocico, finos y un poco curvos -->
+  <g fill="#8A7A6E"><circle cx="40.6" cy="50" r=".55"/><circle cx="41" cy="52" r=".55"/><circle cx="51.4" cy="50" r=".55"/><circle cx="51" cy="52" r=".55"/></g>
+  <g stroke="#3A2E22" stroke-width=".75" stroke-linecap="round" fill="none" opacity=".75">
+    <path d="M39.6 49.6 Q34 47.6 28.6 48.2"/><path d="M39.8 51.8 Q34.4 52 29 54"/>
+    <path d="M52.4 49.6 Q58 47.6 63.4 48.2"/><path d="M52.2 51.8 Q57.6 52 63 54"/>
   </g>
-  <path class="boca" d="M43.4 50.6 Q46 52.2 48.6 50.6" fill="none" stroke="#3A2E22" stroke-width="1.1" stroke-linecap="round"/>
-  <path class="boca-f" d="M43 50.2 Q46 55.4 49 50.2 Z" fill="#8E4A50" stroke="#3A2E22" stroke-width="1" stroke-linejoin="round"/>
-  <rect x="44.6" y="50.8" width="1.3" height="2" rx=".3" fill="#fff" stroke="#3A2E22" stroke-width=".5"/>
-  <rect x="46.1" y="50.8" width="1.3" height="2" rx=".3" fill="#fff" stroke="#3A2E22" stroke-width=".5"/>
+  <!-- la nariz, y el surco hasta la boca -->
+  <ellipse cx="46" cy="47.8" rx="2.3" ry="1.7" fill="#E39A88" stroke="#B9705F" stroke-width=".7"/>
+  <ellipse cx="45.3" cy="47.3" rx=".7" ry=".45" fill="#fff" opacity=".7"/>
+  <path d="M46 49.5 V50.8" stroke="#3A2E22" stroke-width=".7" stroke-linecap="round"/>
+  <!-- las dos bocas: la de diario y la abierta, con los dos incisivos en su sitio -->
+  <path class="boca" d="M42.6 50.8 Q44.4 52.4 46 51 Q47.6 52.4 49.4 50.8" fill="none" stroke="#3A2E22" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path class="boca-f" d="M42.8 51 Q46 57 49.2 51 Q46 51.8 42.8 51 Z" fill="#8E4A50" stroke="#3A2E22" stroke-width=".9" stroke-linejoin="round"/>
+  <path d="M45 51.1 H47 V52.7 Q46 53.1 45 52.7 Z" fill="#FBF7EE" stroke="#3A2E22" stroke-width=".45" stroke-linejoin="round"/>
+  <path d="M46 51.2 V52.9" stroke="#3A2E22" stroke-width=".4"/>
+  <!-- el gorro de cocinero de Migas, bien asentado entre las orejas -->
+  <path d="M35.4 30.4 Q46 25.6 56.6 30.4 L56 34 Q46 29.8 36 34 Z" fill="#EDE6D6" stroke="#3A2E22" stroke-width="1.3" stroke-linejoin="round"/>
+  <path d="M36.2 30.6 Q33 20.4 41 20.2 Q43 15.4 46 15.6 Q49 15.4 51 20.2 Q59 20.4 55.8 30.6 Q46 26.6 36.2 30.6 Z" fill="#FBF7EE" stroke="#3A2E22" stroke-width="1.3" stroke-linejoin="round"/>
+  <path d="M41 22 Q42 25.6 41.2 28.4 M51 22 Q50 25.6 50.8 28.4" fill="none" stroke="#DCCFB4" stroke-width="1" stroke-linecap="round"/>
 </svg>`;
 raiz.Personajes = {NICK, NICOLETA, MIGAS};
 })(window);
