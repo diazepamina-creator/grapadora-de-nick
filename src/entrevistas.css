@@ -1,0 +1,47 @@
+/* ── LAS ENTREVISTAS: Nick, Nicoleta y Migas contestan a lo que se les pregunte ── */
+.micro{width:12px;height:15px;display:inline-block;vertical-align:-2px}
+.entrevista .ev-quien{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 8px}
+.ev-quien button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px 5px;
+  font:inherit;font-family:var(--rotulo);letter-spacing:1px;text-transform:uppercase;font-size:12px;
+  color:var(--tinta);background:var(--noche);border:1px solid var(--linea);border-radius:9px;cursor:pointer}
+.ev-quien button[aria-pressed="true"]{border-color:var(--oro);color:var(--oro);box-shadow:inset 0 0 0 1px var(--oro)}
+.ev-mini{width:48px;height:48px;display:block}
+.ev-mini svg{width:100%;height:100%;display:block}
+.ev-cartel{font-size:13px;color:var(--tenue);margin:2px 0 8px;font-style:italic}
+.ev-cartel b{color:var(--tinta)}
+.ev-escena{display:flex;gap:10px;align-items:flex-end;margin:0 0 10px}
+.ev-cara{flex:0 0 auto;width:128px;height:128px}
+.ev-cara svg{width:100%;height:100%;display:block;overflow:visible}
+.ev-cara[data-q="migas"]{width:140px;height:140px}
+/* la boca: cerrada, abierta mientras habla, y la de contento al acabar */
+.ev-cara .boca-f,.ev-mini .boca-f{display:none}
+.ev-cara.abre .boca, .ev-cara.feliz .boca{display:none}
+.ev-cara.abre .boca-f, .ev-cara.feliz .boca-f{display:block}
+.ev-cara.feliz svg{animation:salta .55s cubic-bezier(.3,1.5,.5,1)}
+.ev-globo{flex:1;min-width:0;position:relative;min-height:112px;padding:10px 13px;border-radius:12px;
+  background:var(--noche);border:1.5px solid var(--linea);margin-bottom:18px}
+.ev-globo::before{content:'';position:absolute;left:-9px;bottom:16px;width:14px;height:14px;
+  background:inherit;border-left:1.5px solid var(--linea);border-bottom:1.5px solid var(--linea);transform:rotate(45deg)}
+.ev-pregunta{margin:0 0 5px;font-size:12.5px;color:var(--tenue);font-family:var(--rotulo);letter-spacing:.4px}
+.ev-respuesta{margin:0;font-size:15.5px;line-height:1.5;color:var(--tinta);min-height:1.5em}
+.ev-respuesta b{color:var(--oro)}
+.ev-rotulo{font-family:var(--rotulo);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--tenue);margin:0 0 6px}
+.ev-lista{display:flex;flex-direction:column;gap:6px}
+.ev-p{text-align:left;font:inherit;font-size:14px;padding:9px 12px;min-height:44px;color:var(--tinta);background:var(--noche);
+  border:1px solid var(--linea);border-radius:9px;cursor:pointer}
+.ev-p:hover{border-color:var(--morado)}
+.ev-p.hecha{opacity:.55}
+.ev-p.repregunta{border-style:dashed;border-color:var(--oro)}
+.ev-re{font-family:var(--rotulo);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--oro)}
+@media (max-width:420px){ .ev-cara{width:100px;height:100px} .ev-cara[data-q="migas"]{width:110px;height:110px} .ev-respuesta{font-size:14.5px} }
+@media (prefers-reduced-motion: reduce){ .ev-cara.feliz svg{animation:none} }
+
+/* ── MIGAS EN LA MESA: los avisos del cortador y de la grapadora los da él ── */
+.aviso{display:grid;grid-template-columns:40px 1fr;gap:9px;align-items:center;margin:10px 0 0;padding:7px 10px;
+  border:1px solid var(--linea);border-radius:10px;background:var(--noche);font-size:14px;color:var(--tinta)}
+.aviso:empty{display:none}
+.aviso .cara{width:40px;height:40px;display:block}
+.aviso .cara svg{width:100%;height:100%;display:block}
+.aviso .cara .boca-f{display:none}
+.aviso .quien{display:block;font-family:var(--rotulo);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tenue)}
+.aviso b{color:var(--oro)}

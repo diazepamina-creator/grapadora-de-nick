@@ -263,8 +263,6 @@ button.n.rompe{border-style:dashed;border-color:#C98F7B;color:var(--tomateO)}
 button.n.avisa{background:#C87A28;color:#fff;border-color:#9A5C1B;border-style:solid;animation:tiembla .28s}
 @keyframes tiembla{25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
 .mandos .botones{margin-top:10px}
-.aviso{margin:8px 0 0;font-size:14px;color:var(--tenue);min-height:20px}
-.aviso b{color:var(--oro)}
 
 /* ── LA PIZARRA DE NICK: el signo, antes de poder contar ── */
 .pizarra{margin-top:10px;background:var(--pizarra);border:6px solid #6E4A2E;border-radius:8px;padding:10px 12px 12px;
@@ -346,6 +344,55 @@ html[data-inicio="si"] main{visibility:hidden}
   letter-spacing:2px;text-transform:uppercase;color:var(--tenue);opacity:.8}
 @media (prefers-reduced-motion: reduce){ .inicio{display:none !important} html[data-inicio="si"] main{visibility:visible} }
 </style>
+<style>
+/* ── LAS ENTREVISTAS: Nick, Nicoleta y Migas contestan a lo que se les pregunte ── */
+.micro{width:12px;height:15px;display:inline-block;vertical-align:-2px}
+.entrevista .ev-quien{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 8px}
+.ev-quien button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px 5px;
+  font:inherit;font-family:var(--rotulo);letter-spacing:1px;text-transform:uppercase;font-size:12px;
+  color:var(--tinta);background:var(--noche);border:1px solid var(--linea);border-radius:9px;cursor:pointer}
+.ev-quien button[aria-pressed="true"]{border-color:var(--oro);color:var(--oro);box-shadow:inset 0 0 0 1px var(--oro)}
+.ev-mini{width:48px;height:48px;display:block}
+.ev-mini svg{width:100%;height:100%;display:block}
+.ev-cartel{font-size:13px;color:var(--tenue);margin:2px 0 8px;font-style:italic}
+.ev-cartel b{color:var(--tinta)}
+.ev-escena{display:flex;gap:10px;align-items:flex-end;margin:0 0 10px}
+.ev-cara{flex:0 0 auto;width:128px;height:128px}
+.ev-cara svg{width:100%;height:100%;display:block;overflow:visible}
+.ev-cara[data-q="migas"]{width:140px;height:140px}
+/* la boca: cerrada, abierta mientras habla, y la de contento al acabar */
+.ev-cara .boca-f,.ev-mini .boca-f{display:none}
+.ev-cara.abre .boca, .ev-cara.feliz .boca{display:none}
+.ev-cara.abre .boca-f, .ev-cara.feliz .boca-f{display:block}
+.ev-cara.feliz svg{animation:salta .55s cubic-bezier(.3,1.5,.5,1)}
+.ev-globo{flex:1;min-width:0;position:relative;min-height:112px;padding:10px 13px;border-radius:12px;
+  background:var(--noche);border:1.5px solid var(--linea);margin-bottom:18px}
+.ev-globo::before{content:'';position:absolute;left:-9px;bottom:16px;width:14px;height:14px;
+  background:inherit;border-left:1.5px solid var(--linea);border-bottom:1.5px solid var(--linea);transform:rotate(45deg)}
+.ev-pregunta{margin:0 0 5px;font-size:12.5px;color:var(--tenue);font-family:var(--rotulo);letter-spacing:.4px}
+.ev-respuesta{margin:0;font-size:15.5px;line-height:1.5;color:var(--tinta);min-height:1.5em}
+.ev-respuesta b{color:var(--oro)}
+.ev-rotulo{font-family:var(--rotulo);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--tenue);margin:0 0 6px}
+.ev-lista{display:flex;flex-direction:column;gap:6px}
+.ev-p{text-align:left;font:inherit;font-size:14px;padding:9px 12px;min-height:44px;color:var(--tinta);background:var(--noche);
+  border:1px solid var(--linea);border-radius:9px;cursor:pointer}
+.ev-p:hover{border-color:var(--morado)}
+.ev-p.hecha{opacity:.55}
+.ev-p.repregunta{border-style:dashed;border-color:var(--oro)}
+.ev-re{font-family:var(--rotulo);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--oro)}
+@media (max-width:420px){ .ev-cara{width:100px;height:100px} .ev-cara[data-q="migas"]{width:110px;height:110px} .ev-respuesta{font-size:14.5px} }
+@media (prefers-reduced-motion: reduce){ .ev-cara.feliz svg{animation:none} }
+
+/* ── MIGAS EN LA MESA: los avisos del cortador y de la grapadora los da él ── */
+.aviso{display:grid;grid-template-columns:40px 1fr;gap:9px;align-items:center;margin:10px 0 0;padding:7px 10px;
+  border:1px solid var(--linea);border-radius:10px;background:var(--noche);font-size:14px;color:var(--tinta)}
+.aviso:empty{display:none}
+.aviso .cara{width:40px;height:40px;display:block}
+.aviso .cara svg{width:100%;height:100%;display:block}
+.aviso .cara .boca-f{display:none}
+.aviso .quien{display:block;font-family:var(--rotulo);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tenue)}
+.aviso b{color:var(--oro)}
+</style>
 <script>
   /* los ajustes se ponen antes de pintar nada, para que no haya un fogonazo del otro fondo */
   document.documentElement.dataset.tema = 'dia';
@@ -377,6 +424,7 @@ html[data-inicio="si"] main{visibility:hidden}
         <button type="button" id="bAjustes" aria-pressed="false" aria-controls="ajustes">Ajustes</button>
         <button type="button" id="bAula" aria-pressed="false">Aula</button>
         <button type="button" id="bActa">Acta</button>
+        <button type="button" id="bEntrevista" aria-label="Entrevistas"><svg class="micro" viewBox="0 0 16 20" aria-hidden="true"><rect x="5" y="1" width="6" height="11" rx="3" fill="currentColor"/><path d="M2.5 9 Q2.5 15 8 15 Q13.5 15 13.5 9 M8 15 V19 M5 19 H11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
       </nav>
     </div>
     <div class="juegos" role="group" aria-label="Los tres juegos">
@@ -426,7 +474,7 @@ html[data-inicio="si"] main{visibility:hidden}
       <div class="fila" id="filaMaq"><span class="etq">la máquina</span><span class="tiras" id="botMaq"></span></div>
       <div class="botones"><button type="button" class="b ok" id="bGrapar">Grapar lo elegido</button><button type="button" class="b" id="bSoltar">Quitar grapas</button><button type="button" class="b" id="bLimpiar">Empezar el pedido</button></div>
     </div>
-    <p class="aviso" id="aviso" role="status"></p>
+    <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
   </section>
 
   <section class="panel tique" id="tique" aria-label="El tique">
@@ -443,7 +491,7 @@ html[data-inicio="si"] main{visibility:hidden}
     <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" rel="license">© 2026 Andrés Asensio · CC BY-NC-ND 4.0</a>
     · <a href="https://diazepamina-creator.github.io/pizzeria-de-nick/">La pizzería de Nick (anterior)</a>
     · <a href="https://diazepamina-creator.github.io/">Materiales</a>
-    · versión 0.1
+    · versión 0.2
   </footer>
 </main>
 
@@ -454,6 +502,20 @@ html[data-inicio="si"] main{visibility:hidden}
     <p id="guiaTxt"></p>
     <div class="guia-pie"><span id="guiaNum"></span>
       <span class="botones"><button type="button" class="b" id="guiaSalir">Salir</button><button type="button" class="b ok" id="guiaSig">Siguiente</button></span></div>
+  </div>
+</div>
+<div class="modal" id="mEntrevista" hidden>
+  <div class="caja2 entrevista" id="entrevista" role="dialog" aria-modal="true" aria-labelledby="evTit" tabindex="-1">
+    <h2 id="evTit">Entrevistas en la cocina</h2>
+    <div class="ev-quien" role="group" aria-label="A quién entrevistar"></div>
+    <p class="ev-cartel"></p>
+    <div class="ev-escena">
+      <div class="ev-cara" aria-hidden="true"></div>
+      <div class="ev-globo"><p class="ev-pregunta"></p><p class="ev-respuesta" aria-live="polite"></p></div>
+    </div>
+    <p class="ev-rotulo">Pregúntale:</p>
+    <div class="ev-lista"></div>
+    <div class="botones"><button type="button" class="b" id="evCierra">Volver al mostrador</button></div>
   </div>
 </div>
 <div class="modal" id="mActa" hidden>
@@ -848,16 +910,98 @@ raiz.Sonido = {toca, activo: v => { activo = !!v; }};
 <script>
 /* ══════════════════════════════════════════════════════════════════════
    LA GRAPADORA DE NICK · la pizza dibujada
-   Una caja del motor, en SVG: cada pieza (los trozos grapados van juntos)
-   con su corteza, su queso y sus ingredientes a escala del trozo. La
-   porción elegida se separa de la pizza siguiendo su bisectriz; las grapas
-   nuevas se ven y se van, en este orden: la costura y las grapas juntas,
-   luego se va la costura, y al final las grapas.
+   Una sola pizza de verdad, dibujada una vez: la corteza tostada con sus
+   burbujas, el borde del tomate, la mozzarella fundida con su textura y
+   sus manchas doradas, el pepperoni, la albahaca y las aceitunas. Cada
+   trozo de una caja es esa misma pizza vista a través de su sector: así
+   un corte parte el pepperoni por donde pasa, como en la cocina, y el
+   dibujo no cambia por cortar más fino (la cantidad tampoco).
+   La porción elegida se separa siguiendo su bisectriz; las grapas nuevas
+   se ven y se van: la costura y las grapas, luego la costura, luego las
+   grapas.
    ══════════════════════════════════════════════════════════════════════ */
 (function (raiz) {
 'use strict';
 const M = raiz.Motor, NS = 'http://www.w3.org/2000/svg';
 const el = (tag, at) => { const e = document.createElementNS(NS, tag); for(const k in at) e.setAttribute(k, at[k]); return e; };
+const CX = 150, CY = 148, R = 126;
+
+/* un azar con semilla: la pizza sale igual cada vez */
+let sem = 11;
+const az = () => { sem = (sem * 16807) % 2147483647; return (sem - 1) / 2147483646; };
+/* un borde irregular: un círculo que respira */
+function blob(r, amp, n, fase){
+  let d = '';
+  const k = 72;
+  for(let i = 0; i <= k; i++){
+    const a = i / k * Math.PI * 2;
+    const rr = r + amp * (Math.sin(a * n + fase) * .6 + Math.sin(a * (n + 3) + fase * 2) * .4);
+    d += (i ? 'L' : 'M') + (CX + rr * Math.cos(a)).toFixed(1) + ' ' + (CY + rr * Math.sin(a)).toFixed(1);
+  }
+  return d + 'Z';
+}
+function pizzaEntera(){
+  let s = '';
+  /* la corteza: tostada por fuera, dorada por dentro, con su grano y sus burbujas */
+  s += '<circle cx="' + CX + '" cy="' + CY + '" r="' + R + '" fill="url(#pzCorteza)"/>';
+  s += '<circle cx="' + CX + '" cy="' + CY + '" r="' + R + '" fill="#8A5A24" filter="url(#pzGrano)" opacity=".55"/>';
+  for(let i = 0; i < 26; i++){
+    const a = az() * Math.PI * 2, d = R - 7 - az() * 6, rr = 1.6 + az() * 3.2;
+    s += '<ellipse cx="' + (CX + d * Math.cos(a)).toFixed(1) + '" cy="' + (CY + d * Math.sin(a)).toFixed(1) + '" rx="' + rr.toFixed(1) + '" ry="' + (rr * .7).toFixed(1) +
+      '" transform="rotate(' + (a * 180 / Math.PI + 90).toFixed(0) + ' ' + (CX + d * Math.cos(a)).toFixed(1) + ' ' + (CY + d * Math.sin(a)).toFixed(1) + ')" fill="' + (i % 3 ? '#9A5E22' : '#F2CE8A') + '" opacity="' + (i % 3 ? .55 : .7) + '"/>';
+  }
+  /* el tomate, que asoma entre la corteza y el queso */
+  s += '<path d="' + blob(112, 2.2, 9, .7) + '" fill="#B8402A"/>';
+  s += '<path d="' + blob(112, 2.2, 9, .7) + '" fill="#7E2414" filter="url(#pzGrano)" opacity=".35"/>';
+  /* la mozzarella fundida: un borde que se derrama, su textura y sus dorados */
+  s += '<path d="' + blob(104, 4.5, 7, 1.9) + '" fill="url(#pzQueso)"/>';
+  s += '<path d="' + blob(104, 4.5, 7, 1.9) + '" fill="#E8B04A" filter="url(#pzFundido)" opacity=".45"/>';
+  for(let i = 0; i < 18; i++){
+    const a = az() * Math.PI * 2, d = az() * 90, rr = 2 + az() * 4;
+    s += '<ellipse cx="' + (CX + d * Math.cos(a)).toFixed(1) + '" cy="' + (CY + d * Math.sin(a)).toFixed(1) + '" rx="' + rr.toFixed(1) + '" ry="' + (rr * .6).toFixed(1) + '" fill="#C98A34" opacity=".35"/>';
+  }
+  /* el pepperoni: rodajas con su borde, su grasa y su brillo */
+  const PEP = [[0, 0], [52, 18], [-48, 30], [20, -58], [-30, -50], [66, -34], [-72, -8], [8, 62], [-40, 72], [58, 60], [80, 22], [-12, -92], [44, -84], [-82, 42]];
+  PEP.forEach(([x, y], i) => {
+    const px = CX + x, py = CY + y, r = 11 + (i % 3) * 1.4;
+    s += '<circle cx="' + px + '" cy="' + (py + 1.6) + '" r="' + r + '" fill="#6E1C12" opacity=".35"/>';
+    s += '<circle cx="' + px + '" cy="' + py + '" r="' + r + '" fill="url(#pzPep)" stroke="#8E2A1C" stroke-width="1.2"/>';
+    for(let k = 0; k < 4; k++){ const a = az() * 6.28, d = az() * r * .65;
+      s += '<circle cx="' + (px + d * Math.cos(a)).toFixed(1) + '" cy="' + (py + d * Math.sin(a)).toFixed(1) + '" r="' + (.9 + az() * 1.1).toFixed(1) + '" fill="#8E2A1C" opacity=".6"/>'; }
+    s += '<path d="M' + (px - r * .55) + ' ' + (py - r * .35) + ' Q' + (px - r * .2) + ' ' + (py - r * .75) + ' ' + (px + r * .3) + ' ' + (py - r * .6) + '" fill="none" stroke="#F4A38A" stroke-width="1.4" stroke-linecap="round" opacity=".75"/>';
+  });
+  /* las aceitunas negras */
+  [[-20, 26], [34, -20], [-62, -30], [30, 34], [-8, -30], [72, 2], [-54, 58], [18, 88]].forEach(([x, y]) => {
+    const px = CX + x, py = CY + y;
+    s += '<circle cx="' + px + '" cy="' + py + '" r="4.6" fill="none" stroke="#2A2420" stroke-width="3"/>';
+    s += '<path d="M' + (px - 2.4) + ' ' + (py - 2.8) + ' q2 -1 4 0" fill="none" stroke="#7A7068" stroke-width="1" stroke-linecap="round"/>';
+  });
+  /* la albahaca: hojas con su nervio */
+  [[-26, -12, 30], [28, 4, -40], [-6, 36, 80], [48, -56, 10], [-64, 12, 120], [0, -70, -60], [72, 44, 60], [-36, -78, 150]].forEach(([x, y, g]) => {
+    const px = CX + x, py = CY + y;
+    s += '<g transform="translate(' + px + ' ' + py + ') rotate(' + g + ')"><path d="M-9 0 Q-2 -7 9 0 Q-2 7 -9 0 Z" fill="#4F7A2E" stroke="#34561C" stroke-width=".9"/>' +
+      '<path d="M-7 0 H7" stroke="#8DB36A" stroke-width=".9" stroke-linecap="round"/></g>';
+  });
+  /* el brillo del horno, arriba a la izquierda */
+  s += '<circle cx="' + CX + '" cy="' + CY + '" r="' + R + '" fill="url(#pzBrillo)"/>';
+  return s;
+}
+/* las piezas comunes: una sola vez en la página */
+function prepara(){
+  if(document.getElementById('pzDefs')) return;
+  const d = document.createElementNS(NS, 'svg');
+  d.setAttribute('id', 'pzDefs'); d.setAttribute('width', '0'); d.setAttribute('height', '0');
+  d.setAttribute('aria-hidden', 'true'); d.style.position = 'absolute';
+  d.innerHTML = '<defs>' +
+    '<radialGradient id="pzCorteza" cx="50%" cy="50%" r="50%"><stop offset="80%" stop-color="#E7B666"/><stop offset="91%" stop-color="#D19446"/><stop offset="100%" stop-color="#A9692A"/></radialGradient>' +
+    '<radialGradient id="pzQueso" cx="45%" cy="42%" r="60%"><stop offset="0%" stop-color="#FCEFC4"/><stop offset="70%" stop-color="#F5DA92"/><stop offset="100%" stop-color="#E9BE62"/></radialGradient>' +
+    '<radialGradient id="pzPep" cx="40%" cy="38%" r="65%"><stop offset="0%" stop-color="#D2533A"/><stop offset="100%" stop-color="#A93522"/></radialGradient>' +
+    '<radialGradient id="pzBrillo" cx="32%" cy="26%" r="75%"><stop offset="0%" stop-color="#fff" stop-opacity=".22"/><stop offset="45%" stop-color="#fff" stop-opacity="0"/><stop offset="100%" stop-color="#3a1c05" stop-opacity=".12"/></radialGradient>' +
+    '<filter id="pzGrano" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.6 -.85"/><feComposite in2="SourceGraphic" operator="in"/></filter>' +
+    '<filter id="pzFundido" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="3" seed="9"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 3.2 -1.9"/><feComposite in2="SourceGraphic" operator="in"/></filter>' +
+    '<symbol id="pzEntera" viewBox="0 0 300 300">' + pizzaEntera() + '</symbol></defs>';
+  document.body.appendChild(d);
+}
 function sector(cx, cy, r, a0, a1){
   const rad = a => (a - 90) * Math.PI / 180;
   if(a1 - a0 >= 359.9) return `M${cx - r} ${cy} a${r} ${r} 0 1 0 ${2 * r} 0 a${r} ${r} 0 1 0 ${-2 * r} 0 Z`;
@@ -865,43 +1009,38 @@ function sector(cx, cy, r, a0, a1){
   const x1 = cx + r * Math.cos(rad(a1)), y1 = cy + r * Math.sin(rad(a1));
   return `M${cx} ${cy} L${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${(a1 - a0) > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z`;
 }
+let nP = 0;
 /* c: la caja; alTocar(i): qué hacer al tocar el trozo i (si no hay, no se toca) */
 function dibuja(c, alTocar){
+  prepara();
+  const id = 'pz' + (++nP);
   const svg = el('svg', {viewBox: '0 0 300 300', class: 'pizza'});
-  const cx = 150, cy = 148, R = 126, paso = 360 / c.cortes;
-  /* a quince cortes el trozo tiene 24 grados: huecos e ingredientes van a escala */
-  const gC = Math.min(.9, paso * .03), gQ = Math.min(2.6, paso * .09);
-  const esc = Math.max(.55, Math.min(1, paso / 70));
-  const nTop = paso >= 70 ? 4 : paso >= 40 ? 3 : paso >= 26 ? 2 : 1;
-  svg.appendChild(el('ellipse', {cx, cy: cy + R + 8, rx: R * .86, ry: 8, fill: 'rgba(60,40,20,.25)'}));
-  M.grupos(c).forEach(t => {
+  const paso = 360 / c.cortes, hueco = Math.min(1.1, paso * .035);
+  const defs = el('defs', {});
+  svg.appendChild(defs);
+  svg.appendChild(el('ellipse', {cx: CX, cy: CY + R + 8, rx: R * .86, ry: 8, fill: 'rgba(60,40,20,.25)'}));
+  M.grupos(c).forEach((t, n) => {
     const a0 = t[0] * paso, a1 = a0 + t.length * paso, ele = c.sel.has(t[0]);
     const g = el('g', {class: 'corte' + (ele ? ' elegida' : (c.sel.size ? ' apagada' : ''))});
     if(ele){ const bis = ((a0 + a1) / 2 - 90) * Math.PI / 180; g.setAttribute('transform', `translate(${(10 * Math.cos(bis)).toFixed(1)} ${(10 * Math.sin(bis)).toFixed(1)})`); }
-    g.appendChild(el('path', {d: sector(cx, cy, R, a0 + gC, a1 - gC), fill: 'var(--corteza)', stroke: ele ? '#FFF3D0' : 'var(--cortezaO)', 'stroke-width': ele ? 6 : 2.5, 'stroke-linejoin': 'round'}));
-    g.appendChild(el('path', {d: sector(cx, cy, R - 13, a0 + gQ, a1 - gQ), fill: 'var(--queso)'}));
-    for(let k = 0; k < t.length; k++){
-      const a = (t[0] + k + .5) * paso - 90;
-      [[.60, 9.5, 1], [.80, 6, 0], [.36, 7, 1], [.72, 5, 0]].slice(0, nTop).forEach(([d, rr, tomate], q) => {
-        const ang = (a + (q - (nTop - 1) / 2) * Math.min(9, paso / 3.2)) * Math.PI / 180;
-        const px = cx + (R - 15) * d * Math.cos(ang), py = cy + (R - 15) * d * Math.sin(ang);
-        if(tomate){
-          g.appendChild(el('circle', {cx: px, cy: py + 1.4, r: rr * esc, fill: 'var(--tomateO)', opacity: .5}));
-          g.appendChild(el('circle', {cx: px, cy: py, r: rr * esc, fill: 'var(--tomate)'}));
-        }else g.appendChild(el('ellipse', {cx: px, cy: py, rx: rr * 1.5 * esc, ry: rr * .85 * esc, fill: 'var(--albahaca)', transform: `rotate(${a + 40} ${px} ${py})`}));
-      });
-    }
+    const forma = sector(CX, CY, R + 1, a0 + hueco, a1 - hueco);
+    const cp = el('clipPath', {id: id + 's' + n}); cp.appendChild(el('path', {d: forma})); defs.appendChild(cp);
+    const vista = el('g', {'clip-path': `url(#${id}s${n})`});
+    vista.appendChild(el('use', {href: '#pzEntera', x: 0, y: 0, width: 300, height: 300}));
+    g.appendChild(vista);
+    /* el canto del corte: un filo más oscuro, que da grosor al trozo */
+    g.appendChild(el('path', {d: forma, fill: 'none', stroke: ele ? '#FFF3D0' : 'rgba(110,62,20,.55)', 'stroke-width': ele ? 4.5 : 1.4, 'stroke-linejoin': 'round'}));
     for(let k = 0; k < t.length - 1; k++){                 // las grapas, solo las nuevas
       if(!c.recien.has(t[k])) continue;
       const gr = (t[k] + 1) * paso, a = (gr - 90) * Math.PI / 180;
-      g.appendChild(el('path', {d: `M${cx} ${cy} L${(cx + R * Math.cos(a)).toFixed(1)} ${(cy + R * Math.sin(a)).toFixed(1)}`, stroke: 'var(--cortezaO)', 'stroke-width': 2.6, 'stroke-dasharray': '7 6', class: 'costura-nueva'}));
+      g.appendChild(el('path', {d: `M${CX} ${CY} L${(CX + R * Math.cos(a)).toFixed(1)} ${(CY + R * Math.sin(a)).toFixed(1)}`, stroke: '#7E4A1A', 'stroke-width': 2.6, 'stroke-dasharray': '7 6', class: 'costura-nueva'}));
       [[.38, 1], [.72, -1]].forEach(([d, lado], q) => {
-        const px = cx + R * d * Math.cos(a), py = cy + R * d * Math.sin(a);
+        const px = CX + R * d * Math.cos(a), py = CY + R * d * Math.sin(a);
         const fuera = el('g', {transform: `translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${gr + (q ? 8 : -8)})`});
         const dentro = el('g', {class: 'grapa-nueva'});
-        const forma = `M-12 ${6.5 * lado} L-12 0 L12 0 L12 ${6.5 * lado}`;
-        dentro.appendChild(el('path', {d: forma, fill: 'none', stroke: 'rgba(60,45,30,.35)', 'stroke-width': 7.2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', transform: 'translate(1 1.6)'}));
-        dentro.appendChild(el('path', {d: forma, fill: 'none', stroke: 'var(--grapa)', 'stroke-width': 5.2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}));
+        const f = `M-12 ${6.5 * lado} L-12 0 L12 0 L12 ${6.5 * lado}`;
+        dentro.appendChild(el('path', {d: f, fill: 'none', stroke: 'rgba(60,45,30,.4)', 'stroke-width': 7.2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', transform: 'translate(1 1.6)'}));
+        dentro.appendChild(el('path', {d: f, fill: 'none', stroke: 'var(--grapa)', 'stroke-width': 5.2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}));
         dentro.appendChild(el('path', {d: 'M-11 -1.5 L11 -1.5', fill: 'none', stroke: '#EDF1F4', 'stroke-width': 1.4, 'stroke-linecap': 'round'}));
         fuera.appendChild(dentro); g.appendChild(fuera);
       });
@@ -924,6 +1063,10 @@ raiz.Pizza = {dibuja};
    del tiempo. Parpadea, el brazo da el clac al grapar y salta cuando el
    pedido sale redondo (las clases .ojo, .brazo, .boca y .boca-f).
    Nicoleta, su hermana, llama por teléfono desde la pastelería.
+   Migas, el pinche: un ratón gris con gorrito de papel, pañuelo rojo de
+   lunares y el cortador de pizza, más grande que su cara. Nick junta con
+   la grapadora; Migas reparte con el cortador. De pequeño cortaba tan
+   fino que solo quedaban migas.
    ══════════════════════════════════════════════════════════════════════ */
 (function (raiz) {
 'use strict';
@@ -1028,13 +1171,81 @@ const NICOLETA = `<svg viewBox="0 0 46 48" aria-hidden="true">
         fill="#E39A88" stroke="#B9705F" stroke-width=".7" stroke-linejoin="round"/>
   <path d="M19 28.7 Q18.95 29.9 19.5 30.2 Q20.05 29.8 20 28.6 Z" fill="#F6EEDC" stroke="#6B4A32" stroke-width=".85" stroke-linejoin="round"/>
   <path d="M23 28.7 Q23.05 29.9 22.5 30.2 Q21.95 29.8 22 28.6 Z" fill="#F6EEDC" stroke="#6B4A32" stroke-width=".85" stroke-linejoin="round"/>
-  <path d="M20.2 27.3 Q21 27.9 21.8 27.3" stroke="#8E5A44" stroke-width="1" fill="none" stroke-linecap="round"/>
+  <path class="boca" d="M20.2 27.3 Q21 27.9 21.8 27.3" stroke="#8E5A44" stroke-width="1" fill="none" stroke-linecap="round"/><path class="boca-f" d="M19.9 27 Q21 29.6 22.1 27 Q21 27.8 19.9 27 Z" fill="#8E5A44" stroke="#8E5A44" stroke-width=".8" stroke-linejoin="round"/>
   <path d="M10.6 13.6 Q21 4.6 31.4 13.6 Q21 9.4 10.6 13.6 Z" fill="#D98C9A" stroke="#3A2E22" stroke-width="1.3" stroke-linejoin="round"/>
   <path d="M10.6 13.6 Q21 9.4 31.4 13.6 L31 15.8 Q21 11.8 11 15.8 Z" fill="#C97E8C" stroke="#3A2E22" stroke-width="1.2" stroke-linejoin="round"/>
   <path d="M30.6 11 Q34.4 10.4 35.4 13 Q33.2 14.4 30.2 13.6 Z" fill="#D98C9A" stroke="#3A2E22" stroke-width="1.1" stroke-linejoin="round"/>
   <g fill="#F6EFE2" opacity=".65"><circle cx="16.4" cy="10.6" r=".9"/><circle cx="23" cy="8.8" r=".9"/><circle cx="27.4" cy="11" r=".9"/></g>
 </svg>`;
-raiz.Personajes = {NICK, NICOLETA};
+const MIGAS = `<svg viewBox="0 0 100 100" class="cara-migas" aria-hidden="true">
+  <!-- la sombra -->
+  <ellipse cx="46" cy="96" rx="30" ry="3.2" fill="#140F1F" opacity=".22"/>
+  <!-- la cola, que asoma por detrás y se enrosca -->
+  <path d="M30 82 Q10 84 9 70 Q8 60 16 58" fill="none" stroke="#3A2E22" stroke-width="4.2" stroke-linecap="round"/>
+  <path d="M30 82 Q10 84 9 70 Q8 60 16 58" fill="none" stroke="#E8A6A0" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- los pies -->
+  <ellipse cx="37" cy="93" rx="7" ry="3.4" fill="#E8A6A0" stroke="#3A2E22" stroke-width="1.3"/>
+  <ellipse cx="55" cy="93" rx="7" ry="3.4" fill="#E8A6A0" stroke="#3A2E22" stroke-width="1.3"/>
+  <!-- el cuerpo: una pera gris, con la barriga clara -->
+  <path d="M28 90 Q24 68 34 58 Q46 50 58 58 Q68 68 64 90 Z" fill="#A99C92" stroke="#3A2E22" stroke-width="1.6" stroke-linejoin="round"/>
+  <!-- el delantal de pinche, blanco y con harina -->
+  <path d="M33 66 Q46 62 59 66 Q62 80 60 90 L32 90 Q30 80 33 66 Z" fill="#FBF7EE" stroke="#3A2E22" stroke-width="1.3" stroke-linejoin="round"/>
+  <path d="M40 76 H52" stroke="#D9CDB8" stroke-width="1.2" stroke-linecap="round"/>
+  <g fill="#E8DFCF"><circle cx="38" cy="83" r="1.3"/><circle cx="53" cy="80" r="1"/><circle cx="47" cy="86" r="1.1"/></g>
+  <!-- el pañuelo rojo al cuello, con sus lunares -->
+  <path d="M33 60 Q46 67 59 60 L57 65 Q46 71 35 65 Z" fill="#C4462F" stroke="#3A2E22" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M44 66 L40 73 L47 69 Z" fill="#C4462F" stroke="#3A2E22" stroke-width="1.1" stroke-linejoin="round"/>
+  <g fill="#FBF7EE"><circle cx="39" cy="63.5" r=".9"/><circle cx="46" cy="66" r=".9"/><circle cx="53" cy="63.5" r=".9"/></g>
+  <!-- el brazo de atrás -->
+  <path d="M35 68 Q29 74 33 80" fill="none" stroke="#3A2E22" stroke-width="5.4" stroke-linecap="round"/>
+  <path d="M35 68 Q29 74 33 80" fill="none" stroke="#A99C92" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="33.5" cy="80.5" r="2.6" fill="#E8A6A0" stroke="#3A2E22" stroke-width="1.1"/>
+  <!-- el cortador de pizza: la rueda, más grande que su cara -->
+  <g class="cortador">
+    <path d="M60 72 L71 60" stroke="#3A2E22" stroke-width="5.6" stroke-linecap="round"/>
+    <path d="M60 72 L71 60" stroke="#B07A45" stroke-width="3.6" stroke-linecap="round"/>
+    <circle cx="80" cy="51" r="13" fill="#C6CBD1" stroke="#3A2E22" stroke-width="1.6"/>
+    <circle cx="80" cy="51" r="10.2" fill="none" stroke="#EDF1F4" stroke-width="1.4"/>
+    <path d="M71 60 L80 51" stroke="#6E7680" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="80" cy="51" r="3" fill="#6E7680" stroke="#3A2E22" stroke-width="1.1"/>
+    <path d="M72 44 Q76 40 81 40" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" opacity=".8"/>
+  </g>
+  <!-- el brazo que empuña el cortador -->
+  <path d="M56 66 Q61 70 62 72" fill="none" stroke="#3A2E22" stroke-width="5.4" stroke-linecap="round"/>
+  <path d="M56 66 Q61 70 62 72" fill="none" stroke="#A99C92" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="61.5" cy="71.5" r="2.8" fill="#E8A6A0" stroke="#3A2E22" stroke-width="1.1"/>
+  <!-- las orejas: grandes, redondas y rosas por dentro -->
+  <circle cx="28" cy="24" r="12" fill="#A99C92" stroke="#3A2E22" stroke-width="1.6"/>
+  <circle cx="28.6" cy="24.6" r="7.6" fill="#E8A6A0"/>
+  <circle cx="64" cy="24" r="12" fill="#A99C92" stroke="#3A2E22" stroke-width="1.6"/>
+  <circle cx="63.4" cy="24.6" r="7.6" fill="#E8A6A0"/>
+  <!-- la cabeza -->
+  <path d="M46 57 Q30 57 29 42 Q29 28 46 27 Q63 28 63 42 Q62 57 46 57 Z" fill="#B7AA9F" stroke="#3A2E22" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M46 57 Q37 56 35 49 Q41 46 46 46 Q51 46 57 49 Q55 56 46 57 Z" fill="#E6DCD2"/>
+  <!-- el gorrito de papel de pinche, ladeado -->
+  <g transform="rotate(-8 46 28)">
+    <path d="M35 30 Q35 20 46 19 Q57 20 57 30 Z" fill="#FBF7EE" stroke="#3A2E22" stroke-width="1.3" stroke-linejoin="round"/>
+    <rect x="33.5" y="28.4" width="25" height="4.2" rx="1.6" fill="#EDE6D6" stroke="#3A2E22" stroke-width="1.2"/>
+  </g>
+  <!-- los mofletes -->
+  <ellipse cx="34" cy="47" rx="3.4" ry="2.2" fill="#E8A6A0" opacity=".6"/>
+  <ellipse cx="58" cy="47" rx="3.4" ry="2.2" fill="#E8A6A0" opacity=".6"/>
+  <!-- los ojos, grandes y con brillo -->
+  <ellipse cx="39.5" cy="40" rx="3.6" ry="4.2" fill="#241C14"/>
+  <ellipse cx="52.5" cy="40" rx="3.6" ry="4.2" fill="#241C14"/>
+  <circle class="ojo" cx="38.4" cy="38.6" r="1.4" fill="#fff"/><circle class="ojo" cx="51.4" cy="38.6" r="1.4" fill="#fff"/>
+  <circle cx="40.6" cy="41.6" r=".6" fill="#fff" opacity=".8"/><circle cx="53.6" cy="41.6" r=".6" fill="#fff" opacity=".8"/>
+  <!-- la nariz, los bigotes y los dos dientes -->
+  <ellipse cx="46" cy="47" rx="2.6" ry="2" fill="#D9707A" stroke="#8E4A50" stroke-width=".8"/>
+  <g stroke="#3A2E22" stroke-width=".7" stroke-linecap="round" opacity=".7">
+    <path d="M40 48 L30 46.5"/><path d="M40 49.5 L30.5 51"/><path d="M52 48 L62 46.5"/><path d="M52 49.5 L61.5 51"/>
+  </g>
+  <path class="boca" d="M43.4 50.6 Q46 52.2 48.6 50.6" fill="none" stroke="#3A2E22" stroke-width="1.1" stroke-linecap="round"/>
+  <path class="boca-f" d="M43 50.2 Q46 55.4 49 50.2 Z" fill="#8E4A50" stroke="#3A2E22" stroke-width="1" stroke-linejoin="round"/>
+  <rect x="44.6" y="50.8" width="1.3" height="2" rx=".3" fill="#fff" stroke="#3A2E22" stroke-width=".5"/>
+  <rect x="46.1" y="50.8" width="1.3" height="2" rx=".3" fill="#fff" stroke="#3A2E22" stroke-width=".5"/>
+</svg>`;
+raiz.Personajes = {NICK, NICOLETA, MIGAS};
 })(window);
 </script>
 <script>
@@ -1086,6 +1297,132 @@ function escena(el, alAcabar){
   luego(5000, fin);
 }
 raiz.Arranque = {escena};
+})(window);
+</script>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   LA GRAPADORA DE NICK · las entrevistas
+   Nick, Nicoleta y Migas contestan a lo que se les pregunte, como en Las
+   piezas de Miut y en La palestra. Cada respuesta se escribe poco a poco
+   mientras mueven la boca; algunas preguntas abren una repregunta.
+   Las respuestas enseñan de verdad: lo que dicen es lo que hace la app.
+   ══════════════════════════════════════════════════════════════════════ */
+(function (raiz) {
+'use strict';
+const REDUCIDO = raiz.matchMedia && raiz.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ENTREVISTAS = {
+  nick: {nombre: 'Nick', cargo: 'pizzero, y dueño de la grapadora',
+    hola: 'Pregunte, pregunte, que el horno no espera. Y si le sobra un minuto, le grapo algo.',
+    preguntas: [
+      {id: 'n1', p: '¿Por qué grapa las pizzas?',
+       r: 'Porque el cliente siempre quiere su pedido <b>en una pieza</b>. Dos cuartos grapados son media pizza: la misma cantidad, con otro nombre. Grapar de dos en dos es <b>dividir arriba y abajo entre 2</b>: 2/4 = 1/2.'},
+      {id: 'n1b', tras: 'n1', p: '¿Y si grapo tres octavos?',
+       r: 'Sale una pieza, sí, pero 3 no cabe en 8: esa pieza no es <b>un trozo de nada entero</b>. No hay división que enseñar. La grapadora grapa lo que le echen; las cuentas, no.'},
+      {id: 'n2', p: '¿No se notan las grapas al comer?', feliz: true,
+       r: 'Se quitan antes de servir. Casi siempre. Lo que importa es que, grapada o suelta, <b>la pizza pesa lo mismo</b>: ni grapar ni cortar cambia la cantidad. Solo el nombre.'},
+      {id: 'n3', p: '¿Por qué todas sus pizzas miden lo mismo?',
+       r: 'Porque si una fuera más grande, un cuarto de esa no sería un cuarto de las otras, y no habría manera de comparar. En esta casa <b>el 1 es la superficie de una pizza</b>. Sin la misma unidad, las fracciones no se hablan.'},
+      {id: 'n4', p: '¿Por qué 1/4 es menos que 1/3, si 4 es más que 3?',
+       r: 'Esa me la hacen todos los días. El 4 de abajo dice <b>en cuántos trozos se corta</b>, no cuánto te llevas. Pizza para cuatro, trozo pequeño; pizza para tres, trozo más grande. <b>Más comensales, menos ración.</b>'},
+      {id: 'n5', p: '¿Es verdad que es usted una morsa?', feliz: true,
+       r: 'Y a mucha honra. El bigote de pizzero lo traía de serie. Lo malo son los colmillos: para probar la salsa hay que tener <b>mucho pulso</b>.'},
+      {id: 'n6', p: '¿Qué es eso de «sumar como Nick»?',
+       r: '…Eso lo dice mi hermana. Una vez, para doblar una receta de 4 personas a 8, <b>le sumé 4 a cada cosa</b> en vez de multiplicar por 2. Salió una masa con ocho huevos para dos tazas de harina. No se hable más del tema.'},
+      {id: 'n7', p: '¿Qué hace un ratón en su cocina?', feliz: true,
+       r: '¿Migas? Es mi pinche, y el mejor con el cortador. Yo <b>junto</b>, él <b>reparte</b>. Entre los dos, cualquier fracción. Y no se come el queso. Casi nunca.'}
+    ]},
+  nicoleta: {nombre: 'Nicoleta', cargo: 'pastelera, hermana de Nick, dos portales más allá',
+    hola: 'Te atiendo, pero rápido: tengo magdalenas en el horno y a mi hermano al teléfono.',
+    preguntas: [
+      {id: 'c1', p: '¿Por qué siempre encarga por teléfono?',
+       r: 'Porque mis encargos son de los difíciles: <b>7/8 contra 6/7</b>. Harían falta 56 trozos, y el cortador de Nick no hila tan fino. Así que lo cortamos <b>sobre el papel</b>.'},
+      {id: 'c2', p: '¿Qué es eso de multiplicar en cruz?', tras: 'c1',
+       r: 'Nada de trucos. Para ponerlas en la misma secuencia, cada una se multiplica arriba y abajo por el denominador de la otra: <b>7/8 = 49/56</b> y <b>6/7 = 48/56</b>. Y fíjate: 49 = 7×7, 48 = 8×6. Esos son <b>los productos en cruz</b>.'},
+      {id: 'c3', p: '¿Quién cocina mejor, usted o Nick?', feliz: true,
+       r: 'Él hace pizzas y yo hago pasteles. Pero yo <b>multiplico</b> las recetas y él las suma. Saca tus propias conclusiones.'},
+      {id: 'c4', p: '¿Qué tienen que ver las fracciones con la pastelería?',
+       r: 'Todo. Media receta, un tercio de azúcar, tres huevos por cada dos tazas… Una pastelería es el sitio donde <b>las razones se usan sin llamarlas así</b>.'},
+      {id: 'c5', p: '¿Y cómo sabe quién se lleva más?',
+       r: 'Cuando las dos están en la misma secuencia, <b>gana el numerador mayor</b>: 49 trozos de 56 son más que 48 de 56. Antes de igualarlas, contar trozos no sirve de nada.'},
+      {id: 'c6', p: '¿Le cae bien Migas?', feliz: true,
+       r: 'Es un sol. Me guarda los recortes de masa. Lo único que le pido es que no <b>corte las magdalenas en quinceavos</b>: se me desmoronan.'}
+    ]},
+  migas: {nombre: 'Migas', cargo: 'pinche de cocina y encargado del cortador',
+    hola: '¡Hola! ¿Es para mí? ¡Nadie me pregunta nunca nada! ¿Quiere que le corte algo?',
+    preguntas: [
+      {id: 'm1', p: '¿Por qué te llamas Migas?', feliz: true,
+       r: 'Porque de pequeño cortaba las pizzas en tantos trozos que al final solo quedaban migas. Pero aprendí una cosa: <b>cortar más fino no cambia la cantidad</b>. La pizza entera sigue siendo 1, esté en 4 trozos o en 400.'},
+      {id: 'm2', p: '¿Qué hace exactamente el cortador?',
+       r: 'Si una pizza está en cuartos y la corto en 8, cada cuarto se hace dos octavos: <b>hay el doble de trozos y cada uno es la mitad</b>. Por eso 3/4 = 6/8: se multiplica arriba y abajo por 2.'},
+      {id: 'm3', p: '¿Por qué a veces el cortador avisa?',
+       r: 'Porque pasar de cuartos a tercios <b>no respeta las piezas</b>: los cortes nuevos caen donde no había, y se pierde lo grapado. Si el corte nuevo es un múltiplo del viejo —de 4 a 8, a 12—, lo grapado aguanta.'},
+      {id: 'm4', p: '¿Qué es un denominador?',
+       r: 'El número de trozos en que corto la pizza: el de <b>abajo</b>. El de arriba, el numerador, es cuántos trozos te llevas tú. Yo me encargo del de abajo; de lo que te llevas, se encarga tu hambre.'},
+      {id: 'm5', p: '¿Cuál es el máximo de trozos?',
+       r: 'Quince. Más allá, los trozos se me hacen <b>migas</b> y el jefe se enfada. Para 56 trozos, lo que hace Nicoleta: <b>se corta sobre el papel</b>, que ahí no se desmorona nada.'},
+      {id: 'm6', p: '¿Cómo se comparan dos pizzas cortadas distinto?',
+       r: 'Primero las corto <b>igual</b>, donde quepan los dos cortes. Tercios y quintos: en 15. Entonces los trozos son del mismo tamaño y ya solo hay que <b>contar</b>. Eso es el denominador común.'},
+      {id: 'm7', p: '¿Te comes el queso?', feliz: true,
+       r: '¡Yo no! …Bueno, alguna hebra que se queda en el cortador. Eso no cuenta: es <b>menos de un quinceavo</b>.'}
+    ]}
+};
+
+function monta(el, PJ){
+  const q = el.querySelector('.ev-quien'), cartel = el.querySelector('.ev-cartel'), cara = el.querySelector('.ev-cara'),
+        pre = el.querySelector('.ev-pregunta'), txt = el.querySelector('.ev-respuesta'), lista = el.querySelector('.ev-lista');
+  const CARAS = {nick: PJ.NICK, nicoleta: PJ.NICOLETA, migas: PJ.MIGAS};
+  const ev = {quien: 'nick', hechas: new Set(), tok: 0};
+  q.innerHTML = Object.keys(ENTREVISTAS).map(k => '<button type="button" data-q="' + k + '"><span class="ev-mini" aria-hidden="true">' + CARAS[k] + '</span>' + ENTREVISTAS[k].nombre + '</button>').join('');
+  q.querySelectorAll('button').forEach(b => b.addEventListener('click', () => elige(b.dataset.q)));
+  function elige(k){
+    ev.quien = k; ev.tok++;
+    const E = ENTREVISTAS[k];
+    q.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.q === k)));
+    el.dataset.quien = k;
+    cartel.innerHTML = '<b>' + E.nombre + '</b>, ' + E.cargo + '.';
+    cara.innerHTML = CARAS[k]; cara.dataset.q = k;
+    pre.textContent = '';
+    habla(E.hola, false);
+    pintaLista();
+  }
+  function pintaLista(){
+    const E = ENTREVISTAS[ev.quien];
+    lista.innerHTML = '';
+    E.preguntas.filter(p => !p.tras || ev.hechas.has(p.tras)).forEach(p => {
+      const b = document.createElement('button'); b.type = 'button';
+      b.className = 'ev-p' + (ev.hechas.has(p.id) ? ' hecha' : '') + (p.tras ? ' repregunta' : '');
+      b.innerHTML = (p.tras ? '<span class="ev-re">Y además… </span>' : '') + p.p;
+      b.addEventListener('click', () => {
+        ev.hechas.add(p.id); pre.textContent = '—' + p.p;
+        habla(p.r, p.feliz); pintaLista();
+        if(raiz.Sonido) raiz.Sonido.toca(p.feliz ? 'bien' : 'tiza');
+      });
+      lista.appendChild(b);
+    });
+  }
+  /* la respuesta se escribe poco a poco mientras mueve la boca */
+  function habla(html, feliz){
+    const tok = ++ev.tok;
+    const trozos = html.split(/(<[^>]+>)/).filter(Boolean);
+    const total = trozos.reduce((s, t) => s + (t[0] === '<' ? 0 : t.length), 0);
+    const cierre = () => { if(ev.tok !== tok) return; txt.innerHTML = html; cara.classList.remove('abre'); cara.classList.toggle('feliz', !!feliz); };
+    cara.classList.remove('feliz');
+    if(REDUCIDO){ cierre(); return; }
+    let n = 0;
+    const paso = () => {
+      if(ev.tok !== tok) return;
+      n = Math.min(total, n + 2);
+      let quedan = n, h = '';
+      for(const t of trozos){ if(t[0] === '<'){ h += t; continue; } if(quedan <= 0) break; h += t.slice(0, quedan); quedan -= t.length; }
+      txt.innerHTML = h;
+      cara.classList.toggle('abre', Math.floor(n / 6) % 2 === 0);
+      if(n < total) setTimeout(paso, 26); else cierre();
+    };
+    paso();
+  }
+  return {abre: () => elige(ev.quien), calla: () => { ev.tok++; cara.classList.remove('abre'); }};
+}
+raiz.Entrevistas = {ENTREVISTAS, monta};
 })(window);
 </script>
 <script>
@@ -1201,11 +1538,17 @@ function pintaPizarra(){
   }
 }
 
+/* ── MIGAS, el pinche: los avisos del cortador y de la grapadora los da él ── */
+function migas(html){
+  const a = $('aviso');
+  a.innerHTML = html ? '<span class="cara" aria-hidden="true">' + PJ.MIGAS + '</span><div><span class="quien">Migas, el pinche</span>' + html + '</div>' : '';
+}
+
 /* ── LA MESA ── */
 function pintaMesa(){
   const tel = esTel();
   $('cajas').hidden = tel || !P; $('mandos').hidden = tel || !P; $('papel').hidden = !tel || !P;
-  $('aviso').innerHTML = '';
+  migas('');
   if(!P) return;
   if(tel){ pintaPapel(); return; }
   const cont = $('cajas'); cont.innerHTML = '';
@@ -1241,8 +1584,8 @@ function pintaMesa(){
     b.addEventListener('click', () => {
       const r = M.industrial(c, x); if(!r.ok) return;
       ultimaOp = r.op; sonar('grapa'); clac(); pintaMesa(); lee();
-      if(r.nota) $('aviso').innerHTML = 'La máquina une la pizza <b>entera</b> de ' + x + ' en ' + x + ': tus ' + r.nota.kAntes + '/' + r.nota.bAntes + ' no llenaban piezas enteras, así que te quedas con las piezas que los contienen. Aquí no hay división que enseñar.';
-      else if(!c.sel.size) $('aviso').innerHTML = 'La pizza queda en <b>' + M.grupos(c).length + '</b> piezas iguales. Ahora elige la tuya.';
+      if(r.nota) migas('La máquina une la pizza <b>entera</b> de ' + x + ' en ' + x + ': tus ' + r.nota.kAntes + '/' + r.nota.bAntes + ' no llenaban piezas enteras, así que te quedas con las piezas que los contienen. Aquí no hay división que enseñar.');
+      else if(!c.sel.size) migas('La pizza queda en <b>' + M.grupos(c).length + '</b> piezas iguales. Ahora elige la tuya.');
       quitaGrapasLuego();
     });
     bm.appendChild(b);
@@ -1256,7 +1599,7 @@ function corta(n){
     armado = {caja: activa, n};
     clearTimeout(corta.aviso); corta.aviso = setTimeout(() => { armado = null; pintaMesa(); }, 3200);
     pintaMesa(); sonar('mal');
-    $('aviso').innerHTML = 'De ' + c.cortes + ' a ' + n + ' el cortador <b>no respeta las piezas</b>: se pierde lo grapado y lo elegido. Toca otra vez para cortar de cero.';
+    migas('De ' + c.cortes + ' a ' + n + ' el cortador <b>no respeta las piezas</b>: se pierde lo grapado y lo elegido. Toca otra vez para cortar de cero.');
     return;
   }
   armado = null;
@@ -1267,11 +1610,11 @@ $('bGrapar').addEventListener('click', () => {
   const c = cajas[activa]; if(!c) return;
   const r = M.grapa(c);
   if(!r.ok){
-    $('aviso').innerHTML = r.por === 'pocas' ? 'La grapadora necesita <b>dos piezas o más</b>, y pegadas.' : 'Esas piezas <b>no están pegadas</b>: sueltas suman lo mismo, pero no forman una.';
+    migas(r.por === 'pocas' ? 'La grapadora necesita <b>dos piezas o más</b>, y pegadas.' : 'Esas piezas <b>no están pegadas</b>: sueltas suman lo mismo, pero no forman una.');
     sonar('mal'); return;
   }
   ultimaOp = r.op; sonar('grapa'); clac(); pintaMesa(); lee();
-  if(!r.op && r.m > 1) $('aviso').innerHTML = 'Una pieza de <b>' + r.m + '/' + c.cortes + '</b>… pero ' + r.m + ' no cabe en ' + c.cortes + ': esa pieza no es 1 de nada entero, y por eso aquí no hay división que enseñar.';
+  if(!r.op && r.m > 1) migas('Una pieza de <b>' + r.m + '/' + c.cortes + '</b>… pero ' + r.m + ' no cabe en ' + c.cortes + ': esa pieza no es 1 de nada entero, y por eso aquí no hay división que enseñar.');
   quitaGrapasLuego();
 });
 function quitaGrapasLuego(){ clearTimeout(reloj); reloj = setTimeout(() => { cajas.forEach(x => x.recien.clear()); pintaMesa(); }, 2600); }
@@ -1422,13 +1765,13 @@ function revisa(){
     const okA = casi(M.valor(cajas[0]), fVal(P.fA)), okB = casi(M.valor(cajas[1]), fVal(P.fB)), igual = cajas[0].cortes === cajas[1].cortes;
     /* la pregunta no se abre hasta que las dos pizzas están cortadas igual; solo el peldaño del mismo numerador va libre */
     if(okA && okB && (P.tipo === 'num' || igual)) ponPregunta();
-    else if(okA && okB && !igual) $('aviso').innerHTML = 'Los dos pedidos están listos: ahora pásales el <b>mismo cortador</b>. Con trozos distintos no hay cuenta que valga.';
+    else if(okA && okB && !igual) migas('Los dos pedidos están listos: ahora pásales el <b>mismo cortador</b>. Con trozos distintos no hay cuenta que valga.');
     return;
   }
   const ps = M.partes(cajas), juntable = ps.length < 2 || M.mismoCorte(ps), v = M.total(cajas);
   const pieza = !P.pieza || cajas.some(c => M.piezaDe(c, P.f[1]));
   if(juntable && casi(v, fVal(P.f)) && pieza) acierta(P.ok);
-  else if(juntable && casi(v, fVal(P.f)) && !pieza) $('aviso').innerHTML = 'Suman ' + fTxt(P.f) + ', sí. Pero el cliente quiere <b>una pieza</b>: grápalos.';
+  else if(juntable && casi(v, fVal(P.f)) && !pieza) migas('Suman ' + fTxt(P.f) + ', sí. Pero el cliente quiere <b>una pieza</b>: grápalos.');
 }
 function ponPregunta(){
   const q = $('pregunta'); if(!q.hidden) return;
@@ -1451,7 +1794,7 @@ function ponPregunta(){
 function acierta(txt){
   resuelto = true; sonar('bien');
   nickDice(txt, true);
-  $('pregunta').hidden = true; $('pregunta').innerHTML = ''; $('aviso').innerHTML = '';
+  $('pregunta').hidden = true; $('pregunta').innerHTML = ''; migas('');
   const s = est.stats[est.juego];
   if(est.practica){ if(!fallos) s.bien++; }
   else s.ruta = Math.max(s.ruta, est.ruta[est.juego] + 1);
@@ -1506,6 +1849,14 @@ $('acBaja').addEventListener('click', () => {
   $('acMsg').textContent = '✓ Acta descargada.';
 });
 
+/* ── LAS ENTREVISTAS ── */
+const EV = window.Entrevistas.monta($('entrevista'), PJ);
+function abreEntrevista(){ ajustes(false); $('mEntrevista').hidden = false; EV.abre(); $('entrevista').focus(); }
+const cierraEntrevista = () => { EV.calla(); $('mEntrevista').hidden = true; $('bEntrevista').focus(); };
+$('bEntrevista').addEventListener('click', abreEntrevista);
+$('evCierra').addEventListener('click', cierraEntrevista);
+$('mEntrevista').addEventListener('click', ev => { if(ev.target.id === 'mEntrevista') cierraEntrevista(); });
+
 /* ── EMPEZAR DE CERO: a la segunda pulsación ── */
 let cero = 0;
 $('ajCero').addEventListener('click', () => {
@@ -1527,6 +1878,7 @@ const GUIA = [
   {sel: '#bGrapar', c: 'La grapadora', t: 'Une los trozos elegidos, si están <b>pegados</b>. Dos cuartos grapados son media pizza: la misma cantidad con otro nombre.'},
   {sel: '#papel', c: 'El papel', t: 'Aquí no hay pizza que valga. Multiplica cada fracción <b>arriba y abajo</b> hasta que las dos estén en la misma secuencia; entonces se comparan.'},
   {sel: '#tique', c: 'El tique', t: 'La regla es la que manda: <b>el 1 es una pizza entera</b>, y cada pedido acaba en su marca. Debajo, la operación que ha hecho tu gesto: cortar multiplica, grapar divide.'},
+  {sel: '#bEntrevista', c: 'Las entrevistas', t: 'Pregúntales lo que quieras a <b>Nick</b>, a su hermana <b>Nicoleta</b> y a <b>Migas</b>, el pinche del cortador.'},
   {sel: '#bPracticar', c: 'Practicar', t: 'Pedidos <b>nuevos cada vez</b>, sin fin, con tres dificultades.'},
   {sel: '#bActa', c: 'El acta', t: 'Un resumen de lo que has hecho, con tu nombre y un código, para <b>entregárselo a tu profesor</b>.'},
   {sel: '#bAjustes', c: 'Ajustes', t: 'La encimera o la pizarra, la apuesta antes de comparar, el sonido y la animación.'},
@@ -1565,7 +1917,8 @@ $('guiaSalir').addEventListener('click', ev => { ev.stopPropagation(); cierraGui
 $('guiaGlobo').addEventListener('click', ev => ev.stopPropagation());
 $('guia').addEventListener('click', () => vaGuia(guiaI + 1));
 addEventListener('keydown', ev => { if(!$('guia').hidden){ ev.stopPropagation(); if(ev.key === 'Escape') cierraGuia(); else if(ev.key === 'ArrowRight' || ev.key === 'Enter'){ ev.preventDefault(); vaGuia(guiaI + 1); } return; }
-  if(ev.key === 'Escape' && !$('mActa').hidden) cierraActa(); }, true);
+  if(ev.key === 'Escape' && !$('mActa').hidden) cierraActa();
+  if(ev.key === 'Escape' && !$('mEntrevista').hidden) cierraEntrevista(); }, true);
 addEventListener('scroll', colocaGuia, {passive: true});
 addEventListener('resize', colocaGuia);
 
