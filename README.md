@@ -10,7 +10,7 @@ Fracciones equivalentes y comparación para 1.º y 2.º de ESO, rehechas desde c
 - **Comparar** — dos mesas, dos fracciones: ¿quién se lleva más? La escalera, en el orden en que se demuestra: mismo denominador, mismo numerador, un corte cabe en el otro, ninguno cabe (el denominador común) e iguales disfrazados. Antes de tocar nada, la pizarra pide el signo: la comparación es una apuesta que se comprueba.
 - **Por teléfono** — Nicoleta llama desde la pastelería con dos fracciones que el cortador no alcanza. Se cortan sobre el papel, y de ahí salen, demostrados, los productos en cruz.
 
-Cada juego tiene su ruta de pedidos fijos y, en **Practicar**, pedidos nuevos sin fin con tres dificultades. Nick contesta a cada respuesta mala diciendo en voz alta el razonamiento que la produjo. En la cocina le ayuda **Migas**, un ratón pinche que se encarga del cortador y da los avisos de la mesa.
+Cada juego tiene su ruta de pedidos fijos y, en **Practicar**, pedidos nuevos sin fin con tres dificultades. Nick contesta a cada respuesta mala diciendo en voz alta el razonamiento que la produjo. En la cocina le ayuda **Migas**, el ratón del obrador de Nicoleta, que baja a encargarse del cortador y da los avisos de la mesa.
 
 **Entrevistas** (el micrófono de arriba): Nick, Nicoleta y Migas contestan a lo que se les pregunte.
 
@@ -36,5 +36,6 @@ La app es **un solo `index.html`**: se genera con `node construye.mjs` a partir 
 
 1. ✅ Versión 0.1: los tres juegos, la ruta, Practicar, la guía, los ajustes, el acta y la escena de inicio.
 2. ✅ Versión 0.2: pizzas con textura (corteza tostada, tomate, queso fundido, pepperoni, aceitunas, albahaca); Migas, el ratón pinche del cortador, que da los avisos de la mesa; y las entrevistas a Nick, Nicoleta y Migas.
+3. ✅ Versión 0.3: Migas es el ratón del obrador de Nicoleta, el mismo de la pastelería, y está pulido: el gorro asentado entre las orejas, los incisivos bajo el labio, las manos con sus dedos (una rodea el mango del cortador), los bigotes desde el hocico y el pañuelo anudado bajo la barbilla. Nick agarra de verdad la grapadora y Nicoleta, la manga pastelera.
 
 © 2026 Andrés Asensio · [CC BY-NC-ND 4.0](LICENSE.md) · [La pizzería de Nick](https://diazepamina-creator.github.io/pizzeria-de-nick/), la app anterior.

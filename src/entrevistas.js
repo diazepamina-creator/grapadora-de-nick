@@ -27,7 +27,7 @@ const ENTREVISTAS = {
       {id: 'n6', p: '¿Qué es eso de «sumar como Nick»?',
        r: '…Eso lo dice mi hermana. Una vez, para doblar una receta de 4 personas a 8, <b>le sumé 4 a cada cosa</b> en vez de multiplicar por 2. Salió una masa con ocho huevos para dos tazas de harina. No se hable más del tema.'},
       {id: 'n7', p: '¿Qué hace un ratón en su cocina?', feliz: true,
-       r: '¿Migas? Es mi pinche, y el mejor con el cortador. Yo <b>junto</b>, él <b>reparte</b>. Entre los dos, cualquier fracción. Y no se come el queso. Casi nunca.'}
+       r: '¿Migas? Es el ratón del obrador de mi hermana, pero los días de mucho lío me lo presta. Es el mejor con el cortador: yo <b>junto</b>, él <b>reparte</b>. Entre los dos, cualquier fracción. Y no se come el queso. Casi nunca.'}
     ]},
   nicoleta: {nombre: 'Nicoleta', cargo: 'pastelera, hermana de Nick, dos portales más allá',
     hola: 'Te atiendo, pero rápido: tengo magdalenas en el horno y a mi hermano al teléfono.',
@@ -43,9 +43,9 @@ const ENTREVISTAS = {
       {id: 'c5', p: '¿Y cómo sabe quién se lleva más?',
        r: 'Cuando las dos están en la misma secuencia, <b>gana el numerador mayor</b>: 49 trozos de 56 son más que 48 de 56. Antes de igualarlas, contar trozos no sirve de nada.'},
       {id: 'c6', p: '¿Le cae bien Migas?', feliz: true,
-       r: 'Es un sol. Me guarda los recortes de masa. Lo único que le pido es que no <b>corte las magdalenas en quinceavos</b>: se me desmoronan.'}
+       r: 'Es mi ratón del obrador: vive debajo del mostrador y se come lo que sobra de cada reparto, por eso sabe tanto de porcentajes. Se lo presto a Nick, con una condición: que no <b>corte las magdalenas en quinceavos</b>, que se me desmoronan.'}
     ]},
-  migas: {nombre: 'Migas', cargo: 'pinche de cocina y encargado del cortador',
+  migas: {nombre: 'Migas', cargo: 'el ratón del obrador de Nicoleta, que baja a llevar el cortador',
     hola: '¡Hola! ¿Es para mí? ¡Nadie me pregunta nunca nada! ¿Quiere que le corte algo?',
     preguntas: [
       {id: 'm1', p: '¿Por qué te llamas Migas?', feliz: true,
