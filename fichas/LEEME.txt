@@ -1,0 +1,30 @@
+LA GRAPADORA DE NICK · FICHAS DE LA COCINA
+Andrés Asensio · CC BY-NC-ND 4.0
+
+Una ficha por pestaña de la app: Servir, Comparar y Por teléfono.
+
+pdf/2eso/      Las tres fichas en formato de 2.º (doble cara: delante y reverso).
+pdf/1eso/      Las tres fichas en formato de 1.º: mismas matemáticas, menos
+               lectura, ejemplo resuelto y pasos numerados, la tabla de
+               multiplicar de andamio en el reverso y un «¿cómo lo he hecho?».
+pdf/profesor/  clave.pdf (2.º y 1.º; NO se reparte) y pizzas-recortables.pdf.
+
+Fuentes LaTeX (se compilan con XeLaTeX: sh compila.sh):
+  cocina.sty    el estilo de todas las fichas (pizzas, regla, gestos, QR, marco).
+  cocina1.sty   carga cocina.sty y añade el formato de 1.º.
+  ficha-0N-*.tex        formato de 2.º
+  ficha-0N-*-1eso.tex   formato de 1.º
+  clave.tex, pizzas-recortables.tex
+  fuentes/     Nunito, Bree Serif y Space Mono (las de la app).
+  personajes/  Nick, Migas y Nicoleta en vectorial; salen de la app con
+               node personajes/hazlos.mjs (hace falta rsvg-convert).
+
+Cada bloque lleva la etiqueta de cuánto ayuda la pizza, como en la app:
+  CON PIZZA → CON LA REGLA → SOBRE EL PAPEL
+
+Los QR abren cada ejercicio en la app, en Practicar:
+  https://diazepamina-creator.github.io/grapadora-de-nick/?j=servir&f=3/8&c=4
+  https://diazepamina-creator.github.io/grapadora-de-nick/?j=comparar&a=3/4&b=5/8
+  https://diazepamina-creator.github.io/grapadora-de-nick/?j=telefono&a=7/8&b=6/7
+  (servir: f el pedido, c las cajas —4,4 son dos—, p=1 de una pieza)
+Lo que el cortador no alcanza (un séptimo, veinte trozos…) no lleva código.

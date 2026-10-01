@@ -1,0 +1,319 @@
+% ============================================================================
+%  cocina.sty · el formato de las FICHAS DE LA COCINA
+%  Fichas de «La grapadora de Nick», una por pestaña de la app
+%  © Andrés Asensio 2026 · CC BY-NC-ND 4.0
+%
+%  Hermano de mesa.sty (Las piezas de Miut): la misma idea de ficha, con lo
+%  de esta cocina. El marco es la caja de cartón de la pizza; dentro, el
+%  papel de las hojas de la app. Cada bloque lleva la etiqueta de cuánto
+%  ayuda la pizza, la misma escalera que en la app:
+%     \etapa{Con pizza}  →  \etapa{Con la regla}  →  \etapa{Sobre el papel}
+%
+%  Cómo se usa (ver ficha-01-servir.tex):
+%     \documentclass[11pt]{article}
+%     \usepackage{cocina}
+%     \begin{document}
+%     \begin{ficha}{Servir}{Cortar reparte, grapar junta}{1}
+%       ...anverso...
+%     \end{ficha}
+%     \begin{dorso}{Servir}{Más pedidos}{1}
+%       ...reverso...
+%     \end{dorso}
+%     \end{document}
+%
+%  Se compila con XELATEX. Fuentes: las de la app —Nunito para el texto,
+%  Bree Serif para rótulos y números grandes, Space Mono para la regla—, en
+%  la carpeta fuentes/. Los personajes, en personajes/ (salen de la app con
+%  node personajes/hazlos.mjs).
+% ============================================================================
+\ProvidesPackage{cocina}[2026/10/01 Fichas de la cocina de Nick]
+
+\RequirePackage[a4paper,margin=1cm]{geometry}
+\RequirePackage{amsmath}\RequirePackage{mathspec}
+\RequirePackage{tcolorbox}\tcbuselibrary{skins}
+\RequirePackage{xcolor}\RequirePackage{graphicx}\RequirePackage{tikz}
+\RequirePackage{amssymb}\RequirePackage{multicol}
+\RequirePackage[nolinks]{qrcode}
+\usetikzlibrary{calc,arrows.meta}
+
+% LA LETRA, la de la app
+\setmainfont{Nunito}[Path=fuentes/,Extension=.ttf,UprightFont=*-Regular,
+  BoldFont=*-Bold,ItalicFont=*-Italic,BoldItalicFont=*-BoldItalic]
+\newfontfamily\rotulo{BreeSerif-Regular}[Path=fuentes/,Extension=.ttf,LetterSpace=6]
+\newfontfamily\bree{BreeSerif-Regular}[Path=fuentes/,Extension=.ttf]
+\newfontfamily\mono{SpaceMono}[Path=fuentes/,Extension=.ttf,UprightFont=*-Regular,BoldFont=*-Bold]
+% las cuentas, con la letra del texto
+\setmathsfont(Digits,Latin)[Path=fuentes/,Extension=.ttf,UprightFont=*-Regular,
+  ItalicFont=*-Italic]{Nunito}
+
+% LOS COLORES de la app: el papel de las hojas, el oro de los rótulos, el
+% tomate de la mesa 4 y el azul de la mesa 7, la corteza, el queso y el cartón
+\definecolor{papel}{HTML}{FFFCF4}
+\definecolor{tinta}{HTML}{2E2218}
+\definecolor{tenue}{HTML}{7D6650}
+\definecolor{oro}{HTML}{A8661B}
+\definecolor{linea}{HTML}{D9C6A6}
+\definecolor{carton}{HTML}{C89A63}
+\definecolor{tomate}{HTML}{C4462F}
+\definecolor{azul}{HTML}{2F6E8C}
+\definecolor{albahaca}{HTML}{5C7A3E}
+\definecolor{corteza}{HTML}{D9A055}
+\definecolor{cortezaO}{HTML}{A96C28}
+\definecolor{queso}{HTML}{F5DA92}
+\definecolor{pepe}{HTML}{B8402A}
+\definecolor{grapa}{HTML}{9AA2AC}
+\definecolor{vacia}{HTML}{FBF6EC}
+\definecolor{morado}{HTML}{8A6A9E}
+
+\pagestyle{empty}\setlength{\parindent}{0pt}
+\AtBeginDocument{\color{tinta}}
+
+% ── LA PIZZA ────────────────────────────────────────────────────────────────
+% Como en la app: la pizza entera se corta en n trozos iguales, empezando
+% arriba y en el sentido del reloj; los trozos ELEGIDOS (el pedido) van con
+% su queso y su pepperoni, y los demás, pálidos. Opciones:
+%   escala=…   el tamaño (1 = 2 cm de diámetro)
+%   grapas={k,…}  grapa la junta k (entre el trozo k y el k+1, desde 0)
+%   guias=m    rayas de puntos para cortar en m (las que aún no están)
+%   sinrayas   la pizza entera, sin cortar
+%   \pizza[escala=1.2,grapas={0}]{4}{0,1}  → media pizza en dos cuartos grapados
+\pgfkeys{/pz/.is family,/pz,
+  escala/.store in=\pzEsc,escala=1,
+  grapas/.store in=\pzGrapas,grapas={},
+  guias/.store in=\pzGuias,guias=0,
+  sinrayas/.code={\def\pzSinRayas{1}}}
+\def\pzSinRayas{0}
+\newcommand{\pizza}[3][]{\begingroup\def\pzSinRayas{0}\pgfkeys{/pz,#1}%
+  \tikz[baseline={(0,-.12)},scale=\pzEsc]{\dibujapizza{#2}{#3}}\endgroup}
+% la misma, pero para meterla dentro de otro tikz: \dibujapizza{n}{elegidas}
+\newcommand{\dibujapizza}[2]{%
+  \pgfmathsetmacro\pzA{360/#1}%
+  \fill[tinta!22](.03,-.05)circle(1.02);
+  % cada trozo: la corteza y el queso, pálidos si no es del pedido
+  \foreach \i in {0,...,\numexpr#1-1\relax}{%
+    \pgfmathsetmacro\aI{90-\i*\pzA}\pgfmathsetmacro\aF{90-(\i+1)*\pzA}%
+    \def\esta{0}\foreach \e in {#2}{\ifnum\e=\i\gdef\esta{1}\fi}%
+    \ifnum\esta=1
+      \fill[corteza](0,0)--(\aI:1)arc[start angle=\aI,end angle=\aF,radius=1]--cycle;
+      \fill[queso](0,0)--(\aI:.84)arc[start angle=\aI,end angle=\aF,radius=.84]--cycle;
+      \pgfmathsetmacro\aM{(\aI+\aF)/2}%
+      \pgfmathsetmacro\rP{min(.17,.9*sin(min(\pzA,90)/2)*.55)}%
+      \fill[pepe](\aM:.55)circle(\rP);
+      \ifdim\pzA pt>50pt
+        \fill[pepe](\aM+\pzA*.22:.3)circle(\rP*.75);
+        \fill[albahaca](\aM-\pzA*.22:.32)ellipse({\rP*.9} and {\rP*.5});\fi
+    \else
+      \fill[corteza!35!vacia](0,0)--(\aI:1)arc[start angle=\aI,end angle=\aF,radius=1]--cycle;
+      \fill[vacia](0,0)--(\aI:.84)arc[start angle=\aI,end angle=\aF,radius=.84]--cycle;
+    \fi\global\let\esta\relax}%
+  % las rayas del corte
+  \ifnum\pzSinRayas=0\ifnum#1>1
+    \foreach \i in {0,...,\numexpr#1-1\relax}{\draw[tinta,line width=.55pt](0,0)--({90-\i*\pzA}:1);}\fi\fi
+  % las guías para cortar, de puntos
+  \ifnum\pzGuias>0
+    \pgfmathsetmacro\pzG{360/\pzGuias}%
+    \foreach \i in {0,...,\numexpr\pzGuias-1\relax}{%
+      \pgfmathtruncatemacro\resto{mod(\i*#1,\pzGuias)}%
+      \ifnum\resto=0 \else
+        \draw[tinta!60,line width=.5pt,dash pattern=on 1.4pt off 1.2pt](0,0)--({90-\i*\pzG}:1);\fi}\fi
+  \draw[cortezaO,line width=.7pt](0,0)circle(1);
+  % las grapas: dos por junta, de través
+  \foreach \k in \pzGrapas{%
+    \pgfmathsetmacro\aJ{90-(\k+1)*\pzA}%
+    \foreach \r in {.36,.66}{%
+      \begin{scope}[shift={(\aJ:\r)},rotate=\aJ]
+        \draw[tinta,line width=2.6pt,line cap=round](0,-.11)--(0,.11);
+        \draw[grapa!70!white,line width=1.5pt,line cap=round](0,-.11)--(0,.11);
+      \end{scope}}}}
+% una caja de pizza abierta, con su rótulo: \caja{CAJA 1 · EN 4}{\pizza…}
+\newcommand{\caja}[2]{\tikz[baseline=(c.base)]\node(c)[fill=carton!35,draw=carton,
+  line width=.8pt,rounded corners=3pt,inner sep=4pt,align=center]{%
+  {\mono\fontsize{6.5}{7}\selectfont\color{tenue}#1}\\[.6mm]#2};}
+
+% ── LA REGLA DEL TIQUE ──────────────────────────────────────────────────────
+% El 1 es una pizza entera. \regla[ancho]{hasta}{den}{marcas}
+%   hasta: 1 o 2 pizzas; den: las rayitas (0 = sin rayitas); marcas: a/b/color
+%   \regla[9cm]{1}{8}{3/8/tomate,5/8/azul}
+\newcommand{\regla}[4][9cm]{\begin{tikzpicture}[baseline=(base)]
+  \pgfmathsetmacro\rL{#1/1cm}\pgfmathsetmacro\rU{\rL/#2}%
+  \coordinate(base)at(0,.15);
+  \fill[carton!25](0,0)rectangle(\rL,.38);
+  \ifnum#3>0 \pgfmathtruncatemacro\rN{#2*#3}%
+    \foreach \k in {1,...,\rN}{\draw[tinta!45,line width=.4pt]({\k*\rU/#3},0)--({\k*\rU/#3},.22);}\fi
+  \draw[tinta,line width=.6pt](0,0)rectangle(\rL,.38);
+  \foreach \u in {0,...,#2}{\draw[tinta,line width=.9pt](\u*\rU,-.08)--(\u*\rU,.46);
+    \node[font=\mono\bfseries\scriptsize,below=1pt]at(\u*\rU,-.08){\u};}
+  \foreach \a/\b/\c [count=\n] in {#4}{%
+    \pgfmathsetmacro\alto{.82+mod(\n+1,2)*.55}%
+    \draw[\c,line width=1.6pt]({\a/\b*\rU},0)--({\a/\b*\rU},\alto);
+    \node[font=\bree\small,text=\c,above=0pt,fill=papel,inner sep=1pt]at({\a/\b*\rU},\alto){$\frac{\a}{\b}$};}
+  \end{tikzpicture}}
+% la regla vacía, para poner las marcas a mano: \reglavacia[ancho]{hasta}{den}
+\newcommand{\reglavacia}[3][9cm]{\regla[#1]{#2}{#3}{}}
+
+% ── LOS DOS GESTOS, ESCRITOS ────────────────────────────────────────────────
+% Como «HAS CORTADO» y «HAS GRAPADO» en la app: la fracción, la flecha por
+% arriba y por abajo con lo que se hace, y la que sale.
+%   \cortado{3}{4}{2}   → 3/4 = 6/8, con ·2 arriba y abajo
+%   \grapado{4}{6}{2}   → 4/6 = 2/3, con :2
+%   \cortadohueco{3}{4}{2} / \grapadohueco{4}{6}{2} → la de la derecha, en blanco
+\newcommand{\gesto}[6]{\tikz[baseline=(m.base),x=1mm,y=1mm]{
+  \node[font=\bree\Large,text=tinta](a)at(0,4){#1};\node[font=\bree\Large](b)at(0,-4){#2};
+  \draw[line width=.7pt](-3,0)--(3,0);
+  \node(m)at(10,0){$=$};
+  \def\q{#3}\def\interr{?}%
+  \ifx\q\interr
+    \draw[tinta!55,line width=.5pt,fill=white,rounded corners=1pt](17,1.2)rectangle(23,7.4);
+    \draw[tinta!55,line width=.5pt,fill=white,rounded corners=1pt](17,-1.2)rectangle(23,-7.4);
+  \else
+    \node[font=\bree\Large](c)at(20,4){#3};\node[font=\bree\Large](d)at(20,-4){#4};\fi
+  \draw[line width=.7pt](16.5,0)--(23.5,0);
+  \draw[-{Stealth[length=1.6mm]},#6,line width=.7pt](2.5,7.5)to[bend left=40]
+    node[midway,above,font=\footnotesize\bfseries,text=#6]{#5}(17.5,7.5);
+  \draw[-{Stealth[length=1.6mm]},#6,line width=.7pt](2.5,-7.5)to[bend right=40]
+    node[midway,below,font=\footnotesize\bfseries,text=#6]{#5}(17.5,-7.5);}}
+\newcommand{\blanco}{\tikz[baseline=-.6ex]\draw[tinta!55,line width=.5pt,fill=white,
+  rounded corners=1.5pt](-.32,-.3)rectangle(.32,.33);}
+\newcommand{\cortado}[3]{\pgfmathtruncatemacro\cA{#1*#3}\pgfmathtruncatemacro\cB{#2*#3}%
+  \gesto{#1}{#2}{\cA}{\cB}{$\cdot #3$}{tomate}}
+\newcommand{\grapado}[3]{\pgfmathtruncatemacro\cA{#1/#3}\pgfmathtruncatemacro\cB{#2/#3}%
+  \gesto{#1}{#2}{\cA}{\cB}{$:#3$}{albahaca}}
+\newcommand{\cortadohueco}[3]{\gesto{#1}{#2}{?}{?}{$\cdot #3$}{tomate}}
+\newcommand{\grapadohueco}[3]{\gesto{#1}{#2}{?}{?}{$:#3$}{albahaca}}
+
+% Las fracciones de cada mesa, con su color: \fA{3}{4} tomate, \fB{5}{8} azul
+\newcommand{\fA}[2]{\textcolor{tomate}{$\boldsymbol{\dfrac{#1}{#2}}$}}
+\newcommand{\fB}[2]{\textcolor{azul}{$\boldsymbol{\dfrac{#1}{#2}}$}}
+\newcommand{\fr}[2]{$\frac{#1}{#2}$}
+
+% ── LA ESCRITURA ────────────────────────────────────────────────────────────
+\newcommand{\raya}[1][3.2cm]{\rule[-1mm]{#1}{.5pt}}
+\newcommand{\hueco}[1][1cm]{\rule{#1}{.5pt}}
+% Una fracción para rellenar: \fhueco (las dos casillas), \fhueco[3] (el
+% numerador dado), \fhueco[][8] (el denominador dado)
+\newcommand{\casillita}{{\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{.5pt}%
+  \raisebox{-.6mm}{\fcolorbox{tinta!55}{white}{\rule{0pt}{4.2mm}\hspace{4mm}}}}}
+\newcommand{\fhparte}[1]{\if\relax\detokenize{#1}\relax\casillita\else#1\fi}
+\NewDocumentCommand{\fhueco}{O{} O{}}{\ensuremath{\dfrac{\fhparte{#1}}{\fhparte{#2}}}}
+% una casilla para el signo: < > =
+\newcommand{\signo}{\tikz[baseline=-.75ex]\draw[oro,line width=.6pt,fill=white,
+  rounded corners=2pt](0,-.27)rectangle(.55,.3);}
+
+% ── LA ETAPA ────────────────────────────────────────────────────────────────
+% La píldora de la app, al lado de cada bloque: cuánto ayuda la pizza
+\newcommand{\etapa}[1]{\tikz[baseline=(e.base)]\node(e)[draw=oro,
+  line width=.6pt,rounded corners=4.5pt,inner xsep=5pt,inner ysep=2pt,
+  text=oro,font=\rotulo\scriptsize]{\MakeUppercase{#1}};}
+\newcommand{\bloque}[3]{\par\ifnum#1>1 \vfill\fi\vspace{1.5mm}{\large\bfseries #1. #2}\quad\etapa{#3}}
+\newcommand{\ej}[1]{\textbf{#1)}\ }
+
+% ── LAS VOCES ───────────────────────────────────────────────────────────────
+% EL ENCARGO: lo que pide la ficha, sin explicar nada
+\newtcolorbox{encargo}{colback=white,colframe=carton!80,boxrule=.7pt,arc=3pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,fontupper=\normalsize}
+% NICK: la regla, DESPUÉS de haberla visto en la pizza. Su cara es la de la
+% app (personajes/nick.pdf). Con \begin{voz}[nicoleta]{NICOLETA} habla otro.
+\newlength{\caraancho}\setlength{\caraancho}{14mm}
+\newtcolorbox{cajavoz}{colback=queso!22,colframe=oro!70,boxrule=.8pt,arc=3pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,fontupper=\small}
+\newenvironment{voz}[2][nick]{%
+  \noindent\begin{minipage}[c]{\caraancho}\includegraphics[width=\caraancho]{personajes/#1.pdf}\end{minipage}%
+  \hspace{2mm}\begin{minipage}[c]{\dimexpr\linewidth-\caraancho-2mm\relax}
+  \begin{cajavoz}{\rotulo\scriptsize\color{oro}#2}\par\vspace{.5mm}}%
+  {\end{cajavoz}\end{minipage}}
+\newenvironment{nick}{\begin{voz}[nick]{NICK, EL PIZZERO}}{\end{voz}}
+% MIGAS: el que da los avisos de la mesa. Sale para el error de método, no
+% para dar la regla.
+\newcommand{\alto}[1]{%
+  \vspace{1mm}\noindent\begin{minipage}[c]{11mm}\includegraphics[width=11mm]{personajes/migas-sorpresa.pdf}\end{minipage}%
+  \hspace{1.5mm}\begin{minipage}[c]{\dimexpr\linewidth-12.5mm\relax}
+  \footnotesize{\bfseries\color{tomate}¡Alto! dice Migas:}
+  \itshape\ #1\end{minipage}\vspace{1mm}}
+
+% EL RETO DE LA COCINA: la pregunta que se discute. Siempre al final.
+\newcommand{\reto}[2][.62\linewidth]{%
+  \begin{minipage}[b]{#1}\footnotesize
+  {\rotulo\color{oro}EL RETO DE LA COCINA}\\[1mm] #2\\[2mm]
+  \rule{\linewidth}{.4pt}\\[3.5mm]\rule{\linewidth}{.4pt}\end{minipage}}
+
+% ── EL MARCO ────────────────────────────────────────────────────────────────
+% La ficha entera: el papel dentro de la caja de cartón de la pizza.
+\newif\ifclave\clavefalse
+% el sello de la cabecera: la grapadora de la app
+\newcommand{\sello}[1][6mm]{\tikz[x=#1/14,y=#1/14,baseline=.4mm]{
+  \begin{scope}[yscale=-1,shift={(0,-14)}]
+  \fill[oro](1.5,4.5)--(10.5,4.5)arc[start angle=90,end angle=0,radius=1.6]--(12.1,7.3)--(9.7,7.3)--(9.7,6.5)--(1.5,6.5)--cycle;
+  \fill[oro,rounded corners=.6](1.5,7.3)rectangle(10.8,9.7);
+  \fill[oro,rounded corners=.5](2.2,10)rectangle(10.1,12.2);
+  \draw[oro,line width=1.2*#1/14](4,12.2)--(4,13.5)(8.4,12.2)--(8.4,13.5);
+  \end{scope}}}
+\tcbset{marco/.style={enhanced,colback=papel,colframe=carton,boxrule=4pt,arc=8pt,
+    left=5mm,right=5mm,top=3mm,bottom=3mm,
+    borderline={.8pt}{2.4pt}{carton!55!white},drop fuzzy shadow=tinta!25}}
+% la cara entera tiene siempre la misma altura: lo de abajo (los códigos) va al pie
+\newlength{\altocara}\setlength{\altocara}{\dimexpr\textheight-34mm\relax}
+\newenvironment{ficha}[3]{%
+  \begin{tcolorbox}[marco]
+  \sello\hspace{1.5mm}{\rotulo\small\color{oro}LA GRAPADORA DE NICK}\hfill
+  {\rotulo\footnotesize\color{oro}\ifclave CLAVE · NO SE REPARTE\else
+   FICHA #3 · \MakeUppercase{#1}\fi}\\[1mm]
+  {\LARGE\bfseries #2}\hfill{\footnotesize\ifclave\relax\else NOMBRE: \raya[5cm]\fi}
+  \vspace{1.5mm}{\color{carton}\hrule height .8pt}\vspace{2.5mm}
+  \ifclave\else\begin{minipage}[t][\altocara][t]{\linewidth}\fi
+}{\ifclave\else\end{minipage}\fi\end{tcolorbox}}
+% EL REVERSO: la otra cara de la hoja, para imprimir a doble cara
+\newenvironment{dorso}[3]{%
+  \newpage
+  \begin{tcolorbox}[marco]
+  \sello\hspace{1.5mm}{\rotulo\small\color{oro}LA GRAPADORA DE NICK}\hfill
+  {\rotulo\footnotesize\color{oro}FICHA #3 · \MakeUppercase{#1} · REVERSO}\\[1mm]
+  {\LARGE\bfseries #2}
+  \vspace{1.5mm}{\color{carton}\hrule height .8pt}\vspace{2mm}
+  \begin{minipage}[t][\dimexpr\altocara+3mm\relax][t]{\linewidth}
+}{\end{minipage}\end{tcolorbox}}
+
+% ── LOS CÓDIGOS ─────────────────────────────────────────────────────────────
+% Cada ejercicio que la app puede montar lleva su QR, que lo abre en
+% Practicar. Los parámetros, como en la app:
+%   servir:    j=servir & f=3/8 & c=4      (c=4,4: dos cajas; p=1: de una pieza)
+%   comparar:  j=comparar & a=3/4 & b=5/8
+%   telefono:  j=telefono & a=7/8 & b=6/7
+% El cortador llega a 2, 3, 4, 5, 6, 8, 9, 10, 12 y 15: lo que no se puede
+% preparar en la app (un séptimo, veinte trozos…) NO lleva código.
+%   \qr{2a}{j=servir\&f=3/8\&c=4}
+\newcommand{\urlcocina}{https://diazepamina-creator.github.io/grapadora-de-nick/}
+\newlength{\qrlado}\setlength{\qrlado}{1.4cm}
+\newcommand{\qr}[2]{\begin{tabular}[t]{@{}c@{}}%
+  \qrcode[height=\qrlado,level=L]{\urlcocina?#2}\\[-.6mm]
+  {\scriptsize\bfseries\color{oro}#1}\end{tabular}}
+\newcommand{\comprueba}[2]{%
+  \par\vfill\vspace{2mm}{\color{carton}\hrule height .6pt}\vspace{1.5mm}
+  \noindent\begin{minipage}[c]{.27\linewidth}\footnotesize\itshape\raggedright
+  \textbf{Compruébalo en la cocina.} #1\end{minipage}\hfill
+  \begin{minipage}[c]{.71\linewidth}\raggedleft #2\end{minipage}}
+\newcommand{\compruebafila}[2]{%
+  \par\vfill\vspace{2mm}{\color{carton}\hrule height .6pt}\vspace{1mm}
+  {\footnotesize\itshape\textbf{Compruébalo en la cocina.} #1}\par\vspace{1mm}
+  \noindent{\setlength{\qrlado}{1.4cm}#2}}
+\newcommand{\enlacocina}[1]{%
+  \vspace{2mm}{\color{carton}\hrule height .6pt}\vspace{1.5mm}
+  {\footnotesize\itshape Compruébalo en la cocina: abre \textbf{La grapadora de
+  Nick} #1}}
+
+% ── LA CRUZ ─────────────────────────────────────────────────────────────────
+% Los productos en cruz, como salen del corte sobre el papel: el de arriba de
+% cada una por el de abajo de la otra. \cruz{7}{8}{6}{7} → 7/8 y 6/7 con las
+% dos diagonales y una casilla para cada producto (\cruzllena los escribe)
+\newcommand{\cruzbase}[6]{\tikz[baseline=(m.base),x=1mm,y=1mm]{
+  \node[font=\bree\Large,text=tomate](a)at(0,4){#1};\node[font=\bree\Large,text=tomate](b)at(0,-4){#2};
+  \draw[tomate,line width=.8pt](-3,0)--(3,0);
+  \node(m)at(13,0){};
+  \node[font=\bree\Large,text=azul](c)at(26,4){#3};\node[font=\bree\Large,text=azul](d)at(26,-4){#4};
+  \draw[azul,line width=.8pt](23,0)--(29,0);
+  \draw[tomate,line width=.7pt,-{Stealth[length=1.5mm]}](3,5)--(23,-3.2);
+  \draw[azul,line width=.7pt,-{Stealth[length=1.5mm]}](23,5)--(3,-3.2);
+  \node[anchor=east,font=\small,text=tomate]at(-5,0){#5};
+  \node[anchor=west,font=\small,text=azul]at(31,0){#6};}}
+\newcommand{\cruz}[4]{\cruzbase{#1}{#2}{#3}{#4}{$#1\cdot#4=$\,\casillita}{\casillita\,$=#2\cdot#3$}}
+\newcommand{\cruzllena}[4]{\pgfmathtruncatemacro\cI{#1*#4}\pgfmathtruncatemacro\cD{#2*#3}%
+  \cruzbase{#1}{#2}{#3}{#4}{$#1\cdot#4=\cI$}{$\cD=#2\cdot#3$}}

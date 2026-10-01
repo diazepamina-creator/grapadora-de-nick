@@ -1,0 +1,145 @@
+\documentclass[11pt]{article}
+\usepackage{cocina}
+
+\begin{document}
+\begin{ficha}{Por teléfono}{Sobre el papel}{3}
+
+\begin{encargo}
+Nicoleta llama desde la pastelería con dos fracciones que el cortador no
+alcanza. Aquí no hay pizza que valga: se cortan \textbf{sobre el papel}… y de
+ahí sale una regla que no es un truco.
+\end{encargo}
+
+\bloque{1}{La llamada}{Sobre el papel}\quad
+{\footnotesize ¿quién se lleva más, Nicoleta o el pinche?}
+
+\vspace{1.5mm}
+{\small
+\begin{voz}[nicoleta]{NICOLETA, AL TELÉFONO}
+—Nick, dos encargos: \fA{7}{8} para mí y \fB{6}{7} para el pinche, que jura
+que lo suyo es más. ¿Quién tiene razón?
+\end{voz}
+
+\vspace{2mm}
+\ej{a}Octavos y séptimos: ¿en cuántos trozos habría que cortar las dos para
+que cupieran los dos cortes? \hueco[1.2cm]\quad ¿Llega el cortador? \hueco[1.2cm]
+
+\vspace{2mm}
+\ej{b}Córtalas sobre el papel, en esa secuencia:\qquad
+\cortadohueco{7}{8}{7}\qquad\cortadohueco{6}{7}{8}
+
+\vspace{1mm}
+\ej{c}¿Quién se lleva más? \hueco[2.4cm]\quad ¿Por cuánto? \hueco[1.8cm]}
+
+\bloque{2}{De dónde sale la cruz}{Sobre el papel}\quad
+{\footnotesize mira de dónde han salido los números de arriba}
+
+\vspace{1.5mm}
+{\small
+\begin{minipage}[c]{.5\linewidth}
+\cruz{7}{8}{6}{7}
+\end{minipage}%
+\begin{minipage}[c]{.5\linewidth}
+El 49 es $7\cdot 7$: el de arriba de la primera por el de abajo de la
+\hueco[1.5cm]. Y el 48, \hueco[2.6cm].\\[1.5mm]
+Los de abajo, ¿hace falta mirarlos? ¿Por qué? \hueco[2cm]
+\end{minipage}}
+
+\vspace{1mm}
+\begin{voz}[nick]{NICK, EL PIZZERO}
+Para ponerlas en la misma secuencia, cada una se multiplica arriba y abajo
+\textbf{por el de abajo de la otra}. Abajo sale lo mismo en las dos, así que
+solo hay que comparar los de arriba: $a\cdot d$ contra $b\cdot c$. Esos son los
+\textbf{productos en cruz}, y no son un truco: son el corte, hecho en el papel.
+\end{voz}
+
+\bloque{3}{Más llamadas}{Sobre el papel}\quad
+{\footnotesize multiplica en cruz y pon el signo}
+
+\vspace{1mm}
+{\small\renewcommand{\arraystretch}{2.6}
+\begin{tabular}{@{}l@{\hspace{8mm}}l@{}}
+\ej{a}$\dfrac{5}{7}\ \signo\ \dfrac{4}{9}$\quad $5\cdot 9 = \hueco[.8cm]$\quad $7\cdot 4 = \hueco[.8cm]$ &
+\ej{b}$\dfrac{3}{8}\ \signo\ \dfrac{2}{5}$\quad \hueco[1.4cm]\quad \hueco[1.4cm]\\
+\ej{c}$\dfrac{5}{9}\ \signo\ \dfrac{4}{7}$\quad \hueco[1.4cm]\quad \hueco[1.4cm] &
+\ej{d}$\dfrac{7}{10}\ \signo\ \dfrac{5}{7}$\quad \hueco[1.4cm]\quad \hueco[1.4cm]\\
+\end{tabular}}
+
+\alto{en cruz es \textbf{el de arriba de una por el de abajo de la otra}. Si
+multiplicas arriba por arriba, o te equivocas de lado al poner el signo,
+comparas otra cosa. El producto que va con cada fracción es el que lleva
+\emph{su} número de arriba.}
+
+\reto{Nicoleta dice que si los dos productos en cruz salen iguales, es la misma
+pizza con dos nombres. ¿Por qué? Pruébalo con $\frac{6}{9}$ y $\frac{8}{12}$.}
+
+\comprueba{Cada código abre esa llamada en Practicar.}{%
+\qr{1}{j=telefono\&a=7/8\&b=6/7}\hfill\qr{3a}{j=telefono\&a=5/7\&b=4/9}\hfill
+\qr{3b}{j=telefono\&a=3/8\&b=2/5}\hfill\qr{3c}{j=telefono\&a=5/9\&b=4/7}\hfill
+\qr{3d}{j=telefono\&a=7/10\&b=5/7}}
+
+\end{ficha}
+
+% ─────────────────────────────── REVERSO ──────────────────────────────────
+\begin{dorso}{Por teléfono}{Más encargos de la pastelería}{3}
+
+\bloque{1}{Al que le falta menos}{Con la regla}\quad
+{\footnotesize otra manera de ver la llamada de la primera cara}
+
+\vspace{1mm}
+{\small
+\regla[11cm]{1}{0}{7/8/tomate,6/7/azul}\\[2mm]
+A $\frac{7}{8}$ le falta \fhueco\ para la pizza entera, y a $\frac{6}{7}$ le falta
+\fhueco. ¿Qué trozo es más pequeño? \hueco[1.6cm]\quad Entonces, ¿quién se lleva
+más? \hueco[1.8cm]}
+
+\bloque{2}{¿La misma pizza?}{Sobre el papel}\quad
+{\footnotesize multiplica en cruz: si sale igual, son equivalentes}
+
+\vspace{1mm}
+{\small\renewcommand{\arraystretch}{2.4}
+\begin{tabular}{@{}l@{\hspace{10mm}}l@{\hspace{10mm}}l@{}}
+\ej{a}$\dfrac{6}{8}$ y $\dfrac{9}{12}$:\ \ \hueco[1.8cm] &
+\ej{b}$\dfrac{10}{15}$ y $\dfrac{4}{6}$:\ \ \hueco[1.8cm] &
+\ej{c}$\dfrac{3}{7}$ y $\dfrac{5}{12}$:\ \ \hueco[1.8cm]\\
+\end{tabular}}
+
+\bloque{3}{El que falta}{Sobre el papel}\quad
+{\footnotesize busca el número que hace iguales los dos productos en cruz}
+
+\vspace{1mm}
+{\small\renewcommand{\arraystretch}{2.4}
+\begin{tabular}{@{}l@{\hspace{12mm}}l@{\hspace{12mm}}l@{}}
+\ej{a}$\dfrac{4}{6} = \fhueco[10][]$ &
+\ej{b}$\fhueco[6][] = \dfrac{9}{12}$ &
+\ej{c}$\dfrac{3}{5} = \fhueco[][20]$\\
+\end{tabular}}
+
+\bloque{4}{En fila}{Sobre el papel}\quad
+{\footnotesize compáralas de dos en dos y ordénalas de menor a mayor}
+
+\vspace{1mm}
+{\small $\dfrac{2}{3}$,\ \ $\dfrac{5}{7}$,\ \ $\dfrac{7}{10}$\qquad
+\hueco[1cm] $<$ \hueco[1cm] $<$ \hueco[1cm]}
+
+\bloque{5}{Problemas de la pastelería}{Sobre el papel}
+
+\vspace{1.5mm}
+{\small
+\ej{a}La receta de Nicoleta lleva $\frac{2}{3}$ de taza de azúcar; la del
+pinche, $\frac{5}{8}$. ¿Cuál lleva más azúcar? \hueco[2.4cm]\par\vspace{8mm}
+
+\ej{b}En el escaparate, 5 de cada 7 pasteles son de chocolate; en el obrador, 7
+de cada 10. ¿Dónde hay más proporción de chocolate? \hueco[2.4cm]\par\vspace{8mm}
+
+\ej{c}Migas se come $\frac{3}{11}$ de una tarta y Nick $\frac{2}{7}$ de otra
+igual. ¿Quién come más? \hueco[2.4cm]\par\vspace{6mm}}
+
+\reto{Busca una fracción que esté entre $\frac{5}{7}$ y $\frac{3}{4}$.
+Comprueba con la cruz que es mayor que una y menor que la otra.}
+
+\comprueba{Cada código abre esa llamada.}{%
+\qr{4}{j=telefono\&a=2/3\&b=5/7}\hfill\qr{5a}{j=telefono\&a=2/3\&b=5/8}\hfill
+\qr{5b}{j=telefono\&a=5/7\&b=7/10}\hfill\qr{5c}{j=telefono\&a=3/11\&b=2/7}}
+\end{dorso}
+\end{document}

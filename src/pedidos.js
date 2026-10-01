@@ -121,7 +121,11 @@ function generaServir(d){
     const b = elige([3, 4, 5, 6]), c = elige([2, 3, 4].filter(x => x !== b && M.mcm(x, b) <= 15));
     f = [entre(1, b - 1), b]; cajas = [c]; pieza = f[0] === 1;
   }
-  const menu = carta([cajas[0], f[1], M.mcm(cajas[0], f[1])], d > 0 ? CARTA.filter(n => n % cajas[0] === 0 && n <= 12) : []);
+  return servirDe(f, cajas, pieza, d > 0 ? CARTA.filter(n => n % cajas[0] === 0 && n <= 12) : []);
+}
+/* un pedido de servir hecho a partir de sus datos (lo usan Practicar y los enlaces de las fichas) */
+function servirDe(f, cajas, pieza, relleno){
+  const menu = carta([cajas[0], f[1], M.mcm(cajas[0], f[1])], relleno || []);
   return {id: 'sp' + Date.now(), f, cajas, pieza, menu, practica: true,
     cli: '—Póngame <b>' + enLetra(f) + '</b>' + (cajas.length > 1 ? '. Y traiga otra caja, que no me cabe' : ', que la veo cortada en ' + NOMBRE[cajas[0]]) + '.',
     nick: pieza ? 'Lo quiere de <b>una pieza</b>: corta o grapa lo que haga falta, y prepárala.' : 'Prepara <b>' + fTxt(f) + '</b>' + (cajas.length > 1 ? ' con las dos cajas' : '') + ': el cortador y la grapadora son tuyos.',
@@ -136,6 +140,18 @@ function generaComparar(d){
   else if(tipo === 'nadie'){ const [b, c] = elige(NADIE); let a = entre(1, b - 1), e = entre(1, c - 1); while(a * c === e * b) e = entre(1, c - 1); fA = [a, b]; fB = [e, c]; }
   else{ [fA, fB] = elige(IGUALES); }
   if(azar() < .5) [fA, fB] = [fB, fA];
+  return compararDe(fA, fB, tipo);
+}
+/* el peldaño de la escalera al que pertenece una pareja */
+function tipoDe(fA, fB){
+  if(fA[0] * fB[1] === fB[0] * fA[1]) return 'igual';
+  if(fA[1] === fB[1]) return 'den';
+  if(fA[0] === fB[0]) return 'num';
+  if(fA[1] % fB[1] === 0 || fB[1] % fA[1] === 0) return 'cabe';
+  return 'nadie';
+}
+function compararDe(fA, fB, tipo){
+  tipo = tipo || tipoDe(fA, fB);
   const m = M.mcm(fA[1], fB[1]);
   const menu = carta([fA[1], fB[1], m], tipo === 'nadie' ? CARTA.filter(n => n % fA[1] === 0 || n % fB[1] === 0) : []);
   const NICK = {den: 'Las dos cajas vienen en ' + NOMBRE[fA[1]] + ': trozos iguales. Prepara los dos pedidos y cuenta.',
@@ -160,7 +176,10 @@ function generaTelefono(d){
   let a, e, dif;
   do{ a = entre(1, b - 1); e = entre(1, c - 1); dif = Math.abs(a / b - e / c); }
   while(dif === 0 || (d === 0 ? dif < .2 : d === 1 ? dif < .06 || dif > .25 : dif > .08));
-  const fA = [a, b], fB = [e, c];
+  return telefonoDe([a, b], [e, c]);
+}
+function telefonoDe(fA, fB){
+  const [a, b] = fA, [e, c] = fB;
   return {id: 'tp' + Date.now(), fA, fB, practica: true,
     cli: '—Nick, soy Nicoleta. ' + ro(enLetra(fA)) + ' para mí y ' + az(enLetra(fB)) + ' para el pinche. ¿Quién se lleva más?',
     nick: NOMBRE[b] + ' contra ' + NOMBRE[c] + ': harían falta ' + b * c + ' trozos. Sobre el papel: multiplica cada una arriba y abajo por el denominador de la otra.',
@@ -168,10 +187,37 @@ function generaTelefono(d){
     rep: {A: 'En la secuencia de ' + b * c + ': ¿quién va más lejos, ' + a * c + ' o ' + e * b + '?', B: 'En la secuencia de ' + b * c + ': ¿quién va más lejos, ' + a * c + ' o ' + e * b + '?', ig: 'No son el mismo número, por muy cerca que anden.'}};
 }
 
+/* ── LOS ENLACES: un pedido escrito en la dirección, para los QR de las fichas ──
+     ?j=servir&f=3/8&c=4          pide 3/8 y viene en cuartos (c=4,4: dos cajas; p=1: de una pieza)
+     ?j=comparar&a=3/4&b=5/8      mesa 4 y mesa 7
+     ?j=telefono&a=7/8&b=6/7      la llamada de Nicoleta
+   Si algo no se puede preparar con el cortador (o no tiene sentido), null */
+const frac = t => { const m = /^(\d{1,2})\/(\d{1,2})$/.exec(String(t || '').trim()); return m && +m[1] > 0 && +m[2] > 1 ? [+m[1], +m[2]] : null; };
+function aMedida(q){
+  const get = k => typeof q.get === 'function' ? q.get(k) : q[k];
+  const j = get('j');
+  if(j === 'servir'){
+    const f = frac(get('f')); if(!f || !CARTA.includes(f[1])) return null;
+    const cajas = String(get('c') || f[1]).split(',').map(Number);
+    if(!cajas.length || cajas.length > 3 || cajas.some(c => !CARTA.includes(c))) return null;
+    if(f[0] > f[1] * cajas.length) return null;                                  // no cabe en las cajas
+    if(!CARTA.includes(M.mcm(cajas[0], f[1]))) return null;                       // el cortador no llega
+    return servirDe(f, cajas, get('p') === '1' || (f[0] === 1 && cajas[0] !== f[1]));
+  }
+  if(j === 'comparar' || j === 'telefono'){
+    const fA = frac(get('a')), fB = frac(get('b')); if(!fA || !fB) return null;
+    if(fA[0] > fA[1] || fB[0] > fB[1]) return null;
+    if(j === 'telefono') return fA[1] <= 12 && fB[1] <= 12 ? telefonoDe(fA, fB) : null;
+    if(!CARTA.includes(fA[1]) || !CARTA.includes(fB[1]) || !CARTA.includes(M.mcm(fA[1], fB[1]))) return null;
+    return compararDe(fA, fB);
+  }
+  return null;
+}
+
 const RUTA = {servir: SERVIR, comparar: COMPARAR, telefono: TELEFONO};
 const GENERA = {servir: generaServir, comparar: generaComparar, telefono: generaTelefono};
 const NOMBRE_J = {servir: 'Servir', comparar: 'Comparar', telefono: 'Por teléfono'};
-const P = {RUTA, GENERA, NOMBRE_J, CARTA, NOMBRE, enLetra, conAzar: f => { azar = f; }};
+const P = {RUTA, GENERA, NOMBRE_J, CARTA, NOMBRE, enLetra, aMedida, tipoDe, conAzar: f => { azar = f; }};
 if(typeof module !== 'undefined' && module.exports) module.exports = P;
 else raiz.Pedidos = P;
 })(typeof window !== 'undefined' ? window : globalThis);

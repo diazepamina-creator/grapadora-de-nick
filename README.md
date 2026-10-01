@@ -32,6 +32,9 @@ La app es **un solo `index.html`**: se genera con `node construye.mjs` a partir 
 - `src/trampa.*` — la trampa para ratones: las viñetas del fallo y del acierto.
 - `src/piel.css` — la encimera de mármol, las hojas y los botones (el formato de Miut). `src/mesa.css` — la mesa, la pizarra y el tique. `src/arranque.*` — la escena de inicio.
 - `pruebas/` — `node --test pruebas/*.test.mjs`: el motor, los pedidos y que `index.html` esté construido.
+- `fichas/` — las fichas en papel, una por pestaña (Servir, Comparar, Por teléfono), en formato de 2.º y de 1.º, con la clave y las pizzas recortables: fuentes en LaTeX (`sh fichas/compila.sh`, con XeLaTeX) y los PDF en `fichas/pdf/`. Ver `fichas/LEEME.txt`.
+
+**Los enlaces.** Cada QR de las fichas abre su ejercicio en Practicar: `?j=servir&f=3/8&c=4` (el pedido y cómo vienen las cajas; `p=1`, de una pieza), `?j=comparar&a=3/4&b=5/8` o `?j=telefono&a=7/8&b=6/7`. Lo que el cortador no alcanza no abre nada.
 
 ## Historial
 
@@ -45,5 +48,6 @@ La app es **un solo `index.html`**: se genera con `node construye.mjs` a partir 
 8. ✅ Versión 0.8: la porción y la regla, vivas. Al elegir un trozo, sube de la pizza con un rebote; al soltarlo, vuelve a su sitio. En el tique, cada marca se desliza por la regla desde donde estaba —desde el 0, la primera vez— y, al acertar una comparación, el hueco entre las dos marcas crece de la menor a la mayor.
 9. ✅ Versión 0.9: los detalles. El signo de la apuesta se escribe con tiza en la pizarra, trazo a trazo y con su grano; el auricular de Nicoleta tiembla mientras suena el teléfono; y, al final de la escena de inicio, Nick y Migas asoman por los lados de la caja. La viñeta del acierto, rehecha: Migas entra entero, de puntillas, agarra la punta del queso, da un paso atrás —la trampa salta sobre nada— y lo levanta de fiesta; ya no sale recortado.
 10. ✅ Versión 0.10: Migas, de lado. En la viñeta del acierto, Migas entra de perfil andando —las patas se turnan, el brazo se balancea y el cuerpo sube y baja con cada paso—, alcanza la punta del queso, tira de él (la trampa salta sobre nada) y da un saltito con el queso en alto, y otro más pequeño.
+11. ✅ Versión 0.11: las fichas de la cocina. Tres fichas de doble cara, una por pestaña, en formato de 2.º y de 1.º, con la clave del profesor y las pizzas recortables, en el estilo de las de Miut: pizzas que se cortan y se grapan, la regla del tique, Nick con la regla y Migas con el aviso. Y los enlaces directos que abren cada ejercicio desde su QR.
 
 © 2026 Andrés Asensio · [CC BY-NC-ND 4.0](LICENSE.md) · [La pizzería de Nick](https://diazepamina-creator.github.io/pizzeria-de-nick/), la app anterior.
