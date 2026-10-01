@@ -139,11 +139,11 @@ const MANGA = '<path d="M-3.2 -1 L3.2 -1 L1 -13 Q0 -15 -1 -13 Z" fill="#EFE7D6" 
   '<path d="M-1 -12.6 Q0 -17 1.4 -13" fill="none" stroke="#D98C9A" stroke-width="2" stroke-linecap="round"/>' +
   '<path d="M-2.2 -4 L2.2 -4" stroke="#D9CDB8" stroke-width="1"/>';
 /* el auricular de baquelita: de la oreja a la boca, y el cordón que cae */
-const AURICULAR = '<path d="M65 41 Q71.4 50 58 57.6" fill="none" stroke="' + T + '" stroke-width="5" stroke-linecap="round"/>' +
+const AURICULAR = '<g class="auricular"><path d="M65 41 Q71.4 50 58 57.6" fill="none" stroke="' + T + '" stroke-width="5" stroke-linecap="round"/>' +
   '<path d="M65 41 Q71.4 50 58 57.6" fill="none" stroke="#2A2420" stroke-width="3.2" stroke-linecap="round"/>' +
   '<ellipse cx="64.2" cy="40.4" rx="3.2" ry="2.4" transform="rotate(40 64.2 40.4)" fill="#2A2420" stroke="' + T + '" stroke-width="1"/>' +
   '<ellipse cx="57.4" cy="58.4" rx="3" ry="2.2" transform="rotate(-30 57.4 58.4)" fill="#2A2420" stroke="' + T + '" stroke-width="1"/>' +
-  '<path d="M69 51 q4 3 1 6 q-3 3 1 6 q4 3 1 6" fill="none" stroke="#2A2420" stroke-width="1" stroke-linecap="round"/>';
+  '<path d="M69 51 q4 3 1 6 q-3 3 1 6 q4 3 1 6" fill="none" stroke="#2A2420" stroke-width="1" stroke-linecap="round"/></g>';
 function nicoleta(pose){
   pose = pose || 'habla';
   const P = {
@@ -215,7 +215,11 @@ function migas(pose){
     senala:   {bI: [140, 8, 80, 8], bD: [-5, 8, -15, 6], c: true, cAng: 38, boca: .4, ojo: 'normal', mira: [1, 0], ceja: 'normal'},
     sorpresa: {bI: [-150, 8, -110, 8], bD: [-30, 8, -75, 8], c: true, boca: .9, redonda: true, ojo: 'grande', mira: [0, 0], ceja: 'alta', orejas: -6},
     celebra:  {bI: [-130, 8, -100, 8], bD: [-60, 8, -85, 9], c: true, boca: 1, ojo: 'feliz', mira: [0, 0], ceja: 'feliz', salto: 3},
-    piensa:   {bI: [140, 8, 80, 8], bD: [80, 7, -120, 10], dedo: true, boca: 0, ojo: 'normal', mira: [.6, -1], ceja: 'piensa'}
+    piensa:   {bI: [140, 8, 80, 8], bD: [80, 7, -120, 10], dedo: true, boca: 0, ojo: 'normal', mira: [.6, -1], ceja: 'piensa'},
+    /* coge: de puntillas, el brazo estirado hacia el queso y los ojos en él (la trampa) */
+    /* fiesta: los dos brazos arriba, sin el cortador (en la trampa, una mano lleva el queso) */
+    fiesta:   {bI: [-130, 8, -100, 8], bD: [-50, 8, -80, 8], boca: 1, ojo: 'feliz', mira: [0, 0], ceja: 'feliz', salto: 3},
+    coge:     {bI: [172, 8, 178, 9], bD: [70, 8, 105, 7], boca: 0, ojo: 'normal', mira: [-1, .7], ceja: 'alta'}
   }[pose] || {};
   const dy = -(P.salto || 0);
   let s = '<svg viewBox="0 0 100 100" class="pj pj-migas pose-' + pose + '" aria-hidden="true">';

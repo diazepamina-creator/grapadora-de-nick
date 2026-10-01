@@ -142,7 +142,10 @@ button.enlace:hover{color:var(--oro)}
 .cara .boca-f{display:none}
 .habla.feliz .cara .boca{display:none}
 .habla.feliz .cara .boca-f{display:block}
-@media (prefers-reduced-motion: reduce){ .habla.grapando .cara .brazo,.habla.feliz .cara svg{animation:none} }
+/* el teléfono suena: el auricular de Nicoleta tiembla en la horquilla de su mano */
+.cara.suena .auricular{transform-box:fill-box;transform-origin:50% 50%;animation:tiembla .07s linear infinite alternate}
+@keyframes tiembla{from{transform:rotate(-6deg) translateY(-.4px)}to{transform:rotate(6deg) translateY(.4px)}}
+@media (prefers-reduced-motion: reduce){ .cara.suena .auricular,.habla.grapando .cara .brazo,.habla.feliz .cara svg{animation:none} }
 
 /* ── LAS VENTANAS: la guía, el acta ── */
 .modal{position:fixed;inset:0;background:rgba(12,8,20,.82);display:grid;place-items:center;padding:16px;z-index:60;overflow:auto}

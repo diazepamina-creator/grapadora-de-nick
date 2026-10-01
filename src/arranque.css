@@ -19,4 +19,12 @@ html[data-inicio="si"] main{visibility:hidden}
 .inLema{margin:0;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--tenue)}
 .inSalta{position:absolute;bottom:26px;left:0;right:0;margin:0;text-align:center;font-family:var(--rotulo);font-size:13px;
   letter-spacing:2px;text-transform:uppercase;color:var(--tenue);opacity:.8}
+/* al final, Nick y Migas asoman por detrás de la caja, uno a cada lado */
+.inMesa{position:relative;width:min(250px,70vw)}
+.inMesa .inCaja{position:relative;z-index:1;width:100%;box-sizing:border-box}
+.inAsoma{position:absolute;bottom:2px;z-index:0;opacity:0;transition:transform .6s cubic-bezier(.3,1.45,.5,1),opacity .25s ease}
+.inAsoma svg{display:block;width:100%;height:auto}
+.inNick{left:-36%;width:54%;transform:translateX(55%) rotate(8deg)}
+.inMigas{right:-32%;width:46%;transform:translateX(-55%) rotate(-8deg)}
+.inAsoma.ve{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){ .inicio{display:none !important} html[data-inicio="si"] main{visibility:visible} }
