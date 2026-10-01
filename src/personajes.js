@@ -215,11 +215,7 @@ function migas(pose){
     senala:   {bI: [140, 8, 80, 8], bD: [-5, 8, -15, 6], c: true, cAng: 38, boca: .4, ojo: 'normal', mira: [1, 0], ceja: 'normal'},
     sorpresa: {bI: [-150, 8, -110, 8], bD: [-30, 8, -75, 8], c: true, boca: .9, redonda: true, ojo: 'grande', mira: [0, 0], ceja: 'alta', orejas: -6},
     celebra:  {bI: [-130, 8, -100, 8], bD: [-60, 8, -85, 9], c: true, boca: 1, ojo: 'feliz', mira: [0, 0], ceja: 'feliz', salto: 3},
-    piensa:   {bI: [140, 8, 80, 8], bD: [80, 7, -120, 10], dedo: true, boca: 0, ojo: 'normal', mira: [.6, -1], ceja: 'piensa'},
-    /* coge: de puntillas, el brazo estirado hacia el queso y los ojos en él (la trampa) */
-    /* fiesta: los dos brazos arriba, sin el cortador (en la trampa, una mano lleva el queso) */
-    fiesta:   {bI: [-130, 8, -100, 8], bD: [-50, 8, -80, 8], boca: 1, ojo: 'feliz', mira: [0, 0], ceja: 'feliz', salto: 3},
-    coge:     {bI: [172, 8, 178, 9], bD: [70, 8, 105, 7], boca: 0, ojo: 'normal', mira: [-1, .7], ceja: 'alta'}
+    piensa:   {bI: [140, 8, 80, 8], bD: [80, 7, -120, 10], dedo: true, boca: 0, ojo: 'normal', mira: [.6, -1], ceja: 'piensa'}
   }[pose] || {};
   const dy = -(P.salto || 0);
   let s = '<svg viewBox="0 0 100 100" class="pj pj-migas pose-' + pose + '" aria-hidden="true">';
