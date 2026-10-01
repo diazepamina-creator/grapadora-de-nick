@@ -240,7 +240,7 @@ html[data-tema="proyector"] .mesa .cajas{background:#eee;box-shadow:inset 0 0 0 
 .cajaP.mA.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--tomate), 0 4px 10px rgba(0,0,0,.3)}
 .cajaP.mB.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--azul), 0 4px 10px rgba(0,0,0,.3)}
 svg.pizza{display:block;width:100%;height:auto;touch-action:manipulation}
-.corte{cursor:pointer;transition:transform .14s ease-out}
+.corte{cursor:pointer}
 /* la porción elegida se separa de la pizza, como cuando la levantas de la caja */
 .corte.apagada{opacity:.55}
 .corte.elegida{filter:drop-shadow(0 4px 5px rgba(60,40,20,.45))}
@@ -306,7 +306,7 @@ html[data-tema="noche"] .cinta{background:linear-gradient(180deg,#4A4036,#3A3128
 .marca u{display:block;font-family:var(--rotulo);font-size:14px;color:var(--tomate);text-decoration:none;background:var(--panel);padding:0 3px;border-radius:5px;line-height:1.2}
 .marca.dos em{background:var(--azul)} .marca.dos u{color:var(--azul)}
 .marca.baja u{transform:translateY(17px)}
-.hueco{position:absolute;top:0;height:26px;background:repeating-linear-gradient(45deg,rgba(196,70,47,.32) 0 4px,rgba(196,70,47,.08) 4px 8px)}
+.hueco{position:absolute;top:0;height:26px;transform-origin:left center;background:repeating-linear-gradient(45deg,rgba(196,70,47,.32) 0 4px,rgba(196,70,47,.08) 4px 8px)}
 .hueco span{position:absolute;left:50%;top:-19px;transform:translateX(-50%);font-family:var(--rotulo);font-size:12px;color:var(--tomateO);
   background:var(--panel);padding:0 5px;border-radius:7px;border:1px solid var(--linea);white-space:nowrap}
 .nota{font-size:12px;color:var(--tenue);margin:10px 0 0;line-height:1.5;text-align:center}
@@ -509,7 +509,7 @@ html[data-inicio="si"] main{visibility:hidden}
     <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" rel="license">© 2026 Andrés Asensio · CC BY-NC-ND 4.0</a>
     · <a href="https://diazepamina-creator.github.io/pizzeria-de-nick/">La pizzería de Nick (anterior)</a>
     · <a href="https://diazepamina-creator.github.io/">Materiales</a>
-    · versión 0.7
+    · versión 0.8
   </footer>
 </main>
 
@@ -949,7 +949,8 @@ raiz.Sonido = {toca, activo: v => { activo = !!v; }};
    trozo de una caja es esa misma pizza vista a través de su sector: así
    un corte parte el pepperoni por donde pasa, como en la cocina, y el
    dibujo no cambia por cortar más fino (la cantidad tampoco).
-   La porción elegida se separa siguiendo su bisectriz; las grapas nuevas
+   La porción elegida se separa siguiendo su bisectriz (al elegirla sube con
+   un rebote; al soltarla, vuelve); las grapas nuevas
    se ven y se van: la costura y las grapas, luego la costura, luego las
    grapas.
    ══════════════════════════════════════════════════════════════════════ */
@@ -958,6 +959,7 @@ raiz.Sonido = {toca, activo: v => { activo = !!v; }};
 const M = raiz.Motor, NS = 'http://www.w3.org/2000/svg';
 const el = (tag, at) => { const e = document.createElementNS(NS, tag); for(const k in at) e.setAttribute(k, at[k]); return e; };
 const CX = 150, CY = 148, R = 126;
+const QUIETO = !!(raiz.matchMedia && raiz.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
 /* un azar con semilla: la pizza sale igual cada vez */
 let sem = 11;
@@ -1056,10 +1058,25 @@ function dibuja(c, alTocar){
   const animar = c.animar === 'grapa'; c.animar = null;
   const juntas = [...c.recien].sort((a, b) => a - b), cada = Math.min(260, 1100 / Math.max(1, juntas.length));
   const retraso = j => animar ? Math.round(juntas.indexOf(j) * cada + 170) : 0;
+  /* lo que estaba levantado al pintar la última vez: lo que cambie es un gesto, con su hora, para que
+     sobreviva si la mesa se repinta mientras pasa (si se ha cortado, los trozos son otros: sin gesto) */
+  const antes = !c.levantadas ? new Set() : c.levantadas.cortes === c.cortes ? c.levantadas : c.sel, ahora = new Set();
+  const hoy = Date.now(), gestos = c.gestos = (c.gestos || []).filter(x => hoy - x.t < 300 && x.cortes === c.cortes);
   M.grupos(c).forEach((t, n) => {
     const a0 = t[0] * paso, a1 = a0 + t.length * paso, ele = c.sel.has(t[0]);
     const g = el('g', {class: 'corte' + (ele ? ' elegida' : (c.sel.size ? ' apagada' : ''))});
-    if(ele){ const bis = ((a0 + a1) / 2 - 90) * Math.PI / 180; g.setAttribute('transform', `translate(${(10 * Math.cos(bis)).toFixed(1)} ${(10 * Math.sin(bis)).toFixed(1)})`); }
+    const bis = ((a0 + a1) / 2 - 90) * Math.PI / 180, dx = 10 * Math.cos(bis), dy = 10 * Math.sin(bis);
+    if(ele) g.setAttribute('transform', `translate(${dx.toFixed(1)} ${dy.toFixed(1)})`);
+    /* si acaba de elegirse o de soltarse, se ve el gesto: sube con un rebote, o vuelve a su sitio */
+    if(ele !== antes.has(t[0])) gestos.push({i: t[0], ele, t: hoy, cortes: c.cortes});
+    const gesto = gestos.filter(x => x.i === t[0] && x.ele === ele).pop();
+    if(gesto && !QUIETO && g.animate){
+      const tr = k => 'translate(' + (dx * k).toFixed(1) + 'px,' + (dy * k).toFixed(1) + 'px)';
+      const a = g.animate(ele ? [{transform: tr(0)}, {transform: tr(1.35), offset: .6}, {transform: tr(1)}] : [{transform: tr(1)}, {transform: tr(0)}],
+                {duration: ele ? 260 : 180, easing: 'ease-out'});
+      a.currentTime = hoy - gesto.t;
+    }
+    if(ele) ahora.add(t[0]);
     const forma = sector(CX, CY, R + 1, a0 + hueco, a1 - hueco);
     const cp = el('clipPath', {id: id + 's' + n}); cp.appendChild(el('path', {d: forma})); defs.appendChild(cp);
     const vista = el('g', {'clip-path': `url(#${id}s${n})`});
@@ -1088,6 +1105,7 @@ function dibuja(c, alTocar){
       g.addEventListener('keydown', ev => { if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); alTocar(t[0]); } }); }
     svg.appendChild(g);
   });
+  ahora.cortes = c.cortes; c.levantadas = ahora;
   if(animar && juntas.length) grapadora(svg, juntas, paso, cada);
   return svg;
 }
@@ -2175,6 +2193,18 @@ function pintaRegla(){
   }
   const ms = marcas.querySelectorAll('.marca');
   if(ms.length === 2 && Math.abs(parseFloat(ms[0].style.left) - parseFloat(ms[1].style.left)) < 52) ms[1].classList.add('baja');
+  /* la regla viva: cada marca se desliza desde donde estaba (o desde el 0, si es nueva) y el hueco crece
+     de la marca menor a la mayor. Solo dentro del mismo pedido y con la regla del mismo ancho */
+  const visto = pintaRegla.visto, mismo = visto && visto.P === P && visto.an === an && !menosMovimiento();
+  const ahora = {P, an, x: {}, hueco: !!cinta.querySelector('.hueco')};
+  ms.forEach(m => {
+    const k = m.classList.contains('dos') ? 'B' : 'A', x = parseFloat(m.style.left); ahora.x[k] = x;
+    const x0 = mismo ? (k in visto.x ? visto.x[k] : 0) : x;
+    if(Math.abs(x0 - x) > .5 && m.animate) m.animate([{left: x0 + 'px'}, {left: x + 'px'}], {duration: 420, easing: 'cubic-bezier(.3,1.25,.5,1)'});
+  });
+  const h = cinta.querySelector('.hueco');
+  if(h && mismo && !visto.hueco && h.animate) h.animate([{transform: 'scaleX(0)'}, {transform: 'scaleX(1)'}], {duration: 520, delay: 120, easing: 'ease-out', fill: 'backwards'});
+  pintaRegla.visto = ahora;
 }
 /* la operación, como en el cuaderno: la punta de la flecha sale de la tangente de la curva */
 function punta(x1, y1, cx, cy, col, largo){
