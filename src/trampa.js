@@ -66,7 +66,18 @@ function migasEntero(PJ){
   return '<g class="mPasa"><g class="mCoge">' + pon('', 'coge', true) + '</g><g class="mFiesta" opacity="0">' + pon('', 'fiesta', true).replace('x="' + MX + '"', 'x="' + (MX + ATRAS) + '"') + '</g></g>';
 }
 
-function svg(escena, PJ){
+/* LA VARIANTE «DE LADO»: Migas de perfil, que entra andando, alcanza el queso,
+   tira de él y salta con el queso en alto. Tres dibujos superpuestos (anda,
+   coge con el queso en la mano, salta) que se van turnando. La mano de «coge»
+   cae en la punta del queso de la trampa */
+const LS = 1.05, LX = 120 - 30.1 * LS, LY = 131 - 67.7 * LS, ATRAS_L = 5;
+function migasDeLado(PJ){
+  const pon = (cls, pose, queso, vis) => '<g class="' + cls + '"' + (vis ? '' : ' opacity="0"') + '><svg x="' + f(LX) + '" y="' + f(LY) + '" width="' + f(100 * LS) + '" height="' + f(100 * LS) + '" viewBox="0 0 100 100" overflow="visible">' +
+    PJ.migasLado(pose, queso).replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '') + '</svg></g>';
+  return '<g class="mLado">' + pon('lAnda', 'anda', false, true) + pon('lCoge', 'coge', true, false) + pon('lSalta', 'salta', true, false) + '</g>';
+}
+const f = x => +x.toFixed(1);
+function svg(escena, PJ, variante){
   const fondo = escena === 'fallo' ? ['#FBE3D8', '#F2C2B0'] : ['#E6F0D4', '#CFE0B0'];
   const g = (cls, html) => '<g class="' + cls + '">' + html + '</g>';
   return '<svg viewBox="0 0 200 200" aria-hidden="true"><defs><clipPath id="trCirculo"><circle cx="100" cy="100" r="94"/></clipPath>' +
@@ -74,12 +85,45 @@ function svg(escena, PJ){
     '<circle cx="100" cy="100" r="94" fill="url(#trFondo-' + escena + ')"/>' +
     '<g clip-path="url(#trCirculo)">' +
       '<ellipse cx="100" cy="164" rx="84" ry="7" fill="rgba(60,35,10,.18)"/>' +
-      (escena === 'acierto' ? migasEntero(PJ) : '') +
+      (escena === 'acierto' ? (variante === 'lado' ? migasDeLado(PJ) : migasEntero(PJ)) : '') +
       g('trampa', TABLA + CEBO + MUELLE + g('queso', QUESO) +
         (escena === 'fallo' ? g('pie', PIE) : '') + g('arco', ARCO)) +
       g('rayos', '<g fill="none" stroke="#E8A93A" stroke-width="4" stroke-linecap="round">' + RAYOS + '</g>') +
       (escena === 'fallo' ? AY : '') +
     '</g><circle cx="100" cy="100" r="94" fill="none" stroke="' + T + '" stroke-width="5"/></svg>';
+}
+
+/* la animación de lado: entra a pasitos (las patas se turnan y el cuerpo sube y
+   baja con cada paso), alcanza, tira, la trampa salta sobre nada y Migas da un
+   saltito y otro más pequeño con el queso en alto */
+function animaDeLado(v, D, o, anima){
+  const tr = (x, y, r) => 'translate(' + x + 'px,' + y + 'px)' + (r ? ' rotate(' + r + 'deg)' : '');
+  const k = [{transform: tr(92, 0), offset: 0}, {transform: tr(92, 0), offset: o(150)}];
+  for(let t = 225, i = 1; t <= 600; t += 75, i++) k.push({transform: tr(+(92 * (1 - (t - 150) / 450)).toFixed(1), i % 2 ? -2.6 : 0), offset: o(t)});
+  k.push({transform: tr(0, 0), offset: 1});
+  anima('.mLado', k);
+  /* las patas y el brazo, mientras anda: un paso cada 75 ms */
+  const paso = (sel, origen, a) => { v.querySelectorAll('.lAnda ' + sel).forEach(e => {
+    e.style.transformBox = 'view-box'; e.style.transformOrigin = origen;
+    e.animate([{transform: 'rotate(' + a + 'deg)'}, {transform: 'rotate(' + (-a) + 'deg)'}], {duration: 75, iterations: 6, direction: 'alternate', delay: 150, easing: 'ease-in-out'}); }); };
+  paso('.pataA', '52px 84px', 24); paso('.pataB', '61px 82px', -24); paso('.brazoLado', '50px 66px', -20);
+  /* los turnos de los tres dibujos */
+  const turno = (sel, de, a) => anima(sel, [
+    ...(de > 0 ? [{opacity: 0, offset: 0}, {opacity: 0, offset: o(de)}] : []), {opacity: 1, offset: o(de + 1)},
+    {opacity: 1, offset: o(a)}, ...(a < D ? [{opacity: 0, offset: o(a + 1)}, {opacity: 0, offset: 1}] : [])]);
+  turno('.lAnda', -1, 600); turno('.lCoge', 600, 860); turno('.lSalta', 860, D);
+  /* coge el queso: el de la trampa se va y aparece el de la mano */
+  anima('.queso', [{opacity: 1, offset: 0}, {opacity: 1, offset: o(660)}, {opacity: 0, offset: o(661)}, {opacity: 0, offset: 1}]);
+  anima('.lCoge .qMano', [{opacity: 0, offset: 0}, {opacity: 0, offset: o(660)}, {opacity: 1, offset: o(661)}, {opacity: 1, offset: 1}]);
+  /* tira: recula echándose atrás, con el queso */
+  const pie = (LX + 54 * LS) + 'px ' + (LY + 95 * LS) + 'px';
+  anima('.lCoge', [{transform: tr(0, 0), offset: 0}, {transform: tr(0, 0), offset: o(660)},
+    {transform: tr(ATRAS_L, 0, 7), offset: o(800), easing: 'ease-in'}, {transform: tr(ATRAS_L, 0, 7), offset: 1}], pie);
+  /* el saltito, y otro más pequeño */
+  anima('.lSalta', [{transform: tr(ATRAS_L, 0), offset: 0}, {transform: tr(ATRAS_L, 0), offset: o(860)},
+    {transform: tr(ATRAS_L, -18), offset: o(1000), easing: 'ease-out'}, {transform: tr(ATRAS_L, 0), offset: o(1130), easing: 'ease-in'},
+    {transform: tr(ATRAS_L, -7), offset: o(1220), easing: 'ease-out'}, {transform: tr(ATRAS_L, 0), offset: o(1310), easing: 'ease-in'},
+    {transform: tr(ATRAS_L, 0), offset: 1}], pie);
 }
 
 let nT = 0;
@@ -90,7 +134,7 @@ function lanza(escena, PJ, opts){
   const S = Math.round(opts.tam || Math.min(230, innerWidth * .56));
   const v = document.createElement('div');
   v.className = 'trampa-vineta ' + escena;
-  v.innerHTML = svg(escena, PJ).replace(/trCirculo/g, 'trCirculo' + (++nT));
+  v.innerHTML = svg(escena, PJ, opts.variante).replace(/trCirculo/g, 'trCirculo' + (++nT));
   const ref = opts.cerca && opts.cerca.getBoundingClientRect();
   const cx = opts.punto ? opts.punto.x : ref ? ref.left + ref.width / 2 : innerWidth / 2;
   const cy = opts.punto ? opts.punto.y : ref ? Math.max(S / 2 + 10, Math.min(innerHeight - S / 2 - 10, ref.top + ref.height / 2)) : innerHeight / 2;
@@ -138,6 +182,8 @@ function lanza(escena, PJ, opts){
     if(dedo) dedo.animate([{fill: '#C9A17C', offset: 0}, {fill: '#C9A17C', offset: o(660)}, {fill: '#E0705A', offset: o(760)}, {fill: '#E0705A', offset: 1}], {duration: D, fill: 'forwards'});
     anima('.ay', [{transform: 'scale(0)', opacity: 0, offset: 0}, {transform: 'scale(0)', opacity: 0, offset: o(700)},
       {transform: 'scale(1.15)', opacity: 1, offset: o(800), easing: 'ease-out'}, {transform: 'scale(1)', opacity: 1, offset: o(880)}, {transform: 'scale(1)', opacity: 1, offset: 1}], '72px 70px');
+  }else if(opts.variante === 'lado'){
+    animaDeLado(v, D, o, anima);
   }else{
     /* Migas entra de puntillas desde el borde, agarra la punta del queso, da un paso
        atrás con él —la trampa salta sobre nada— y lo levanta de fiesta */
