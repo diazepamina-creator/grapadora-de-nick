@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="src/mesa.css">
 <link rel="stylesheet" href="src/arranque.css">
 <link rel="stylesheet" href="src/entrevistas.css">
+<link rel="stylesheet" href="src/trampa.css">
 <script>
   /* los ajustes se ponen antes de pintar nada, para que no haya un fogonazo del otro fondo */
   document.documentElement.dataset.tema = 'dia';
@@ -66,6 +67,9 @@
       <small>Bajito: el clac de la grapadora, el cortador, la tiza y el teléfono.</small></div>
     <div class="aj"><span class="etq">Al abrir</span>
       <span class="ops" data-aj="inicio" role="group" aria-label="La animación de inicio"><button type="button" data-v="si">Con animación</button><button type="button" data-v="no">Sin animación</button></span></div>
+    <div class="aj"><span class="etq">La trampa</span>
+      <span class="ops" data-aj="trampa" role="group" aria-label="La trampa para ratones"><button type="button" data-v="si">Con trampa</button><button type="button" data-v="no">Sin trampa</button></span>
+      <small>Al fallar una respuesta, Nick pisa la trampa para ratones. Al acertar, Migas se lleva el queso sin que salte.</small></div>
     <div class="aj"><span class="etq">Empezar de cero</span>
       <small id="ajCeroTxt">Borra de este aparato los pedidos servidos y el acta de este turno, para el siguiente alumno o la siguiente clase. Hay que pulsar dos veces. Los ajustes se quedan.</small>
       <button type="button" class="b borrar" id="ajCero">Borrar todo</button></div>
@@ -159,6 +163,7 @@
 <script src="src/personajes.js"></script>
 <script src="src/arranque.js"></script>
 <script src="src/entrevistas.js"></script>
+<script src="src/trampa.js"></script>
 <script>
 (function(){
 'use strict';
@@ -171,14 +176,14 @@ const MESAS = ['Mesa 4', 'Mesa 7'];
 
 /* ── LOS AJUSTES ── */
 const AJ = 'grapadora.ajustes.v1';
-const aj = {tema: 'dia', aula: false, apuesta: true, sonido: true, inicio: true};
+const aj = {tema: 'dia', aula: false, apuesta: true, sonido: true, inicio: true, trampa: true};
 try{ Object.assign(aj, JSON.parse(localStorage.getItem(AJ) || '{}')); }catch(err){}
 const guardaAjustes = () => { try{ localStorage.setItem(AJ, JSON.stringify(aj)); }catch(err){} };
 function aplicaAjustes(){
   const h = document.documentElement;
   h.dataset.tema = aj.tema;
   if(aj.aula) h.dataset.aula = 'si'; else delete h.dataset.aula;
-  const v = {tema: aj.tema, apuesta: aj.apuesta ? 'si' : 'no', sonido: aj.sonido ? 'si' : 'no', inicio: aj.inicio ? 'si' : 'no'};
+  const v = {tema: aj.tema, apuesta: aj.apuesta ? 'si' : 'no', sonido: aj.sonido ? 'si' : 'no', inicio: aj.inicio ? 'si' : 'no', trampa: aj.trampa ? 'si' : 'no'};
   document.querySelectorAll('.ajustes [data-aj]').forEach(g => g.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(v[g.dataset.aj] === b.dataset.v))));
   $('bAula').setAttribute('aria-pressed', String(aj.aula)); $('bAula').textContent = aj.aula ? 'Salir del aula' : 'Aula';
   if(window.Sonido) window.Sonido.activo(aj.sonido);
@@ -518,7 +523,8 @@ function ponPregunta(){
         const guiño = !prediccion ? '' : prediccion === signoReal() ? 'Lo que apuntaste en la pizarra iba bien encaminado. ' : 'La pizarra decía otra cosa, ¿eh? Por algo se cuenta antes de cobrar. ';
         acierta(guiño + P.ok);
       }else{
-        fallos++; est.stats[est.juego].mal += fallos === 1 ? 1 : 0; sonar('mal');
+        fallos++; est.stats[est.juego].mal += fallos === 1 ? 1 : 0;
+        if(!trampa('fallo')) sonar('mal');
         nickDice((P.rep || {})[clave] || 'Mira la regla: se lleva más el que cae más a la derecha.', false);
       }
     });
@@ -526,7 +532,8 @@ function ponPregunta(){
   });
 }
 function acierta(txt){
-  resuelto = true; sonar('bien');
+  resuelto = true;
+  if(!trampa('acierto')) sonar('bien');
   nickDice(txt, true);
   $('pregunta').hidden = true; $('pregunta').innerHTML = ''; migas('');
   const s = est.stats[est.juego];
@@ -537,6 +544,17 @@ function acierta(txt){
   if(est.practica) $('bOtro').hidden = false;
   else{ $('bSiguiente').hidden = false; $('bSaltar').hidden = true; }
   pintaRegla(); pintaOperacion(); pintaPizarra();
+}
+
+/* ── LA TRAMPA: como el choque de manos de Miut, una viñeta de segundo y
+   medio. Al fallar la pregunta, Nick pisa la trampa; al servir o acertar,
+   Migas se lleva el queso. Devuelve si ha salido, para no sonar dos veces ── */
+const quieto = () => !aj.trampa || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+function trampa(escena){
+  if(quieto() || !window.Trampa) return false;
+  /* sobre la mesa si se ve entera; si no, en el centro de la pantalla, que es donde se está mirando */
+  const r = $('mesa').getBoundingClientRect(), seVeLaMesa = r.top >= 0 && r.bottom <= innerHeight;
+  return !!window.Trampa.lanza(escena, PJ, {cerca: seVeLaMesa ? $('mesa') : null});
 }
 
 /* ── EL ACTA ── */
@@ -615,7 +633,7 @@ const GUIA = [
   {sel: '#bEntrevista', c: 'Las entrevistas', t: 'Pregúntales lo que quieras a <b>Nick</b>, a su hermana <b>Nicoleta</b> y a <b>Migas</b>, el pinche del cortador.'},
   {sel: '#bPracticar', c: 'Practicar', t: 'Pedidos <b>nuevos cada vez</b>, sin fin, con tres dificultades.'},
   {sel: '#bActa', c: 'El acta', t: 'Un resumen de lo que has hecho, con tu nombre y un código, para <b>entregárselo a tu profesor</b>.'},
-  {sel: '#bAjustes', c: 'Ajustes', t: 'La encimera o la pizarra, la apuesta antes de comparar, el sonido y la animación.'},
+  {sel: '#bAjustes', c: 'Ajustes', t: 'La encimera o la pizarra, la apuesta antes de comparar, el sonido, la animación y la trampa para ratones.'},
   {sel: '#bAula', c: 'El aula', t: 'Todo más grande y en una sola pantalla, para la pizarra digital. <b>A servir.</b>'}
 ];
 let guiaI = -1, guiaParadas = [], guiaRetoque = 0;
