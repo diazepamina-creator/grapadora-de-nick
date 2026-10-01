@@ -207,6 +207,11 @@ const nuevoTurno = () => ({juego: 'servir', ruta: {servir: 0, comparar: 0, telef
   stats: {servir: {ruta: 0, bien: 0, mal: 0}, comparar: {ruta: 0, bien: 0, mal: 0}, telefono: {ruta: 0, bien: 0, mal: 0}}, ejercicios: []});
 let est = nuevoTurno();
 try{ const d = JSON.parse(localStorage.getItem(TURNO) || 'null'); if(d && d.v === 1 && Date.now() - d.ts < CADUCA) est = Object.assign(nuevoTurno(), d); }catch(err){}
+/* un pedido que llega en la dirección (los QR de las fichas): se abre en Practicar, y la dirección se limpia */
+let deEnlace = null;
+try{ const q = new URLSearchParams(location.search);
+  if(q.get('j')){ deEnlace = PD.aMedida(q); if(deEnlace){ est.juego = q.get('j'); est.practica = true; } history.replaceState(null, '', location.pathname); } }catch(err){}
+const vieneDeEnlace = !!deEnlace;
 const guarda = () => { est.ts = Date.now(); est.v = 1; try{ localStorage.setItem(TURNO, JSON.stringify(est)); }catch(err){} };
 
 /* ── EL PEDIDO EN CURSO ── */
@@ -215,7 +220,8 @@ const enRuta = () => PD.RUTA[est.juego], rutaHecha = () => est.ruta[est.juego] >
 const esCompara = () => est.juego === 'comparar', esTel = () => est.juego === 'telefono';
 function montaPedido(){
   resuelto = false; prediccion = null; armado = null; ultimaOp = null; papel = {A: null, B: null}; fallos = 0; tPedido = Date.now(); clearTimeout(reloj);
-  if(est.practica) P = PD.GENERA[est.juego](est.dif);
+  if(deEnlace){ P = deEnlace; deEnlace = null; }
+  else if(est.practica) P = PD.GENERA[est.juego](est.dif);
   else P = rutaHecha() ? null : enRuta()[est.ruta[est.juego]];
   cajas = P && !esTel() ? (P.cajas || [P.fA[1], P.fB[1]]).map(M.nuevaCaja) : [];
   activa = 0;
@@ -759,7 +765,7 @@ addEventListener('resize', colocaGuia);
 /* ── LA APERTURA ── */
 aplicaAjustes(); pintaPestanas(); montaPedido();
 const primeraVez = (() => { try{ return localStorage.getItem('grapadora.guia') !== 'vista'; }catch(err){ return false; } })();
-const arranca = () => { if(primeraVez) setTimeout(abreGuia, 400); };
+const arranca = () => { if(primeraVez && !vieneDeEnlace) setTimeout(abreGuia, 400); };
 if(document.documentElement.dataset.inicio === 'si' && window.Arranque) window.Arranque.escena($('escenaInicio'), arranca);
 else arranca();
 })();

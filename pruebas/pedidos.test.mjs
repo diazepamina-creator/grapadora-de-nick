@@ -56,3 +56,23 @@ test('por teléfono, generado: el cortador no llega y nunca son iguales', () => 
     assert.notEqual(M.signo(p.fA, p.fB), '=');
   }
 });
+
+test('los enlaces de las fichas abren su pedido, y rechazan lo que no se puede preparar', () => {
+  const P = require('../src/pedidos.js');
+  const s = P.aMedida({j: 'servir', f: '3/8', c: '4'});
+  assert.deepEqual(s.f, [3, 8]); assert.deepEqual(s.cajas, [4]); assert.ok(s.menu.includes(8));
+  assert.equal(P.aMedida({j: 'servir', f: '1/3', c: '6'}).pieza, true);
+  assert.deepEqual(P.aMedida({j: 'servir', f: '5/4', c: '4,4'}).cajas, [4, 4]);
+  assert.equal(P.aMedida({j: 'servir', f: '5/4', c: '4'}), null);           // no cabe en una caja
+  assert.equal(P.aMedida({j: 'servir', f: '1/7', c: '4'}), null);           // el cortador no hace séptimos
+  assert.equal(P.aMedida({j: 'servir', f: '1/5', c: '4'}), null);           // 20 trozos: no llega
+  const c = P.aMedida({j: 'comparar', a: '2/3', b: '3/5'});
+  assert.equal(c.tipo, 'nadie'); assert.ok(c.menu.includes(15));
+  assert.equal(P.aMedida({j: 'comparar', a: '2/4', b: '3/6'}).tipo, 'igual');
+  assert.equal(P.aMedida({j: 'comparar', a: '3/4', b: '5/8'}).tipo, 'cabe');
+  assert.equal(P.aMedida({j: 'comparar', a: '1/3', b: '1/4'}).tipo, 'num');
+  assert.equal(P.aMedida({j: 'comparar', a: '3/4', b: '4/5'}), null);       // 20: el cortador no llega
+  assert.deepEqual(P.aMedida({j: 'telefono', a: '7/8', b: '6/7'}).fB, [6, 7]);
+  assert.equal(P.aMedida({j: 'nada'}), null);
+  assert.equal(P.aMedida({j: 'servir', f: 'tres'}), null);
+});
