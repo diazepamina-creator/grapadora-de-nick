@@ -79,7 +79,7 @@
   <section class="panel encargo" id="encargo" aria-label="El encargo">
     <div class="enc-cab"><h2 id="encCab">Pedido 1 de 5</h2><div class="puntos" id="puntos"></div></div>
     <p class="cliente" id="cliente"></p>
-    <div class="habla" id="nick"><span class="cara" id="caraNick" aria-hidden="true"></span><div><div class="quien">Nick, el pizzero</div><p id="nickTxt" role="status"></p></div></div>
+    <div class="habla" id="nick"><span class="cara" id="caraNick" data-vb="12 4 76 76" aria-hidden="true"></span><div><div class="quien">Nick, el pizzero</div><p id="nickTxt" role="status"></p></div></div>
     <div id="pizarra"></div>
     <div class="botones" id="encBotones">
       <button type="button" class="b ok" id="bSiguiente" hidden>Siguiente pedido</button>
@@ -241,7 +241,6 @@ function pintaEncargo(){
   $('encCab').textContent = est.practica ? 'Practicar · ' + PD.NOMBRE_J[est.juego] : P ? 'Pedido ' + (i + 1) + ' de ' + R.length : PD.NOMBRE_J[est.juego] + ' · ruta hecha';
   $('puntos').innerHTML = est.practica ? '' : R.map((q, k) => '<i class="' + (k < i ? 'hecho' : k === i ? 'aqui' : '') + '"></i>').join('');
   $('bSiguiente').hidden = true; $('bOtro').hidden = true; $('bSaltar').hidden = est.practica || !P;
-  $('caraNick').innerHTML = PJ.NICK;
   if(!P){
     $('cliente').innerHTML = '<span class="quien">El mostrador</span>Los ' + R.length + ' pedidos de la ruta están servidos.';
     nickDice('Ruta hecha. Si quieres más, en <b>Practicar</b> hay pedidos nuevos sin fin; y en las otras pestañas, más trabajo.', false);
@@ -249,15 +248,25 @@ function pintaEncargo(){
   }
   const quien = esTel() ? 'Al teléfono · Nicoleta, desde la pastelería' : esCompara() ? 'Dos clientes · ' + MESAS[0] + ' y ' + MESAS[1] : 'Cliente';
   $('cliente').className = 'cliente' + (esTel() ? ' tel' : '');
-  $('cliente').innerHTML = '<span class="quien">' + quien + '</span>' + P.cli;
+  $('cliente').innerHTML = esTel() ? '<span class="cara" data-vb="20 16 64 64" aria-hidden="true"></span><span><span class="quien">' + quien + '</span>' + P.cli + '</span>'
+    : '<span class="quien">' + quien + '</span>' + P.cli;
+  if(esTel()) PJ.ponCara($('cliente').querySelector('.cara'), 'nicoleta', 'telefono', true);
   nickDice(P.nick, false);
   pintaPizarra();
 }
-function nickDice(html, feliz){
+/* Nick dice algo, con su postura: contento al acertar, pensando cuando
+   contesta a un fallo, hablando el resto; la boca se mueve al empezar */
+function nickDice(html, feliz, pose){
   const n = $('nick'); n.classList.toggle('feliz', !!feliz);
+  PJ.ponCara($('caraNick'), 'nick', pose || (feliz ? 'celebra' : 'habla'), true);
   $('nickTxt').innerHTML = html;
 }
-function clac(){ const n = $('nick'); n.classList.remove('grapando'); void n.offsetWidth; n.classList.add('grapando'); }
+/* el clac: Nick baja la grapadora un momento y vuelve a la postura que tenía */
+function clac(){
+  const c = $('caraNick'), antes = c.dataset.pose || 'habla';
+  PJ.ponCara(c, 'nick', 'grapa');
+  clearTimeout(clac.t); clac.t = setTimeout(() => { if(c.dataset.pose === 'grapa') PJ.ponCara(c, 'nick', antes === 'grapa' ? 'habla' : antes); }, 380);
+}
 
 /* ── LA PIZARRA: el signo, antes de poder contar ── */
 const signoReal = () => M.signo(P.fA, P.fB);
@@ -278,9 +287,10 @@ function pintaPizarra(){
 }
 
 /* ── MIGAS, el pinche: los avisos del cortador y de la grapadora los da él ── */
-function migas(html){
+function migas(html, pose){
   const a = $('aviso');
-  a.innerHTML = html ? '<span class="cara" aria-hidden="true">' + PJ.MIGAS + '</span><div><span class="quien">Migas, el pinche</span>' + html + '</div>' : '';
+  a.innerHTML = html ? '<span class="cara" data-vb="14 10 68 68" aria-hidden="true"></span><div><span class="quien">Migas, el pinche</span>' + html + '</div>' : '';
+  if(html) PJ.ponCara(a.querySelector('.cara'), 'migas', pose || 'sorpresa', true);
 }
 
 /* ── LA MESA ── */
@@ -324,7 +334,7 @@ function pintaMesa(){
       const r = M.industrial(c, x); if(!r.ok) return;
       ultimaOp = r.op; sonar('grapa'); clac(); pintaMesa(); lee();
       if(r.nota) migas('La máquina une la pizza <b>entera</b> de ' + x + ' en ' + x + ': tus ' + r.nota.kAntes + '/' + r.nota.bAntes + ' no llenaban piezas enteras, así que te quedas con las piezas que los contienen. Aquí no hay división que enseñar.');
-      else if(!c.sel.size) migas('La pizza queda en <b>' + M.grupos(c).length + '</b> piezas iguales. Ahora elige la tuya.');
+      else if(!c.sel.size) migas('La pizza queda en <b>' + M.grupos(c).length + '</b> piezas iguales. Ahora elige la tuya.', 'senala');
       quitaGrapasLuego();
     });
     bm.appendChild(b);
@@ -504,7 +514,7 @@ function revisa(){
     const okA = casi(M.valor(cajas[0]), fVal(P.fA)), okB = casi(M.valor(cajas[1]), fVal(P.fB)), igual = cajas[0].cortes === cajas[1].cortes;
     /* la pregunta no se abre hasta que las dos pizzas están cortadas igual; solo el peldaño del mismo numerador va libre */
     if(okA && okB && (P.tipo === 'num' || igual)) ponPregunta();
-    else if(okA && okB && !igual) migas('Los dos pedidos están listos: ahora pásales el <b>mismo cortador</b>. Con trozos distintos no hay cuenta que valga.');
+    else if(okA && okB && !igual) migas('Los dos pedidos están listos: ahora pásales el <b>mismo cortador</b>. Con trozos distintos no hay cuenta que valga.', 'senala');
     return;
   }
   const ps = M.partes(cajas), juntable = ps.length < 2 || M.mismoCorte(ps), v = M.total(cajas);
@@ -525,7 +535,7 @@ function ponPregunta(){
       }else{
         fallos++; est.stats[est.juego].mal += fallos === 1 ? 1 : 0;
         if(!trampa('fallo')) sonar('mal');
-        nickDice((P.rep || {})[clave] || 'Mira la regla: se lleva más el que cae más a la derecha.', false);
+        nickDice((P.rep || {})[clave] || 'Mira la regla: se lleva más el que cae más a la derecha.', false, 'piensa');
       }
     });
     q.appendChild(b);

@@ -57,7 +57,7 @@ const AY =
 
 function cabezaMigas(PJ){
   /* la cabeza de Migas, recortada de su propio dibujo: asoma por el borde */
-  const dentro = PJ.MIGAS.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
+  const dentro = PJ.migas('celebra').replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
   return '<svg class="mCabeza" x="136" y="40" width="66" height="66" viewBox="20 13 50 50" overflow="hidden">' + dentro + '</svg>';
 }
 /* la mano de Migas: rosa, con sus deditos, y el brazo gris que sale del borde */

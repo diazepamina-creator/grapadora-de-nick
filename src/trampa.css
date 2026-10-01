@@ -2,7 +2,4 @@
    encima de todo, como el choque de manos de Las piezas de Miut ── */
 .trampa-vineta{position:fixed;z-index:43;pointer-events:none;filter:drop-shadow(0 10px 18px rgba(40,20,5,.35))}
 .trampa-vineta > svg{width:100%;height:100%;display:block;overflow:visible}
-/* Migas, contento: la boca abierta, con el queso */
-.trampa-vineta .boca{display:none}
-.trampa-vineta .boca-f{display:block}
 @media print{ .trampa-vineta{display:none} }

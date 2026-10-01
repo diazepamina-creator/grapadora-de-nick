@@ -28,7 +28,7 @@ La app es **un solo `index.html`**: se genera con `node construye.mjs` a partir 
 - `src/pagina.html` — la página: la cabecera, el encargo, la mesa, el tique, los ajustes, la guía y el acta.
 - `src/motor.js` — la caja de pizza: cortar, grapar, la máquina, el valor. No dibuja nada; vale en el navegador y en Node.
 - `src/pedidos.js` — los pedidos fijos de los tres juegos y los generadores de Practicar.
-- `src/pizza.js` — la pizza en SVG. `src/personajes.js` — Nick, Nicoleta y Migas. `src/entrevistas.*` — las entrevistas. `src/sonido.js` — el clac, el cortador, la tiza y el teléfono, sintetizados.
+- `src/pizza.js` — la pizza en SVG. `src/personajes.js` — Nick, Nicoleta y Migas, articulados: una función por personaje que dibuja cada postura. `src/entrevistas.*` — las entrevistas. `src/sonido.js` — el clac, el cortador, la tiza y el teléfono, sintetizados.
 - `src/trampa.*` — la trampa para ratones: las viñetas del fallo y del acierto.
 - `src/piel.css` — la encimera de mármol, las hojas y los botones (el formato de Miut). `src/mesa.css` — la mesa, la pizarra y el tique. `src/arranque.*` — la escena de inicio.
 - `pruebas/` — `node --test pruebas/*.test.mjs`: el motor, los pedidos y que `index.html` esté construido.
@@ -39,5 +39,6 @@ La app es **un solo `index.html`**: se genera con `node construye.mjs` a partir 
 2. ✅ Versión 0.2: pizzas con textura (corteza tostada, tomate, queso fundido, pepperoni, aceitunas, albahaca); Migas, el ratón pinche del cortador, que da los avisos de la mesa; y las entrevistas a Nick, Nicoleta y Migas.
 3. ✅ Versión 0.3: Migas es el ratón del obrador de Nicoleta, el mismo de la pastelería, y está pulido: el gorro asentado entre las orejas, los incisivos bajo el labio, las manos con sus dedos (una rodea el mango del cortador), los bigotes desde el hocico y el pañuelo anudado bajo la barbilla. Nick agarra de verdad la grapadora y Nicoleta, la manga pastelera.
 4. ✅ Versión 0.4: la trampa para ratones, como el choque de manos de Miut: al fallar una pregunta, Nick pisa la trampa y se pilla el dedo gordo (¡AY!); al servir o acertar, Migas se lleva el queso sin que salte. Con su clac, su ¡ay! y la risita de Migas; se quita en Ajustes.
+5. ✅ Versión 0.5: Nick, Nicoleta y Migas, articulados como Jeferión y Listillón en La palestra: brazos con hombro y codo, ojos que miran, cejas y boca que se abre al hablar. Cada uno tiene sus posturas —habla, señala, sorpresa, celebra, piensa; Nick, además, el clac de la grapadora, y Nicoleta, el teléfono—, y las usan el encargo, los avisos de Migas, la llamada de Nicoleta y las entrevistas.
 
 © 2026 Andrés Asensio · [CC BY-NC-ND 4.0](LICENSE.md) · [La pizzería de Nick](https://diazepamina-creator.github.io/pizzeria-de-nick/), la app anterior.

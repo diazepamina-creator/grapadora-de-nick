@@ -13,10 +13,6 @@
 .ev-cara{flex:0 0 auto;width:128px;height:128px}
 .ev-cara svg{width:100%;height:100%;display:block;overflow:visible}
 .ev-cara[data-q="migas"]{width:140px;height:140px}
-/* la boca: cerrada, abierta mientras habla, y la de contento al acabar */
-.ev-cara .boca-f,.ev-mini .boca-f{display:none}
-.ev-cara.abre .boca, .ev-cara.feliz .boca{display:none}
-.ev-cara.abre .boca-f, .ev-cara.feliz .boca-f{display:block}
 .ev-cara.feliz svg{animation:salta .55s cubic-bezier(.3,1.5,.5,1)}
 .ev-globo{flex:1;min-width:0;position:relative;min-height:112px;padding:10px 13px;border-radius:12px;
   background:var(--noche);border:1.5px solid var(--linea);margin-bottom:18px}
@@ -37,11 +33,10 @@
 @media (prefers-reduced-motion: reduce){ .ev-cara.feliz svg{animation:none} }
 
 /* ── MIGAS EN LA MESA: los avisos del cortador y de la grapadora los da él ── */
-.aviso{display:grid;grid-template-columns:40px 1fr;gap:9px;align-items:center;margin:10px 0 0;padding:7px 10px;
+.aviso{display:grid;grid-template-columns:48px 1fr;gap:9px;align-items:center;margin:10px 0 0;padding:7px 10px;
   border:1px solid var(--linea);border-radius:10px;background:var(--noche);font-size:14px;color:var(--tinta)}
 .aviso:empty{display:none}
-.aviso .cara{width:40px;height:40px;display:block}
+.aviso .cara{width:48px;height:48px;display:block}
 .aviso .cara svg{width:100%;height:100%;display:block}
-.aviso .cara .boca-f{display:none}
 .aviso .quien{display:block;font-family:var(--rotulo);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tenue)}
 .aviso b{color:var(--oro)}
