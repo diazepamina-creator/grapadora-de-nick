@@ -549,11 +549,32 @@ function ponPregunta(){
       }else{
         fallos++; est.stats[est.juego].mal += fallos === 1 ? 1 : 0;
         if(!trampa('fallo')) sonar('mal');
-        nickDice((P.rep || {})[clave] || 'Mira la regla: se lleva más el que cae más a la derecha.', false, 'piensa');
+        b.disabled = true; b.classList.add('no');
+        replica(b, (P.rep || {})[clave] || 'Mira la regla: se lleva más el que cae más a la derecha.');
       }
     });
     q.appendChild(b);
   });
+}
+/* la réplica de Nick, donde se está mirando: un bocadillo bajo los botones,
+   con la cola hacia el que se ha pulsado. Arriba, Nick se queda pensando */
+function replica(boton, html){
+  const q = $('pregunta');
+  let r = q.querySelector('.replica');
+  if(!r){
+    r = document.createElement('div'); r.className = 'replica'; r.setAttribute('role', 'status');
+    r.innerHTML = '<span class="cara" data-vb="14 14 72 72" aria-hidden="true"></span><p class="bocadillo"></p>';
+    q.appendChild(r);
+  }
+  const t = r.querySelector('.bocadillo');
+  t.innerHTML = '<b class="quien">Nick</b> ' + html;
+  /* la cola apunta al botón pulsado */
+  const rq = q.getBoundingClientRect(), rb = boton.getBoundingClientRect();
+  const x = rb.left + rb.width / 2 - rq.left;
+  r.style.setProperty('--cola', Math.round(Math.max(76, Math.min(rq.width - 18, x))) + 'px');
+  r.classList.remove('entra'); void r.offsetWidth; r.classList.add('entra');
+  PJ.ponCara(r.querySelector('.cara'), 'nick', 'senala', true);
+  PJ.ponCara($('caraNick'), 'nick', 'piensa');
 }
 function acierta(txt){
   resuelto = true;
