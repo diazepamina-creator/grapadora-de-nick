@@ -1,8 +1,8 @@
 # Pendiente
 
-## Las animaciones de acierto y de fallo: la trampa para ratones
+## ✅ Hecho en la versión 0.4: la trampa para ratones
 
-La idea de Andrés (1 de octubre de 2026), para hacer a continuación.
+La idea de Andrés (1 de octubre de 2026). Se queda aquí como registro de lo que se pensó.
 
 Como en Las piezas de Miut, cada respuesta tendrá su animación: una para el acierto y otra para el fallo o para lo que no se puede hacer. El objeto de la casa es **la típica trampa para ratones**, de tabla de madera, muelle, arco de alambre y un taco de queso en el cebo.
 
