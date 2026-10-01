@@ -6,7 +6,8 @@
    trozo de una caja es esa misma pizza vista a través de su sector: así
    un corte parte el pepperoni por donde pasa, como en la cocina, y el
    dibujo no cambia por cortar más fino (la cantidad tampoco).
-   La porción elegida se separa siguiendo su bisectriz; las grapas nuevas
+   La porción elegida se separa siguiendo su bisectriz (al elegirla sube con
+   un rebote; al soltarla, vuelve); las grapas nuevas
    se ven y se van: la costura y las grapas, luego la costura, luego las
    grapas.
    ══════════════════════════════════════════════════════════════════════ */
@@ -15,6 +16,7 @@
 const M = raiz.Motor, NS = 'http://www.w3.org/2000/svg';
 const el = (tag, at) => { const e = document.createElementNS(NS, tag); for(const k in at) e.setAttribute(k, at[k]); return e; };
 const CX = 150, CY = 148, R = 126;
+const QUIETO = !!(raiz.matchMedia && raiz.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
 /* un azar con semilla: la pizza sale igual cada vez */
 let sem = 11;
@@ -113,10 +115,25 @@ function dibuja(c, alTocar){
   const animar = c.animar === 'grapa'; c.animar = null;
   const juntas = [...c.recien].sort((a, b) => a - b), cada = Math.min(260, 1100 / Math.max(1, juntas.length));
   const retraso = j => animar ? Math.round(juntas.indexOf(j) * cada + 170) : 0;
+  /* lo que estaba levantado al pintar la última vez: lo que cambie es un gesto, con su hora, para que
+     sobreviva si la mesa se repinta mientras pasa (si se ha cortado, los trozos son otros: sin gesto) */
+  const antes = !c.levantadas ? new Set() : c.levantadas.cortes === c.cortes ? c.levantadas : c.sel, ahora = new Set();
+  const hoy = Date.now(), gestos = c.gestos = (c.gestos || []).filter(x => hoy - x.t < 300 && x.cortes === c.cortes);
   M.grupos(c).forEach((t, n) => {
     const a0 = t[0] * paso, a1 = a0 + t.length * paso, ele = c.sel.has(t[0]);
     const g = el('g', {class: 'corte' + (ele ? ' elegida' : (c.sel.size ? ' apagada' : ''))});
-    if(ele){ const bis = ((a0 + a1) / 2 - 90) * Math.PI / 180; g.setAttribute('transform', `translate(${(10 * Math.cos(bis)).toFixed(1)} ${(10 * Math.sin(bis)).toFixed(1)})`); }
+    const bis = ((a0 + a1) / 2 - 90) * Math.PI / 180, dx = 10 * Math.cos(bis), dy = 10 * Math.sin(bis);
+    if(ele) g.setAttribute('transform', `translate(${dx.toFixed(1)} ${dy.toFixed(1)})`);
+    /* si acaba de elegirse o de soltarse, se ve el gesto: sube con un rebote, o vuelve a su sitio */
+    if(ele !== antes.has(t[0])) gestos.push({i: t[0], ele, t: hoy, cortes: c.cortes});
+    const gesto = gestos.filter(x => x.i === t[0] && x.ele === ele).pop();
+    if(gesto && !QUIETO && g.animate){
+      const tr = k => 'translate(' + (dx * k).toFixed(1) + 'px,' + (dy * k).toFixed(1) + 'px)';
+      const a = g.animate(ele ? [{transform: tr(0)}, {transform: tr(1.35), offset: .6}, {transform: tr(1)}] : [{transform: tr(1)}, {transform: tr(0)}],
+                {duration: ele ? 260 : 180, easing: 'ease-out'});
+      a.currentTime = hoy - gesto.t;
+    }
+    if(ele) ahora.add(t[0]);
     const forma = sector(CX, CY, R + 1, a0 + hueco, a1 - hueco);
     const cp = el('clipPath', {id: id + 's' + n}); cp.appendChild(el('path', {d: forma})); defs.appendChild(cp);
     const vista = el('g', {'clip-path': `url(#${id}s${n})`});
@@ -145,6 +162,7 @@ function dibuja(c, alTocar){
       g.addEventListener('keydown', ev => { if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); alTocar(t[0]); } }); }
     svg.appendChild(g);
   });
+  ahora.cortes = c.cortes; c.levantadas = ahora;
   if(animar && juntas.length) grapadora(svg, juntas, paso, cada);
   return svg;
 }

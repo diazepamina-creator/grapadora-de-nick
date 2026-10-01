@@ -12,7 +12,7 @@ html[data-tema="proyector"] .mesa .cajas{background:#eee;box-shadow:inset 0 0 0 
 .cajaP.mA.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--tomate), 0 4px 10px rgba(0,0,0,.3)}
 .cajaP.mB.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--azul), 0 4px 10px rgba(0,0,0,.3)}
 svg.pizza{display:block;width:100%;height:auto;touch-action:manipulation}
-.corte{cursor:pointer;transition:transform .14s ease-out}
+.corte{cursor:pointer}
 /* la porción elegida se separa de la pizza, como cuando la levantas de la caja */
 .corte.apagada{opacity:.55}
 .corte.elegida{filter:drop-shadow(0 4px 5px rgba(60,40,20,.45))}
@@ -78,7 +78,7 @@ html[data-tema="noche"] .cinta{background:linear-gradient(180deg,#4A4036,#3A3128
 .marca u{display:block;font-family:var(--rotulo);font-size:14px;color:var(--tomate);text-decoration:none;background:var(--panel);padding:0 3px;border-radius:5px;line-height:1.2}
 .marca.dos em{background:var(--azul)} .marca.dos u{color:var(--azul)}
 .marca.baja u{transform:translateY(17px)}
-.hueco{position:absolute;top:0;height:26px;background:repeating-linear-gradient(45deg,rgba(196,70,47,.32) 0 4px,rgba(196,70,47,.08) 4px 8px)}
+.hueco{position:absolute;top:0;height:26px;transform-origin:left center;background:repeating-linear-gradient(45deg,rgba(196,70,47,.32) 0 4px,rgba(196,70,47,.08) 4px 8px)}
 .hueco span{position:absolute;left:50%;top:-19px;transform:translateX(-50%);font-family:var(--rotulo);font-size:12px;color:var(--tomateO);
   background:var(--panel);padding:0 5px;border-radius:7px;border:1px solid var(--linea);white-space:nowrap}
 .nota{font-size:12px;color:var(--tenue);margin:10px 0 0;line-height:1.5;text-align:center}

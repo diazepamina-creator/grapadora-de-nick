@@ -485,6 +485,18 @@ function pintaRegla(){
   }
   const ms = marcas.querySelectorAll('.marca');
   if(ms.length === 2 && Math.abs(parseFloat(ms[0].style.left) - parseFloat(ms[1].style.left)) < 52) ms[1].classList.add('baja');
+  /* la regla viva: cada marca se desliza desde donde estaba (o desde el 0, si es nueva) y el hueco crece
+     de la marca menor a la mayor. Solo dentro del mismo pedido y con la regla del mismo ancho */
+  const visto = pintaRegla.visto, mismo = visto && visto.P === P && visto.an === an && !menosMovimiento();
+  const ahora = {P, an, x: {}, hueco: !!cinta.querySelector('.hueco')};
+  ms.forEach(m => {
+    const k = m.classList.contains('dos') ? 'B' : 'A', x = parseFloat(m.style.left); ahora.x[k] = x;
+    const x0 = mismo ? (k in visto.x ? visto.x[k] : 0) : x;
+    if(Math.abs(x0 - x) > .5 && m.animate) m.animate([{left: x0 + 'px'}, {left: x + 'px'}], {duration: 420, easing: 'cubic-bezier(.3,1.25,.5,1)'});
+  });
+  const h = cinta.querySelector('.hueco');
+  if(h && mismo && !visto.hueco && h.animate) h.animate([{transform: 'scaleX(0)'}, {transform: 'scaleX(1)'}], {duration: 520, delay: 120, easing: 'ease-out', fill: 'backwards'});
+  pintaRegla.visto = ahora;
 }
 /* la operación, como en el cuaderno: la punta de la flecha sale de la tangente de la curva */
 function punta(x1, y1, cx, cy, col, largo){
