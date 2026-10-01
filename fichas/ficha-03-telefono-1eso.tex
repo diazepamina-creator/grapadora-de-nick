@@ -1,0 +1,97 @@
+\documentclass[12pt]{article}
+\usepackage{cocina1}
+
+\begin{document}
+\begin{ficha}{Por teléfono}{Sobre el papel}{3}
+
+\begin{encargo}
+Nicoleta llama con dos fracciones. El cortador no llega: se cortan \textbf{sobre el papel}.
+\end{encargo}
+
+\bloque{1}{Mira cómo se hace}{Sobre el papel}\quad{\small ¿$\frac{3}{4}$ o $\frac{2}{3}$?}
+
+\vspace{1.5mm}
+\paso{1}\textbf{Multiplica la primera por el de abajo de la otra.}\quad \cortado{3}{4}{3}
+
+\vspace{1mm}
+\paso{2}\textbf{Multiplica la segunda por el de abajo de la primera.}\quad \cortado{2}{3}{4}
+
+\vspace{1mm}
+\paso{3}\textbf{Compara los de arriba.}\ \ 9 es más que 8:\quad \fA{3}{4}\ $>$\ \fB{2}{3}
+
+\vspace{1mm}
+\hspace*{6mm}{\small Más rápido: \textbf{en cruz}.}\quad\cruzllena{3}{4}{2}{3}
+
+\vspace{1mm}
+\begin{voz}[nicoleta]{NICOLETA, AL TELÉFONO}
+Multiplica \textbf{en cruz}: el de arriba de una por el de abajo de la otra.
+Gana la fracción que tiene el producto \textbf{más grande}.
+\end{voz}
+
+\bloque{2}{Ahora tú}{Sobre el papel}\quad{\small multiplica en cruz y pon el signo}
+
+\vspace{1mm}
+\textbf{a)}\ \cruz{2}{5}{1}{3}\hfill $\dfrac{2}{5}$\ \signo\ $\dfrac{1}{3}$
+
+\vspace{1mm}
+\textbf{b)}\ \cruz{3}{7}{2}{5}\hfill $\dfrac{3}{7}$\ \signo\ $\dfrac{2}{5}$
+
+\alto{en cruz es el de \textbf{arriba} de una por el de \textbf{abajo} de la
+otra. Arriba por arriba no vale.}
+
+\reto{¿Son la misma pizza $\frac{2}{3}$ y $\frac{6}{9}$? Usa la cruz.}
+
+\comprueba{Cada código abre esa llamada.}{%
+\qr{1}{j=telefono\&a=3/4\&b=2/3}\hfill\qr{2a}{j=telefono\&a=2/5\&b=1/3}\hfill
+\qr{2b}{j=telefono\&a=3/7\&b=2/5}\hfill\qr{reto}{j=telefono\&a=2/3\&b=6/9}}
+
+\end{ficha}
+
+% ─────────────────────────────── REVERSO ──────────────────────────────────
+\begin{dorso}{Por teléfono}{Más llamadas}{3}
+
+\begin{minipage}[t]{.6\linewidth}\vspace{0pt}
+\bloque{1}{Con la cruz}{Sobre el papel}
+
+\vspace{2mm}
+{\renewcommand{\arraystretch}{2.6}
+\begin{tabular}{@{}l@{\hspace{4mm}}l@{}}
+\textbf{a)}\ $\dfrac{4}{7}\ \signo\ \dfrac{3}{5}$ & \hueco[1cm]\quad \hueco[1cm]\\
+\textbf{b)}\ $\dfrac{5}{8}\ \signo\ \dfrac{3}{5}$ & \hueco[1cm]\quad \hueco[1cm]\\
+\textbf{c)}\ $\dfrac{7}{9}\ \signo\ \dfrac{4}{5}$ & \hueco[1cm]\quad \hueco[1cm]\\
+\textbf{d)}\ $\dfrac{5}{6}\ \signo\ \dfrac{4}{5}$ & \hueco[1cm]\quad \hueco[1cm]\\
+\end{tabular}}
+\end{minipage}\hfill
+\begin{minipage}[t]{.37\linewidth}\vspace{6mm}
+\tablamult
+\end{minipage}
+
+\bloque{2}{¿La misma pizza?}{Sobre el papel}\quad{\small si los dos productos son iguales, sí}
+
+\vspace{2mm}
+{\renewcommand{\arraystretch}{2.4}
+\begin{tabular}{@{}l@{\hspace{12mm}}l@{\hspace{12mm}}l@{}}
+\textbf{a)}\ $\dfrac{2}{4}$ y $\dfrac{3}{6}$:\ \hueco[1.4cm] &
+\textbf{b)}\ $\dfrac{3}{5}$ y $\dfrac{6}{10}$:\ \hueco[1.4cm] &
+\textbf{c)}\ $\dfrac{2}{3}$ y $\dfrac{3}{4}$:\ \hueco[1.4cm]\\
+\end{tabular}}
+
+\bloque{3}{Un problema de la pastelería}{Sobre el papel}
+
+\vspace{1.5mm}
+Nicoleta usa $\frac{2}{3}$ de un paquete de harina y el pinche $\frac{3}{5}$ de
+otro igual. ¿Quién usa más harina?\hfill\hueco[2cm]
+
+\vspace{4mm}
+\begin{semaforo}
+\sfila{Multiplico en cruz}
+\sfila{Pongo bien el signo}
+\sfila{Sé si dos fracciones son la misma pizza}
+\end{semaforo}
+
+\comprueba{Cada código abre esa llamada.}{%
+\qr{1a}{j=telefono\&a=4/7\&b=3/5}\hfill\qr{1b}{j=telefono\&a=5/8\&b=3/5}\hfill
+\qr{1c}{j=telefono\&a=7/9\&b=4/5}\hfill\qr{1d}{j=telefono\&a=5/6\&b=4/5}\hfill
+\qr{3}{j=telefono\&a=2/3\&b=3/5}}
+\end{dorso}
+\end{document}

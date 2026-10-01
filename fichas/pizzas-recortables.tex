@@ -1,0 +1,46 @@
+\documentclass[11pt]{article}
+\usepackage{cocina}
+% La hoja de pizzas: una por alumno, se recorta el primer día y se guarda en
+% un sobre. Las de todas las fichas: entera, mitades, tercios, cuartos,
+% sextos, octavos y doceavos. Se cortan por las rayas y se juntan con clips
+% (o con grapas de verdad, que para eso es La grapadora).
+\newcommand{\grande}[2]{\begin{tabular}[t]{@{}c@{}}\tikz[scale=2.45]{\dibujapizza{#1}{#2}}\\[1mm]
+  {\rotulo\footnotesize\color{oro}\MakeUppercase{#1 trozos}}\end{tabular}}
+\begin{document}
+\begin{ficha}{Recortables}{Las pizzas de la cocina}{0}
+{\small Recorta cada pizza por su borde y luego \textbf{por las rayas}: cada
+trozo es una fracción de pizza. Guárdalas en un sobre con tu nombre; las vas a
+usar en todas las fichas. Para \textbf{grapar}, junta los trozos con un clip o con
+cinta adhesiva por detrás.}
+
+\vspace{4mm}
+\centering
+\begin{tikzpicture}[scale=2.45]
+\begin{scope}[shift={(0,0)}]\def\pzSinRayas{1}\dibujapizza{1}{0}\end{scope}
+\node[font=\rotulo\footnotesize,text=oro]at(0,-1.18){ENTERA};
+\begin{scope}[shift={(2.35,0)}]\dibujapizza{2}{0,1}\end{scope}
+\node[font=\rotulo\footnotesize,text=oro]at(2.35,-1.18){MITADES};
+\begin{scope}[shift={(4.7,0)}]\dibujapizza{3}{0,1,2}\end{scope}
+\node[font=\rotulo\footnotesize,text=oro]at(4.7,-1.18){TERCIOS};
+\begin{scope}[shift={(0,-2.55)}]\dibujapizza{4}{0,1,2,3}\end{scope}
+\node[font=\rotulo\footnotesize,text=oro]at(0,-3.73){CUARTOS};
+\begin{scope}[shift={(2.35,-2.55)}]\dibujapizza{6}{0,1,2,3,4,5}\end{scope}
+\node[font=\rotulo\footnotesize,text=oro]at(2.35,-3.73){SEXTOS};
+\begin{scope}[shift={(4.7,-2.55)}]\dibujapizza{8}{0,1,2,3,4,5,6,7}\end{scope}
+\node[font=\rotulo\footnotesize,text=oro]at(4.7,-3.73){OCTAVOS};
+\begin{scope}[shift={(0,-5.1)}]\dibujapizza{12}{0,1,2,3,4,5,6,7,8,9,10,11}\end{scope}
+\node[font=\rotulo\footnotesize,text=oro]at(0,-6.28){DOCEAVOS};
+\begin{scope}[shift={(2.35,-5.1)}]\dibujapizza{4}{0,1,2,3}\end{scope}
+\node[font=\rotulo\footnotesize,text=oro]at(2.35,-6.28){CUARTOS};
+\begin{scope}[shift={(4.7,-5.1)}]\dibujapizza{8}{0,1,2,3,4,5,6,7}\end{scope}
+\node[font=\rotulo\footnotesize,text=oro]at(4.7,-6.28){OCTAVOS};
+\end{tikzpicture}
+
+\vspace{3mm}\raggedright
+{\small Todas las pizzas son \textbf{iguales de grandes}: por eso se pueden comparar
+los trozos poniendo uno encima de otro. ¿Cuántos octavos tapan un cuarto?
+\hueco[1cm]\quad ¿Y cuántos doceavos tapan un tercio? \hueco[1cm]}
+
+\enlacocina{para hacer lo mismo con la pizza de la pantalla: cortar, grapar y comparar.}
+\end{ficha}
+\end{document}

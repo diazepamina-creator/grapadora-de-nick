@@ -1,0 +1,130 @@
+\documentclass[11pt]{article}
+\usepackage{cocina}
+\begin{document}
+\begin{ficha}{Comparar}{¿Quién se lleva más?}{2}
+
+\begin{encargo}
+Dos mesas, dos pedidos: ¿quién se lleva más pizza? \textbf{Antes de cortar nada,
+apuesta} en la casilla: $>$, $<$ o $=$. Luego compruébalo con las pizzas.
+\end{encargo}
+
+\bloque{1}{La escalera}{Con pizza}\quad
+{\footnotesize apuesta, colorea los pedidos y di por qué}
+
+\vspace{2mm}
+{\small
+\begin{tabular}{@{}l@{\hspace{3mm}}c@{\hspace{1mm}}c@{\hspace{2mm}}c@{\hspace{2mm}}c@{\hspace{1mm}}l@{\hspace{4mm}}l@{}}
+\ej{a} & \fA{3}{8} \pizza[escala=.6]{8}{} & \signo & \pizza[escala=.6]{8}{} \fB{5}{8} && mismos trozos: \hueco[4.4cm]\\[3mm]
+\ej{b} & \fA{1}{3} \pizza[escala=.6]{3}{} & \signo & \pizza[escala=.6]{4}{} \fB{1}{4} && un trozo cada uno: \hueco[3.8cm]\\[3mm]
+\ej{c} & \fA{3}{4} \pizza[escala=.6,guias=8]{4}{} & \signo & \pizza[escala=.6]{8}{} \fB{5}{8} && $\dfrac{3}{4} = \fhueco[][8]$\quad corta \hueco[.8cm] caja\\[3mm]
+\ej{d} & \fA{2}{4} \pizza[escala=.6,guias=12]{4}{} & \signo & \pizza[escala=.6,guias=12]{6}{} \fB{3}{6} && $\dfrac{2}{4} = \fhueco[][12]$\quad $\dfrac{3}{6} = \fhueco[][12]$\\
+\end{tabular}}
+
+\vspace{1.5mm}
+\begin{nick}
+\textbf{Con trozos iguales}, basta contar trozos. \textbf{Con el mismo número de
+trozos}, gana el trozo más grande: el de la pizza cortada en menos partes. \textbf{Con
+trozos distintos}, contar no vale: se cortan las dos en la \textbf{misma secuencia
+de trozos} —eso es el \textbf{denominador común}— y entonces sí, se cuenta.
+\end{nick}
+
+\bloque{2}{Ninguno cabe en el otro}{Con la regla}\quad
+{\footnotesize ni los tercios caben en los quintos ni al revés}
+
+\vspace{1mm}
+{\small
+\begin{minipage}[c]{.42\linewidth}
+\cortadohueco{2}{3}{5}\qquad\cortadohueco{3}{5}{3}
+\end{minipage}%
+\begin{minipage}[c]{.58\linewidth}
+Mesa 4: \fA{2}{3}\quad Mesa 7: \fB{3}{5}\quad\ \fA{2}{3}\ \signo\ \fB{3}{5}\\[1.5mm]
+Márcalas en la regla:\\[1mm]\reglavacia[8.6cm]{1}{15}\\[1mm]
+Gana por \hueco[1.4cm] de pizza.
+\end{minipage}}
+
+\bloque{3}{Sin pizza}{Sobre el papel}\quad
+{\footnotesize busca la secuencia común, cuenta y pon el signo}
+
+\vspace{1mm}
+{\small\renewcommand{\arraystretch}{2.4}
+\begin{tabular}{@{}l@{\hspace{10mm}}l@{}}
+\ej{a}$\dfrac{5}{6}\ \signo\ \dfrac{7}{9}$\qquad en \hueco[.8cm]:\quad $\fhueco[][]\ \ \fhueco[][]$ &
+\ej{b}$\dfrac{3}{10}\ \signo\ \dfrac{1}{4}$\qquad en \hueco[.8cm]:\quad $\fhueco[][]\ \ \fhueco[][]$\\
+\ej{c}$\dfrac{4}{9}\ \signo\ \dfrac{5}{12}$\qquad en \hueco[.8cm]:\quad $\fhueco[][]\ \ \fhueco[][]$ &
+\ej{d}$\dfrac{7}{12}\ \signo\ \dfrac{5}{8}$\qquad en \hueco[.8cm]:\quad $\fhueco[][]\ \ \fhueco[][]$\\
+\end{tabular}}
+
+\alto{el número de abajo dice \textbf{en cuántas partes} se corta la pizza, no
+cuánto te toca. $\frac{1}{4}$ lleva un 4 y $\frac{1}{3}$ un 3, pero el cuarto es
+más pequeño: más comensales, menos ración. Y contar trozos que no miden lo mismo
+no sirve para nada.}
+
+\reto{¿Hay alguna fracción entre $\frac{3}{4}$ y $\frac{4}{5}$? Encuentra una.
+¿Y entre $\frac{1}{2}$ y $\frac{2}{4}$?}
+
+\comprueba{Cada código abre ese pedido en Practicar.}{%
+\qr{1a}{j=comparar\&a=3/8\&b=5/8}\hfill\qr{1b}{j=comparar\&a=1/3\&b=1/4}\hfill
+\qr{1c}{j=comparar\&a=3/4\&b=5/8}\hfill\qr{1d}{j=comparar\&a=2/4\&b=3/6}\hfill
+\qr{2}{j=comparar\&a=2/3\&b=3/5}}
+
+\end{ficha}
+
+% ─────────────────────────────── REVERSO ──────────────────────────────────
+\begin{dorso}{Comparar}{Más mesas}{2}
+
+\bloque{1}{En fila}{Con la regla}\quad
+{\footnotesize márcalas en la regla y ordénalas de menor a mayor}
+
+\vspace{1mm}
+{\small
+\ej{a}$\dfrac{1}{2}$,\ $\dfrac{3}{8}$,\ $\dfrac{3}{4}$,\ $\dfrac{5}{8}$\qquad
+\reglavacia[10.5cm]{1}{8}\\[1mm]
+\hspace*{6mm}\hueco[.9cm] $<$ \hueco[.9cm] $<$ \hueco[.9cm] $<$ \hueco[.9cm]
+
+\vspace{4mm}
+\ej{b}$\dfrac{2}{3}$,\ $\dfrac{1}{2}$,\ $\dfrac{5}{6}$,\ $\dfrac{1}{3}$\qquad
+\reglavacia[10.5cm]{1}{6}\\[1mm]
+\hspace*{6mm}\hueco[.9cm] $<$ \hueco[.9cm] $<$ \hueco[.9cm] $<$ \hueco[.9cm]}
+
+\bloque{2}{¿Qué peldaño?}{Sobre el papel}\quad
+{\footnotesize di qué peldaño de la escalera toca, y pon el signo}
+
+\vspace{1mm}
+{\footnotesize\color{tenue} A: mismos trozos \quad B: mismo número de trozos \quad
+C: uno cabe en el otro \quad D: ninguno cabe \quad E: iguales disfrazados}
+
+\vspace{1mm}
+{\small\renewcommand{\arraystretch}{2.8}
+\begin{tabular}{@{}l@{\hspace{6mm}}l@{\hspace{14mm}}l@{\hspace{6mm}}l@{}}
+\ej{a}$\dfrac{4}{7}\ \signo\ \dfrac{4}{9}$ & peldaño \hueco[.7cm] &
+\ej{b}$\dfrac{5}{12}\ \signo\ \dfrac{7}{12}$ & peldaño \hueco[.7cm]\\
+\ej{c}$\dfrac{2}{5}\ \signo\ \dfrac{7}{10}$ & peldaño \hueco[.7cm] &
+\ej{d}$\dfrac{3}{4}\ \signo\ \dfrac{5}{6}$ & peldaño \hueco[.7cm]\\
+\ej{e}$\dfrac{6}{9}\ \signo\ \dfrac{4}{6}$ & peldaño \hueco[.7cm] &
+\ej{f}$\dfrac{9}{10}\ \signo\ \dfrac{9}{8}$ & peldaño \hueco[.7cm]\\
+\end{tabular}}
+
+\bloque{3}{Problemas de las mesas}{Sobre el papel}
+
+\vspace{1.5mm}
+{\small
+\ej{a}En la mesa 4 se comen $\frac{3}{5}$ de una pizza y en la mesa 7,
+$\frac{5}{8}$ de otra igual. ¿Quién ha comido más? \hueco[2cm]\quad ¿Por cuánto?
+\hueco[1.4cm]\par\vspace{12mm}
+
+\ej{b}Ana ha leído $\frac{2}{3}$ de un libro y Luis $\frac{5}{8}$ del mismo
+libro. ¿Quién va más adelantado? \hueco[2cm]\par\vspace{12mm}
+
+\ej{c}En una clase aprueban $\frac{3}{4}$ de los alumnos; en otra,
+$\frac{7}{10}$. ¿En cuál aprueba una parte mayor de la clase? \hueco[2cm]\par\vspace{12mm}}
+
+\reto{Nick dice: «de dos fracciones, es más pequeña la que tiene más distancia
+entre el número de arriba y el de abajo». Prueba con $\frac{2}{3}$ y
+$\frac{3}{4}$. ¿Funciona siempre? Busca un caso en que falle.}
+
+\comprueba{Los del bloque 2 abren la pareja; los del 3, la llamada al teléfono, porque el cortador no llega.}{%
+\qr{2b}{j=comparar\&a=5/12\&b=7/12}\hfill\qr{2c}{j=comparar\&a=2/5\&b=7/10}\hfill
+\qr{2d}{j=comparar\&a=3/4\&b=5/6}\hfill\qr{3a}{j=telefono\&a=3/5\&b=5/8}\hfill
+\qr{3b}{j=telefono\&a=2/3\&b=5/8}\hfill\qr{3c}{j=telefono\&a=3/4\&b=7/10}}
+\end{dorso}
+\end{document}

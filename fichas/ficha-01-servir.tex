@@ -1,0 +1,165 @@
+\documentclass[11pt]{article}
+\usepackage{cocina}
+
+\begin{document}
+\begin{ficha}{Servir}{Cortar reparte, grapar junta}{1}
+
+\begin{encargo}
+El cliente pide una fracción y la pizza viene cortada de otra manera. Con el
+\textbf{cortador} y la \textbf{grapadora}, prepara justo lo que pide: ni un
+trozo más, ni un trozo menos.
+\end{encargo}
+
+\bloque{1}{Cortar}{Con pizza}\quad
+{\footnotesize dibuja los cortes que faltan por las rayas de puntos y completa}
+
+\vspace{2mm}
+{\small
+\begin{tabular}{@{}c@{\hspace{2mm}}l@{\hspace{7mm}}c@{\hspace{2mm}}l@{\hspace{7mm}}c@{\hspace{2mm}}l@{}}
+\pizza[escala=.85,guias=8]{4}{0,1,2} & \cortadohueco{3}{4}{2} &
+\pizza[escala=.85,guias=6]{3}{0} & \cortadohueco{1}{3}{2} &
+\pizza[escala=.85,guias=12]{4}{0} & \cortadohueco{1}{4}{3}\\[1mm]
+\multicolumn{2}{@{}l}{\ej{a}en cuartos; pide octavos} &
+\multicolumn{2}{l}{\ej{b}en tercios; pide sextos} &
+\multicolumn{2}{l@{}}{\ej{c}en cuartos; pide doceavos}\\
+\end{tabular}
+
+\vspace{1.5mm}
+Al cortar, ¿hay más trozos? \hueco[1.2cm]\quad ¿Son más grandes? \hueco[1.2cm]\quad
+¿Te llevas más pizza? \hueco[1.2cm]}
+
+\bloque{2}{Grapar}{Con pizza}\quad
+{\footnotesize dibuja las grapas que juntan los trozos y completa}
+
+\vspace{2mm}
+{\small
+\begin{tabular}{@{}c@{\hspace{2mm}}l@{\hspace{7mm}}c@{\hspace{2mm}}l@{\hspace{7mm}}c@{\hspace{2mm}}l@{}}
+\pizza[escala=.85]{6}{0,1,2,3} & \grapadohueco{4}{6}{2} &
+\pizza[escala=.85]{8}{0,1,2,3,4,5} & \grapadohueco{6}{8}{2} &
+\pizza[escala=.85]{12}{0,1,2,3,4,5,6,7} & \grapadohueco{8}{12}{4}\\[1mm]
+\multicolumn{2}{@{}l}{\ej{a}en sextos; de 2 en 2} &
+\multicolumn{2}{l}{\ej{b}en octavos; de 2 en 2} &
+\multicolumn{2}{l@{}}{\ej{c}en doceavos; de 4 en 4}\\
+\end{tabular}}
+
+\vspace{1.5mm}
+\begin{nick}
+Cortar cada trozo en 2 \textbf{multiplica arriba y abajo por 2}: salen el doble
+de trozos, la mitad de grandes. Grapar de 2 en 2 \textbf{divide arriba y abajo
+entre 2}. La pizza que te llevas es la misma: $\frac{3}{4}$, $\frac{6}{8}$ y
+$\frac{9}{12}$ son \textbf{fracciones equivalentes}, el mismo punto de la regla
+con distintos nombres.
+\end{nick}
+
+\bloque{3}{La regla del tique}{Con la regla}\quad
+{\footnotesize el 1 es una pizza entera: marca $\frac{1}{2}$, $\frac{2}{4}$ y
+$\frac{4}{8}$}
+
+\vspace{1mm}
+\hspace*{4mm}\reglavacia[11cm]{1}{8}\qquad
+{\small ¿Qué ves? \hueco[2.2cm]}
+
+\bloque{4}{Sin pizza}{Sobre el papel}\quad
+{\footnotesize multiplica o divide arriba y abajo por el mismo número}
+
+\vspace{1.5mm}
+{\small\renewcommand{\arraystretch}{2.2}
+\begin{tabular}{@{}l@{\hspace{9mm}}l@{\hspace{9mm}}l@{}}
+\ej{a}$\dfrac{2}{5} = \fhueco[][10] = \fhueco[][15]$ &
+\ej{b}$\dfrac{5}{6} = \fhueco[][12] = \fhueco[15][]$ &
+\ej{c}$\dfrac{9}{12} = \fhueco[3][] = \fhueco[][8]$\\
+\ej{d}$\dfrac{10}{15} = \fhueco[][3] = \fhueco[][9]$ &
+\ej{e}$\dfrac{6}{8} = \fhueco[][4] = \fhueco[][12]$ &
+\ej{f}$\dfrac{4}{10} = \fhueco[2][] = \fhueco[][15]$\\
+\end{tabular}}
+
+\alto{cortar y grapar \textbf{multiplican} o \textbf{dividen}, nunca suman. Si a
+$\frac{1}{2}$ le sumas 1 arriba y 1 abajo sale $\frac{2}{3}$, y eso ya no es
+media pizza: míralo en la regla.}
+
+\reto{Media pizza tiene muchos nombres: $\frac{1}{2}$, $\frac{2}{4}$… ¿Cuántos
+tiene? ¿Cuál es el más corto, y por qué ese ya no se puede grapar más?}
+
+\comprueba{Cada código abre ese pedido en Practicar.}{%
+\qr{1a}{j=servir\&f=6/8\&c=4}\hfill\qr{1b}{j=servir\&f=2/6\&c=3}\hfill
+\qr{1c}{j=servir\&f=3/12\&c=4}\hfill\qr{2a}{j=servir\&f=2/3\&c=6}\hfill
+\qr{2b}{j=servir\&f=3/4\&c=8}\hfill\qr{2c}{j=servir\&f=2/3\&c=12}}
+
+\end{ficha}
+
+% ─────────────────────────────── REVERSO ──────────────────────────────────
+\begin{dorso}{Servir}{Más pedidos}{1}
+
+\bloque{1}{¿Cortar o grapar?}{Con la regla}\quad
+{\footnotesize decide el gesto y por cuánto, y escribe el pedido con los trozos nuevos}
+
+\vspace{1.5mm}
+{\small\renewcommand{\arraystretch}{2.3}
+\begin{tabular}{@{}l@{\hspace{4mm}}l@{\hspace{4mm}}l@{\hspace{4mm}}l@{\hspace{4mm}}l@{}}
+& \textbf{viene en} & \textbf{el cliente pide} & \textbf{¿cortar o grapar? ¿por cuánto?} & \textbf{queda}\\
+\ej{a} & cuartos & $\dfrac{5}{8}$ & \hueco[5.2cm] & \hueco[1.6cm]\\
+\ej{b} & octavos & media pizza & \hueco[5.2cm] & \hueco[1.6cm]\\
+\ej{c} & sextos & $\dfrac{2}{3}$ & \hueco[5.2cm] & \hueco[1.6cm]\\
+\ej{d} & quintos & $\dfrac{7}{10}$ & \hueco[5.2cm] & \hueco[1.6cm]\\
+\ej{e} & doceavos & $\dfrac{3}{4}$ & \hueco[5.2cm] & \hueco[1.6cm]\\
+\end{tabular}}
+
+\bloque{2}{Más de una pizza}{Con pizza}\quad
+{\footnotesize somos cinco y cada uno quiere un cuarto}
+
+\vspace{2mm}
+{\small
+\begin{minipage}[c]{.36\linewidth}
+\caja{CAJA 1 · EN 4}{\pizza[escala=.8]{4}{}}\ \caja{CAJA 2 · EN 4}{\pizza[escala=.8]{4}{}}
+\end{minipage}%
+\begin{minipage}[c]{.64\linewidth}
+Colorea $\frac{5}{4}$. Son \hueco[.8cm] pizza entera y \fhueco[][4].\\[2mm]
+Márcalo en la regla:\ \reglavacia[6.4cm]{2}{4}
+\end{minipage}}
+
+\bloque{3}{Juntar dos trozos}{Con pizza}\quad
+{\footnotesize para graparlos, primero tienen que ser del mismo tamaño}
+
+\vspace{1.5mm}
+{\small
+\begin{minipage}[c]{.5\linewidth}
+\ej{a}Media pizza y un cuarto, todo junto:\\[1mm]
+\pizza[escala=.75,guias=4]{2}{0}\ \ +\ \ \pizza[escala=.75]{4}{2}\\[1mm]
+$\dfrac{1}{2} + \dfrac{1}{4} = \fhueco[][4] + \dfrac{1}{4} = \fhueco[][4]$
+\end{minipage}%
+\begin{minipage}[c]{.5\linewidth}
+\ej{b}Un tercio y un sexto:\\[1mm]
+\pizza[escala=.75,guias=6]{3}{0}\ \ +\ \ \pizza[escala=.75]{6}{2}\\[1mm]
+$\dfrac{1}{3} + \dfrac{1}{6} = \fhueco[][6] + \dfrac{1}{6} = \fhueco[][6] = \fhueco[][2]$
+\end{minipage}}
+
+\bloque{4}{Ya no se grapa más}{Sobre el papel}\quad
+{\footnotesize grapa todo lo que se pueda: lo que queda es la fracción irreducible}
+
+\vspace{1mm}
+{\small\renewcommand{\arraystretch}{2.2}
+\begin{tabular}{@{}l@{\hspace{6mm}}l@{\hspace{6mm}}l@{}}
+\ej{a}$\dfrac{12}{16} = \hueco[2.4cm] = \hueco[.9cm]$ &
+\ej{b}$\dfrac{15}{20} = \hueco[2.4cm] = \hueco[.9cm]$ &
+\ej{c}$\dfrac{18}{24} = \hueco[2.4cm] = \hueco[.9cm]$\\
+\ej{d}$\dfrac{20}{30} = \hueco[2.4cm] = \hueco[.9cm]$ &
+\ej{e}$\dfrac{14}{21} = \hueco[2.4cm] = \hueco[.9cm]$ &
+\ej{f}$\dfrac{9}{27} = \hueco[2.4cm] = \hueco[.9cm]$\\
+\end{tabular}}
+
+\vspace{1mm}
+{\small ¿Se puede grapar en un solo golpe, sin ir de 2 en 2? ¿De cuántos en
+cuántos, en \ej{c}? \hueco[1cm]\quad Piensa en Miut: ese número es el
+\hueco[2.6cm] del 18 y el 24.}
+
+\vspace{2mm}
+\reto{Nick dice que $\frac{4}{6}$ y $\frac{6}{9}$ son la misma pizza, aunque de
+una a otra no se pasa solo cortando ni solo grapando. ¿Tiene razón? ¿Qué gestos
+harías, uno detrás de otro?}
+
+\comprueba{Cada código abre ese pedido.}{%
+\qr{1a}{j=servir\&f=5/8\&c=4}\hfill\qr{1b}{j=servir\&f=1/2\&c=8\&p=1}\hfill
+\qr{1d}{j=servir\&f=7/10\&c=5}\hfill\qr{2}{j=servir\&f=5/4\&c=4,4}\hfill
+\qr{3a}{j=servir\&f=3/4\&c=2,4}}
+\end{dorso}
+\end{document}
