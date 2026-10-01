@@ -215,11 +215,7 @@ function migas(pose){
     senala:   {bI: [140, 8, 80, 8], bD: [-5, 8, -15, 6], c: true, cAng: 38, boca: .4, ojo: 'normal', mira: [1, 0], ceja: 'normal'},
     sorpresa: {bI: [-150, 8, -110, 8], bD: [-30, 8, -75, 8], c: true, boca: .9, redonda: true, ojo: 'grande', mira: [0, 0], ceja: 'alta', orejas: -6},
     celebra:  {bI: [-130, 8, -100, 8], bD: [-60, 8, -85, 9], c: true, boca: 1, ojo: 'feliz', mira: [0, 0], ceja: 'feliz', salto: 3},
-    piensa:   {bI: [140, 8, 80, 8], bD: [80, 7, -120, 10], dedo: true, boca: 0, ojo: 'normal', mira: [.6, -1], ceja: 'piensa'},
-    /* coge: de puntillas, el brazo estirado hacia el queso y los ojos en él (la trampa) */
-    /* fiesta: los dos brazos arriba, sin el cortador (en la trampa, una mano lleva el queso) */
-    fiesta:   {bI: [-130, 8, -100, 8], bD: [-50, 8, -80, 8], boca: 1, ojo: 'feliz', mira: [0, 0], ceja: 'feliz', salto: 3},
-    coge:     {bI: [172, 8, 178, 9], bD: [70, 8, 105, 7], boca: 0, ojo: 'normal', mira: [-1, .7], ceja: 'alta'}
+    piensa:   {bI: [140, 8, 80, 8], bD: [80, 7, -120, 10], dedo: true, boca: 0, ojo: 'normal', mira: [.6, -1], ceja: 'piensa'}
   }[pose] || {};
   const dy = -(P.salto || 0);
   let s = '<svg viewBox="0 0 100 100" class="pj pj-migas pose-' + pose + '" aria-hidden="true">';
@@ -283,6 +279,78 @@ function migas(pose){
   return s + '</g></svg>';
 }
 
+/* ── MIGAS, DE LADO: el mismo ratón visto de perfil, mirando a la izquierda,
+   para cuando camina hacia algo (la trampa). Lleva sus piezas sueltas con
+   clase para moverlas: las patas (.pataA delante, .pataB detrás) giran en la
+   cadera y el brazo (.brazoLado) en el hombro. Posturas:
+     anda   el brazo colgando, a punto de balancearse
+     coge   el brazo estirado hacia delante y abajo, la mirada en el queso
+     salta  el brazo arriba con el queso, los ojos en arco y la boca abierta
+   «queso»: dibuja un taco de queso en la mano (coge, salta) ── */
+const QUESITO = (x, y, k) => '<g transform="translate(' + f1(x) + ' ' + f1(y) + ') scale(' + (k || 1) + ')">' +
+  '<path d="M-8 4 L8 4 L8 -7 Z" fill="#F4C64A" stroke="' + T + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+  '<path d="M-8 4 L8 -7 L8 -10 Q1 -8.4 -8 1 Z" fill="#E2A82C" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>' +
+  '<circle cx="4" cy="0" r="1.3" fill="#D99A22"/><circle cx="1" cy="2.4" r=".8" fill="#D99A22"/></g>';
+function migasLado(pose, queso){
+  pose = pose || 'anda';
+  const P = {
+    anda:  {b: [100, 9, 115, 8], ojo: 'normal', boca: 0, ceja: 0},
+    coge:  {b: [172, 10, 178, 10], ojo: 'normal', boca: 0, ceja: -1.4, mira: [-.6, .8]},
+    salta: {b: [120, 9, 70, 8], alto: [-82, 24, -96, 24], ojo: 'feliz', boca: 1, ceja: -1}
+  }[pose] || {};
+  const m = P.mira || [-.8, 0];
+  let s = '<svg viewBox="0 0 100 100" class="pj pj-migas lado pose-' + pose + '" aria-hidden="true">';
+  s += '<ellipse cx="54" cy="96" rx="20" ry="2.6" fill="#140F1F" opacity=".2"/>';
+  /* la cola, por detrás, enroscada hacia arriba */
+  s += '<path d="M66 84 Q84 89 86 76 Q87 66 80 63" fill="none" stroke="' + T + '" stroke-width="4" stroke-linecap="round"/>' +
+       '<path d="M66 84 Q84 89 86 76 Q87 66 80 63" fill="none" stroke="' + MV.rosa + '" stroke-width="2.3" stroke-linecap="round"/>';
+  /* al saltar, el brazo de detrás sube el queso por encima de la cabeza */
+  if(P.alto){ const a = brazo(60, 64, ...P.alto, 3.4, '#857469');
+    s += '<g class="brazoAlto">' + (queso ? QUESITO(a.x + 1, a.y - 10, 1.2) : '') + a.svg + mano(a.x, a.y, a.ang, '#D8939F', MV.rosaB) + '</g>'; }
+  /* la pata de detrás, un poco más oscura */
+  s += '<g class="pataB"><path d="M61 82 L62 92" stroke="' + T + '" stroke-width="5.6" stroke-linecap="round"/><path d="M61 82 L62 92" stroke="#857469" stroke-width="3.4" stroke-linecap="round"/>' +
+       '<path d="M55 95.2 Q55 91 61 91 Q67 91.4 66.4 95.2 Z" fill="#D8939F" stroke="' + T + '" stroke-width="1.2" stroke-linejoin="round"/></g>';
+  /* el cuerpo, en pera, y el delantal que se ve por delante */
+  s += '<path d="M44 88 Q38 72 46 62 Q54 55 63 60 Q72 67 70 81 Q68 91 58 92 Q48 92 44 88 Z" fill="' + MV.pelo + '" stroke="' + T + '" stroke-width="1.6" stroke-linejoin="round"/>';
+  s += '<path d="M45.4 65 Q40.6 76 44.6 88.4 Q50 91.4 55.6 91.6 Q53 78 53.6 64 Q49 63 45.4 65 Z" fill="' + MV.tela + '" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>';
+  s += '<path d="M44 78 Q48 80 53.4 79" fill="none" stroke="#DCCFB4" stroke-width="1.2"/>';
+  /* la pata de delante */
+  s += '<g class="pataA"><path d="M52 84 L50 92" stroke="' + T + '" stroke-width="5.8" stroke-linecap="round"/><path d="M52 84 L50 92" stroke="' + MV.pelo + '" stroke-width="3.6" stroke-linecap="round"/>' +
+       '<path d="M41.6 95.4 Q41.6 91 48 90.8 Q54.4 91 54 95.4 Z" fill="' + MV.rosa + '" stroke="' + T + '" stroke-width="1.2" stroke-linejoin="round"/>' +
+       '<path d="M44 95.2 V93.8 M46.4 95.2 V93.4 M48.8 95.2 V93.8" stroke="' + MV.rosaB + '" stroke-width=".7" stroke-linecap="round"/></g>';
+  /* la oreja, por detrás de la cabeza */
+  s += '<circle cx="57" cy="30" r="11" fill="' + MV.pelo + '" stroke="' + T + '" stroke-width="1.6"/><circle cx="56.2" cy="30.8" r="6.6" fill="' + MV.rosa + '"/>';
+  /* la cabeza de perfil: el cráneo redondo y el hocico largo hacia la izquierda */
+  s += '<path d="M60 45 Q61 30 49 28 Q37 27 33.6 36 Q30.6 42 22.6 45.6 Q18.6 48.6 22.4 51.6 Q30 56.4 41 56.6 Q57 57 60 45 Z" fill="' + MV.cabeza + '" stroke="' + T + '" stroke-width="1.6" stroke-linejoin="round"/>';
+  s += '<path d="M24 51 Q31 55.6 40 55.4 Q34 52 30 47 Q26 48.6 24 51 Z" fill="' + MV.hocico + '"/>';
+  s += '<ellipse cx="42" cy="50" rx="3" ry="1.9" fill="' + MV.rosa + '" opacity=".55"/>';
+  s += '<ellipse cx="21.4" cy="48.2" rx="2.5" ry="2" fill="#E39A88" stroke="#B9705F" stroke-width=".7"/><ellipse cx="20.8" cy="47.6" rx=".7" ry=".45" fill="#fff" opacity=".7"/>';
+  /* el ojo (con su párpado) o, si está contento, en arco */
+  if(P.ojo === 'feliz') s += '<path d="M34.6 41.6 Q38 37.4 41.4 41.6" fill="none" stroke="#241C14" stroke-width="2" stroke-linecap="round"/>';
+  else s += '<ellipse class="ojo" cx="38" cy="40.4" rx="3" ry="3.6" fill="#241C14"/>' +
+    '<circle cx="' + f1(37 + m[0] * .7) + '" cy="' + f1(39 + m[1] * .7) + '" r="1.2" fill="#fff"/>' + parpado(38, 40.4, 3, 3.6, MV.cabeza, T);
+  s += '<path d="M34.4 ' + f1(34.6 + P.ceja) + ' Q38 ' + f1(32.6 + P.ceja) + ' 41.6 ' + f1(34.2 + P.ceja) + '" fill="none" stroke="#6E6058" stroke-width="1.5" stroke-linecap="round"/>';
+  /* los bigotes, la boca y el incisivo */
+  s += '<g stroke="' + T + '" stroke-width=".75" stroke-linecap="round" fill="none" opacity=".75"><path d="M27 48.6 Q20 45 14 45.4"/><path d="M27.4 50.4 Q20.4 50.6 14.6 53"/></g>';
+  if(P.boca) s += '<path d="M25.4 52.4 Q30 59 35 53.4 Q30 54.6 25.4 52.4 Z" fill="#8E4A50" stroke="' + T + '" stroke-width=".9" stroke-linejoin="round"/>';
+  else s += '<path d="M25.6 52.6 Q30 55.2 34.4 53.2" fill="none" stroke="' + T + '" stroke-width="1" stroke-linecap="round"/>';
+  s += '<path d="M27 53 H29 V55 Q28 55.4 27 55 Z" fill="#FBF7EE" stroke="' + T + '" stroke-width=".45" stroke-linejoin="round"/>';
+  /* el pañuelo rojo al cuello, con el nudo atrás */
+  s += '<path d="M40 56 Q51 62 61 55 L62.4 59.4 Q51 67 40.4 60.4 Z" fill="#C4462F" stroke="' + T + '" stroke-width="1.2" stroke-linejoin="round"/>';
+  s += '<path d="M60.6 57 L67 61.6 L61 63 Z" fill="#C4462F" stroke="' + T + '" stroke-width="1.1" stroke-linejoin="round"/>';
+  s += '<g fill="#F6EFE2"><circle cx="45" cy="60" r=".8"/><circle cx="51" cy="61.6" r=".8"/><circle cx="57" cy="59.6" r=".8"/></g>';
+  /* el gorro, encajado detrás de la oreja y algo echado atrás */
+  s += '<g transform="rotate(12 48 30)"><path d="M37.4 31 Q48 26.4 58.6 31 L58 34.4 Q48 30.4 38 34.6 Z" fill="#EDE6D6" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>' +
+       '<path d="M38.2 31.2 Q35 21 43 20.8 Q45 16 48 16.2 Q51 16 53 20.8 Q61 21 57.8 31.2 Q48 27.2 38.2 31.2 Z" fill="#FBF7EE" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/></g>';
+  /* el brazo de este lado, con su mano, y el queso si lo lleva */
+  const b = brazo(50, 66, ...P.b, 3.6, MV.pelo);
+  let mano_ = b.svg + mano(b.x, b.y, b.ang, MV.rosa, MV.rosaB);
+  /* en «coge», el queso del tamaño del de la trampa (la viñeta dibuja a Migas a 1,05): cambia de sitio sin saltar */
+  if(queso && !P.alto) mano_ = '<g class="qMano">' + QUESITO(b.x - 10.5, b.y + .9, 1.19) + '</g>' + mano_;
+  s += '<g class="brazoLado">' + mano_ + '</g>';
+  return s + '</svg>';
+}
+
 const DIBUJA = {nick, nicoleta, migas};
 const REDUCIDO = raiz.matchMedia && raiz.matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* pone una postura en un hueco; si «hablar», mueve la boca un momento
@@ -324,6 +392,6 @@ function parpadea(){
 if(!REDUCIDO && raiz.document) setInterval(parpadea, 120);
 const POSES = {nick: ['habla', 'senala', 'grapa', 'sorpresa', 'celebra', 'piensa'], nicoleta: ['habla', 'senala', 'telefono', 'sorpresa', 'celebra', 'piensa'], migas: ['habla', 'senala', 'sorpresa', 'celebra', 'piensa']};
 /* las caras de siempre, para quien no necesita postura */
-raiz.Personajes = {nick, nicoleta, migas, DIBUJA, POSES, ponCara,
+raiz.Personajes = {nick, nicoleta, migas, migasLado, DIBUJA, POSES, ponCara,
   get NICK(){ return nick('habla'); }, get NICOLETA(){ return nicoleta('habla'); }, get MIGAS(){ return migas('habla'); }};
 })(window);
