@@ -29,7 +29,7 @@
 <div class="inicio" id="escenaInicio" hidden>
   <div class="inEscena">
     <p class="inLema">cortar reparte · grapar junta</p>
-    <div class="inCaja" aria-hidden="true"></div>
+    <div class="inMesa"><span class="inAsoma inNick" aria-hidden="true"></span><span class="inAsoma inMigas" aria-hidden="true"></span><div class="inCaja" aria-hidden="true"></div></div>
     <p class="inTitulo">La grapadora de Nick</p>
   </div>
   <p class="inSalta">toca para empezar</p>
@@ -221,6 +221,9 @@ function montaPedido(){
   activa = 0;
   if(P && esTel()) sonar('timbre');
   pintaEncargo(); pintaMesa(); lee();
+  /* mientras suena, el auricular de Nicoleta tiembla */
+  const cara = P && esTel() && !menosMovimiento() && $('cliente').querySelector('.cara');
+  if(cara){ cara.classList.add('suena'); setTimeout(() => cara.classList.remove('suena'), 1300); }
 }
 function pintaPestanas(){
   document.querySelectorAll('.juegos button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.j === est.juego)));
@@ -270,7 +273,16 @@ function clac(){
 
 /* ── LA PIZARRA: el signo, antes de poder contar ── */
 const signoReal = () => M.signo(P.fA, P.fB);
-function pintaPizarra(){
+/* el signo, escrito con tiza: cada trazo se dibuja (si «escribe») y queda con su grano */
+const TRAZOS = {'>': ['M8 7 L28 18 L8 29'], '<': ['M28 7 L8 18 L28 29'], '=': ['M7 13 H29', 'M7 23 H29']};
+function tiza(sg, escribe){
+  const t = (TRAZOS[sg] || []).map((d, i) => '<path d="' + d + '" pathLength="1" style="animation-delay:' + (i * 260) + 'ms"/>').join('');
+  return '<span class="signo" role="img" aria-label="' + ({'>': 'mayor que', '<': 'menor que', '=': 'igual a'}[sg] || sg) + '">' +
+    '<svg viewBox="0 0 36 36" class="' + (escribe ? 'escribe' : '') + '" aria-hidden="true"><defs><filter id="tizaGrano" x="-20%" y="-20%" width="140%" height="140%">' +
+    '<feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="3" result="r"/><feDisplacementMap in="SourceGraphic" in2="r" scale="1.6" result="d"/>' +
+    '<feColorMatrix in="r" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.7" result="h"/><feComposite in="d" in2="h" operator="in"/></filter></defs><g filter="url(#tizaGrano)">' + t + '</g></svg></span>';
+}
+function pintaPizarra(escribe){
   const el = $('pizarra');
   if(!P || !(esCompara() || esTel()) || !aj.apuesta){ el.innerHTML = ''; return; }
   const izq = '<span class="fA">' + fTxt(P.fA) + '</span>', der = '<span class="fB">' + fTxt(P.fB) + '</span>';
@@ -278,10 +290,10 @@ function pintaPizarra(){
     el.innerHTML = '<div class="pizarra"><div class="rot">LA PIZARRA DE NICK</div><div class="linea">' + izq + '<span class="hueco-signo">?</span>' + der + '</div>' +
       '<div class="bots"><button type="button" data-s="&gt;" aria-label="mayor">&gt;</button><button type="button" data-s="=" aria-label="igual">=</button><button type="button" data-s="&lt;" aria-label="menor">&lt;</button></div>' +
       '<div class="apuesta">SIN CORTAR NADA TODAVÍA: ¿QUÉ SE APUESTA?</div></div>';
-    el.querySelectorAll('.bots button').forEach(b => b.addEventListener('click', () => { prediccion = b.dataset.s; sonar('tiza'); pintaPizarra(); }));
+    el.querySelectorAll('.bots button').forEach(b => b.addEventListener('click', () => { prediccion = b.dataset.s; sonar('tiza'); pintaPizarra(true); }));
   }else{
     const bien = prediccion === signoReal();
-    el.innerHTML = '<div class="pizarra"><div class="rot">LA PIZARRA DE NICK</div><div class="linea">' + izq + '<span class="signo">' + prediccion + '</span>' + der + '</div>' +
+    el.innerHTML = '<div class="pizarra"><div class="rot">LA PIZARRA DE NICK</div><div class="linea">' + izq + tiza(prediccion, escribe) + der + '</div>' +
       '<div class="apuesta">' + (resuelto ? (bien ? 'LA APUESTA AGUANTÓ' : 'LA APUESTA NO AGUANTÓ') : 'ESO DICE LA PIZARRA. LA CUENTA LO DIRÁ.') + '</div></div>';
   }
 }

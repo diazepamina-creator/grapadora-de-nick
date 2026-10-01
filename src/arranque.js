@@ -2,7 +2,7 @@
    LA GRAPADORA DE NICK · la escena de inicio
    La app en pequeño: cae una pizza entera en la caja, el cortador la parte
    en cuatro, dos cuartos se levantan y la grapadora los junta: sale media
-   pizza, y el nombre. Unos cuatro segundos; se salta tocando, o con Intro,
+   pizza, y el nombre; Nick y Migas asoman por los lados de la caja. Unos cuatro segundos; se salta tocando, o con Intro,
    espacio o Esc. Solo al abrir la app, no al recargar en la misma sesión.
    No hay dibujo propio: la pizza es la de verdad y los pasos, del motor.
    ══════════════════════════════════════════════════════════════════════ */
@@ -43,6 +43,15 @@ function escena(el, alAcabar){
   luego(2100, () => { M.toca(c, 1); pinta(); });
   luego(2700, () => { M.grapa(c); pinta(); if(S) S.toca('grapa'); });
   luego(3200, () => titulo.classList.add('ve'));
+  /* y, con el nombre, Nick y Migas asoman a ver qué ha salido */
+  luego(3350, () => {
+    const PJ = raiz.Personajes; if(!PJ) return;
+    [['.inNick', 'nick'], ['.inMigas', 'migas']].forEach(([sel, q], i) => {
+      const a = el.querySelector(sel); if(!a) return;
+      a.innerHTML = PJ.DIBUJA[q]('celebra');
+      setTimeout(() => a.classList.add('ve'), i * 180);
+    });
+  });
   luego(5000, fin);
 }
 raiz.Arranque = {escena};

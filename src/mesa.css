@@ -43,7 +43,13 @@ button.n.avisa{background:#C87A28;color:#fff;border-color:#9A5C1B;border-style:s
 .pizarra .linea{font-family:var(--rotulo);font-size:22px;color:var(--tizaB);display:flex;gap:11px;align-items:center;justify-content:center;flex-wrap:wrap}
 .pizarra .fA{color:#F0A79A} .pizarra .fB{color:#9FD0E6}
 .pizarra .hueco-signo{display:inline-block;min-width:44px;padding:1px 8px;border-radius:5px;border:2px dashed #7E9686;color:var(--tizaV)}
-.pizarra .signo{display:inline-block;min-width:44px;font-size:27px;color:#F7E9A0}
+.pizarra .signo{display:inline-block;min-width:44px;color:#F7E9A0;line-height:0}
+/* el signo, con tiza: cada trazo se escribe y deja su grano */
+.pizarra .signo svg{width:36px;height:36px;overflow:visible}
+.pizarra .signo path{fill:none;stroke:currentColor;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+.pizarra .signo svg.escribe path{stroke-dasharray:1;stroke-dashoffset:1;animation:tizaEscribe .32s ease-out forwards}
+@keyframes tizaEscribe{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion: reduce){ .pizarra .signo svg.escribe path{animation:none;stroke-dashoffset:0} }
 .pizarra .apuesta{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1px;color:var(--tizaV);margin-top:6px}
 .pizarra .bots{display:flex;gap:8px;justify-content:center;margin-top:9px}
 .pizarra .bots button{font-family:var(--rotulo);font-size:21px;width:56px;min-height:42px;border-radius:8px;border:2px solid #7E9686;

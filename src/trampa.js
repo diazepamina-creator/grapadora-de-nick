@@ -8,44 +8,44 @@
      fallo    baja un pie de Nick, pisa el cebo y ¡clac!: el arco le pilla
               el dedo gordo. El dedo se pone rojo, sale un «¡AY!» y el pie
               da un respingo con la trampa colgando.
-     acierto  asoma la mano de Migas, se lleva el queso con mucho cuidado y
-              la trampa salta sobre el vacío. Migas, desde el borde, guiña
-              un ojo con el queso en la mano.
+     acierto  Migas entra de puntillas, agarra la punta del queso y da un
+              paso atrás con él: la trampa salta sobre el vacío y Migas lo
+              levanta, de fiesta.
    Se salta con «Sin trampas» en Ajustes y con «menos movimiento».
    ══════════════════════════════════════════════════════════════════════ */
 (function (raiz) {
 'use strict';
 const T = '#3A2E22';
-const HINGE = [100, 136];
+const HINGE = [86, 136];
 /* la trampa, de lado: la tabla, el muelle, el cebo con su queso y el arco */
 const TABLA =
-  '<path d="M26 142 H174 Q178 142 178 146 V156 Q178 160 174 160 H26 Q22 160 22 156 V146 Q22 142 26 142 Z" fill="#C99A5E" stroke="' + T + '" stroke-width="3" stroke-linejoin="round"/>' +
-  '<path d="M24 147 H176" stroke="#E2BE86" stroke-width="2.4" stroke-linecap="round"/>' +
-  '<path d="M40 152 Q60 150 80 153 M110 151 Q132 154 160 151" fill="none" stroke="#A97A42" stroke-width="1.6" stroke-linecap="round"/>' +
+  '<path d="M28 142 H142 Q146 142 146 146 V156 Q146 160 142 160 H28 Q24 160 24 156 V146 Q24 142 28 142 Z" fill="#C99A5E" stroke="' + T + '" stroke-width="3" stroke-linejoin="round"/>' +
+  '<path d="M26 147 H144" stroke="#E2BE86" stroke-width="2.4" stroke-linecap="round"/>' +
+  '<path d="M38 152 Q56 150 74 153 M96 151 Q114 154 134 151" fill="none" stroke="#A97A42" stroke-width="1.6" stroke-linecap="round"/>' +
   /* las grapas que sujetan el alambre a la tabla */
-  '<path d="M93 142 V137 H107 V142" fill="none" stroke="#6E7680" stroke-width="2.6" stroke-linejoin="round"/>';
+  '<path d="M79 142 V137 H93 V142" fill="none" stroke="#6E7680" stroke-width="2.6" stroke-linejoin="round"/>';
 const MUELLE =
-  '<g fill="none" stroke="#8C949E" stroke-width="2.4"><ellipse cx="100" cy="136" rx="7" ry="5"/><ellipse cx="100" cy="136" rx="4" ry="2.8"/></g>' +
-  '<circle cx="100" cy="136" r="1.8" fill="#6E7680"/>';
+  '<g fill="none" stroke="#8C949E" stroke-width="2.4"><ellipse cx="86" cy="136" rx="7" ry="5"/><ellipse cx="86" cy="136" rx="4" ry="2.8"/></g>' +
+  '<circle cx="86" cy="136" r="1.8" fill="#6E7680"/>';
 const CEBO =
-  '<path d="M124 142 V138 H150 V142" fill="#B6BCC4" stroke="' + T + '" stroke-width="2" stroke-linejoin="round"/>';
+  '<path d="M96 142 V138 H122 V142" fill="#B6BCC4" stroke="' + T + '" stroke-width="2" stroke-linejoin="round"/>';
 const QUESO =
-  '<path d="M127 137 L147 137 L147 124 Z" fill="#F4C64A" stroke="' + T + '" stroke-width="2.2" stroke-linejoin="round"/>' +
-  '<path d="M127 137 L147 124 L147 120 Q138 122 127 133 Z" fill="#E2A82C" stroke="' + T + '" stroke-width="2" stroke-linejoin="round"/>' +
-  '<g fill="#D99A22"><circle cx="141" cy="132" r="1.8"/><circle cx="144" cy="127.4" r="1.2"/><circle cx="136" cy="134" r="1.1"/></g>';
+  '<path d="M99 137 L119 137 L119 124 Z" fill="#F4C64A" stroke="' + T + '" stroke-width="2.2" stroke-linejoin="round"/>' +
+  '<path d="M99 137 L119 124 L119 120 Q110 122 99 133 Z" fill="#E2A82C" stroke="' + T + '" stroke-width="2" stroke-linejoin="round"/>' +
+  '<g fill="#D99A22"><circle cx="113" cy="132" r="1.8"/><circle cx="116" cy="127.4" r="1.2"/><circle cx="108" cy="134" r="1.1"/></g>';
 /* el arco de alambre: tumbado hacia la izquierda, armado; al saltar gira
    media vuelta por arriba y golpea a la derecha */
 const ARCO =
-  '<path d="M100 136 L46 136" stroke="' + T + '" stroke-width="5.4" stroke-linecap="round"/>' +
-  '<path d="M100 136 L46 136" stroke="#C6CBD1" stroke-width="3" stroke-linecap="round"/>' +
-  '<path d="M48 131 V141" stroke="' + T + '" stroke-width="5.4" stroke-linecap="round"/>' +
-  '<path d="M48 131 V141" stroke="#C6CBD1" stroke-width="3" stroke-linecap="round"/>';
+  '<path d="M86 136 L38 136" stroke="' + T + '" stroke-width="5.4" stroke-linecap="round"/>' +
+  '<path d="M86 136 L38 136" stroke="#C6CBD1" stroke-width="3" stroke-linecap="round"/>' +
+  '<path d="M40 131 V141" stroke="' + T + '" stroke-width="5.4" stroke-linecap="round"/>' +
+  '<path d="M40 131 V141" stroke="#C6CBD1" stroke-width="3" stroke-linecap="round"/>';
 const RAYOS = [[100, 82, 100, 66], [128, 92, 140, 80], [72, 92, 60, 80], [146, 112, 162, 106], [54, 112, 38, 106]]
-  .map(([a, b, c, d]) => '<path d="M' + a + ' ' + b + ' L' + c + ' ' + d + '"/>').join('');
+  .map(([a, b, c, d]) => '<path d="M' + (a - 14) + ' ' + b + ' L' + (c - 14) + ' ' + d + '"/>').join('');
 
 /* el pie de Nick: grande, de dibujo, con el dedo gordo delante; baja desde arriba a la derecha */
 const PIE =
-  '<g transform="translate(26 0)"><path d="M150 -20 L150 82 Q150 96 138 100 L112 106 Q100 108 100 118 Q100 128 112 128 L150 128 Q172 128 176 108 L178 -20 Z" fill="#C9A17C" stroke="' + T + '" stroke-width="3" stroke-linejoin="round"/>' +
+  '<g transform="translate(-2 0)"><path d="M150 -20 L150 82 Q150 96 138 100 L112 106 Q100 108 100 118 Q100 128 112 128 L150 128 Q172 128 176 108 L178 -20 Z" fill="#C9A17C" stroke="' + T + '" stroke-width="3" stroke-linejoin="round"/>' +
   '<path d="M156 -20 Q154 40 160 70" fill="none" stroke="#B08A6A" stroke-width="2.4" stroke-linecap="round" opacity=".7"/>' +
   /* los dedos pequeños, y el gordo, que es el que va a pagar */
   '<g fill="#C9A17C" stroke="' + T + '" stroke-width="2.4"><circle cx="122" cy="126" r="5"/><circle cx="133" cy="127" r="4.6"/><circle cx="143" cy="127.4" r="4.2"/></g>' +
@@ -55,17 +55,16 @@ const AY =
   '<g class="ay"><path d="M34 46 Q36 28 58 28 L86 28 Q106 28 106 46 Q106 64 86 64 L72 64 L80 78 L60 64 Q34 64 34 46 Z" fill="#FFF8E8" stroke="' + T + '" stroke-width="3" stroke-linejoin="round"/>' +
   '<text x="70" y="55" text-anchor="middle" font-family="Bree Serif,Georgia,serif" font-size="25" fill="#B0442C">¡AY!</text></g>';
 
-function cabezaMigas(PJ){
-  /* la cabeza de Migas, recortada de su propio dibujo: asoma por el borde */
-  const dentro = PJ.migas('celebra').replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
-  return '<svg class="mCabeza" x="136" y="40" width="66" height="66" viewBox="20 13 50 50" overflow="hidden">' + dentro + '</svg>';
+/* Migas, entero y sin recortes: de puntillas con el brazo estirado («coge»)
+   y, ya con el queso, de fiesta. Está de pie detrás de la trampa (los pies,
+   tapados por la tabla); la mano de «coge» cae justo en la punta del queso */
+const MS = 96, MX = 119 - 20 * MS / 100, MY = 130 - 67.5 * MS / 100, ATRAS = 6;
+const MANO_FIESTA = [MX + ATRAS + 29.5 * MS / 100, MY + (52 - 3) * MS / 100];
+function migasEntero(PJ){
+  const pon = (cls, pose, vis) => '<svg x="' + MX + '" y="' + MY + '" width="' + MS + '" height="' + MS + '" viewBox="0 0 100 100" overflow="visible"' + (vis ? '' : ' opacity="0"') + '>' +
+    PJ.migas(pose).replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '') + '</svg>';
+  return '<g class="mPasa"><g class="mCoge">' + pon('', 'coge', true) + '</g><g class="mFiesta" opacity="0">' + pon('', 'fiesta', true).replace('x="' + MX + '"', 'x="' + (MX + ATRAS) + '"') + '</g></g>';
 }
-/* la mano de Migas: rosa, con sus deditos, y el brazo gris que sale del borde */
-const MANO =
-  '<path d="M210 112 Q176 112 158 118" fill="none" stroke="' + T + '" stroke-width="13" stroke-linecap="round"/>' +
-  '<path d="M210 112 Q176 112 158 118" fill="none" stroke="#9A8A80" stroke-width="9" stroke-linecap="round"/>' +
-  '<path d="M146 116 Q146 108 154 108 Q162 109 162 117 Q161 125 153 125 Q145 124 146 116 Z" fill="#E8A9B4" stroke="' + T + '" stroke-width="2.4" stroke-linejoin="round"/>' +
-  '<path d="M148 112 L143 109 M147 116 L141 115 M148 120 L143 122" stroke="' + T + '" stroke-width="2" stroke-linecap="round"/>';
 
 function svg(escena, PJ){
   const fondo = escena === 'fallo' ? ['#FBE3D8', '#F2C2B0'] : ['#E6F0D4', '#CFE0B0'];
@@ -75,10 +74,9 @@ function svg(escena, PJ){
     '<circle cx="100" cy="100" r="94" fill="url(#trFondo-' + escena + ')"/>' +
     '<g clip-path="url(#trCirculo)">' +
       '<ellipse cx="100" cy="164" rx="84" ry="7" fill="rgba(60,35,10,.18)"/>' +
-      (escena === 'acierto' ? cabezaMigas(PJ) : '') +
+      (escena === 'acierto' ? migasEntero(PJ) : '') +
       g('trampa', TABLA + CEBO + MUELLE + g('queso', QUESO) +
         (escena === 'fallo' ? g('pie', PIE) : '') + g('arco', ARCO)) +
-      (escena === 'acierto' ? g('mano', MANO) : '') +
       g('rayos', '<g fill="none" stroke="#E8A93A" stroke-width="4" stroke-linecap="round">' + RAYOS + '</g>') +
       (escena === 'fallo' ? AY : '') +
     '</g><circle cx="100" cy="100" r="94" fill="none" stroke="' + T + '" stroke-width="5"/></svg>';
@@ -127,34 +125,41 @@ function lanza(escena, PJ, opts){
       {transform: 'translate(0,-130px)', offset: 0}, {transform: 'translate(0,-130px)', offset: o(260)},
       {transform: 'translate(0,2px)', offset: o(560), easing: 'ease-in'}, {transform: 'translate(0,0)', offset: o(640)},
       {transform: 'translate(0,0)', offset: 1}];
-    anima('.pie', pie, '166px 120px');
+    anima('.pie', pie, '138px 120px');
     /* la trampa entera sube con el pie: va colgando del dedo */
     anima('.trampa', [
       {transform: 'translate(0,0)', offset: 0}, {transform: 'translate(0,0)', offset: o(760)},
       {transform: 'translate(-4px,-30px) rotate(-6deg)', offset: o(900), easing: 'ease-out'},
       {transform: 'translate(4px,-26px) rotate(7deg)', offset: o(1020)},
       {transform: 'translate(-3px,-28px) rotate(-5deg)', offset: o(1140)},
-      {transform: 'translate(0,-27px) rotate(2deg)', offset: o(1260)}, {transform: 'translate(0,-27px) rotate(2deg)', offset: 1}], '134px 128px');
+      {transform: 'translate(0,-27px) rotate(2deg)', offset: o(1260)}, {transform: 'translate(0,-27px) rotate(2deg)', offset: 1}], '106px 128px');
     /* el dedo pillado se pone rojo */
     const dedo = v.querySelector('.dedo ellipse');
     if(dedo) dedo.animate([{fill: '#C9A17C', offset: 0}, {fill: '#C9A17C', offset: o(660)}, {fill: '#E0705A', offset: o(760)}, {fill: '#E0705A', offset: 1}], {duration: D, fill: 'forwards'});
     anima('.ay', [{transform: 'scale(0)', opacity: 0, offset: 0}, {transform: 'scale(0)', opacity: 0, offset: o(700)},
       {transform: 'scale(1.15)', opacity: 1, offset: o(800), easing: 'ease-out'}, {transform: 'scale(1)', opacity: 1, offset: o(880)}, {transform: 'scale(1)', opacity: 1, offset: 1}], '72px 70px');
   }else{
-    /* la mano entra, coge el queso con cuidado y se lo lleva; la trampa salta tarde, sobre nada */
-    const mano = [
-      {transform: 'translate(70px,0)', offset: 0}, {transform: 'translate(70px,0)', offset: o(260)},
-      {transform: 'translate(0,0)', offset: o(560), easing: 'ease-out'}, {transform: 'translate(0,-2px)', offset: o(640)},
-      {transform: 'translate(46px,-46px)', offset: o(800), easing: 'ease-in'}, {transform: 'translate(46px,-46px)', offset: 1}];
-    anima('.mano', mano);
+    /* Migas entra de puntillas desde el borde, agarra la punta del queso, da un paso
+       atrás con él —la trampa salta sobre nada— y lo levanta de fiesta */
+    const [hx, hy] = MANO_FIESTA, qx = hx - 119, qy = hy - 128;
+    const paso = (x, y) => ({transform: 'translate(' + x + 'px,' + y + 'px)'});
+    anima('.mPasa', [
+      Object.assign(paso(74, 0), {offset: 0}), Object.assign(paso(74, 0), {offset: o(200)}),
+      Object.assign(paso(54, -3), {offset: o(280)}), Object.assign(paso(38, 0), {offset: o(350)}),
+      Object.assign(paso(22, -3), {offset: o(420)}), Object.assign(paso(8, 0), {offset: o(490)}),
+      Object.assign(paso(0, -1), {offset: o(560), easing: 'ease-out'}), Object.assign(paso(0, 0), {offset: o(640)}),
+      Object.assign(paso(0, 0), {offset: o(840)}), Object.assign(paso(0, 0), {offset: 1})]);
+    /* el paso atrás: la figura de «coge» recula con el queso; luego, la de fiesta */
+    anima('.mCoge', [{transform: 'translate(0,0)', offset: 0}, {transform: 'translate(0,0)', offset: o(640)},
+      {transform: 'translate(' + ATRAS + 'px,1px) rotate(5deg)', offset: o(780), easing: 'ease-in'}, {transform: 'translate(' + ATRAS + 'px,1px) rotate(5deg)', offset: 1}], (MX + 46 * MS / 100) + 'px ' + (MY + 95 * MS / 100) + 'px');
+    anima('.mCoge', [{opacity: 1, offset: 0}, {opacity: 1, offset: o(860)}, {opacity: 0, offset: o(870)}, {opacity: 0, offset: 1}]);
+    anima('.mFiesta', [{opacity: 0, offset: 0}, {opacity: 0, offset: o(860)}, {opacity: 1, offset: o(870)}, {opacity: 1, offset: 1}]);
     anima('.queso', [
       {transform: 'translate(0,0)', offset: 0}, {transform: 'translate(0,0)', offset: o(640)},
-      {transform: 'translate(46px,-46px) rotate(-14deg)', offset: o(800), easing: 'ease-in'},
-      {transform: 'translate(46px,-46px) rotate(-14deg)', offset: 1}], '137px 130px');
-    /* y Migas asoma por el borde, guiña y sonríe con la boca abierta */
-    anima('.mCabeza', [
-      {transform: 'translate(72px,0)', offset: 0}, {transform: 'translate(72px,0)', offset: o(780)},
-      {transform: 'translate(0,0)', offset: o(940), easing: 'cubic-bezier(.3,1.5,.5,1)'}, {transform: 'translate(0,0)', offset: 1}]);
+      {transform: 'translate(' + ATRAS + 'px,-1px) rotate(4deg)', offset: o(780), easing: 'ease-in'}, {transform: 'translate(' + ATRAS + 'px,-1px) rotate(4deg)', offset: o(860)},
+      {transform: 'translate(' + qx.toFixed(1) + 'px,' + (qy - 6).toFixed(1) + 'px) rotate(-14deg)', offset: o(940), easing: 'ease-out'},
+      {transform: 'translate(' + qx.toFixed(1) + 'px,' + qy.toFixed(1) + 'px) rotate(-10deg)', offset: o(1020)},
+      {transform: 'translate(' + qx.toFixed(1) + 'px,' + qy.toFixed(1) + 'px) rotate(-10deg)', offset: 1}], '119px 128px');
   }
   if(raiz.Sonido){
     if(escena === 'fallo'){ raiz.Sonido.toca('trampa', salto / 1000); raiz.Sonido.toca('ay', (salto + 90) / 1000); }
