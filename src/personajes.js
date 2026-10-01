@@ -37,15 +37,25 @@ function mano(x, y, ang, color, borde, dedo){
   }
   return s + '<path d="M' + f1(x - 1.8) + ' ' + f1(y - 1) + ' q1.8 -1.2 3.6 0" fill="none" stroke="' + borde + '" stroke-width=".8" stroke-linecap="round"/>';
 }
+/* el párpado: una tapa del color de la cara, recortada al ojo y guardada
+   encima; parpadea() la baja y la sube. Cada ojo, su recorte */
+let nOjo = 0;
+function parpado(x, y, rx, ry, color, borde){
+  /* h: arriba, fuera del ojo; c: cerrado, con el borde del párpado como una raya curva abajo */
+  const id = 'pp' + (++nOjo), h = f1(ry * 2 + 1.4), c = f1(ry * .3 + .9);
+  return '<clipPath id="' + id + '"><ellipse cx="' + x + '" cy="' + y + '" rx="' + f1(rx + .2) + '" ry="' + f1(ry + .2) + '"/></clipPath>' +
+    '<g clip-path="url(#' + id + ')"><ellipse class="parpado" data-h="' + h + '" data-c="' + c + '" style="transform:translateY(-' + h + 'px)" cx="' + x + '" cy="' + y + '" rx="' + f1(rx + .9) + '" ry="' + f1(ry + .9) + '" fill="' + color + '" stroke="' + borde + '" stroke-width="1.3"/></g>';
+}
 /* los ojos: blancos con pupila que mira, o en arco si está contento */
-function ojos(xs, y, rx, ry, mira, tipo, borde){
+function ojos(xs, y, rx, ry, mira, tipo, borde, piel){
   return xs.map(x => {
     if(tipo === 'feliz') return '<path d="M' + (x - rx) + ' ' + (y + 1) + ' Q' + x + ' ' + (y - ry - 1) + ' ' + (x + rx) + ' ' + (y + 1) + '" fill="none" stroke="' + T + '" stroke-width="1.8" stroke-linecap="round"/>';
     const k = tipo === 'grande' ? 1.15 : 1, rp = tipo === 'grande' ? 2.1 : 2.6;
     const px = x + mira[0] * 1.5, py = y + mira[1] * 1.6;
     return '<ellipse class="ojo" cx="' + x + '" cy="' + y + '" rx="' + f1(rx * k) + '" ry="' + f1(ry * k) + '" fill="#FBF7EE" stroke="' + borde + '" stroke-width="1.3"/>' +
       '<circle cx="' + f1(px) + '" cy="' + f1(py) + '" r="' + rp + '" fill="#241C14"/>' +
-      '<circle cx="' + f1(px - 1) + '" cy="' + f1(py - 1.1) + '" r="1" fill="#fff"/>';
+      '<circle cx="' + f1(px - 1) + '" cy="' + f1(py - 1.1) + '" r="1" fill="#fff"/>' +
+      parpado(x, y, f1(rx * k), f1(ry * k), piel, borde);
   }).join('');
 }
 /* las cejas: un arco suave por ojo, más o menos alto y torcido */
@@ -96,7 +106,7 @@ function nick(pose){
   s += '<ellipse cx="50" cy="45" rx="18" ry="16.4" fill="' + NV.piel + '" stroke="' + NV.borde + '" stroke-width="1.7"/>';
   s += '<path d="M34 42 Q35.4 55 41 59.6 Q36.6 53 36.2 41 Z" fill="' + NV.sombra + '" opacity=".8"/>';
   s += '<ellipse cx="36" cy="51" rx="4.4" ry="2.8" fill="#E39A88" opacity=".45"/><ellipse cx="64" cy="51" rx="4.4" ry="2.8" fill="#E39A88" opacity=".45"/>';
-  s += ojos([43.4, 56.6], 44, 4.4, 4.8, P.mira, P.ojo, NV.borde);
+  s += ojos([43.4, 56.6], 44, 4.4, 4.8, P.mira, P.ojo, NV.borde, NV.piel);
   s += cejas([43.4, 56.6], 37.4, P.ceja, '#8E6A4E');
   /* el hocico de dos lóbulos, la nariz rosa y las vibrisas */
   s += '<path d="M41.4 51.4 Q41 58.6 45.8 59.2 Q50 59.6 50 57 Q50 59.6 54.2 59.2 Q59 58.6 58.6 51.4 Q54.6 49.2 50 49.4 Q45.4 49.2 41.4 51.4 Z" fill="' + NV.hocico + '" stroke="' + NV.borde + '" stroke-width="1.4" stroke-linejoin="round"/>';
@@ -160,7 +170,7 @@ function nicoleta(pose){
   s += '<ellipse cx="50" cy="44" rx="15" ry="13.8" fill="' + CV.piel + '" stroke="' + CV.borde + '" stroke-width="1.6"/>';
   s += '<path d="M36.6 42 Q37.4 53 42.6 57.4 Q38.6 51 38.6 41 Z" fill="' + CV.sombra + '" opacity=".75"/>';
   s += '<ellipse cx="39" cy="49" rx="3.6" ry="2.4" fill="#E39A88" opacity=".45"/><ellipse cx="61" cy="49" rx="3.6" ry="2.4" fill="#E39A88" opacity=".45"/>';
-  s += ojos([44.4, 55.6], 43.4, 4, 4.4, P.mira, P.ojo, CV.borde);
+  s += ojos([44.4, 55.6], 43.4, 4, 4.4, P.mira, P.ojo, CV.borde, CV.piel);
   /* las pestañas: tres por ojo, hacia fuera */
   if(P.ojo !== 'feliz') s += '<g stroke="' + T + '" stroke-width="1" stroke-linecap="round" fill="none"><path d="M40.6 40.8 Q39.2 39.4 38.6 38.2"/><path d="M40.2 43 Q38.6 42.4 37.6 41.4"/><path d="M59.4 40.8 Q60.8 39.4 61.4 38.2"/><path d="M59.8 43 Q61.4 42.4 62.4 41.4"/></g>';
   else s += '<g stroke="' + T + '" stroke-width="1" stroke-linecap="round"><path d="M40.4 43 L38.6 41.6"/><path d="M59.6 43 L61.4 41.6"/></g>';
@@ -242,7 +252,8 @@ function migas(pose){
     const k = P.ojo === 'grande' ? 1.18 : 1, [mx, my] = P.mira;
     [40, 52].forEach(x => { s += '<ellipse class="ojo" cx="' + x + '" cy="40.6" rx="' + f1(3.3 * k) + '" ry="' + f1(3.8 * k) + '" fill="#241C14"/>' +
       '<circle cx="' + f1(x - 1.1 + mx * .9) + '" cy="' + f1(39.2 + my * .9) + '" r="1.3" fill="#fff"/>' +
-      '<circle cx="' + f1(x + 1 + mx * .5) + '" cy="' + f1(42.2 + my * .5) + '" r=".55" fill="#fff" opacity=".8"/>'; });
+      '<circle cx="' + f1(x + 1 + mx * .5) + '" cy="' + f1(42.2 + my * .5) + '" r=".55" fill="#fff" opacity=".8"/>' +
+      parpado(x, 40.6, f1(3.3 * k), f1(3.8 * k), MV.cabeza, T); });
   }
   s += cejas([40, 52], 34.4, P.ceja, '#6E6058');
   /* los bigotes, desde las almohadillas del hocico */
@@ -287,6 +298,26 @@ function ponCara(c, quien, pose, hablar){
     if(n >= 7){ clearInterval(c._parla); pinta(pose); }
   }, 170);
 }
+/* el parpadeo: cada cara, a su aire, cada 2,5–5,5 s (a veces, dos seguidos).
+   Lo lleva un reloj aparte, así que cambiar de postura o hablar no lo reinicia */
+const toca = new WeakMap();
+function parpadea(){
+  const ahora = Date.now();
+  document.querySelectorAll('svg.pj').forEach(sv => {
+    const hueco = sv.parentElement || sv, t = toca.get(hueco);
+    if(!t){ toca.set(hueco, ahora + 800 + Math.random() * 3000); return; }
+    if(ahora < t || !sv.getClientRects().length) return;
+    const doble = Math.random() < .2;
+    toca.set(hueco, ahora + 2500 + Math.random() * 3000 + (doble ? 300 : 0));
+    sv.querySelectorAll('.parpado').forEach(p => {
+      const arriba = 'translateY(-' + p.dataset.h + 'px)', abajo = 'translateY(-' + p.dataset.c + 'px)';
+      const k = doble ? [{transform: arriba}, {transform: abajo, offset: .2}, {transform: arriba, offset: .45}, {transform: abajo, offset: .7}, {transform: arriba}]
+                      : [{transform: arriba}, {transform: abajo, offset: .45}, {transform: arriba}];
+      p.animate(k, {duration: doble ? 380 : 170, easing: 'ease-in-out'});
+    });
+  });
+}
+if(!REDUCIDO && raiz.document) setInterval(parpadea, 120);
 const POSES = {nick: ['habla', 'senala', 'grapa', 'sorpresa', 'celebra', 'piensa'], nicoleta: ['habla', 'senala', 'telefono', 'sorpresa', 'celebra', 'piensa'], migas: ['habla', 'senala', 'sorpresa', 'celebra', 'piensa']};
 /* las caras de siempre, para quien no necesita postura */
 raiz.Personajes = {nick, nicoleta, migas, DIBUJA, POSES, ponCara,

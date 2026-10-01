@@ -91,3 +91,16 @@ html[data-tema="noche"] .cinta{background:linear-gradient(180deg,#4A4036,#3A3128
 /* la pregunta, en el tique: ¿quién se lleva más? */
 .pregunta{margin-top:10px;padding-top:10px;border-top:1px dashed var(--linea);display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
 .pregunta .etq{flex-basis:100%;text-align:center}
+/* la réplica de Nick tras un fallo: un bocadillo bajo los botones, con la cola hacia el pulsado */
+.pregunta button.b.no{opacity:.5;text-decoration:line-through;text-decoration-color:var(--rojo)}
+.replica{flex-basis:100%;display:grid;grid-template-columns:50px 1fr;gap:8px;align-items:start;margin-top:10px;position:relative}
+.replica .cara{width:50px;height:50px;display:block}
+.replica .cara svg{width:100%;height:100%;display:block}
+.bocadillo{margin:0;padding:9px 12px;background:var(--noche);border:1.5px solid var(--linea);border-radius:12px;font-size:15px;line-height:1.45;position:static}
+.bocadillo .quien{font-family:var(--rotulo);font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--albahaca);margin-right:4px}
+.bocadillo b{color:var(--oro)}
+.replica::before{content:"";position:absolute;top:-7px;left:var(--cola,50%);width:12px;height:12px;margin-left:-6px;transform:rotate(45deg);
+  background:var(--noche);border-left:1.5px solid var(--linea);border-top:1.5px solid var(--linea);z-index:1}
+.replica.entra{animation:replica .32s cubic-bezier(.3,1.4,.5,1)}
+@keyframes replica{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){ .replica.entra{animation:none} }

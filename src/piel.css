@@ -133,9 +133,7 @@ button.enlace:hover{color:var(--oro)}
 .practica{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px dashed var(--linea)}
 .practica .etq{min-width:0}
 
-/* Nick vive: parpadea, el brazo da el clac al grapar y salta con el pedido redondo */
-.cara .ojo{transform-box:fill-box;transform-origin:center;animation:parpadea 4.4s infinite}
-@keyframes parpadea{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+/* Nick vive (el parpadeo lo lleva personajes.js): el brazo da el clac al grapar y salta con el pedido redondo */
 .cara .brazo{transform-box:fill-box;transform-origin:15% 100%}
 .habla.grapando .cara .brazo{animation:clac .5s ease-in-out}
 @keyframes clac{35%{transform:rotate(22deg)}60%{transform:rotate(-4deg)}}
@@ -144,7 +142,7 @@ button.enlace:hover{color:var(--oro)}
 .cara .boca-f{display:none}
 .habla.feliz .cara .boca{display:none}
 .habla.feliz .cara .boca-f{display:block}
-@media (prefers-reduced-motion: reduce){ .cara .ojo,.habla.grapando .cara .brazo,.habla.feliz .cara svg{animation:none} }
+@media (prefers-reduced-motion: reduce){ .habla.grapando .cara .brazo,.habla.feliz .cara svg{animation:none} }
 
 /* ── LAS VENTANAS: la guía, el acta ── */
 .modal{position:fixed;inset:0;background:rgba(12,8,20,.82);display:grid;place-items:center;padding:16px;z-index:60;overflow:auto}

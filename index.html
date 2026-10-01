@@ -146,9 +146,7 @@ button.enlace:hover{color:var(--oro)}
 .practica{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px dashed var(--linea)}
 .practica .etq{min-width:0}
 
-/* Nick vive: parpadea, el brazo da el clac al grapar y salta con el pedido redondo */
-.cara .ojo{transform-box:fill-box;transform-origin:center;animation:parpadea 4.4s infinite}
-@keyframes parpadea{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+/* Nick vive (el parpadeo lo lleva personajes.js): el brazo da el clac al grapar y salta con el pedido redondo */
 .cara .brazo{transform-box:fill-box;transform-origin:15% 100%}
 .habla.grapando .cara .brazo{animation:clac .5s ease-in-out}
 @keyframes clac{35%{transform:rotate(22deg)}60%{transform:rotate(-4deg)}}
@@ -157,7 +155,7 @@ button.enlace:hover{color:var(--oro)}
 .cara .boca-f{display:none}
 .habla.feliz .cara .boca{display:none}
 .habla.feliz .cara .boca-f{display:block}
-@media (prefers-reduced-motion: reduce){ .cara .ojo,.habla.grapando .cara .brazo,.habla.feliz .cara svg{animation:none} }
+@media (prefers-reduced-motion: reduce){ .habla.grapando .cara .brazo,.habla.feliz .cara svg{animation:none} }
 
 /* ── LAS VENTANAS: la guía, el acta ── */
 .modal{position:fixed;inset:0;background:rgba(12,8,20,.82);display:grid;place-items:center;padding:16px;z-index:60;overflow:auto}
@@ -321,6 +319,19 @@ html[data-tema="noche"] .cinta{background:linear-gradient(180deg,#4A4036,#3A3128
 /* la pregunta, en el tique: ¿quién se lleva más? */
 .pregunta{margin-top:10px;padding-top:10px;border-top:1px dashed var(--linea);display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
 .pregunta .etq{flex-basis:100%;text-align:center}
+/* la réplica de Nick tras un fallo: un bocadillo bajo los botones, con la cola hacia el pulsado */
+.pregunta button.b.no{opacity:.5;text-decoration:line-through;text-decoration-color:var(--rojo)}
+.replica{flex-basis:100%;display:grid;grid-template-columns:50px 1fr;gap:8px;align-items:start;margin-top:10px;position:relative}
+.replica .cara{width:50px;height:50px;display:block}
+.replica .cara svg{width:100%;height:100%;display:block}
+.bocadillo{margin:0;padding:9px 12px;background:var(--noche);border:1.5px solid var(--linea);border-radius:12px;font-size:15px;line-height:1.45;position:static}
+.bocadillo .quien{font-family:var(--rotulo);font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--albahaca);margin-right:4px}
+.bocadillo b{color:var(--oro)}
+.replica::before{content:"";position:absolute;top:-7px;left:var(--cola,50%);width:12px;height:12px;margin-left:-6px;transform:rotate(45deg);
+  background:var(--noche);border-left:1.5px solid var(--linea);border-top:1.5px solid var(--linea);z-index:1}
+.replica.entra{animation:replica .32s cubic-bezier(.3,1.4,.5,1)}
+@keyframes replica{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){ .replica.entra{animation:none} }
 </style>
 <style>
 /* ── LA ESCENA DE INICIO, como en Las piezas de Miut: cae una pizza en la
@@ -498,7 +509,7 @@ html[data-inicio="si"] main{visibility:hidden}
     <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" rel="license">© 2026 Andrés Asensio · CC BY-NC-ND 4.0</a>
     · <a href="https://diazepamina-creator.github.io/pizzeria-de-nick/">La pizzería de Nick (anterior)</a>
     · <a href="https://diazepamina-creator.github.io/">Materiales</a>
-    · versión 0.6
+    · versión 0.7
   </footer>
 </main>
 
@@ -1206,15 +1217,25 @@ function mano(x, y, ang, color, borde, dedo){
   }
   return s + '<path d="M' + f1(x - 1.8) + ' ' + f1(y - 1) + ' q1.8 -1.2 3.6 0" fill="none" stroke="' + borde + '" stroke-width=".8" stroke-linecap="round"/>';
 }
+/* el párpado: una tapa del color de la cara, recortada al ojo y guardada
+   encima; parpadea() la baja y la sube. Cada ojo, su recorte */
+let nOjo = 0;
+function parpado(x, y, rx, ry, color, borde){
+  /* h: arriba, fuera del ojo; c: cerrado, con el borde del párpado como una raya curva abajo */
+  const id = 'pp' + (++nOjo), h = f1(ry * 2 + 1.4), c = f1(ry * .3 + .9);
+  return '<clipPath id="' + id + '"><ellipse cx="' + x + '" cy="' + y + '" rx="' + f1(rx + .2) + '" ry="' + f1(ry + .2) + '"/></clipPath>' +
+    '<g clip-path="url(#' + id + ')"><ellipse class="parpado" data-h="' + h + '" data-c="' + c + '" style="transform:translateY(-' + h + 'px)" cx="' + x + '" cy="' + y + '" rx="' + f1(rx + .9) + '" ry="' + f1(ry + .9) + '" fill="' + color + '" stroke="' + borde + '" stroke-width="1.3"/></g>';
+}
 /* los ojos: blancos con pupila que mira, o en arco si está contento */
-function ojos(xs, y, rx, ry, mira, tipo, borde){
+function ojos(xs, y, rx, ry, mira, tipo, borde, piel){
   return xs.map(x => {
     if(tipo === 'feliz') return '<path d="M' + (x - rx) + ' ' + (y + 1) + ' Q' + x + ' ' + (y - ry - 1) + ' ' + (x + rx) + ' ' + (y + 1) + '" fill="none" stroke="' + T + '" stroke-width="1.8" stroke-linecap="round"/>';
     const k = tipo === 'grande' ? 1.15 : 1, rp = tipo === 'grande' ? 2.1 : 2.6;
     const px = x + mira[0] * 1.5, py = y + mira[1] * 1.6;
     return '<ellipse class="ojo" cx="' + x + '" cy="' + y + '" rx="' + f1(rx * k) + '" ry="' + f1(ry * k) + '" fill="#FBF7EE" stroke="' + borde + '" stroke-width="1.3"/>' +
       '<circle cx="' + f1(px) + '" cy="' + f1(py) + '" r="' + rp + '" fill="#241C14"/>' +
-      '<circle cx="' + f1(px - 1) + '" cy="' + f1(py - 1.1) + '" r="1" fill="#fff"/>';
+      '<circle cx="' + f1(px - 1) + '" cy="' + f1(py - 1.1) + '" r="1" fill="#fff"/>' +
+      parpado(x, y, f1(rx * k), f1(ry * k), piel, borde);
   }).join('');
 }
 /* las cejas: un arco suave por ojo, más o menos alto y torcido */
@@ -1265,7 +1286,7 @@ function nick(pose){
   s += '<ellipse cx="50" cy="45" rx="18" ry="16.4" fill="' + NV.piel + '" stroke="' + NV.borde + '" stroke-width="1.7"/>';
   s += '<path d="M34 42 Q35.4 55 41 59.6 Q36.6 53 36.2 41 Z" fill="' + NV.sombra + '" opacity=".8"/>';
   s += '<ellipse cx="36" cy="51" rx="4.4" ry="2.8" fill="#E39A88" opacity=".45"/><ellipse cx="64" cy="51" rx="4.4" ry="2.8" fill="#E39A88" opacity=".45"/>';
-  s += ojos([43.4, 56.6], 44, 4.4, 4.8, P.mira, P.ojo, NV.borde);
+  s += ojos([43.4, 56.6], 44, 4.4, 4.8, P.mira, P.ojo, NV.borde, NV.piel);
   s += cejas([43.4, 56.6], 37.4, P.ceja, '#8E6A4E');
   /* el hocico de dos lóbulos, la nariz rosa y las vibrisas */
   s += '<path d="M41.4 51.4 Q41 58.6 45.8 59.2 Q50 59.6 50 57 Q50 59.6 54.2 59.2 Q59 58.6 58.6 51.4 Q54.6 49.2 50 49.4 Q45.4 49.2 41.4 51.4 Z" fill="' + NV.hocico + '" stroke="' + NV.borde + '" stroke-width="1.4" stroke-linejoin="round"/>';
@@ -1329,7 +1350,7 @@ function nicoleta(pose){
   s += '<ellipse cx="50" cy="44" rx="15" ry="13.8" fill="' + CV.piel + '" stroke="' + CV.borde + '" stroke-width="1.6"/>';
   s += '<path d="M36.6 42 Q37.4 53 42.6 57.4 Q38.6 51 38.6 41 Z" fill="' + CV.sombra + '" opacity=".75"/>';
   s += '<ellipse cx="39" cy="49" rx="3.6" ry="2.4" fill="#E39A88" opacity=".45"/><ellipse cx="61" cy="49" rx="3.6" ry="2.4" fill="#E39A88" opacity=".45"/>';
-  s += ojos([44.4, 55.6], 43.4, 4, 4.4, P.mira, P.ojo, CV.borde);
+  s += ojos([44.4, 55.6], 43.4, 4, 4.4, P.mira, P.ojo, CV.borde, CV.piel);
   /* las pestañas: tres por ojo, hacia fuera */
   if(P.ojo !== 'feliz') s += '<g stroke="' + T + '" stroke-width="1" stroke-linecap="round" fill="none"><path d="M40.6 40.8 Q39.2 39.4 38.6 38.2"/><path d="M40.2 43 Q38.6 42.4 37.6 41.4"/><path d="M59.4 40.8 Q60.8 39.4 61.4 38.2"/><path d="M59.8 43 Q61.4 42.4 62.4 41.4"/></g>';
   else s += '<g stroke="' + T + '" stroke-width="1" stroke-linecap="round"><path d="M40.4 43 L38.6 41.6"/><path d="M59.6 43 L61.4 41.6"/></g>';
@@ -1411,7 +1432,8 @@ function migas(pose){
     const k = P.ojo === 'grande' ? 1.18 : 1, [mx, my] = P.mira;
     [40, 52].forEach(x => { s += '<ellipse class="ojo" cx="' + x + '" cy="40.6" rx="' + f1(3.3 * k) + '" ry="' + f1(3.8 * k) + '" fill="#241C14"/>' +
       '<circle cx="' + f1(x - 1.1 + mx * .9) + '" cy="' + f1(39.2 + my * .9) + '" r="1.3" fill="#fff"/>' +
-      '<circle cx="' + f1(x + 1 + mx * .5) + '" cy="' + f1(42.2 + my * .5) + '" r=".55" fill="#fff" opacity=".8"/>'; });
+      '<circle cx="' + f1(x + 1 + mx * .5) + '" cy="' + f1(42.2 + my * .5) + '" r=".55" fill="#fff" opacity=".8"/>' +
+      parpado(x, 40.6, f1(3.3 * k), f1(3.8 * k), MV.cabeza, T); });
   }
   s += cejas([40, 52], 34.4, P.ceja, '#6E6058');
   /* los bigotes, desde las almohadillas del hocico */
@@ -1456,6 +1478,26 @@ function ponCara(c, quien, pose, hablar){
     if(n >= 7){ clearInterval(c._parla); pinta(pose); }
   }, 170);
 }
+/* el parpadeo: cada cara, a su aire, cada 2,5–5,5 s (a veces, dos seguidos).
+   Lo lleva un reloj aparte, así que cambiar de postura o hablar no lo reinicia */
+const toca = new WeakMap();
+function parpadea(){
+  const ahora = Date.now();
+  document.querySelectorAll('svg.pj').forEach(sv => {
+    const hueco = sv.parentElement || sv, t = toca.get(hueco);
+    if(!t){ toca.set(hueco, ahora + 800 + Math.random() * 3000); return; }
+    if(ahora < t || !sv.getClientRects().length) return;
+    const doble = Math.random() < .2;
+    toca.set(hueco, ahora + 2500 + Math.random() * 3000 + (doble ? 300 : 0));
+    sv.querySelectorAll('.parpado').forEach(p => {
+      const arriba = 'translateY(-' + p.dataset.h + 'px)', abajo = 'translateY(-' + p.dataset.c + 'px)';
+      const k = doble ? [{transform: arriba}, {transform: abajo, offset: .2}, {transform: arriba, offset: .45}, {transform: abajo, offset: .7}, {transform: arriba}]
+                      : [{transform: arriba}, {transform: abajo, offset: .45}, {transform: arriba}];
+      p.animate(k, {duration: doble ? 380 : 170, easing: 'ease-in-out'});
+    });
+  });
+}
+if(!REDUCIDO && raiz.document) setInterval(parpadea, 120);
 const POSES = {nick: ['habla', 'senala', 'grapa', 'sorpresa', 'celebra', 'piensa'], nicoleta: ['habla', 'senala', 'telefono', 'sorpresa', 'celebra', 'piensa'], migas: ['habla', 'senala', 'sorpresa', 'celebra', 'piensa']};
 /* las caras de siempre, para quien no necesita postura */
 raiz.Personajes = {nick, nicoleta, migas, DIBUJA, POSES, ponCara,
@@ -2197,11 +2239,32 @@ function ponPregunta(){
       }else{
         fallos++; est.stats[est.juego].mal += fallos === 1 ? 1 : 0;
         if(!trampa('fallo')) sonar('mal');
-        nickDice((P.rep || {})[clave] || 'Mira la regla: se lleva más el que cae más a la derecha.', false, 'piensa');
+        b.disabled = true; b.classList.add('no');
+        replica(b, (P.rep || {})[clave] || 'Mira la regla: se lleva más el que cae más a la derecha.');
       }
     });
     q.appendChild(b);
   });
+}
+/* la réplica de Nick, donde se está mirando: un bocadillo bajo los botones,
+   con la cola hacia el que se ha pulsado. Arriba, Nick se queda pensando */
+function replica(boton, html){
+  const q = $('pregunta');
+  let r = q.querySelector('.replica');
+  if(!r){
+    r = document.createElement('div'); r.className = 'replica'; r.setAttribute('role', 'status');
+    r.innerHTML = '<span class="cara" data-vb="14 14 72 72" aria-hidden="true"></span><p class="bocadillo"></p>';
+    q.appendChild(r);
+  }
+  const t = r.querySelector('.bocadillo');
+  t.innerHTML = '<b class="quien">Nick</b> ' + html;
+  /* la cola apunta al botón pulsado */
+  const rq = q.getBoundingClientRect(), rb = boton.getBoundingClientRect();
+  const x = rb.left + rb.width / 2 - rq.left;
+  r.style.setProperty('--cola', Math.round(Math.max(76, Math.min(rq.width - 18, x))) + 'px');
+  r.classList.remove('entra'); void r.offsetWidth; r.classList.add('entra');
+  PJ.ponCara(r.querySelector('.cara'), 'nick', 'senala', true);
+  PJ.ponCara($('caraNick'), 'nick', 'piensa');
 }
 function acierta(txt){
   resuelto = true;
