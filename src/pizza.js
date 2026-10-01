@@ -109,6 +109,10 @@ function dibuja(c, alTocar){
   const defs = el('defs', {});
   svg.appendChild(defs);
   svg.appendChild(el('ellipse', {cx: CX, cy: CY + R + 8, rx: R * .86, ry: 8, fill: 'rgba(60,40,20,.25)'}));
+  /* la grapadora, si toca: las juntas nuevas, en orden, una cada «cada» ms */
+  const animar = c.animar === 'grapa'; c.animar = null;
+  const juntas = [...c.recien].sort((a, b) => a - b), cada = Math.min(260, 1100 / Math.max(1, juntas.length));
+  const retraso = j => animar ? Math.round(juntas.indexOf(j) * cada + 170) : 0;
   M.grupos(c).forEach((t, n) => {
     const a0 = t[0] * paso, a1 = a0 + t.length * paso, ele = c.sel.has(t[0]);
     const g = el('g', {class: 'corte' + (ele ? ' elegida' : (c.sel.size ? ' apagada' : ''))});
@@ -123,11 +127,12 @@ function dibuja(c, alTocar){
     for(let k = 0; k < t.length - 1; k++){                 // las grapas, solo las nuevas
       if(!c.recien.has(t[k])) continue;
       const gr = (t[k] + 1) * paso, a = (gr - 90) * Math.PI / 180;
-      g.appendChild(el('path', {d: `M${CX} ${CY} L${(CX + R * Math.cos(a)).toFixed(1)} ${(CY + R * Math.sin(a)).toFixed(1)}`, stroke: '#7E4A1A', 'stroke-width': 2.6, 'stroke-dasharray': '7 6', class: 'costura-nueva'}));
+      const ms = retraso(t[k]);
+      g.appendChild(el('path', {d: `M${CX} ${CY} L${(CX + R * Math.cos(a)).toFixed(1)} ${(CY + R * Math.sin(a)).toFixed(1)}`, stroke: '#7E4A1A', 'stroke-width': 2.6, 'stroke-dasharray': '7 6', class: 'costura-nueva', style: 'animation-delay:' + ms + 'ms'}));
       [[.38, 1], [.72, -1]].forEach(([d, lado], q) => {
         const px = CX + R * d * Math.cos(a), py = CY + R * d * Math.sin(a);
         const fuera = el('g', {transform: `translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${gr + (q ? 8 : -8)})`});
-        const dentro = el('g', {class: 'grapa-nueva'});
+        const dentro = el('g', {class: 'grapa-nueva', style: 'animation-delay:' + ms + 'ms'});
         const f = `M-12 ${6.5 * lado} L-12 0 L12 0 L12 ${6.5 * lado}`;
         dentro.appendChild(el('path', {d: f, fill: 'none', stroke: 'rgba(60,45,30,.4)', 'stroke-width': 7.2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', transform: 'translate(1 1.6)'}));
         dentro.appendChild(el('path', {d: f, fill: 'none', stroke: 'var(--grapa)', 'stroke-width': 5.2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}));
@@ -140,7 +145,91 @@ function dibuja(c, alTocar){
       g.addEventListener('keydown', ev => { if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); alTocar(t[0]); } }); }
     svg.appendChild(g);
   });
+  if(animar && juntas.length) grapadora(svg, juntas, paso, cada);
   return svg;
 }
-raiz.Pizza = {dibuja};
+
+/* ── LA GRAPADORA DE NICK: llega desde fuera, baja sobre cada junta nueva
+   —el clac—, sube y va a la siguiente; al final se va. Cada grapa aparece
+   justo cuando la grapadora aprieta (el retraso de su animación) ── */
+const GRAPADORA_SVG =
+  '<g class="gpCuerpo"><rect x="-22" y="-30" width="44" height="13" rx="5" fill="#9AA2AC" stroke="#3A2E22" stroke-width="2.6"/>' +
+  '<rect x="-16" y="-27.4" width="22" height="4" rx="2" fill="#C6CBD1"/></g>' +
+  '<rect x="-19" y="-15" width="38" height="9" rx="3.4" fill="#6E7680" stroke="#3A2E22" stroke-width="2.4"/>' +
+  '<path d="M-6 -6 V-2 H6 V-6" fill="none" stroke="#EDF1F4" stroke-width="2.2" stroke-linejoin="round"/>';
+function grapadora(svg, juntas, paso, cada){
+  const g = el('g', {class: 'grapadoraPasa'}); g.innerHTML = GRAPADORA_SVG;
+  svg.appendChild(g);
+  if(!g.animate) return;
+  const sitio = j => { const gr = (j + 1) * paso, a = (gr - 90) * Math.PI / 180, d = R * .55;
+    return {x: CX + d * Math.cos(a), y: CY + d * Math.sin(a), gr}; };
+  const pos = (x, y, gr, alto) => 'translate(' + x.toFixed(1) + 'px,' + (y - alto).toFixed(1) + 'px) rotate(' + gr.toFixed(0) + 'deg) scale(1.35)';
+  const total = 170 + juntas.length * cada + 260, o = ms => Math.min(1, ms / total), K = [];
+  const p0 = sitio(juntas[0]);
+  K.push({transform: pos(p0.x + 90, p0.y - 70, p0.gr, 30), opacity: 0, offset: 0});
+  juntas.forEach((j, i) => {
+    const p = sitio(j), t = 170 + i * cada;
+    K.push({transform: pos(p.x, p.y, p.gr, 22), opacity: 1, offset: o(t - cada * .45), easing: 'ease-out'});
+    K.push({transform: pos(p.x, p.y, p.gr, 2), opacity: 1, offset: o(t), easing: 'ease-in'});
+    K.push({transform: pos(p.x, p.y, p.gr, 16), opacity: 1, offset: o(t + cada * .4)});
+  });
+  const pz = sitio(juntas[juntas.length - 1]);
+  K.push({transform: pos(pz.x + 90, pz.y - 70, pz.gr, 30), opacity: 0, offset: 1});
+  /* los offsets tienen que crecer: si dos coinciden, se separan un pelo */
+  for(let i = 1; i < K.length; i++) if(K[i].offset <= K[i - 1].offset) K[i].offset = Math.min(1, K[i - 1].offset + .001);
+  const an = g.animate(K, {duration: total, fill: 'forwards'});
+  /* el cuerpo se aplasta un poco en cada clac */
+  const cu = g.querySelector('.gpCuerpo'), KC = [{transform: 'translateY(0)', offset: 0}];
+  juntas.forEach((j, i) => { const t = 170 + i * cada; KC.push({transform: 'translateY(0)', offset: o(t - 40)}, {transform: 'translateY(6px)', offset: o(t)}, {transform: 'translateY(0)', offset: o(t + 70)}); });
+  KC.push({transform: 'translateY(0)', offset: 1});
+  for(let i = 1; i < KC.length; i++) if(KC[i].offset <= KC[i - 1].offset) KC[i].offset = Math.min(1, KC[i - 1].offset + .001);
+  cu.animate(KC, {duration: total, fill: 'forwards'});
+  if(raiz.Sonido) juntas.forEach((j, i) => raiz.Sonido.toca('grapa', (170 + i * cada) / 1000));
+  an.finished.then(() => g.remove(), () => {});
+}
+/* cuánto dura la grapadora con n juntas, para que el acierto espere */
+const duraGrapa = n => n ? 170 + n * Math.min(260, 1100 / n) + 260 : 0;
+
+/* ── EL CORTADOR DE MIGAS: sobre la pizza de antes, la rueda recorre cada
+   corte nuevo —de borde a borde si es un diámetro, del borde al centro si
+   no— y la raya se dibuja a su paso. Al acabar, «alAcabar» pone la pizza
+   cortada. Devuelve cuánto dura ── */
+function cortador(svg, antes, nuevo, alAcabar){
+  const nuevos = [];
+  for(let k = 0; k < nuevo; k++){
+    const a = k * 360 / nuevo, viejo = (k * antes) % nuevo === 0;   // ya estaba ese corte
+    if(!viejo || nuevo % antes !== 0) nuevos.push(a);
+  }
+  if(!svg || !svg.animate || !nuevos.length){ alAcabar(); return 0; }
+  /* los diámetros: un corte y su opuesto van de una pasada */
+  const pasadas = [], usado = new Set();
+  nuevos.forEach(a => { if(usado.has(a)) return; const op = (a + 180) % 360;
+    if(nuevos.some(b => Math.abs(b - op) < .01) && !usado.has(op)){ pasadas.push([a, op]); usado.add(op); } else pasadas.push([a]); usado.add(a); });
+  const dur = Math.max(130, Math.min(360, 900 / pasadas.length)), paso = dur * .75, total = paso * (pasadas.length - 1) + dur + 80;
+  const capa = el('g', {class: 'cortadorPasa'}); svg.appendChild(capa);
+  const borde = a => { const r = (a - 90) * Math.PI / 180; return [CX + (R + 4) * Math.cos(r), CY + (R + 4) * Math.sin(r)]; };
+  pasadas.forEach((pa, i) => {
+    const [x0, y0] = borde(pa[0]), [x1, y1] = pa.length > 1 ? borde(pa[1]) : [CX, CY];
+    const largo = Math.hypot(x1 - x0, y1 - y0), t0 = i * paso;
+    const raya = el('path', {d: 'M' + x0.toFixed(1) + ' ' + y0.toFixed(1) + ' L' + x1.toFixed(1) + ' ' + y1.toFixed(1), stroke: '#5A3510', 'stroke-width': 2.6, 'stroke-linecap': 'round', fill: 'none',
+      'stroke-dasharray': largo.toFixed(1), 'stroke-dashoffset': largo.toFixed(1), opacity: .8});
+    capa.appendChild(raya);
+    raya.animate([{strokeDashoffset: largo}, {strokeDashoffset: 0}], {duration: dur, delay: t0, fill: 'forwards', easing: 'ease-in-out'});
+    /* la rueda, con su mango detrás, girando mientras avanza */
+    const ang = Math.atan2(y1 - y0, x1 - x0) * 180 / Math.PI;
+    const rueda = el('g', {opacity: 0});
+    rueda.innerHTML = '<g class="rMango"><path d="M0 0 L-26 -14" stroke="#3A2E22" stroke-width="7" stroke-linecap="round"/><path d="M0 0 L-26 -14" stroke="#B07A45" stroke-width="4.6" stroke-linecap="round"/></g>' +
+      '<g class="rGira"><circle r="13" fill="#C6CBD1" stroke="#3A2E22" stroke-width="2.2"/><circle r="9.6" fill="none" stroke="#EDF1F4" stroke-width="1.6"/>' +
+      '<path d="M0 -9 V9 M-9 0 H9" stroke="#9AA2AC" stroke-width="1.4"/><circle r="3" fill="#6E7680" stroke="#3A2E22" stroke-width="1.2"/></g>';
+    capa.appendChild(rueda);
+    const tr = (x, y) => 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + ang.toFixed(0) + 'deg) scale(1.35)';
+    rueda.animate([{transform: tr(x0, y0), opacity: 0}, {transform: tr(x0, y0), opacity: 1, offset: .1}, {transform: tr(x1, y1), opacity: 1, offset: .9}, {transform: tr(x1, y1), opacity: 0}],
+      {duration: dur, delay: t0, fill: 'forwards', easing: 'ease-in-out'});
+    rueda.querySelector('.rGira').animate([{transform: 'rotate(0deg)'}, {transform: 'rotate(' + Math.round(largo * 3) + 'deg)'}], {duration: dur, delay: t0, fill: 'forwards', easing: 'ease-in-out'});
+    if(raiz.Sonido) raiz.Sonido.toca('corte', t0 / 1000);
+  });
+  setTimeout(alAcabar, total);
+  return total;
+}
+raiz.Pizza = {dibuja, cortador, duraGrapa};
 })(window);

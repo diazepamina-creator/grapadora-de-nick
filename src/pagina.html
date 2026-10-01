@@ -307,7 +307,7 @@ function pintaMesa(){
     const tapa = document.createElement('div'); tapa.className = 'tapa';
     tapa.textContent = (esCompara() ? MESAS[i].toUpperCase() : 'CAJA ' + (i + 1)) + ' · EN ' + c.cortes;
     caja.appendChild(tapa);
-    caja.appendChild(PZ.dibuja(c, k => { activa = i; M.toca(c, k); ultimaOp = null; pintaMesa(); lee(); }));
+    caja.appendChild(PZ.dibuja(c, k => { if(ocupado) return; activa = i; M.toca(c, k); ultimaOp = null; pintaMesa(); lee(); }));
     caja.addEventListener('click', () => { if(activa !== i){ activa = i; pintaMesa(); } });
     cont.appendChild(caja);
   });
@@ -331,8 +331,9 @@ function pintaMesa(){
   xs.forEach(x => {
     const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = 'de ' + x + ' en ' + x;
     b.addEventListener('click', () => {
+      if(ocupado) return;
       const r = M.industrial(c, x); if(!r.ok) return;
-      ultimaOp = r.op; sonar('grapa'); clac(); pintaMesa(); lee();
+      ultimaOp = r.op; grapaAnimada(c); clac(); pintaMesa(); lee();
       if(r.nota) migas('La máquina une la pizza <b>entera</b> de ' + x + ' en ' + x + ': tus ' + r.nota.kAntes + '/' + r.nota.bAntes + ' no llenaban piezas enteras, así que te quedas con las piezas que los contienen. Aquí no hay división que enseñar.');
       else if(!c.sel.size) migas('La pizza queda en <b>' + M.grupos(c).length + '</b> piezas iguales. Ahora elige la tuya.', 'senala');
       quitaGrapasLuego();
@@ -342,7 +343,7 @@ function pintaMesa(){
 }
 function corta(n){
   const c = cajas[activa];
-  if(n === c.cortes) return;
+  if(ocupado || n === c.cortes) return;
   const destruye = n % c.cortes !== 0 && (c.sel.size > 0 || c.grapas.some(Boolean));
   if(destruye && !(armado && armado.caja === activa && armado.n === n)){
     armado = {caja: activa, n};
@@ -352,23 +353,36 @@ function corta(n){
     return;
   }
   armado = null;
-  const r = M.recorta(c, n); ultimaOp = r.op;
-  sonar('corte'); pintaMesa(); lee();
+  const hecho = () => { ocupado = false; const r = M.recorta(c, n); ultimaOp = r.op; pintaMesa(); lee(); };
+  if(menosMovimiento()){ sonar('corte'); hecho(); return; }
+  /* la rueda de Migas pasa por la pizza de antes; luego, la pizza cortada */
+  const svg = document.querySelectorAll('.cajaP')[activa]?.querySelector('svg.pizza');
+  ocupado = true; migas('');
+  animaHasta = Date.now() + PZ.cortador(svg, c.cortes, n, hecho);
 }
 $('bGrapar').addEventListener('click', () => {
-  const c = cajas[activa]; if(!c) return;
+  const c = cajas[activa]; if(!c || ocupado) return;
   const r = M.grapa(c);
   if(!r.ok){
     migas(r.por === 'pocas' ? 'La grapadora necesita <b>dos piezas o más</b>, y pegadas.' : 'Esas piezas <b>no están pegadas</b>: sueltas suman lo mismo, pero no forman una.');
     sonar('mal'); return;
   }
-  ultimaOp = r.op; sonar('grapa'); clac(); pintaMesa(); lee();
+  ultimaOp = r.op; grapaAnimada(c); clac(); pintaMesa(); lee();
   if(!r.op && r.m > 1) migas('Una pieza de <b>' + r.m + '/' + c.cortes + '</b>… pero ' + r.m + ' no cabe en ' + c.cortes + ': esa pieza no es 1 de nada entero, y por eso aquí no hay división que enseñar.');
   quitaGrapasLuego();
 });
-function quitaGrapasLuego(){ clearTimeout(reloj); reloj = setTimeout(() => { cajas.forEach(x => x.recien.clear()); pintaMesa(); }, 2600); }
-$('bSoltar').addEventListener('click', () => { const c = cajas[activa]; if(!c) return; M.suelta(c); ultimaOp = null; pintaMesa(); lee(); });
-$('bLimpiar').addEventListener('click', () => { if(!P || resuelto) return; cajas = (P.cajas || [P.fA[1], P.fB[1]]).map(M.nuevaCaja); activa = 0; ultimaOp = null; armado = null; pintaMesa(); lee(); });
+function quitaGrapasLuego(){ clearTimeout(reloj); reloj = setTimeout(() => { cajas.forEach(x => x.recien.clear()); pintaMesa(); }, Math.max(0, animaHasta - Date.now()) + 2600); }
+/* LOS GESTOS, A LA VISTA. Mientras pasa la rueda o la grapadora, la mesa no
+   se toca; y lo que venga después —el acierto— espera a que acaben */
+let ocupado = false, animaHasta = 0;
+const menosMovimiento = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+function grapaAnimada(c){
+  if(menosMovimiento()){ sonar('grapa'); return; }
+  c.animar = 'grapa';                       // la grapadora de Nick pasa en el próximo dibujo
+  animaHasta = Date.now() + PZ.duraGrapa(c.recien.size);
+}
+$('bSoltar').addEventListener('click', () => { const c = cajas[activa]; if(!c || ocupado) return; M.suelta(c); ultimaOp = null; pintaMesa(); lee(); });
+$('bLimpiar').addEventListener('click', () => { if(!P || resuelto || ocupado) return; cajas = (P.cajas || [P.fA[1], P.fB[1]]).map(M.nuevaCaja); activa = 0; ultimaOp = null; armado = null; pintaMesa(); lee(); });
 
 /* ── EL PAPEL: por teléfono, cada fracción se multiplica arriba y abajo ── */
 const stackSVG = (k, b, col, x, y, tam) => '<text x="' + x + '" y="' + (y - 6) + '" font-size="' + tam + '" fill="' + col + '">' + k + '</text>' +
@@ -543,7 +557,9 @@ function ponPregunta(){
 }
 function acierta(txt){
   resuelto = true;
-  if(!trampa('acierto')) sonar('bien');
+  /* primero se ve el gesto entero —la rueda, las grapas— y luego, el acierto */
+  const espera = Math.max(0, animaHasta - Date.now()) + (animaHasta > Date.now() ? 250 : 0);
+  setTimeout(() => { if(!trampa('acierto')) sonar('bien'); }, espera);
   nickDice(txt, true);
   $('pregunta').hidden = true; $('pregunta').innerHTML = ''; migas('');
   const s = est.stats[est.juego];
@@ -563,8 +579,19 @@ const quieto = () => !aj.trampa || (window.matchMedia && matchMedia('(prefers-re
 function trampa(escena){
   if(quieto() || !window.Trampa) return false;
   /* sobre la mesa si se ve entera; si no, en el centro de la pantalla, que es donde se está mirando */
+  if(escena === 'acierto') return !!window.Trampa.lanza(escena, PJ, sitioLibre());
   const r = $('mesa').getBoundingClientRect(), seVeLaMesa = r.top >= 0 && r.bottom <= innerHeight;
   return !!window.Trampa.lanza(escena, PJ, {cerca: seVeLaMesa ? $('mesa') : null});
+}
+/* el acierto no tapa la pizza: va al hueco libre más grande, encima o debajo
+   de las cajas; si no cabe, a una esquina y más pequeño */
+function sitioLibre(){
+  const S = Math.round(Math.min(230, innerWidth * .56)), r = $('cajas').getBoundingClientRect();
+  const abajo = innerHeight - Math.max(0, r.bottom), arriba = Math.min(innerHeight, r.top);
+  if(abajo >= S * .8) return {punto: {x: innerWidth / 2, y: innerHeight - abajo / 2}, tam: Math.min(S, abajo - 12)};
+  if(arriba >= S * .8) return {punto: {x: innerWidth / 2, y: arriba / 2}, tam: Math.min(S, arriba - 12)};
+  const t = Math.round(S * .7);
+  return {punto: {x: innerWidth - t / 2 - 10, y: innerHeight - t / 2 - 10}, tam: t};
 }
 
 /* ── EL ACTA ── */

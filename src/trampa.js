@@ -89,13 +89,13 @@ function lanza(escena, PJ, opts){
   opts = opts || {};
   if(opts.quieto) return null;
   document.querySelectorAll('.trampa-vineta').forEach(v => v.remove());
-  const S = Math.round(Math.min(230, innerWidth * .56));
+  const S = Math.round(opts.tam || Math.min(230, innerWidth * .56));
   const v = document.createElement('div');
   v.className = 'trampa-vineta ' + escena;
   v.innerHTML = svg(escena, PJ).replace(/trCirculo/g, 'trCirculo' + (++nT));
   const ref = opts.cerca && opts.cerca.getBoundingClientRect();
-  const cx = ref ? ref.left + ref.width / 2 : innerWidth / 2;
-  const cy = ref ? Math.max(S / 2 + 10, Math.min(innerHeight - S / 2 - 10, ref.top + ref.height / 2)) : innerHeight / 2;
+  const cx = opts.punto ? opts.punto.x : ref ? ref.left + ref.width / 2 : innerWidth / 2;
+  const cy = opts.punto ? opts.punto.y : ref ? Math.max(S / 2 + 10, Math.min(innerHeight - S / 2 - 10, ref.top + ref.height / 2)) : innerHeight / 2;
   v.style.cssText = 'left:' + Math.round(cx - S / 2) + 'px;top:' + Math.round(cy - S / 2) + 'px;width:' + S + 'px;height:' + S + 'px';
   document.body.appendChild(v);
   const D = 1700;
