@@ -1,0 +1,2302 @@
+<!doctype html>
+<html lang="es">
+<head>
+<!--
+  La grapadora de Nick · versión 0.12
+  © Andrés Asensio · CC BY-NC-ND 4.0 · https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es
+  Versión de aula generada el 2026-10-09 a partir del original b841eab.
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta name="author" content="Andrés Asensio">
+<title>La grapadora de Nick</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Nunito:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --fondo1:#EFE9DD; --fondo2:#DED5C4; --luz:rgba(255,252,240,.7);
+  --veta:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='520'><filter id='v'><feTurbulence type='fractalNoise' baseFrequency='.004 .012' numOctaves='3' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .40  0 0 0 0 .34  0 0 0 9 -4.2'/></filter><rect width='520' height='520' filter='url(%23v)' opacity='.16'/></svg>");
+  --harina:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='h'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='1' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 7 -4.6'/></filter><rect width='180' height='180' filter='url(%23h)' opacity='.5'/></svg>");
+  --noche:#F6EEDF; --panel:#FFFCF4; --panel2:#FBF4E6; --linea:#D9C6A6;
+  --tinta:#2E2218; --tenue:#7D6650;
+  --morado:#8A6A9E; --oro:#A8661B; --rojo:#B0442C; --verde:#4F7A2E;
+  --sombra:rgba(70,45,20,.22); --brillo:rgba(214,150,50,.18);
+  --tomate:#C4462F; --tomateO:#9E3423; --azul:#2F6E8C; --albahaca:#5C7A3E;
+  --corteza:#C98A3E; --cortezaO:#A96C28; --queso:#F3DCA2; --carton:#C89A63; --grapa:#C6CBD1;
+  --pizarra:#2E4034; --tizaV:#8FA894; --tizaB:#EFF3EA;
+  --sello:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'><path d='M1.5 4.5 h9 a1.6 1.6 0 0 1 1.6 1.6 v1.2 h-2.4 v-.8 h-8.2 z'/><rect x='1.5' y='7.3' width='9.3' height='2.4' rx='.6'/><rect x='2.2' y='10' width='7.9' height='2.2' rx='.5'/><path d='M4 12.2 v1.3 M8.4 12.2 v1.3' stroke='black' stroke-width='1.2'/></svg>");
+  --rotulo:'Bree Serif',Georgia,serif; --letra:'Nunito',system-ui,sans-serif;
+}
+html[data-tema="noche"]{
+  --fondo1:#2C3D33; --fondo2:#1E2B24; --luz:rgba(240,240,220,.10);
+  --veta:none;
+  --harina:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='h'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='5' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 .95  0 0 0 5 -3.2'/></filter><rect width='180' height='180' filter='url(%23h)' opacity='.35'/></svg>");
+  --noche:#1F1A16; --panel:#2B241F; --panel2:#342C26; --linea:#57493D;
+  --tinta:#F4EADB; --tenue:#C4B29A;
+  --morado:#B79CCB; --oro:#E6A84A; --rojo:#D2644B; --verde:#8DB36A;
+  --tomate:#E2725B; --azul:#57B8D6; --albahaca:#8DB36A;
+  --sombra:rgba(0,0,0,.45); --brillo:rgba(230,168,74,.16);
+  color-scheme:dark}
+html[data-tema="proyector"]{
+  --noche:#F4F4F4; --panel:#FFFFFF; --panel2:#FFFFFF; --linea:#1A1A1A;
+  --tinta:#000000; --tenue:#2B2B2B;
+  --oro:#8A5A00; --rojo:#B3261E; --verde:#1D6B12; --tomate:#B3261E; --azul:#0B5F86;
+  --sombra:rgba(0,0,0,.12); --brillo:rgba(138,90,0,.10)}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{background:var(--fondo2)}
+body{margin:0;color:var(--tinta);font-family:var(--letra);font-size:15px;line-height:1.5;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%, var(--luz), transparent 70%),
+    var(--harina),
+    var(--veta),
+    linear-gradient(180deg, var(--fondo1), var(--fondo2));
+  background-size:auto, 180px 180px, 520px 520px, auto;
+  background-attachment:fixed;-webkit-text-size-adjust:100%;min-height:100vh}
+html[data-tema="proyector"], html[data-tema="proyector"] body{background:#FFFFFF}
+.lienzo{max-width:760px;margin:0 auto;padding:12px 12px 36px;display:flex;flex-direction:column}
+html[data-movimiento="menos"] *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+
+.cab{padding:9px 14px 0;border:1px solid var(--linea);border-radius:13px;overflow:hidden;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 6px 18px var(--sombra)}
+.rotulo{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rotulo > div{flex:1 1 0;min-width:0}
+.cab .sello{width:26px;height:26px;flex:0 0 26px;background:var(--oro);
+  -webkit-mask:var(--sello) center/contain no-repeat;mask:var(--sello) center/contain no-repeat}
+.cab h1{font-family:var(--rotulo);font-weight:400;font-size:19px;letter-spacing:1.8px;text-transform:uppercase;margin:0;color:var(--oro);line-height:1.1}
+.cab .sub{font-family:var(--rotulo);font-size:11px;letter-spacing:1.3px;text-transform:uppercase;color:var(--tenue);margin:0}
+.cab .acc{margin-left:auto;display:flex;gap:16px}
+.cab .acc button{font-family:var(--rotulo);font-size:12.5px;letter-spacing:1.3px;text-transform:uppercase;color:var(--tenue);
+  background:none;border:0;border-bottom:1px solid transparent;padding:4px 0;cursor:pointer}
+.cab .acc button:hover,.cab .acc button:focus-visible,.cab .acc button[aria-pressed="true"]{color:var(--oro);border-bottom-color:var(--oro);outline:none}
+@media (max-width:620px){
+  .cab .acc{width:100%;margin:5px 0 0;padding-top:4px;border-top:1px solid var(--linea);justify-content:space-around;gap:6px}
+}
+.juegos{display:grid;grid-template-columns:repeat(3,1fr);margin:8px -14px 0;border-top:1px solid var(--linea)}
+.juegos button{font:inherit;cursor:pointer;text-align:center;color:var(--tinta);background:none;border:0;border-bottom:3px solid transparent;
+  border-radius:0;padding:6px 4px 4px;line-height:1.2}
+.juegos button + button{border-left:1px solid var(--linea)}
+.juegos button b{display:block;font-family:var(--rotulo);font-weight:400;font-size:15px;letter-spacing:1.3px;text-transform:uppercase;color:var(--oro)}
+.juegos button span{display:block;font-size:11.5px;color:var(--tenue)}
+.juegos button:hover{background:var(--brillo)}
+.juegos button[aria-pressed="true"]{border-bottom-color:var(--oro);background:var(--brillo)}
+@media (max-width:480px){ .juegos button span{display:none} .juegos button b{font-size:13.5px;letter-spacing:.6px} .juegos button{padding:8px 2px 6px} }
+
+.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--linea);border-radius:13px;
+  padding:12px 13px;margin-top:9px;box-shadow:0 6px 18px var(--sombra)}
+.panel h2, .etq{font-family:var(--rotulo);font-weight:400;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tenue);margin:0}
+.panel > h2{margin-bottom:8px}
+.caja{border:1px solid var(--linea);border-radius:12px;background:var(--noche);padding:9px 10px}
+
+.botones{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+button.b{font-family:var(--rotulo);font-weight:400;font-size:14px;letter-spacing:1px;text-transform:uppercase;
+  padding:8px 14px;min-height:42px;border-radius:9px;border:1px solid var(--linea);cursor:pointer;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));color:var(--tinta);box-shadow:0 2px 0 rgba(0,0,0,.28)}
+button.b:hover{border-color:var(--morado)}
+button.b:active{transform:translateY(2px);box-shadow:none}
+button.b.ok{background:linear-gradient(180deg,#F4CB72,#DDA23A);color:#2A1D06;border-color:#A8661B;box-shadow:0 2px 0 #7E4C12}
+button.b:disabled{opacity:.4;cursor:default;transform:none}
+button.b.borrar.seguro{background:var(--rojo);border-color:var(--rojo);color:#fff}
+button.b:focus-visible{outline:2px solid var(--oro);outline-offset:2px}
+button.enlace{background:none;border:0;color:var(--tenue);text-decoration:underline;font:inherit;font-size:13.5px;cursor:pointer;padding:6px 4px}
+button.enlace:hover{color:var(--oro)}
+
+.ajustes .aj{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px 0;border-bottom:1px dashed var(--linea)}
+.ajustes .aj > .etq{min-width:130px}
+.ajustes .aj small{flex-basis:100%;color:var(--tenue);font-size:12.5px;margin-top:-2px}
+.ops{display:inline-flex;border:1px solid var(--linea);border-radius:20px;overflow:hidden;flex-wrap:wrap}
+.ops button{font-family:var(--rotulo);font-weight:400;font-size:13px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;
+  background:none;border:0;color:var(--tenue);padding:6px 12px;min-height:34px}
+.ops button + button{border-left:1px solid var(--linea)}
+.ops button[aria-pressed="true"]{background:var(--oro);color:var(--panel)}
+
+.enc-cab{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.enc-cab .puntos{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto;align-items:center}
+.puntos i{width:10px;height:10px;border-radius:50%;background:var(--linea);display:block}
+.puntos i.hecho{background:var(--oro)}
+.puntos i.aqui{box-shadow:0 0 0 2px var(--oro)}
+.cliente{margin:0;padding:8px 12px;border-left:4px solid var(--tomate);border-radius:0 9px 9px 0;background:var(--noche);font-size:16px;line-height:1.45}
+.cliente .quien{display:block;font-family:var(--rotulo);font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tomate);margin-bottom:1px}
+.cliente.tel{border-left-color:var(--azul);display:grid;grid-template-columns:58px 1fr;column-gap:10px;align-items:start}
+.cliente.tel .cara{width:58px;height:58px;display:block}
+.cliente.tel .cara svg{width:100%;height:100%;display:block} .cliente.tel .quien{color:var(--azul)}
+.cliente .fA, .habla .fA, .tique .fA, .pizarra .fA, .opera .fA{color:var(--tomate)}
+.cliente .fB, .habla .fB, .tique .fB, .pizarra .fB, .opera .fB{color:var(--azul)}
+.habla{display:grid;grid-template-columns:66px 1fr;gap:10px;align-items:start;margin-top:9px;padding:9px 12px;
+  border:1px solid var(--linea);border-radius:11px;background:var(--noche)}
+.habla .cara{width:66px;height:66px;display:block;margin-top:-4px}
+.habla .cara svg{display:block;width:100%;height:auto;overflow:visible}
+.habla .quien{font-family:var(--rotulo);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--albahaca)}
+.habla p{margin:2px 0 0;font-size:15.5px;line-height:1.45}
+.habla p b{color:var(--oro)}
+.habla.feliz .quien{color:var(--oro)}
+.practica{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px dashed var(--linea)}
+.practica .etq{min-width:0}
+
+.cara .brazo{transform-box:fill-box;transform-origin:15% 100%}
+.habla.grapando .cara .brazo{animation:clac .5s ease-in-out}
+@keyframes clac{35%{transform:rotate(22deg)}60%{transform:rotate(-4deg)}}
+.habla.feliz .cara svg{animation:salta .55s cubic-bezier(.3,1.5,.5,1)}
+@keyframes salta{30%{transform:translateY(-6px) rotate(-3deg)}60%{transform:translateY(1px)}}
+.cara .boca-f{display:none}
+.habla.feliz .cara .boca{display:none}
+.habla.feliz .cara .boca-f{display:block}
+.cara.suena .auricular{transform-box:fill-box;transform-origin:50% 50%;animation:tiembla .07s linear infinite alternate}
+@keyframes tiembla{from{transform:rotate(-6deg) translateY(-.4px)}to{transform:rotate(6deg) translateY(.4px)}}
+@media (prefers-reduced-motion: reduce){ .cara.suena .auricular,.habla.grapando .cara .brazo,.habla.feliz .cara svg{animation:none} }
+
+.modal{position:fixed;inset:0;background:rgba(12,8,20,.82);display:grid;place-items:center;padding:16px;z-index:60;overflow:auto}
+.modal .caja2{width:min(600px,100%);max-height:92vh;overflow:auto;border:1px solid var(--linea);border-radius:16px;padding:18px 20px;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.modal .caja2:focus{outline:none}
+.modal h2{font-family:var(--rotulo);font-weight:400;color:var(--oro);letter-spacing:1.5px;text-transform:uppercase;font-size:18px;margin:0 0 8px}
+.modal h3{font-family:var(--rotulo);font-weight:400;color:var(--oro);font-size:15px;letter-spacing:1px;margin:14px 0 4px}
+.modal p,.modal li{font-size:14.5px}
+.acta .actaSub{margin:0 0 10px;color:var(--tenue)}
+.actaNombre{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.actaNombre input{flex:1;font:inherit;font-size:16px;padding:8px 10px;border-radius:9px;border:1px solid var(--linea);background:var(--noche);color:var(--tinta)}
+.actaDatos{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:6px;margin-bottom:10px}
+.actaDatos div{background:var(--noche);border:1px solid var(--linea);border-radius:9px;padding:6px 9px}
+.actaDatos b{display:block;font-family:'Space Mono',monospace;font-size:18px}
+.actaTabla{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:10px}
+.actaTabla th{font-family:var(--rotulo);font-weight:400;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--tenue);text-align:left;padding:4px 6px;border-bottom:1px solid var(--linea)}
+.actaTabla td{padding:6px;border-bottom:1px dashed var(--linea);vertical-align:top}
+.actaTabla td b{color:var(--oro)}
+.actaCodigos{display:grid;gap:6px;margin:6px 0 4px}
+.actaCodigos b{font-family:'Space Mono',monospace;font-size:18px;letter-spacing:2px;color:var(--oro);margin-left:8px}
+.actaMsg{min-height:20px;color:var(--verde);margin:6px 0 0}
+.ac-det{margin:0 0 6px} .ac-det summary{cursor:pointer;color:var(--tenue);font-size:13.5px}
+.ac-ej{margin:6px 0 0;padding-left:0;list-style:none;font-size:13px}
+.ac-ej li{display:flex;gap:8px;padding:3px 0;border-bottom:1px dashed var(--linea);flex-wrap:wrap}
+.ac-ej .ac-h{font-family:'Space Mono',monospace;color:var(--tenue);font-size:11px;min-width:44px}
+.ac-ej .ac-c{font-family:'Space Mono',monospace}
+.ac-ej li.ok .ac-como::before{content:"✓ ";color:var(--verde)} .ac-ej li.no .ac-como::before{content:"✗ ";color:var(--rojo)}
+
+.guia{position:fixed;inset:0;z-index:80;cursor:pointer}
+.guia-foco{position:fixed;border-radius:13px;border:2px solid #F0C75E;pointer-events:none;
+  box-shadow:0 0 0 9999px rgba(30,16,6,.72),0 0 22px rgba(240,199,94,.55);
+  transition:top .28s ease,left .28s ease,width .28s ease,height .28s ease}
+.guia-globo{position:fixed;z-index:81;width:min(340px,calc(100vw - 32px));cursor:default;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--oro);border-radius:14px;padding:13px 15px;
+  box-shadow:0 18px 44px rgba(0,0,0,.5);transition:top .28s ease,left .28s ease}
+.guia-globo .tit{display:flex;align-items:center;gap:8px;font-family:var(--rotulo);font-size:15px;letter-spacing:1.4px;text-transform:uppercase;color:var(--oro);margin-bottom:4px}
+.guia-globo .tit::before{content:'';width:18px;height:18px;flex:0 0 18px;background:var(--oro);-webkit-mask:var(--sello) center/contain no-repeat;mask:var(--sello) center/contain no-repeat}
+.guia-globo:focus{outline:none}
+.guia-globo p{margin:0;font-size:14.5px;line-height:1.5}
+.guia-globo p b{color:var(--oro)}
+.guia-pie{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:11px}
+.guia-pie span{font-family:'Space Mono',monospace;font-size:11px;color:var(--tenue)}
+.guia-pie .botones{margin:0}
+.guia-pie button.b{min-height:36px;padding:5px 12px}
+
+footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--linea);text-align:center;
+  font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--tenue)}
+footer a{color:var(--tenue)}
+html:not([data-tema="noche"]):not([data-tema="proyector"]) footer{color:#5a4a36;border-top-color:rgba(90,66,38,.3)}
+
+@media (min-width:900px){ html[data-aula="si"] body{zoom:1.32;padding-left:22px;padding-right:22px} }
+@media (min-width:900px) and (max-height:820px){ html[data-aula="si"] body{zoom:1.12} }
+html[data-aula="si"] .lienzo{max-width:860px}
+@media (min-width:1100px){
+  html[data-aula="si"] .lienzo{max-width:1500px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:0 18px;align-items:start}
+  html[data-aula="si"] .lienzo > *{grid-column:1}
+  html[data-aula="si"] .lienzo > .cab{grid-column:1 / -1}
+  html[data-aula="si"] .lienzo > #mesa{grid-column:2;grid-row:2 / span 12;position:sticky;top:8px}
+}
+@media print{
+  body{background:#fff} .cab .acc,.mandos,.botones,.guia,.modal,.inicio{display:none !important}
+  .panel{box-shadow:none;break-inside:avoid}
+}
+</style>
+<style>
+.mesa .cajas{display:flex;gap:10px;justify-content:center;align-items:flex-start;padding:10px;border-radius:12px;
+  background:repeating-linear-gradient(94deg,#9A6A42 0 30px,#8A5E3B 30px 60px);box-shadow:inset 0 0 0 4px #6E4A2E}
+html[data-tema="proyector"] .mesa .cajas{background:#eee;box-shadow:inset 0 0 0 2px #1a1a1a}
+.cajaP{flex:1;max-width:280px;background:var(--carton);border-radius:10px;padding:7px;
+  box-shadow:inset 0 0 0 2px #A87C48, 0 3px 6px rgba(0,0,0,.25);cursor:pointer;transition:box-shadow .15s}
+.cajaP.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--oro), 0 4px 10px rgba(0,0,0,.3)}
+.cajaP .tapa{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:1px;color:#6E4A2E;text-align:center;margin-bottom:3px}
+.cajaP.mA{border-top:5px solid var(--tomate)} .cajaP.mA .tapa{color:var(--tomateO)}
+.cajaP.mB{border-top:5px solid var(--azul)}  .cajaP.mB .tapa{color:var(--azul)}
+.cajaP.mA.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--tomate), 0 4px 10px rgba(0,0,0,.3)}
+.cajaP.mB.activa{box-shadow:inset 0 0 0 3px #F3DCA2, 0 0 0 3px var(--azul), 0 4px 10px rgba(0,0,0,.3)}
+svg.pizza{display:block;width:100%;height:auto;touch-action:manipulation}
+.corte{cursor:pointer}
+.corte.apagada{opacity:.55}
+.corte.elegida{filter:drop-shadow(0 4px 5px rgba(60,40,20,.45))}
+.grapa-nueva{animation:seva 2.6s ease-out forwards;transform-box:view-box}
+.costura-nueva{animation:seCose 2.6s ease-out forwards}
+@keyframes seva{0%{opacity:0;transform:scale(1.7)}8%{opacity:1;transform:scale(1)}82%{opacity:1}100%{opacity:0}}
+@keyframes seCose{0%{opacity:0}8%{opacity:.85}48%{opacity:.85}66%{opacity:0}100%{opacity:0}}
+
+.mandos .fila{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.mandos .fila .etq{min-width:86px}
+.mandos .tiras{display:flex;gap:6px;flex-wrap:wrap}
+button.n{font-family:'Space Mono',monospace;font-weight:700;font-size:15px;min-width:42px;min-height:42px;padding:5px 10px;border-radius:9px;
+  border:1px solid var(--linea);background:var(--noche);color:var(--tinta);cursor:pointer;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+button.n:hover{border-color:var(--morado)}
+button.n:active{transform:translateY(2px);box-shadow:none}
+button.n[aria-pressed="true"]{background:var(--oro);border-color:var(--oro);color:var(--panel)}
+button.n.rompe{border-style:dashed;border-color:#C98F7B;color:var(--tomateO)}
+button.n.avisa{background:#C87A28;color:#fff;border-color:#9A5C1B;border-style:solid;animation:tiembla .28s}
+@keyframes tiembla{25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+.mandos .botones{margin-top:10px}
+
+.pizarra{margin-top:10px;background:var(--pizarra);border:6px solid #6E4A2E;border-radius:8px;padding:10px 12px 12px;
+  box-shadow:inset 0 0 26px rgba(0,0,0,.45);text-align:center}
+.pizarra .rot{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--tizaV);margin-bottom:6px}
+.pizarra .linea{font-family:var(--rotulo);font-size:22px;color:var(--tizaB);display:flex;gap:11px;align-items:center;justify-content:center;flex-wrap:wrap}
+.pizarra .fA{color:#F0A79A} .pizarra .fB{color:#9FD0E6}
+.pizarra .hueco-signo{display:inline-block;min-width:44px;padding:1px 8px;border-radius:5px;border:2px dashed #7E9686;color:var(--tizaV)}
+.pizarra .signo{display:inline-block;min-width:44px;color:#F7E9A0;line-height:0}
+.pizarra .signo svg{width:36px;height:36px;overflow:visible}
+.pizarra .signo path{fill:none;stroke:currentColor;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+.pizarra .signo svg.escribe path{stroke-dasharray:1;stroke-dashoffset:1;animation:tizaEscribe .32s ease-out forwards}
+@keyframes tizaEscribe{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion: reduce){ .pizarra .signo svg.escribe path{animation:none;stroke-dashoffset:0} }
+.pizarra .apuesta{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:1px;color:var(--tizaV);margin-top:6px}
+.pizarra .bots{display:flex;gap:8px;justify-content:center;margin-top:9px}
+.pizarra .bots button{font-family:var(--rotulo);font-size:21px;width:56px;min-height:42px;border-radius:8px;border:2px solid #7E9686;
+  background:rgba(255,255,255,.07);color:var(--tizaB);cursor:pointer}
+.pizarra .bots button:hover{background:rgba(255,255,255,.16)}
+html[data-tema="proyector"] .pizarra{background:#F4F1E6;border-color:#555;box-shadow:none}
+html[data-tema="proyector"] .pizarra .linea,html[data-tema="proyector"] .pizarra .signo,html[data-tema="proyector"] .pizarra .bots button{color:#000}
+html[data-tema="proyector"] .pizarra .rot,html[data-tema="proyector"] .pizarra .apuesta{color:#444}
+
+.papel{display:grid;gap:10px}
+.papel .fr{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;padding:8px 10px;border:1px solid var(--linea);border-radius:11px;background:var(--noche)}
+.papel .fr .quien{grid-column:1 / -1;font-family:var(--rotulo);font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase}
+.papel .fr.mA .quien{color:var(--tomate)} .papel .fr.mB .quien{color:var(--azul)}
+.papel .fr svg{width:150px;height:auto;display:block}
+.papel .fr .tiras{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.papel .fr .tiras .etq{flex-basis:100%}
+
+.tique h2{text-align:center;letter-spacing:3px}
+.lectura{font-size:16px;margin:0 0 2px;text-align:center}
+.lectura b{font-family:var(--rotulo);font-size:22px;color:var(--oro)}
+.desglose{font-size:13px;color:var(--tenue);text-align:center;margin:0 0 8px;min-height:18px}
+.desglose b{color:var(--tinta)}
+.regla{position:relative;height:84px;margin:6px 4px 0}
+.cinta{position:absolute;left:0;right:0;top:30px;height:26px;border-radius:2px;
+  background:linear-gradient(180deg,#F3EAD3,#E4D8B8);border:1px solid #C9BB9E}
+html[data-tema="noche"] .cinta{background:linear-gradient(180deg,#4A4036,#3A3128);border-color:#6a5c4a}
+.cinta b{position:absolute;top:28px;font-family:'Space Mono',monospace;font-size:12px;color:var(--tenue);transform:translateX(-50%);font-weight:700}
+.marca{position:absolute;top:2px;transform:translateX(-50%);text-align:center;pointer-events:none}
+.marca em{display:block;width:3px;height:52px;margin:0 auto;background:var(--tomate);border-radius:2px}
+.marca u{display:block;font-family:var(--rotulo);font-size:14px;color:var(--tomate);text-decoration:none;background:var(--panel);padding:0 3px;border-radius:5px;line-height:1.2}
+.marca.dos em{background:var(--azul)} .marca.dos u{color:var(--azul)}
+.marca.baja u{transform:translateY(17px)}
+.hueco{position:absolute;top:0;height:26px;transform-origin:left center;background:repeating-linear-gradient(45deg,rgba(196,70,47,.32) 0 4px,rgba(196,70,47,.08) 4px 8px)}
+.hueco span{position:absolute;left:50%;top:-19px;transform:translateX(-50%);font-family:var(--rotulo);font-size:12px;color:var(--tomateO);
+  background:var(--panel);padding:0 5px;border-radius:7px;border:1px solid var(--linea);white-space:nowrap}
+.nota{font-size:12px;color:var(--tenue);margin:10px 0 0;line-height:1.5;text-align:center}
+.opera{margin-top:10px;padding:8px 10px 4px;border-top:1px dashed var(--linea)}
+.opera .rot{font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:2px;color:var(--tenue);text-align:center;margin-bottom:2px}
+.opera svg{display:block;width:100%;max-width:320px;margin:0 auto;height:auto}
+.opera .frase{font-size:13px;color:var(--tenue);text-align:center;margin:2px 0 4px}
+.opera .frase b{color:var(--tinta)}
+.pregunta{margin-top:10px;padding-top:10px;border-top:1px dashed var(--linea);display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
+.pregunta .etq{flex-basis:100%;text-align:center}
+.pregunta button.b.no{opacity:.5;text-decoration:line-through;text-decoration-color:var(--rojo)}
+.replica{flex-basis:100%;display:grid;grid-template-columns:50px 1fr;gap:8px;align-items:start;margin-top:10px;position:relative}
+.replica .cara{width:50px;height:50px;display:block}
+.replica .cara svg{width:100%;height:100%;display:block}
+.bocadillo{margin:0;padding:9px 12px;background:var(--noche);border:1.5px solid var(--linea);border-radius:12px;font-size:15px;line-height:1.45;position:static}
+.bocadillo .quien{font-family:var(--rotulo);font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--albahaca);margin-right:4px}
+.bocadillo b{color:var(--oro)}
+.replica::before{content:"";position:absolute;top:-7px;left:var(--cola,50%);width:12px;height:12px;margin-left:-6px;transform:rotate(45deg);
+  background:var(--noche);border-left:1.5px solid var(--linea);border-top:1.5px solid var(--linea);z-index:1}
+.replica.entra{animation:replica .32s cubic-bezier(.3,1.4,.5,1)}
+@keyframes replica{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){ .replica.entra{animation:none} }
+</style>
+<style>
+.inicio{position:fixed;inset:0;z-index:36;display:none;place-items:center;cursor:pointer;padding:20px 16px;
+  background:radial-gradient(ellipse 70% 55% at 50% 42%, rgba(255,250,230,.35), transparent 70%);transition:opacity .5s ease;
+  -webkit-user-select:none;user-select:none}
+html[data-inicio="si"] .inicio{display:grid}
+html[data-inicio="si"] main{visibility:hidden}
+.inicio[hidden]{display:none !important}
+.inicio.fuera{opacity:0}
+.inEscena{display:flex;flex-direction:column;align-items:center;gap:14px;width:min(360px,100%);text-align:center}
+.inCaja{width:min(250px,70vw);background:var(--carton);border-radius:10px;padding:7px;box-shadow:inset 0 0 0 2px #A87C48, 0 6px 14px rgba(0,0,0,.25);
+  animation:inCae .6s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes inCae{from{transform:translateY(-60vh) rotate(-6deg);opacity:0}}
+.inCaja svg.pizza{display:block;width:100%;height:auto}
+.inTitulo{font-family:var(--rotulo);font-weight:400;font-size:clamp(28px,7vw,46px);letter-spacing:4px;text-transform:uppercase;
+  color:var(--oro);margin:4px 0 0;line-height:1.05;opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.inTitulo.ve{opacity:1;transform:none}
+.inLema{margin:0;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--tenue)}
+.inSalta{position:absolute;bottom:26px;left:0;right:0;margin:0;text-align:center;font-family:var(--rotulo);font-size:13px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--tenue);opacity:.8}
+.inMesa{position:relative;width:min(250px,70vw)}
+.inMesa .inCaja{position:relative;z-index:1;width:100%;box-sizing:border-box}
+.inAsoma{position:absolute;bottom:2px;z-index:0;opacity:0;transition:transform .6s cubic-bezier(.3,1.45,.5,1),opacity .25s ease}
+.inAsoma svg{display:block;width:100%;height:auto}
+.inNick{left:-36%;width:54%;transform:translateX(55%) rotate(8deg)}
+.inMigas{right:-32%;width:46%;transform:translateX(-55%) rotate(-8deg)}
+.inAsoma.ve{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){ .inicio{display:none !important} html[data-inicio="si"] main{visibility:visible} }
+</style>
+<style>
+.micro{width:12px;height:15px;display:inline-block;vertical-align:-2px}
+.entrevista .ev-quien{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 8px}
+.ev-quien button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px 5px;
+  font:inherit;font-family:var(--rotulo);letter-spacing:1px;text-transform:uppercase;font-size:12px;
+  color:var(--tinta);background:var(--noche);border:1px solid var(--linea);border-radius:9px;cursor:pointer}
+.ev-quien button[aria-pressed="true"]{border-color:var(--oro);color:var(--oro);box-shadow:inset 0 0 0 1px var(--oro)}
+.ev-mini{width:48px;height:48px;display:block}
+.ev-mini svg{width:100%;height:100%;display:block}
+.ev-cartel{font-size:13px;color:var(--tenue);margin:2px 0 8px;font-style:italic}
+.ev-cartel b{color:var(--tinta)}
+.ev-escena{display:flex;gap:10px;align-items:flex-end;margin:0 0 10px}
+.ev-cara{flex:0 0 auto;width:128px;height:128px}
+.ev-cara svg{width:100%;height:100%;display:block;overflow:visible}
+.ev-cara[data-q="migas"]{width:140px;height:140px}
+.ev-cara.feliz svg{animation:salta .55s cubic-bezier(.3,1.5,.5,1)}
+.ev-globo{flex:1;min-width:0;position:relative;min-height:112px;padding:10px 13px;border-radius:12px;
+  background:var(--noche);border:1.5px solid var(--linea);margin-bottom:18px}
+.ev-globo::before{content:'';position:absolute;left:-9px;bottom:16px;width:14px;height:14px;
+  background:inherit;border-left:1.5px solid var(--linea);border-bottom:1.5px solid var(--linea);transform:rotate(45deg)}
+.ev-pregunta{margin:0 0 5px;font-size:12.5px;color:var(--tenue);font-family:var(--rotulo);letter-spacing:.4px}
+.ev-respuesta{margin:0;font-size:15.5px;line-height:1.5;color:var(--tinta);min-height:1.5em}
+.ev-respuesta b{color:var(--oro)}
+.ev-rotulo{font-family:var(--rotulo);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--tenue);margin:0 0 6px}
+.ev-lista{display:flex;flex-direction:column;gap:6px}
+.ev-p{text-align:left;font:inherit;font-size:14px;padding:9px 12px;min-height:44px;color:var(--tinta);background:var(--noche);
+  border:1px solid var(--linea);border-radius:9px;cursor:pointer}
+.ev-p:hover{border-color:var(--morado)}
+.ev-p.hecha{opacity:.55}
+.ev-p.repregunta{border-style:dashed;border-color:var(--oro)}
+.ev-re{font-family:var(--rotulo);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--oro)}
+@media (max-width:420px){ .ev-cara{width:100px;height:100px} .ev-cara[data-q="migas"]{width:110px;height:110px} .ev-respuesta{font-size:14.5px} }
+@media (prefers-reduced-motion: reduce){ .ev-cara.feliz svg{animation:none} }
+
+.aviso{display:grid;grid-template-columns:48px 1fr;gap:9px;align-items:center;margin:10px 0 0;padding:7px 10px;
+  border:1px solid var(--linea);border-radius:10px;background:var(--noche);font-size:14px;color:var(--tinta)}
+.aviso:empty{display:none}
+.aviso .cara{width:48px;height:48px;display:block}
+.aviso .cara svg{width:100%;height:100%;display:block}
+.aviso .quien{display:block;font-family:var(--rotulo);font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tenue)}
+.aviso b{color:var(--oro)}
+</style>
+<style>
+.trampa-vineta{position:fixed;z-index:43;pointer-events:none;filter:drop-shadow(0 10px 18px rgba(40,20,5,.35))}
+.trampa-vineta > svg{width:100%;height:100%;display:block;overflow:visible}
+@media print{ .trampa-vineta{display:none} }
+</style>
+<script>
+  document.documentElement.dataset.tema = 'dia';
+  try{ const a = JSON.parse(localStorage.getItem('grapadora.ajustes.v1') || '{}');
+    if(a.tema === 'noche' || a.tema === 'proyector') document.documentElement.dataset.tema = a.tema;
+    if(a.aula) document.documentElement.dataset.aula = 'si';
+    const vista = sessionStorage.getItem('grapadora.inicio') === 'visto';
+    const quieto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(a.inicio !== false && !vista && !quieto) document.documentElement.dataset.inicio = 'si'; }catch(err){}
+</script>
+</head>
+<body>
+<div class="inicio" id="escenaInicio" hidden>
+  <div class="inEscena">
+    <p class="inLema">cortar reparte · grapar junta</p>
+    <div class="inMesa"><span class="inAsoma inNick" aria-hidden="true"></span><span class="inAsoma inMigas" aria-hidden="true"></span><div class="inCaja" aria-hidden="true"></div></div>
+    <p class="inTitulo">La grapadora de Nick</p>
+  </div>
+  <p class="inSalta">toca para empezar</p>
+</div>
+<main class="lienzo">
+  <header class="cab">
+    <div class="rotulo">
+      <span class="sello" aria-hidden="true"></span>
+      <div><h1>La grapadora de Nick</h1><p class="sub">fracciones · cortar reparte, grapar junta</p></div>
+      <nav class="acc" aria-label="Acciones">
+        <button type="button" id="bGuia">Guía</button>
+        <button type="button" id="bPracticar" aria-pressed="false">Practicar</button>
+        <button type="button" id="bAjustes" aria-pressed="false" aria-controls="ajustes">Ajustes</button>
+        <button type="button" id="bAula" aria-pressed="false">Aula</button>
+        <button type="button" id="bActa">Acta</button>
+        <button type="button" id="bEntrevista" aria-label="Entrevistas"><svg class="micro" viewBox="0 0 16 20" aria-hidden="true"><rect x="5" y="1" width="6" height="11" rx="3" fill="currentColor"/><path d="M2.5 9 Q2.5 15 8 15 Q13.5 15 13.5 9 M8 15 V19 M5 19 H11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      </nav>
+    </div>
+    <div class="juegos" role="group" aria-label="Los tres juegos">
+      <button type="button" data-j="servir" aria-pressed="true"><b>Servir</b><span>la misma cantidad</span></button>
+      <button type="button" data-j="comparar" aria-pressed="false"><b>Comparar</b><span>¿quién se lleva más?</span></button>
+      <button type="button" data-j="telefono" aria-pressed="false"><b>Por teléfono</b><span>sobre el papel</span></button>
+    </div>
+  </header>
+
+  <section class="panel ajustes" id="ajustes" hidden aria-label="Ajustes">
+    <div class="aj"><span class="etq">El fondo</span>
+      <span class="ops" data-aj="tema" role="group" aria-label="El fondo"><button type="button" data-v="dia">La encimera</button><button type="button" data-v="noche">La pizarra</button><button type="button" data-v="proyector">Proyector</button></span>
+      <small>El mármol de la encimera, con algo de harina. La pizarra del local, para un aula con poca luz. Proyector: papel blanco y tinta negra.</small></div>
+    <div class="aj"><span class="etq">Antes de comparar</span>
+      <span class="ops" data-aj="apuesta" role="group" aria-label="La pizarra"><button type="button" data-v="si">Decir el signo antes</button><button type="button" data-v="no">Sin pizarra</button></span>
+      <small>Con la pizarra, cada comparación empieza diciendo qué signo crees (&gt;, = o &lt;) antes de poder contar nada.</small></div>
+    <div class="aj"><span class="etq">El sonido</span>
+      <span class="ops" data-aj="sonido" role="group" aria-label="El sonido"><button type="button" data-v="si">Con sonido</button><button type="button" data-v="no">Sin sonido</button></span>
+      <small>Bajito: el clac de la grapadora, el cortador, la tiza y el teléfono.</small></div>
+    <div class="aj"><span class="etq">Al abrir</span>
+      <span class="ops" data-aj="inicio" role="group" aria-label="La animación de inicio"><button type="button" data-v="si">Con animación</button><button type="button" data-v="no">Sin animación</button></span></div>
+    <div class="aj"><span class="etq">La trampa</span>
+      <span class="ops" data-aj="trampa" role="group" aria-label="La trampa para ratones"><button type="button" data-v="si">Con trampa</button><button type="button" data-v="no">Sin trampa</button></span>
+      <small>Al fallar una respuesta, Nick pisa la trampa para ratones. Al acertar, Migas se lleva el queso sin que salte.</small></div>
+    <div class="aj"><span class="etq">Empezar de cero</span>
+      <small id="ajCeroTxt">Borra de este aparato los pedidos servidos y el acta de este turno, para el siguiente alumno o la siguiente clase. Hay que pulsar dos veces. Los ajustes se quedan.</small>
+      <button type="button" class="b borrar" id="ajCero">Borrar todo</button></div>
+    <div class="botones"><button type="button" class="b ok" id="ajCierra">Cerrar</button></div>
+  </section>
+
+  <section class="panel encargo" id="encargo" aria-label="El encargo">
+    <div class="enc-cab"><h2 id="encCab">Pedido 1 de 5</h2><div class="puntos" id="puntos"></div></div>
+    <p class="cliente" id="cliente"></p>
+    <div class="habla" id="nick"><span class="cara" id="caraNick" data-vb="12 4 76 76" aria-hidden="true"></span><div><div class="quien">Nick, el pizzero</div><p id="nickTxt" role="status"></p></div></div>
+    <div id="pizarra"></div>
+    <div class="botones" id="encBotones">
+      <button type="button" class="b ok" id="bSiguiente" hidden>Siguiente pedido</button>
+      <button type="button" class="b ok" id="bOtro" hidden>Otro pedido</button>
+      <button type="button" class="enlace" id="bSaltar">Saltar este pedido</button>
+    </div>
+    <div class="practica" id="practica" hidden><span class="etq">Dificultad</span>
+      <span class="ops" id="difOps" role="group" aria-label="Dificultad"><button type="button" data-d="0">Fácil</button><button type="button" data-d="1">Media</button><button type="button" data-d="2">Difícil</button></span></div>
+  </section>
+
+  <section class="panel mesa" id="mesa" aria-label="La mesa">
+    <div class="cajas" id="cajas"></div>
+    <div class="papel" id="papel" hidden></div>
+    <div class="mandos" id="mandos">
+      <div class="fila"><span class="etq">cortar en</span><span class="tiras" id="botCortes"></span></div>
+      <div class="fila" id="filaMaq"><span class="etq">la máquina</span><span class="tiras" id="botMaq"></span></div>
+      <div class="botones"><button type="button" class="b ok" id="bGrapar">Grapar lo elegido</button><button type="button" class="b" id="bSoltar">Quitar grapas</button><button type="button" class="b" id="bLimpiar">Empezar el pedido</button></div>
+    </div>
+    <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="panel tique" id="tique" aria-label="El tique">
+    <h2>Tique</h2>
+    <p class="lectura" id="lec">—</p>
+    <p class="desglose" id="des"></p>
+    <div class="regla"><div class="cinta" id="cinta"></div><div id="marcas"></div></div>
+    <div class="opera" id="opera" hidden></div>
+    <div class="pregunta" id="pregunta" hidden></div>
+    <p class="nota">El 1 es la superficie de una pizza entera de la casa. La pizza es el envase; el número vive en la regla.</p>
+  </section>
+
+  <footer>
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" rel="license">© 2026 Andrés Asensio · CC BY-NC-ND 4.0</a>
+    · <a href="https://diazepamina-creator.github.io/pizzeria-de-nick/">La pizzería de Nick (anterior)</a>
+    · <a href="https://diazepamina-creator.github.io/">Materiales</a>
+    · versión 0.12
+  </footer>
+</main>
+
+<div class="guia" id="guia" hidden>
+  <div class="guia-foco" id="guiaFoco"></div>
+  <div class="guia-globo" id="guiaGlobo" role="dialog" aria-modal="true" aria-labelledby="guiaTit" tabindex="-1">
+    <div class="tit" id="guiaTit"></div>
+    <p id="guiaTxt"></p>
+    <div class="guia-pie"><span id="guiaNum"></span>
+      <span class="botones"><button type="button" class="b" id="guiaSalir">Salir</button><button type="button" class="b ok" id="guiaSig">Siguiente</button></span></div>
+  </div>
+</div>
+<div class="modal" id="mEntrevista" hidden>
+  <div class="caja2 entrevista" id="entrevista" role="dialog" aria-modal="true" aria-labelledby="evTit" tabindex="-1">
+    <h2 id="evTit">Entrevistas en la cocina</h2>
+    <div class="ev-quien" role="group" aria-label="A quién entrevistar"></div>
+    <p class="ev-cartel"></p>
+    <div class="ev-escena">
+      <div class="ev-cara" aria-hidden="true"></div>
+      <div class="ev-globo"><p class="ev-pregunta"></p><p class="ev-respuesta" aria-live="polite"></p></div>
+    </div>
+    <p class="ev-rotulo">Pregúntale:</p>
+    <div class="ev-lista"></div>
+    <div class="botones"><button type="button" class="b" id="evCierra">Volver al mostrador</button></div>
+  </div>
+</div>
+<div class="modal" id="mActa" hidden>
+  <div class="caja2 acta" role="dialog" aria-modal="true" aria-labelledby="actaTit" tabindex="-1">
+    <h2 id="actaTit">El acta del mostrador</h2>
+    <p class="actaSub">Lo que has hecho en este turno. Cópiala o descárgala para dársela a tu profesor.</p>
+    <label class="actaNombre"><span class="etq">Tu nombre</span><input id="acNombre" autocomplete="name" placeholder="Escribe tu nombre"></label>
+    <div class="actaDatos" id="acDatos"></div>
+    <table class="actaTabla"><thead><tr><th>Juego</th><th>La ruta</th><th>Practicar</th></tr></thead><tbody id="acFilas"></tbody></table>
+    <details class="ac-det" id="acDet"><summary>Pedido a pedido</summary><ol class="ac-ej" id="acEj"></ol></details>
+    <div class="actaCodigos"><div><span class="etq">Código de verificación</span><b id="acFirma">—</b></div></div>
+    <div class="botones"><button type="button" class="b ok" id="acCopia">Copiar el acta</button><button type="button" class="b" id="acBaja">Descargar .txt</button><button type="button" class="b" id="acCierra">Volver al mostrador</button></div>
+    <p class="actaMsg" id="acMsg" role="status"></p>
+  </div>
+</div>
+
+<script>
+(function (raiz) {
+'use strict';
+const casi = (a, b) => Math.abs(a - b) < 1e-9;
+const mcd = (a, b) => b ? mcd(b, a % b) : a;
+const mcm = (a, b) => a / mcd(a, b) * b;
+
+const nuevaCaja = c => ({cortes: c, grapas: new Array(c).fill(false), sel: new Set(), recien: new Set()});
+
+function grupos(c){
+  const n = c.cortes, g = [], usados = new Array(n).fill(false);
+  for(let i = 0; i < n; i++){
+    if(usados[i] || (c.grapas[(i - 1 + n) % n] && n > 1)) continue;
+    const t = [i]; usados[i] = true;
+    let j = i;
+    while(c.grapas[j] && t.length < n){ j = (j + 1) % n; if(usados[j]) break; t.push(j); usados[j] = true; }
+    g.push(t);
+  }
+  if(!g.length) g.push([...Array(n).keys()]);
+  return g;
+}
+const elegidas = c => grupos(c).filter(t => c.sel.has(t[0]));
+const trozosDe = c => elegidas(c).reduce((s, t) => s + t.length, 0);
+const valor = c => trozosDe(c) / c.cortes;
+const piezaDe = (c, b) => elegidas(c).some(t => t.length * b === c.cortes);
+
+function toca(c, i){
+  const t = grupos(c).find(t => t.includes(i));
+  if(!t) return;
+  if(c.sel.has(t[0])) c.sel.delete(t[0]); else c.sel.add(t[0]);
+}
+
+function recorta(c, nuevo){
+  const b = c.cortes;
+  if(nuevo === b) return {op: null, rompe: false};
+  if(nuevo % b !== 0){
+    const rompe = c.sel.size > 0 || c.grapas.some(Boolean);
+    c.cortes = nuevo; c.grapas = new Array(nuevo).fill(false); c.sel.clear(); c.recien.clear();
+    return {op: null, rompe};
+  }
+  const f = nuevo / b, ka = trozosDe(c), g2 = new Array(nuevo).fill(false), sel2 = new Set();
+  grupos(c).forEach(t => {
+    const unida = t.length > 1;
+    t.forEach((i, idx) => {
+      for(let k = 0; k < f - 1; k++) g2[i * f + k] = unida;
+      if(idx < t.length - 1) g2[i * f + f - 1] = true;
+    });
+    if(!c.sel.has(t[0])) return;
+    if(unida) sel2.add(t[0] * f);
+    else for(let k = 0; k < f; k++) sel2.add(t[0] * f + k);
+  });
+  c.cortes = nuevo; c.grapas = g2; c.sel = sel2; c.recien.clear();
+  return {op: ka ? {tipo: 'corte', c: f, ka, ba: b, kd: ka * f, bd: nuevo} : null, rompe: false};
+}
+
+function grapa(c){
+  const n = c.cortes, gs = elegidas(c);
+  if(gs.length < 2) return {ok: false, por: 'pocas'};
+  const todos = gs.flat(), dentro = new Set(todos);
+  let ini = -1;
+  for(let i = 0; i < n && ini < 0; i++){
+    if(!dentro.has(i)) continue;
+    let sigue = true;
+    for(let k = 0; k < todos.length; k++) if(!dentro.has((i + k) % n)){ sigue = false; break; }
+    if(sigue) ini = i;
+  }
+  if(ini < 0) return {ok: false, por: 'sueltas'};
+  c.recien.clear();
+  for(let k = 0; k < todos.length - 1; k++){
+    const j = (ini + k) % n;
+    if(!c.grapas[j]) c.recien.add(j);
+    c.grapas[j] = true;
+  }
+  c.sel.clear(); c.sel.add(ini);
+  const m = todos.length, divide = n % m === 0;
+  return {ok: true, m, op: divide ? {tipo: 'grapa', c: m, ka: m, ba: n, kd: 1, bd: n / m} : null};
+}
+
+function industrial(c, x){
+  if(c.cortes % x !== 0) return {ok: false};
+  const finos = elegidas(c).flat(), kAntes = finos.length, bAntes = c.cortes, vAntes = valor(c);
+  c.recien.clear(); c.grapas = new Array(c.cortes).fill(false);
+  for(let i = 0; i < c.cortes; i++) if((i + 1) % x !== 0){ c.grapas[i] = true; c.recien.add(i); }
+  c.sel.clear();
+  grupos(c).forEach(t => { if(t.some(i => finos.includes(i))) c.sel.add(t[0]); });
+  const exacta = kAntes > 0 && kAntes % x === 0 && casi(vAntes, valor(c));
+  return {ok: true, op: exacta ? {tipo: 'grapa', c: x, ka: kAntes, ba: bAntes, kd: kAntes / x, bd: bAntes / x} : null,
+          nota: kAntes && !exacta ? {kAntes, bAntes, x} : null};
+}
+function suelta(c){ c.grapas = new Array(c.cortes).fill(false); c.sel.clear(); c.recien.clear(); }
+
+const fVal = f => f[0] / f[1];
+const fTxt = f => f[0] + '/' + f[1];
+const signo = (a, b) => casi(fVal(a), fVal(b)) ? '=' : (fVal(a) > fVal(b) ? '>' : '<');
+const simplifica = f => { const d = mcd(f[0], f[1]); return [f[0] / d, f[1] / d]; };
+const partes = cajas => cajas.map(c => ({k: trozosDe(c), b: c.cortes})).filter(t => t.k > 0);
+const mismoCorte = ps => ps.every(t => t.b === ps[0].b);
+const total = cajas => cajas.reduce((s, c) => s + valor(c), 0);
+
+const M = {casi, mcd, mcm, nuevaCaja, grupos, elegidas, trozosDe, valor, piezaDe, toca, recorta, grapa, industrial, suelta,
+           fVal, fTxt, signo, simplifica, partes, mismoCorte, total};
+if(typeof module !== 'undefined' && module.exports) module.exports = M;
+else raiz.Motor = M;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const M = typeof require === 'function' && typeof module !== 'undefined' ? require('./motor.js') : raiz.Motor;
+let azar = Math.random;
+const elige = xs => xs[Math.floor(azar() * xs.length)];
+const entre = (a, b) => a + Math.floor(azar() * (b - a + 1));
+const fTxt = M.fTxt, az = t => '<b class="fB">' + t + '</b>', ro = t => '<b class="fA">' + t + '</b>';
+const CARTA = [2, 3, 4, 5, 6, 8, 9, 10, 12, 15];
+const NOMBRE = {2: 'mitades', 3: 'tercios', 4: 'cuartos', 5: 'quintos', 6: 'sextos', 7: 'séptimos', 8: 'octavos', 9: 'novenos', 10: 'décimos', 12: 'doceavos', 15: 'quinceavos'};
+const UNO = {2: 'media pizza', 3: 'un tercio', 4: 'un cuarto', 5: 'un quinto', 6: 'un sexto', 7: 'un séptimo', 8: 'un octavo', 9: 'un noveno', 10: 'un décimo', 12: 'un doceavo', 15: 'un quinceavo'};
+const enLetra = f => f[0] === 1 ? UNO[f[1]] : f[0] + ' ' + NOMBRE[f[1]];
+
+const SERVIR = [
+  {id: 's1', f: [1, 2], cajas: [4], pieza: true, menu: [2, 4, 8],
+   cli: '—Perdone… yo la quería <b>en mitades</b>, no en cuartos. ¿Y ahora qué me llevo?',
+   nick: 'Es lo mismo, pero el cliente quiere <b>una pieza</b>. Toca dos cuartos pegados y grápalos.',
+   ok: '¡Media! Dos cuartos grapados ocupan lo mismo que una mitad: <b>2/4 y 1/2 son la misma cantidad</b>. Y mira la regla: la marca no se ha movido.'},
+  {id: 's2', f: [3, 8], cajas: [4], menu: [2, 4, 8],
+   cli: '—Yo quiero <b>tres octavos</b>. Y no me diga que no, que lo pone en la carta.',
+   nick: 'Viene en cuartos, pero el cortador vuelve a pasar cuando hace falta. Córtala en 8 y quédate con tres trozos.',
+   ok: 'Tres de ocho, ni uno más. Al cortar más fino, cada cuarto se ha hecho <b>dos octavos</b>: hay más trozos y son más pequeños.'},
+  {id: 's3', f: [5, 4], cajas: [4, 4], menu: [2, 4, 8],
+   cli: '—Somos cinco. Póngame <b>cinco cuartos</b>… si es que eso existe.',
+   nick: 'Existe, pero no cabe en una caja: he traído otra. Una pizza entera y un cuarto de la segunda.',
+   ok: 'Claro que existe: una pizza entera y un cuarto. Cuando el de arriba pasa al de abajo hace falta <b>más de una unidad</b>, y en la regla se ve pasado el 1.'},
+  {id: 's4', f: [1, 3], cajas: [6], pieza: true, menu: [3, 6, 12],
+   cli: '—Un <b>tercio</b> de pizza, por favor. Pero la veo cortada en seis…',
+   nick: 'Seis sextos, sí. Con la máquina de <b>2 en 2</b> quedan tercios, y luego eliges tu pieza. O grapa dos sextos pegados: es lo mismo.',
+   ok: 'Un tercio. Grapando de dos en dos, 2/6 se ha convertido en 1/3: <b>has dividido arriba y abajo entre 2</b>.'},
+  {id: 's5', f: [3, 4], cajas: [4, 4], menu: [2, 4, 8],
+   cli: '—Quiero <b>media pizza y un cuarto</b>. Todo junto, si puede ser.',
+   nick: 'Media y un cuarto no se juntan: no son del mismo tamaño. Media pizza son dos cuartos: tres cuartos en total.',
+   ok: 'Tres cuartos. Para juntar dos trozos hay que <b>cortarlos igual</b> primero: buscar el mismo denominador no es un capricho, es poder graparlos.'}
+];
+
+const COMPARAR = [
+  {id: 'c1', tipo: 'den', fA: [3, 8], fB: [5, 8], menu: [2, 4, 8],
+   cli: '—Mesa 4 quiere ' + ro('tres octavos') + '; mesa 7, ' + az('cinco octavos') + '. ¿Quién se lleva más?',
+   nick: 'Las dos cajas ya vienen en octavos: trozos <b>iguales</b>. Prepara 3/8 y 5/8, y esto se cuenta solo.',
+   ok: 'Mesa 7, y de calle: cinco octavos contra tres. Con trozos iguales <b>basta contar los trozos</b>, y en la regla se ve la diferencia: dos octavos.',
+   rep: {A: '¿Tres trozos más que cinco? Son octavos los dos, del mismo tamaño exacto: gana quien tenga más trozos.',
+         ig: 'Iguales no: mira la regla, las dos marcas están en sitios distintos. Cuenta los octavos de cada caja.'}},
+  {id: 'c2', tipo: 'num', fA: [1, 3], fB: [1, 4], menu: [3, 4, 6, 12],
+   cli: '—Mesa 4 pide ' + ro('un tercio') + ' y mesa 7 ' + az('un cuarto') + ', y discuten: que si 4 es más que 3, que si el cuarto gana…',
+   nick: 'Más comensales tocan a menos, te lo digo yo. Pero prepáralo: un trozo en cada caja, y mira el tamaño de cada uno.',
+   ok: 'El del tercio. Cuantas <b>más</b> partes se hace una pizza, más pequeño toca cada trozo: por eso <b>1/4 &lt; 1/3 aunque 4 &gt; 3</b>. Si alguien protesta, córtalas las dos en 12 y cuenta: 4/12 contra 3/12.',
+   rep: {B: 'Ya sé lo que has pensado: que 4 es más que 3. Pero ese número dice <b>en cuántas partes se corta</b>, no cuánto toca. Más comensales, menos ración. Mira el tamaño de los dos trozos.',
+         ig: '¿Iguales? Pon un trozo encima del otro: el de la mesa 4 sobra por todas partes.'}},
+  {id: 'c3', tipo: 'cabe', fA: [3, 4], fB: [5, 8], menu: [2, 4, 8],
+   cli: '—Mesa 4, ' + ro('tres cuartos') + '; mesa 7, ' + az('cinco octavos') + '. A ver quién tiene razón.',
+   nick: 'Cuartos contra octavos: trozos distintos, y con trozos distintos no hay cuenta que valga. Pero los cuartos se dejan recortar: pasa el cortador por <b>una</b> caja y quedan igualadas.',
+   ok: 'Mesa 4: seis octavos contra cinco. Bastaba recortar <b>una</b> caja, porque los cuartos caben justos en los octavos. Un octavo de diferencia.',
+   rep: {B: 'Cinco trozos contra tres, sí. Pero de distinto tamaño: <b>un octavo es la mitad de un cuarto</b>. Contar trozos que no miden lo mismo no vale para nada. Iguálalos y hablamos.',
+         ig: 'No caen en el mismo punto. Ponlas en octavos las dos y lo verás.'}},
+  {id: 'c4', tipo: 'nadie', fA: [2, 3], fB: [3, 5], menu: [3, 5, 6, 10, 15],
+   cli: '—Mesa 4 quiere ' + ro('dos tercios') + ' y mesa 7 quiere ' + az('tres quintos') + '. ¿Quién se lleva más pizza?',
+   nick: 'Tercios y quintos: ni unos caben en los otros ni al revés. Aquí toca cortar <b>las dos</b>… y hay un número de trozos donde caben los dos cortes.',
+   ok: 'Mesa 4, por un pelo: diez quinceavos contra nueve. Ponerlas en la <b>misma secuencia de trozos</b>: eso, y no otra cosa, es el denominador común. Un quinceavo de diferencia.',
+   rep: {B: 'Ya veo el razonamiento: 3 es más que 2 y 5 es más que 3, así que gana. Pues eso mismo pasaba hace dos pedidos con 1/3 y 1/4, y <b>ganaba el tercio</b>. Con trozos distintos, contar no sirve.',
+         ig: 'Iguales no, pero por poco: un solo quinceavo los separa. Córtalas las dos y cuenta.'}},
+  {id: 'c5', tipo: 'igual', fA: [2, 4], fB: [3, 6], menu: [2, 3, 4, 6, 8, 12],
+   cli: '—Mesa 4 pide ' + ro('dos cuartos') + '; mesa 7, ' + az('tres sextos') + '. Cada una dice que la suya es más grande.',
+   nick: 'Pues las dos no pueden tener razón. Córtalas igual y se acaba la discusión.',
+   ok: 'Las dos tenían razón: 6/12 y 6/12, <b>el mismo punto de la regla con dos nombres</b>. Comparar también puede acabar en empate.',
+   rep: {A: '¿Seguro? Córtalas las dos igual y mira las marcas de la regla antes de contestar.',
+         B: '¿Porque 3 es más que 2? Pero también 6 es más que 4. Córtalas igual y verás la sorpresa.'}}
+];
+
+const TELEFONO = [
+  {id: 't1', fA: [7, 8], fB: [6, 7],
+   cli: '—Nick, soy Nicoleta. Dos encargos para la pastelería: ' + ro('siete octavos') + ' para mí y ' + az('seis séptimos') + ' para el pinche, que jura que lo suyo es más. ¿Quién tiene razón?',
+   nick: '¿Octavos contra séptimos? Harían falta 56 trozos y el cortador no hila tan fino. Esto se corta <b>sobre el papel</b>: multiplica cada una arriba y abajo por lo que haga falta hasta que estén en la misma secuencia.',
+   ok: 'El de 7/8, por un trozo de 56: 49 contra 48. Y fíjate en los números: <b>49 = 7×7 y 48 = 8×6</b>. Has multiplicado <b>en cruz</b> sin querer: la regla famosa no es un truco, es este corte sobre el papel.',
+   rep: {B: 'El pinche dice lo mismo, y por lo mismo: que a 6/7 le falta un séptimo y a 7/8 un octavo. Pero <b>al que le falta menos, se lleva más</b>, y un octavo es más pequeño que un séptimo.',
+         ig: 'Ni hablar: 49 y 48 no son el mismo número, por muy cerca que anden.'}}
+];
+
+function carta(obligados, relleno){
+  const c = new Set(obligados);
+  for(const n of relleno) if(c.size < 6) c.add(n);
+  return [...c].filter(n => CARTA.includes(n)).sort((a, b) => a - b);
+}
+const IGUALES = [[[1, 2], [2, 4]], [[2, 4], [3, 6]], [[2, 4], [4, 8]], [[1, 3], [2, 6]], [[1, 3], [4, 12]], [[2, 6], [4, 12]], [[1, 4], [2, 8]],
+                 [[1, 4], [3, 12]], [[3, 4], [6, 8]], [[1, 5], [2, 10]], [[2, 5], [4, 10]], [[1, 6], [2, 12]], [[5, 6], [10, 12]], [[3, 6], [6, 12]]];
+const NADIE = [[2, 3], [2, 5], [3, 4], [3, 5], [4, 6]];
+const CABE = [[2, 4], [2, 6], [3, 6], [4, 8], [2, 8], [3, 9], [5, 10], [4, 12], [6, 12], [3, 12]];
+function generaServir(d){
+  let f, cajas, pieza = false, tipo;
+  if(d === 0){
+    tipo = elige(['grapa', 'corta']);
+    if(tipo === 'grapa'){ const b = elige([2, 3, 4]), c = b * elige([2, 3].filter(x => b * x <= 12)); f = [1, b]; cajas = [c]; pieza = true; }
+    else{ const c = elige([2, 3, 4]), m = elige([2, 3].filter(x => c * x <= 12)), b = c * m; f = [entre(1, b - 1), b]; cajas = [c]; }
+  }else if(d === 1){
+    tipo = elige(['mas', 'suma']);
+    const b = tipo === 'mas' ? elige([2, 3, 4, 6, 8]) : elige([4, 6, 8]);
+    if(tipo === 'mas'){ f = [b + entre(1, b - 1), b]; cajas = [b, b]; }
+    else{ f = [entre(2, b - 1), b]; cajas = [b / 2, b]; }
+  }else{
+    tipo = 'mixto';
+    const b = elige([3, 4, 5, 6]), c = elige([2, 3, 4].filter(x => x !== b && M.mcm(x, b) <= 15));
+    f = [entre(1, b - 1), b]; cajas = [c]; pieza = f[0] === 1;
+  }
+  return servirDe(f, cajas, pieza, d > 0 ? CARTA.filter(n => n % cajas[0] === 0 && n <= 12) : []);
+}
+function servirDe(f, cajas, pieza, relleno){
+  const menu = carta([cajas[0], f[1], M.mcm(cajas[0], f[1])], relleno || []);
+  return {id: 'sp' + Date.now(), f, cajas, pieza, menu, practica: true,
+    cli: '—Póngame <b>' + enLetra(f) + '</b>' + (cajas.length > 1 ? '. Y traiga otra caja, que no me cabe' : ', que la veo cortada en ' + NOMBRE[cajas[0]]) + '.',
+    nick: pieza ? 'Lo quiere de <b>una pieza</b>: corta o grapa lo que haga falta, y prepárala.' : 'Prepara <b>' + fTxt(f) + '</b>' + (cajas.length > 1 ? ' con las dos cajas' : '') + ': el cortador y la grapadora son tuyos.',
+    ok: 'Eso es: <b>' + fTxt(f) + '</b>. La marca de la regla no miente.'};
+}
+function generaComparar(d){
+  const tipo = elige([['den', 'num'], ['cabe', 'igual', 'den'], ['nadie', 'igual', 'cabe']][d]);
+  let fA, fB;
+  if(tipo === 'den'){ const b = elige([5, 6, 8, 10, 12]); let a = entre(1, b - 1), c = entre(1, b - 1); while(c === a) c = entre(1, b - 1); fA = [a, b]; fB = [c, b]; }
+  else if(tipo === 'num'){ const [b, c] = elige(NADIE.concat(CABE)), k = d && Math.min(b, c) > 2 ? elige([1, 2]) : 1; fA = [k, b]; fB = [k, c]; }
+  else if(tipo === 'cabe'){ const [b, c] = elige(CABE); let a = entre(1, b - 1), e = entre(1, c - 1); while(a * c === e * b) e = entre(1, c - 1); fA = [a, b]; fB = [e, c]; }
+  else if(tipo === 'nadie'){ const [b, c] = elige(NADIE); let a = entre(1, b - 1), e = entre(1, c - 1); while(a * c === e * b) e = entre(1, c - 1); fA = [a, b]; fB = [e, c]; }
+  else{ [fA, fB] = elige(IGUALES); }
+  if(azar() < .5) [fA, fB] = [fB, fA];
+  return compararDe(fA, fB, tipo);
+}
+function tipoDe(fA, fB){
+  if(fA[0] * fB[1] === fB[0] * fA[1]) return 'igual';
+  if(fA[1] === fB[1]) return 'den';
+  if(fA[0] === fB[0]) return 'num';
+  if(fA[1] % fB[1] === 0 || fB[1] % fA[1] === 0) return 'cabe';
+  return 'nadie';
+}
+function compararDe(fA, fB, tipo){
+  tipo = tipo || tipoDe(fA, fB);
+  const m = M.mcm(fA[1], fB[1]);
+  const menu = carta([fA[1], fB[1], m], tipo === 'nadie' ? CARTA.filter(n => n % fA[1] === 0 || n % fB[1] === 0) : []);
+  const NICK = {den: 'Las dos cajas vienen en ' + NOMBRE[fA[1]] + ': trozos iguales. Prepara los dos pedidos y cuenta.',
+    num: 'Un trozo del mismo tamaño no es: mira cuál toca a más. Prepáralos y compara los trozos.',
+    cabe: 'Trozos distintos, pero unos caben en los otros: pasa el cortador por <b>una</b> caja y quedan igualadas.',
+    nadie: 'Ni unos caben en los otros ni al revés: hay que cortar <b>las dos</b> donde quepan los dos cortes.',
+    igual: 'Córtalas igual, y luego mira bien las dos marcas de la regla.'};
+  const OK = {den: 'Con trozos iguales <b>basta contar los trozos</b>.', num: 'Cuantas más partes, más pequeño toca cada trozo: <b>gana el denominador pequeño</b>.',
+    cabe: 'Bastaba recortar una caja: un corte cabía en el otro.', nadie: 'Las dos en la <b>misma secuencia de trozos</b>: eso es el denominador común.',
+    igual: '<b>El mismo punto con dos nombres.</b> Comparar también puede acabar en empate.'};
+  const REP = {den: 'Son ' + NOMBRE[fA[1]] + ' los dos, del mismo tamaño: gana quien tenga <b>más trozos</b>.',
+    num: 'Ese número dice en <b>cuántas partes</b> se corta la pizza, no cuánto toca. Más partes, menos ración.',
+    cabe: 'Trozos de distinto tamaño: contar no vale. <b>Iguálalos</b> y cuenta.', nadie: 'Trozos de distinto tamaño: contar no vale. <b>Iguálalos</b> y cuenta.',
+    igual: 'Córtalas igual y mira las marcas: caen en el <b>mismo punto</b>.'};
+  return {id: 'cp' + Date.now(), tipo, fA, fB, menu, practica: true,
+    cli: '—Mesa 4 quiere ' + ro(enLetra(fA)) + '; mesa 7, ' + az(enLetra(fB)) + '. ¿Quién se lleva más?',
+    nick: NICK[tipo], ok: OK[tipo], rep: {A: REP[tipo], B: REP[tipo], ig: REP[tipo]}};
+}
+const LEJOS = [[5, 7], [5, 8], [7, 8], [6, 7], [4, 7], [3, 7], [5, 9], [7, 9], [8, 9], [4, 9], [5, 6], [7, 10], [3, 8]];
+function generaTelefono(d){
+  const [b, c] = elige(LEJOS.filter(([x, y]) => M.mcm(x, y) > 15));
+  let a, e, dif;
+  do{ a = entre(1, b - 1); e = entre(1, c - 1); dif = Math.abs(a / b - e / c); }
+  while(dif === 0 || (d === 0 ? dif < .2 : d === 1 ? dif < .06 || dif > .25 : dif > .08));
+  return telefonoDe([a, b], [e, c]);
+}
+function telefonoDe(fA, fB){
+  const [a, b] = fA, [e, c] = fB;
+  return {id: 'tp' + Date.now(), fA, fB, practica: true,
+    cli: '—Nick, soy Nicoleta. ' + ro(enLetra(fA)) + ' para mí y ' + az(enLetra(fB)) + ' para el pinche. ¿Quién se lleva más?',
+    nick: NOMBRE[b] + ' contra ' + NOMBRE[c] + ': harían falta ' + b * c + ' trozos. Sobre el papel: multiplica cada una arriba y abajo por el denominador de la otra.',
+    ok: 'En la secuencia de ' + b * c + ': <b>' + a * c + ' contra ' + e * b + '</b>. Y ' + a * c + ' = ' + a + '×' + c + ', ' + e * b + ' = ' + e + '×' + b + ': los <b>productos en cruz</b>.',
+    rep: {A: 'En la secuencia de ' + b * c + ': ¿quién va más lejos, ' + a * c + ' o ' + e * b + '?', B: 'En la secuencia de ' + b * c + ': ¿quién va más lejos, ' + a * c + ' o ' + e * b + '?', ig: 'No son el mismo número, por muy cerca que anden.'}};
+}
+
+const frac = t => { const m = /^(\d{1,2})\/(\d{1,2})$/.exec(String(t || '').trim()); return m && +m[1] > 0 && +m[2] > 1 ? [+m[1], +m[2]] : null; };
+function aMedida(q){
+  const get = k => typeof q.get === 'function' ? q.get(k) : q[k];
+  const j = get('j');
+  if(j === 'servir'){
+    const f = frac(get('f')); if(!f || !CARTA.includes(f[1])) return null;
+    const cajas = String(get('c') || f[1]).split(',').map(Number);
+    if(!cajas.length || cajas.length > 3 || cajas.some(c => !CARTA.includes(c))) return null;
+    if(f[0] > f[1] * cajas.length) return null;
+    if(!CARTA.includes(M.mcm(cajas[0], f[1]))) return null;
+    return servirDe(f, cajas, get('p') === '1' || (f[0] === 1 && cajas[0] !== f[1]));
+  }
+  if(j === 'comparar' || j === 'telefono'){
+    const fA = frac(get('a')), fB = frac(get('b')); if(!fA || !fB) return null;
+    if(fA[0] > fA[1] || fB[0] > fB[1]) return null;
+    if(j === 'telefono') return fA[1] <= 12 && fB[1] <= 12 ? telefonoDe(fA, fB) : null;
+    if(!CARTA.includes(fA[1]) || !CARTA.includes(fB[1]) || !CARTA.includes(M.mcm(fA[1], fB[1]))) return null;
+    return compararDe(fA, fB);
+  }
+  return null;
+}
+
+const RUTA = {servir: SERVIR, comparar: COMPARAR, telefono: TELEFONO};
+const GENERA = {servir: generaServir, comparar: generaComparar, telefono: generaTelefono};
+const NOMBRE_J = {servir: 'Servir', comparar: 'Comparar', telefono: 'Por teléfono'};
+const P = {RUTA, GENERA, NOMBRE_J, CARTA, NOMBRE, enLetra, aMedida, tipoDe, conAzar: f => { azar = f; }};
+if(typeof module !== 'undefined' && module.exports) module.exports = P;
+else raiz.Pedidos = P;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+let activo = true, A = null;
+function prepara(){
+  if(A) return A;
+  const AC = raiz.AudioContext || raiz.webkitAudioContext;
+  if(!AC) return null;
+  const ctx = new AC(), salida = ctx.createGain(); salida.gain.value = .8; salida.connect(ctx.destination);
+  const ruido = ctx.createBuffer(1, ctx.sampleRate * .5, ctx.sampleRate), d = ruido.getChannelData(0);
+  for(let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  return A = {ctx, salida, ruido};
+}
+function rafaga(t, f, dur, vol, q){
+  const s = A.ctx.createBufferSource(); s.buffer = A.ruido;
+  const fl = A.ctx.createBiquadFilter(); fl.type = 'bandpass'; fl.frequency.value = f; fl.Q.value = q || 1.2;
+  const g = A.ctx.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  s.connect(fl); fl.connect(g); g.connect(A.salida); s.start(t); s.stop(t + dur + .02);
+}
+function tono(t, f, dur, vol, tipo){
+  const o = A.ctx.createOscillator(); o.type = tipo || 'sine'; o.frequency.value = f;
+  const g = A.ctx.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .01);
+  g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  o.connect(g); g.connect(A.salida); o.start(t); o.stop(t + dur + .02);
+}
+const SONIDOS = {
+  grapa(t){ rafaga(t, 1400, .05, .35, 1.2); rafaga(t + .04, 600, .08, .3, 1); },
+  corte(t){ rafaga(t, 3200, .12, .16, .8); rafaga(t + .05, 4200, .08, .1, .8); },
+  tiza(t){ rafaga(t, 2400, .05, .14, 2); },
+  timbre(t){ for(let k = 0; k < 6; k++) tono(t + k * .08, k % 2 ? 1180 : 980, .07, .08, 'square'); },
+  bien(t){ tono(t, 659, .18, .14, 'triangle'); tono(t + .11, 988, .26, .12, 'triangle'); },
+  mal(t){ tono(t, 160, .22, .16, 'square'); },
+  trampa(t){ rafaga(t, 3800, .04, .5, 1.4); rafaga(t + .005, 1600, .06, .4, 1.2); tono(t, 180, .12, .22, 'triangle'); },
+  ay(t){
+    const o = A.ctx.createOscillator(); o.type = 'sawtooth';
+    o.frequency.setValueAtTime(330, t); o.frequency.linearRampToValueAtTime(560, t + .07); o.frequency.exponentialRampToValueAtTime(260, t + .42);
+    const f = A.ctx.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 900; f.Q.value = 1.6;
+    const g = A.ctx.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.35, t + .03); g.gain.exponentialRampToValueAtTime(.0001, t + .45);
+    o.connect(f); f.connect(g); g.connect(A.salida); o.start(t); o.stop(t + .5);
+  },
+  risita(t){ [0, .11, .22].forEach((d, i) => { tono(t + d, 1700 + i * 140, .07, .1, 'triangle'); tono(t + d + .02, 2300 + i * 160, .05, .05, 'sine'); }); }
+};
+function toca(nombre, retraso){
+  if(!activo || !SONIDOS[nombre]) return;
+  try{
+    if(!prepara()) return;
+    if(A.ctx.state === 'suspended') A.ctx.resume();
+    SONIDOS[nombre](A.ctx.currentTime + .02 + (retraso || 0));
+  }catch(err){}
+}
+if(raiz.addEventListener) raiz.addEventListener('pointerdown', () => {
+  if(activo) try{ const a = prepara(); if(a && a.ctx.state === 'suspended') a.ctx.resume(); }catch(err){}
+}, {once: true});
+raiz.Sonido = {toca, activo: v => { activo = !!v; }};
+})(window);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const M = raiz.Motor, NS = 'http://www.w3.org/2000/svg';
+const el = (tag, at) => { const e = document.createElementNS(NS, tag); for(const k in at) e.setAttribute(k, at[k]); return e; };
+const CX = 150, CY = 148, R = 126;
+const QUIETO = !!(raiz.matchMedia && raiz.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+let sem = 11;
+const az = () => { sem = (sem * 16807) % 2147483647; return (sem - 1) / 2147483646; };
+function blob(r, amp, n, fase){
+  let d = '';
+  const k = 72;
+  for(let i = 0; i <= k; i++){
+    const a = i / k * Math.PI * 2;
+    const rr = r + amp * (Math.sin(a * n + fase) * .6 + Math.sin(a * (n + 3) + fase * 2) * .4);
+    d += (i ? 'L' : 'M') + (CX + rr * Math.cos(a)).toFixed(1) + ' ' + (CY + rr * Math.sin(a)).toFixed(1);
+  }
+  return d + 'Z';
+}
+function pizzaEntera(){
+  let s = '';
+  s += '<circle cx="' + CX + '" cy="' + CY + '" r="' + R + '" fill="url(#pzCorteza)"/>';
+  s += '<circle cx="' + CX + '" cy="' + CY + '" r="' + R + '" fill="#8A5A24" filter="url(#pzGrano)" opacity=".55"/>';
+  for(let i = 0; i < 26; i++){
+    const a = az() * Math.PI * 2, d = R - 7 - az() * 6, rr = 1.6 + az() * 3.2;
+    s += '<ellipse cx="' + (CX + d * Math.cos(a)).toFixed(1) + '" cy="' + (CY + d * Math.sin(a)).toFixed(1) + '" rx="' + rr.toFixed(1) + '" ry="' + (rr * .7).toFixed(1) +
+      '" transform="rotate(' + (a * 180 / Math.PI + 90).toFixed(0) + ' ' + (CX + d * Math.cos(a)).toFixed(1) + ' ' + (CY + d * Math.sin(a)).toFixed(1) + ')" fill="' + (i % 3 ? '#9A5E22' : '#F2CE8A') + '" opacity="' + (i % 3 ? .55 : .7) + '"/>';
+  }
+  s += '<path d="' + blob(112, 2.2, 9, .7) + '" fill="#B8402A"/>';
+  s += '<path d="' + blob(112, 2.2, 9, .7) + '" fill="#7E2414" filter="url(#pzGrano)" opacity=".35"/>';
+  s += '<path d="' + blob(104, 4.5, 7, 1.9) + '" fill="url(#pzQueso)"/>';
+  s += '<path d="' + blob(104, 4.5, 7, 1.9) + '" fill="#E8B04A" filter="url(#pzFundido)" opacity=".45"/>';
+  for(let i = 0; i < 18; i++){
+    const a = az() * Math.PI * 2, d = az() * 90, rr = 2 + az() * 4;
+    s += '<ellipse cx="' + (CX + d * Math.cos(a)).toFixed(1) + '" cy="' + (CY + d * Math.sin(a)).toFixed(1) + '" rx="' + rr.toFixed(1) + '" ry="' + (rr * .6).toFixed(1) + '" fill="#C98A34" opacity=".35"/>';
+  }
+  const PEP = [[0, 0], [52, 18], [-48, 30], [20, -58], [-30, -50], [66, -34], [-72, -8], [8, 62], [-40, 72], [58, 60], [80, 22], [-12, -92], [44, -84], [-82, 42]];
+  PEP.forEach(([x, y], i) => {
+    const px = CX + x, py = CY + y, r = 11 + (i % 3) * 1.4;
+    s += '<circle cx="' + px + '" cy="' + (py + 1.6) + '" r="' + r + '" fill="#6E1C12" opacity=".35"/>';
+    s += '<circle cx="' + px + '" cy="' + py + '" r="' + r + '" fill="url(#pzPep)" stroke="#8E2A1C" stroke-width="1.2"/>';
+    for(let k = 0; k < 4; k++){ const a = az() * 6.28, d = az() * r * .65;
+      s += '<circle cx="' + (px + d * Math.cos(a)).toFixed(1) + '" cy="' + (py + d * Math.sin(a)).toFixed(1) + '" r="' + (.9 + az() * 1.1).toFixed(1) + '" fill="#8E2A1C" opacity=".6"/>'; }
+    s += '<path d="M' + (px - r * .55) + ' ' + (py - r * .35) + ' Q' + (px - r * .2) + ' ' + (py - r * .75) + ' ' + (px + r * .3) + ' ' + (py - r * .6) + '" fill="none" stroke="#F4A38A" stroke-width="1.4" stroke-linecap="round" opacity=".75"/>';
+  });
+  [[-20, 26], [34, -20], [-62, -30], [30, 34], [-8, -30], [72, 2], [-54, 58], [18, 88]].forEach(([x, y]) => {
+    const px = CX + x, py = CY + y;
+    s += '<circle cx="' + px + '" cy="' + py + '" r="4.6" fill="none" stroke="#2A2420" stroke-width="3"/>';
+    s += '<path d="M' + (px - 2.4) + ' ' + (py - 2.8) + ' q2 -1 4 0" fill="none" stroke="#7A7068" stroke-width="1" stroke-linecap="round"/>';
+  });
+  [[-26, -12, 30], [28, 4, -40], [-6, 36, 80], [48, -56, 10], [-64, 12, 120], [0, -70, -60], [72, 44, 60], [-36, -78, 150]].forEach(([x, y, g]) => {
+    const px = CX + x, py = CY + y;
+    s += '<g transform="translate(' + px + ' ' + py + ') rotate(' + g + ')"><path d="M-9 0 Q-2 -7 9 0 Q-2 7 -9 0 Z" fill="#4F7A2E" stroke="#34561C" stroke-width=".9"/>' +
+      '<path d="M-7 0 H7" stroke="#8DB36A" stroke-width=".9" stroke-linecap="round"/></g>';
+  });
+  s += '<circle cx="' + CX + '" cy="' + CY + '" r="' + R + '" fill="url(#pzBrillo)"/>';
+  return s;
+}
+function prepara(){
+  if(document.getElementById('pzDefs')) return;
+  const d = document.createElementNS(NS, 'svg');
+  d.setAttribute('id', 'pzDefs'); d.setAttribute('width', '0'); d.setAttribute('height', '0');
+  d.setAttribute('aria-hidden', 'true'); d.style.position = 'absolute';
+  d.innerHTML = '<defs>' +
+    '<radialGradient id="pzCorteza" cx="50%" cy="50%" r="50%"><stop offset="80%" stop-color="#E7B666"/><stop offset="91%" stop-color="#D19446"/><stop offset="100%" stop-color="#A9692A"/></radialGradient>' +
+    '<radialGradient id="pzQueso" cx="45%" cy="42%" r="60%"><stop offset="0%" stop-color="#FCEFC4"/><stop offset="70%" stop-color="#F5DA92"/><stop offset="100%" stop-color="#E9BE62"/></radialGradient>' +
+    '<radialGradient id="pzPep" cx="40%" cy="38%" r="65%"><stop offset="0%" stop-color="#D2533A"/><stop offset="100%" stop-color="#A93522"/></radialGradient>' +
+    '<radialGradient id="pzBrillo" cx="32%" cy="26%" r="75%"><stop offset="0%" stop-color="#fff" stop-opacity=".22"/><stop offset="45%" stop-color="#fff" stop-opacity="0"/><stop offset="100%" stop-color="#3a1c05" stop-opacity=".12"/></radialGradient>' +
+    '<filter id="pzGrano" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.6 -.85"/><feComposite in2="SourceGraphic" operator="in"/></filter>' +
+    '<filter id="pzFundido" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".045" numOctaves="3" seed="9"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 3.2 -1.9"/><feComposite in2="SourceGraphic" operator="in"/></filter>' +
+    '<symbol id="pzEntera" viewBox="0 0 300 300">' + pizzaEntera() + '</symbol></defs>';
+  document.body.appendChild(d);
+}
+function sector(cx, cy, r, a0, a1){
+  const rad = a => (a - 90) * Math.PI / 180;
+  if(a1 - a0 >= 359.9) return `M${cx - r} ${cy} a${r} ${r} 0 1 0 ${2 * r} 0 a${r} ${r} 0 1 0 ${-2 * r} 0 Z`;
+  const x0 = cx + r * Math.cos(rad(a0)), y0 = cy + r * Math.sin(rad(a0));
+  const x1 = cx + r * Math.cos(rad(a1)), y1 = cy + r * Math.sin(rad(a1));
+  return `M${cx} ${cy} L${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${(a1 - a0) > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z`;
+}
+let nP = 0;
+function dibuja(c, alTocar){
+  prepara();
+  const id = 'pz' + (++nP);
+  const svg = el('svg', {viewBox: '0 0 300 300', class: 'pizza'});
+  const paso = 360 / c.cortes, hueco = Math.min(1.1, paso * .035);
+  const defs = el('defs', {});
+  svg.appendChild(defs);
+  svg.appendChild(el('ellipse', {cx: CX, cy: CY + R + 8, rx: R * .86, ry: 8, fill: 'rgba(60,40,20,.25)'}));
+  const animar = c.animar === 'grapa'; c.animar = null;
+  const juntas = [...c.recien].sort((a, b) => a - b), cada = Math.min(260, 1100 / Math.max(1, juntas.length));
+  const retraso = j => animar ? Math.round(juntas.indexOf(j) * cada + 170) : 0;
+  const antes = !c.levantadas ? new Set() : c.levantadas.cortes === c.cortes ? c.levantadas : c.sel, ahora = new Set();
+  const hoy = Date.now(), gestos = c.gestos = (c.gestos || []).filter(x => hoy - x.t < 300 && x.cortes === c.cortes);
+  M.grupos(c).forEach((t, n) => {
+    const a0 = t[0] * paso, a1 = a0 + t.length * paso, ele = c.sel.has(t[0]);
+    const g = el('g', {class: 'corte' + (ele ? ' elegida' : (c.sel.size ? ' apagada' : ''))});
+    const bis = ((a0 + a1) / 2 - 90) * Math.PI / 180, dx = 10 * Math.cos(bis), dy = 10 * Math.sin(bis);
+    if(ele) g.setAttribute('transform', `translate(${dx.toFixed(1)} ${dy.toFixed(1)})`);
+    if(ele !== antes.has(t[0])) gestos.push({i: t[0], ele, t: hoy, cortes: c.cortes});
+    const gesto = gestos.filter(x => x.i === t[0] && x.ele === ele).pop();
+    if(gesto && !QUIETO && g.animate){
+      const tr = k => 'translate(' + (dx * k).toFixed(1) + 'px,' + (dy * k).toFixed(1) + 'px)';
+      const a = g.animate(ele ? [{transform: tr(0)}, {transform: tr(1.35), offset: .6}, {transform: tr(1)}] : [{transform: tr(1)}, {transform: tr(0)}],
+                {duration: ele ? 260 : 180, easing: 'ease-out'});
+      a.currentTime = hoy - gesto.t;
+    }
+    if(ele) ahora.add(t[0]);
+    const forma = sector(CX, CY, R + 1, a0 + hueco, a1 - hueco);
+    const cp = el('clipPath', {id: id + 's' + n}); cp.appendChild(el('path', {d: forma})); defs.appendChild(cp);
+    const vista = el('g', {'clip-path': `url(#${id}s${n})`});
+    vista.appendChild(el('use', {href: '#pzEntera', x: 0, y: 0, width: 300, height: 300}));
+    g.appendChild(vista);
+    g.appendChild(el('path', {d: forma, fill: 'none', stroke: ele ? '#FFF3D0' : 'rgba(110,62,20,.55)', 'stroke-width': ele ? 4.5 : 1.4, 'stroke-linejoin': 'round'}));
+    for(let k = 0; k < t.length - 1; k++){
+      if(!c.recien.has(t[k])) continue;
+      const gr = (t[k] + 1) * paso, a = (gr - 90) * Math.PI / 180;
+      const ms = retraso(t[k]);
+      g.appendChild(el('path', {d: `M${CX} ${CY} L${(CX + R * Math.cos(a)).toFixed(1)} ${(CY + R * Math.sin(a)).toFixed(1)}`, stroke: '#7E4A1A', 'stroke-width': 2.6, 'stroke-dasharray': '7 6', class: 'costura-nueva', style: 'animation-delay:' + ms + 'ms'}));
+      [[.38, 1], [.72, -1]].forEach(([d, lado], q) => {
+        const px = CX + R * d * Math.cos(a), py = CY + R * d * Math.sin(a);
+        const fuera = el('g', {transform: `translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${gr + (q ? 8 : -8)})`});
+        const dentro = el('g', {class: 'grapa-nueva', style: 'animation-delay:' + ms + 'ms'});
+        const f = `M-12 ${6.5 * lado} L-12 0 L12 0 L12 ${6.5 * lado}`;
+        dentro.appendChild(el('path', {d: f, fill: 'none', stroke: 'rgba(60,45,30,.4)', 'stroke-width': 7.2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', transform: 'translate(1 1.6)'}));
+        dentro.appendChild(el('path', {d: f, fill: 'none', stroke: 'var(--grapa)', 'stroke-width': 5.2, 'stroke-linecap': 'round', 'stroke-linejoin': 'round'}));
+        dentro.appendChild(el('path', {d: 'M-11 -1.5 L11 -1.5', fill: 'none', stroke: '#EDF1F4', 'stroke-width': 1.4, 'stroke-linecap': 'round'}));
+        fuera.appendChild(dentro); g.appendChild(fuera);
+      });
+    }
+    if(alTocar){ g.setAttribute('role', 'button'); g.setAttribute('tabindex', '0'); g.setAttribute('aria-label', 'trozo ' + (t[0] + 1) + (ele ? ', elegido' : ''));
+      g.addEventListener('click', ev => { ev.stopPropagation(); alTocar(t[0]); });
+      g.addEventListener('keydown', ev => { if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); alTocar(t[0]); } }); }
+    svg.appendChild(g);
+  });
+  ahora.cortes = c.cortes; c.levantadas = ahora;
+  if(animar && juntas.length) grapadora(svg, juntas, paso, cada);
+  return svg;
+}
+
+const GRAPADORA_SVG =
+  '<g class="gpCuerpo"><rect x="-22" y="-30" width="44" height="13" rx="5" fill="#9AA2AC" stroke="#3A2E22" stroke-width="2.6"/>' +
+  '<rect x="-16" y="-27.4" width="22" height="4" rx="2" fill="#C6CBD1"/></g>' +
+  '<rect x="-19" y="-15" width="38" height="9" rx="3.4" fill="#6E7680" stroke="#3A2E22" stroke-width="2.4"/>' +
+  '<path d="M-6 -6 V-2 H6 V-6" fill="none" stroke="#EDF1F4" stroke-width="2.2" stroke-linejoin="round"/>';
+function grapadora(svg, juntas, paso, cada){
+  const g = el('g', {class: 'grapadoraPasa'}); g.innerHTML = GRAPADORA_SVG;
+  svg.appendChild(g);
+  if(!g.animate) return;
+  const sitio = j => { const gr = (j + 1) * paso, a = (gr - 90) * Math.PI / 180, d = R * .55;
+    return {x: CX + d * Math.cos(a), y: CY + d * Math.sin(a), gr}; };
+  const pos = (x, y, gr, alto) => 'translate(' + x.toFixed(1) + 'px,' + (y - alto).toFixed(1) + 'px) rotate(' + gr.toFixed(0) + 'deg) scale(1.35)';
+  const total = 170 + juntas.length * cada + 260, o = ms => Math.min(1, ms / total), K = [];
+  const p0 = sitio(juntas[0]);
+  K.push({transform: pos(p0.x + 90, p0.y - 70, p0.gr, 30), opacity: 0, offset: 0});
+  juntas.forEach((j, i) => {
+    const p = sitio(j), t = 170 + i * cada;
+    K.push({transform: pos(p.x, p.y, p.gr, 22), opacity: 1, offset: o(t - cada * .45), easing: 'ease-out'});
+    K.push({transform: pos(p.x, p.y, p.gr, 2), opacity: 1, offset: o(t), easing: 'ease-in'});
+    K.push({transform: pos(p.x, p.y, p.gr, 16), opacity: 1, offset: o(t + cada * .4)});
+  });
+  const pz = sitio(juntas[juntas.length - 1]);
+  K.push({transform: pos(pz.x + 90, pz.y - 70, pz.gr, 30), opacity: 0, offset: 1});
+  for(let i = 1; i < K.length; i++) if(K[i].offset <= K[i - 1].offset) K[i].offset = Math.min(1, K[i - 1].offset + .001);
+  const an = g.animate(K, {duration: total, fill: 'forwards'});
+  const cu = g.querySelector('.gpCuerpo'), KC = [{transform: 'translateY(0)', offset: 0}];
+  juntas.forEach((j, i) => { const t = 170 + i * cada; KC.push({transform: 'translateY(0)', offset: o(t - 40)}, {transform: 'translateY(6px)', offset: o(t)}, {transform: 'translateY(0)', offset: o(t + 70)}); });
+  KC.push({transform: 'translateY(0)', offset: 1});
+  for(let i = 1; i < KC.length; i++) if(KC[i].offset <= KC[i - 1].offset) KC[i].offset = Math.min(1, KC[i - 1].offset + .001);
+  cu.animate(KC, {duration: total, fill: 'forwards'});
+  if(raiz.Sonido) juntas.forEach((j, i) => raiz.Sonido.toca('grapa', (170 + i * cada) / 1000));
+  an.finished.then(() => g.remove(), () => {});
+}
+const duraGrapa = n => n ? 170 + n * Math.min(260, 1100 / n) + 260 : 0;
+
+function cortador(svg, antes, nuevo, alAcabar){
+  const nuevos = [];
+  for(let k = 0; k < nuevo; k++){
+    const a = k * 360 / nuevo, viejo = (k * antes) % nuevo === 0;
+    if(!viejo || nuevo % antes !== 0) nuevos.push(a);
+  }
+  if(!svg || !svg.animate || !nuevos.length){ alAcabar(); return 0; }
+  const pasadas = [], usado = new Set();
+  nuevos.forEach(a => { if(usado.has(a)) return; const op = (a + 180) % 360;
+    if(nuevos.some(b => Math.abs(b - op) < .01) && !usado.has(op)){ pasadas.push([a, op]); usado.add(op); } else pasadas.push([a]); usado.add(a); });
+  const dur = Math.max(130, Math.min(360, 900 / pasadas.length)), paso = dur * .75, total = paso * (pasadas.length - 1) + dur + 80;
+  const capa = el('g', {class: 'cortadorPasa'}); svg.appendChild(capa);
+  const borde = a => { const r = (a - 90) * Math.PI / 180; return [CX + (R + 4) * Math.cos(r), CY + (R + 4) * Math.sin(r)]; };
+  pasadas.forEach((pa, i) => {
+    const [x0, y0] = borde(pa[0]), [x1, y1] = pa.length > 1 ? borde(pa[1]) : [CX, CY];
+    const largo = Math.hypot(x1 - x0, y1 - y0), t0 = i * paso;
+    const raya = el('path', {d: 'M' + x0.toFixed(1) + ' ' + y0.toFixed(1) + ' L' + x1.toFixed(1) + ' ' + y1.toFixed(1), stroke: '#5A3510', 'stroke-width': 2.6, 'stroke-linecap': 'round', fill: 'none',
+      'stroke-dasharray': largo.toFixed(1), 'stroke-dashoffset': largo.toFixed(1), opacity: .8});
+    capa.appendChild(raya);
+    raya.animate([{strokeDashoffset: largo}, {strokeDashoffset: 0}], {duration: dur, delay: t0, fill: 'forwards', easing: 'ease-in-out'});
+    const ang = Math.atan2(y1 - y0, x1 - x0) * 180 / Math.PI;
+    const rueda = el('g', {opacity: 0});
+    rueda.innerHTML = '<g class="rMango"><path d="M0 0 L-26 -14" stroke="#3A2E22" stroke-width="7" stroke-linecap="round"/><path d="M0 0 L-26 -14" stroke="#B07A45" stroke-width="4.6" stroke-linecap="round"/></g>' +
+      '<g class="rGira"><circle r="13" fill="#C6CBD1" stroke="#3A2E22" stroke-width="2.2"/><circle r="9.6" fill="none" stroke="#EDF1F4" stroke-width="1.6"/>' +
+      '<path d="M0 -9 V9 M-9 0 H9" stroke="#9AA2AC" stroke-width="1.4"/><circle r="3" fill="#6E7680" stroke="#3A2E22" stroke-width="1.2"/></g>';
+    capa.appendChild(rueda);
+    const tr = (x, y) => 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + ang.toFixed(0) + 'deg) scale(1.35)';
+    rueda.animate([{transform: tr(x0, y0), opacity: 0}, {transform: tr(x0, y0), opacity: 1, offset: .1}, {transform: tr(x1, y1), opacity: 1, offset: .9}, {transform: tr(x1, y1), opacity: 0}],
+      {duration: dur, delay: t0, fill: 'forwards', easing: 'ease-in-out'});
+    rueda.querySelector('.rGira').animate([{transform: 'rotate(0deg)'}, {transform: 'rotate(' + Math.round(largo * 3) + 'deg)'}], {duration: dur, delay: t0, fill: 'forwards', easing: 'ease-in-out'});
+    if(raiz.Sonido) raiz.Sonido.toca('corte', t0 / 1000);
+  });
+  setTimeout(alAcabar, total);
+  return total;
+}
+raiz.Pizza = {dibuja, cortador, duraGrapa};
+})(window);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const T = '#3A2E22';
+const f1 = x => +x.toFixed(1);
+function brazo(x0, y0, a1, l1, a2, l2, g, color){
+  const r1 = a1 * Math.PI / 180, r2 = a2 * Math.PI / 180;
+  const xc = x0 + Math.cos(r1) * l1, yc = y0 + Math.sin(r1) * l1;
+  const x1 = xc + Math.cos(r2) * l2, y1 = yc + Math.sin(r2) * l2;
+  const d = 'M' + x0 + ' ' + y0 + ' L' + f1(xc) + ' ' + f1(yc) + ' L' + f1(x1) + ' ' + f1(y1);
+  return {x: x1, y: y1, ang: a2,
+    svg: '<path d="' + d + '" fill="none" stroke="' + T + '" stroke-width="' + (g + 2.6) + '" stroke-linecap="round" stroke-linejoin="round"/>' +
+         '<path d="' + d + '" fill="none" stroke="' + color + '" stroke-width="' + g + '" stroke-linecap="round" stroke-linejoin="round"/>'};
+}
+const en = (x, y, ang, html) => '<g transform="translate(' + f1(x) + ' ' + f1(y) + ') rotate(' + f1(ang) + ')">' + html + '</g>';
+function mano(x, y, ang, color, borde, dedo){
+  let s = '<circle cx="' + f1(x) + '" cy="' + f1(y) + '" r="3.9" fill="' + color + '" stroke="' + T + '" stroke-width="1.3"/>';
+  if(dedo){
+    const r = ang * Math.PI / 180, x2 = x + Math.cos(r) * 6, y2 = y + Math.sin(r) * 6;
+    s = '<path d="M' + f1(x) + ' ' + f1(y) + ' L' + f1(x2) + ' ' + f1(y2) + '" stroke="' + T + '" stroke-width="4.2" stroke-linecap="round"/>' +
+        '<path d="M' + f1(x) + ' ' + f1(y) + ' L' + f1(x2) + ' ' + f1(y2) + '" stroke="' + color + '" stroke-width="2.2" stroke-linecap="round"/>' + s;
+  }
+  return s + '<path d="M' + f1(x - 1.8) + ' ' + f1(y - 1) + ' q1.8 -1.2 3.6 0" fill="none" stroke="' + borde + '" stroke-width=".8" stroke-linecap="round"/>';
+}
+let nOjo = 0;
+function parpado(x, y, rx, ry, color, borde){
+  const id = 'pp' + (++nOjo), h = f1(ry * 2 + 1.4), c = f1(ry * .3 + .9);
+  return '<clipPath id="' + id + '"><ellipse cx="' + x + '" cy="' + y + '" rx="' + f1(rx + .2) + '" ry="' + f1(ry + .2) + '"/></clipPath>' +
+    '<g clip-path="url(#' + id + ')"><ellipse class="parpado" data-h="' + h + '" data-c="' + c + '" style="transform:translateY(-' + h + 'px)" cx="' + x + '" cy="' + y + '" rx="' + f1(rx + .9) + '" ry="' + f1(ry + .9) + '" fill="' + color + '" stroke="' + borde + '" stroke-width="1.3"/></g>';
+}
+function ojos(xs, y, rx, ry, mira, tipo, borde, piel){
+  return xs.map(x => {
+    if(tipo === 'feliz') return '<path d="M' + (x - rx) + ' ' + (y + 1) + ' Q' + x + ' ' + (y - ry - 1) + ' ' + (x + rx) + ' ' + (y + 1) + '" fill="none" stroke="' + T + '" stroke-width="1.8" stroke-linecap="round"/>';
+    const k = tipo === 'grande' ? 1.15 : 1, rp = tipo === 'grande' ? 2.1 : 2.6;
+    const px = x + mira[0] * 1.5, py = y + mira[1] * 1.6;
+    return '<ellipse class="ojo" cx="' + x + '" cy="' + y + '" rx="' + f1(rx * k) + '" ry="' + f1(ry * k) + '" fill="#FBF7EE" stroke="' + borde + '" stroke-width="1.3"/>' +
+      '<circle cx="' + f1(px) + '" cy="' + f1(py) + '" r="' + rp + '" fill="#241C14"/>' +
+      '<circle cx="' + f1(px - 1) + '" cy="' + f1(py - 1.1) + '" r="1" fill="#fff"/>' +
+      parpado(x, y, f1(rx * k), f1(ry * k), piel, borde);
+  }).join('');
+}
+function cejas(xs, y, tipo, color){
+  const C = {normal: [[0, 0], [0, 0]], alta: [[-2.6, 0], [-2.6, 0]], piensa: [[-2.2, -2], [.6, 1.4]], feliz: [[-1, 0], [-1, 0]], seria: [[.6, 1.6], [.6, -1.6]]}[tipo] || [[0, 0], [0, 0]];
+  return xs.map((x, i) => {
+    const [dy, inc] = C[i], s = i ? 1 : -1;
+    return '<path d="M' + f1(x - 3.6) + ' ' + f1(y + dy + inc * s * -.5) + ' Q' + x + ' ' + f1(y + dy - 2.2) + ' ' + f1(x + 3.6) + ' ' + f1(y + dy + inc * s * .5) + '" fill="none" stroke="' + color + '" stroke-width="1.6" stroke-linecap="round"/>';
+  }).join('');
+}
+
+const NV = {piel: '#D3AC88', sombra: '#B08A6A', borde: '#6B4A32', hocico: '#EBD2B8', mano: '#C9A17C', manoB: '#8E6A4E', tela: '#F6EFE2', telaS: '#DFD6C2', mandil: '#C4462F', mandilS: '#9E3423'};
+const GRAPADORA =
+  '<rect x="-9" y="-7.4" width="19" height="6.5" rx="2.2" fill="#9AA2AC" stroke="' + T + '" stroke-width="1.3"/>' +
+  '<rect x="-7.5" y="-1.4" width="16" height="4.4" rx="1.6" fill="#6E7680" stroke="' + T + '" stroke-width="1.2"/>' +
+  '<rect x="-6" y="-6" width="9" height="2" rx="1" fill="#C6CBD1"/>';
+function nick(pose){
+  pose = pose || 'habla';
+  const P = {
+    habla:    {bI: [150, 11, 70, 12], bD: [-30, 12, -80, 11], g: true, boca: .5, ojo: 'normal', mira: [.4, 0], ceja: 'normal'},
+    calla:    {bI: [150, 11, 70, 12], bD: [-30, 12, -80, 11], g: true, boca: 0, ojo: 'normal', mira: [.4, 0], ceja: 'normal'},
+    grapa:    {bI: [150, 11, 70, 12], bD: [-10, 12, -35, 11], g: true, boca: .2, ojo: 'normal', mira: [1, .4], ceja: 'seria'},
+    senala:   {bI: [150, 11, 70, 12], bD: [-8, 12, -18, 10], dedo: true, boca: .4, ojo: 'normal', mira: [1, 0], ceja: 'normal'},
+    sorpresa: {bI: [-150, 11, -105, 10], bD: [-30, 11, -78, 10], g: true, boca: .9, redonda: true, ojo: 'grande', mira: [0, 0], ceja: 'alta'},
+    celebra:  {bI: [-125, 12, -95, 11], bD: [-40, 12, -68, 12], g: true, boca: 1, ojo: 'feliz', mira: [0, 0], ceja: 'feliz'},
+    piensa:   {bI: [150, 11, 70, 12], bD: [100, 8, -121, 18], boca: 0, ojo: 'normal', mira: [.6, -1], ceja: 'piensa'}
+  }[pose] || {};
+  let s = '<svg viewBox="0 0 100 100" class="pj pj-nick pose-' + pose + '" aria-hidden="true">';
+  s += '<ellipse cx="50" cy="98" rx="30" ry="2.6" fill="#140F1F" opacity=".18"/>';
+  s += '<path d="M21 100 Q21 75 35 68 L65 68 Q79 75 79 100 Z" fill="' + NV.tela + '" stroke="' + T + '" stroke-width="1.6" stroke-linejoin="round"/>';
+  s += '<path d="M65 68 Q79 75 79 100 L68 100 Q70 82 61 70 Z" fill="' + NV.telaS + '"/>';
+  s += '<path d="M32 78 L68 78 Q70 90 68 100 L32 100 Q30 90 32 78 Z" fill="' + NV.mandil + '" stroke="' + T + '" stroke-width="1.4" stroke-linejoin="round"/>';
+  s += '<path d="M32 78 Q50 82.6 68 78" fill="none" stroke="' + NV.mandilS + '" stroke-width="2"/>';
+  s += '<g fill="#E8B08F" opacity=".55"><circle cx="40" cy="88" r="2.2"/><circle cx="56" cy="93" r="1.7"/><circle cx="48" cy="96" r="1.3"/></g>';
+  s += '<path d="M39 66 L50 76 L61 66 L64 68.4 L50 79 L36 68.4 Z" fill="#FBF7EE" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>';
+  s += '<path d="M60 68.6 Q70 66.6 73 73 Q67 74 64 80 Z" fill="#EFE6D2" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>';
+  s += '<path d="M64 71 L69 70 M65 74 L69.6 73.4" stroke="#C4462F" stroke-width="1" stroke-linecap="round" opacity=".7"/>';
+  const bi = brazo(34, 71, ...P.bI, 6, NV.tela);
+  s += bi.svg + mano(bi.x, bi.y, bi.ang, NV.mano, NV.manoB);
+  s += '<ellipse cx="50" cy="45" rx="18" ry="16.4" fill="' + NV.piel + '" stroke="' + NV.borde + '" stroke-width="1.7"/>';
+  s += '<path d="M34 42 Q35.4 55 41 59.6 Q36.6 53 36.2 41 Z" fill="' + NV.sombra + '" opacity=".8"/>';
+  s += '<ellipse cx="36" cy="51" rx="4.4" ry="2.8" fill="#E39A88" opacity=".45"/><ellipse cx="64" cy="51" rx="4.4" ry="2.8" fill="#E39A88" opacity=".45"/>';
+  s += ojos([43.4, 56.6], 44, 4.4, 4.8, P.mira, P.ojo, NV.borde, NV.piel);
+  s += cejas([43.4, 56.6], 37.4, P.ceja, '#8E6A4E');
+  s += '<path d="M41.4 51.4 Q41 58.6 45.8 59.2 Q50 59.6 50 57 Q50 59.6 54.2 59.2 Q59 58.6 58.6 51.4 Q54.6 49.2 50 49.4 Q45.4 49.2 41.4 51.4 Z" fill="' + NV.hocico + '" stroke="' + NV.borde + '" stroke-width="1.4" stroke-linejoin="round"/>';
+  s += '<path d="M47.2 50 Q50 48.8 52.8 50 Q52.4 53.6 50 54.6 Q47.6 53.6 47.2 50 Z" fill="#E39A88" stroke="#B9705F" stroke-width=".9" stroke-linejoin="round"/>';
+  s += '<ellipse cx="48.6" cy="50.6" rx=".7" ry=".45" fill="#fff" opacity=".7"/>';
+  s += '<g fill="' + NV.sombra + '" opacity=".6"><circle cx="44" cy="54.4" r=".7"/><circle cx="45" cy="57" r=".7"/><circle cx="56" cy="54.4" r=".7"/><circle cx="55" cy="57" r=".7"/></g>';
+  s += '<g stroke="#F2E8D6" stroke-width=".9" stroke-linecap="round" opacity=".9"><path d="M41.4 54 Q36 53.2 34 54.6"/><path d="M42 56.8 Q37 57.4 35 59"/><path d="M58.6 54 Q64 53.2 66 54.6"/><path d="M58 56.8 Q63 57.4 65 59"/></g>';
+  const ab = P.boca;
+  if(P.redonda) s += '<ellipse cx="50" cy="61.2" rx="2.2" ry="' + f1(1.6 + ab * 1.4) + '" fill="#8E5A44" stroke="' + NV.borde + '" stroke-width=".9"/>';
+  else if(ab > .05) s += '<path d="M46.6 59.6 Q50 ' + f1(60.6 + ab * 4.6) + ' 53.4 59.6 Q50 60.6 46.6 59.6 Z" fill="#8E5A44" stroke="' + NV.borde + '" stroke-width=".9" stroke-linejoin="round"/>';
+  else s += '<path d="M48 59.8 Q50 61 52 59.8" fill="none" stroke="#8E5A44" stroke-width="1.3" stroke-linecap="round"/>';
+  s += '<path d="M46.2 59.2 Q46.1 61.2 47.1 61.7 Q47.9 61.1 47.8 59.1 Z M53.8 59.2 Q53.9 61.2 52.9 61.7 Q52.1 61.1 52.2 59.1 Z" fill="#F6EEDC" stroke="' + NV.borde + '" stroke-width=".9" stroke-linejoin="round"/>';
+  s += '<g transform="rotate(-7 50 28)"><path d="M33 30 Q30.4 11 50 11.4 Q69.6 11 67 30 Z" fill="#FBF7EE" stroke="' + T + '" stroke-width="1.6" stroke-linejoin="round"/>' +
+       '<path d="M37 19 Q42 10.6 50 12.4 Q58 10.6 63 19 Q56 15 50 16.4 Q44 15 37 19 Z" fill="#fff" opacity=".85"/>' +
+       '<rect x="32" y="27.4" width="36" height="6.2" rx="2.4" fill="#EDE6D6" stroke="' + T + '" stroke-width="1.5"/></g>';
+  const bd = brazo(66, 71, ...P.bD, 6, NV.tela);
+  s += bd.svg;
+  if(P.g) s += en(bd.x, bd.y - 2.6, bd.ang + 62, GRAPADORA);
+  s += mano(bd.x, bd.y, bd.ang, NV.mano, NV.manoB, P.dedo);
+  return s + '</svg>';
+}
+
+const CV = {piel: '#D3AC88', sombra: '#B08A6A', borde: '#6B4A32', pelo: '#B08A6A', hocico: '#EBD2B8', rosa: '#D98C9A', rosaS: '#C97E8C', mano: '#C9A17C', manoB: '#8E6A4E', tela: '#F6EFE2'};
+const MANGA = '<path d="M-3.2 -1 L3.2 -1 L1 -13 Q0 -15 -1 -13 Z" fill="#EFE7D6" stroke="' + T + '" stroke-width="1.2" stroke-linejoin="round"/>' +
+  '<path d="M-1 -12.6 Q0 -17 1.4 -13" fill="none" stroke="#D98C9A" stroke-width="2" stroke-linecap="round"/>' +
+  '<path d="M-2.2 -4 L2.2 -4" stroke="#D9CDB8" stroke-width="1"/>';
+const AURICULAR = '<g class="auricular"><path d="M65 41 Q71.4 50 58 57.6" fill="none" stroke="' + T + '" stroke-width="5" stroke-linecap="round"/>' +
+  '<path d="M65 41 Q71.4 50 58 57.6" fill="none" stroke="#2A2420" stroke-width="3.2" stroke-linecap="round"/>' +
+  '<ellipse cx="64.2" cy="40.4" rx="3.2" ry="2.4" transform="rotate(40 64.2 40.4)" fill="#2A2420" stroke="' + T + '" stroke-width="1"/>' +
+  '<ellipse cx="57.4" cy="58.4" rx="3" ry="2.2" transform="rotate(-30 57.4 58.4)" fill="#2A2420" stroke="' + T + '" stroke-width="1"/>' +
+  '<path d="M69 51 q4 3 1 6 q-3 3 1 6 q4 3 1 6" fill="none" stroke="#2A2420" stroke-width="1" stroke-linecap="round"/></g>';
+function nicoleta(pose){
+  pose = pose || 'habla';
+  const P = {
+    habla:    {bI: [120, 11, 60, 10], bD: [-40, 11, -86, 10], manga: true, boca: .5, ojo: 'normal', mira: [.4, 0], ceja: 'normal'},
+    calla:    {bI: [120, 11, 60, 10], bD: [-40, 11, -86, 10], manga: true, boca: 0, ojo: 'normal', mira: [.4, 0], ceja: 'normal'},
+    senala:   {bI: [120, 11, 60, 10], bD: [-8, 12, -16, 10], dedo: true, boca: .4, ojo: 'normal', mira: [1, 0], ceja: 'normal'},
+    sorpresa: {bI: [-150, 10, -100, 9], bD: [-30, 10, -80, 9], boca: .9, redonda: true, ojo: 'grande', mira: [0, 0], ceja: 'alta'},
+    celebra:  {bI: [-130, 11, -100, 10], bD: [-55, 11, -88, 11], manga: true, boca: 1, ojo: 'feliz', mira: [0, 0], ceja: 'feliz'},
+    piensa:   {bI: [120, 11, 60, 10], bD: [95, 6, -110, 20], dedo: true, boca: 0, ojo: 'normal', mira: [.6, -1], ceja: 'piensa'},
+    telefono: {bI: [120, 11, 60, 10], bD: [-50, 10, -101, 15.6], tel: true, boca: .5, ojo: 'normal', mira: [-.6, -.2], ceja: 'normal'}
+  }[pose] || {};
+  let s = '<svg viewBox="0 0 100 100" class="pj pj-nicoleta pose-' + pose + '" aria-hidden="true">';
+  s += '<ellipse cx="50" cy="98" rx="26" ry="2.6" fill="#140F1F" opacity=".18"/>';
+  s += '<path d="M25 100 Q25 77 37 70.4 L63 70.4 Q75 77 75 100 Z" fill="' + CV.tela + '" stroke="' + T + '" stroke-width="1.5" stroke-linejoin="round"/>';
+  s += '<path d="M37 75 L63 75 Q66 88 64 100 L36 100 Q34 88 37 75 Z" fill="' + CV.rosa + '" stroke="' + T + '" stroke-width="1.4" stroke-linejoin="round"/>';
+  s += '<path d="M37 75 Q50 79.4 63 75" fill="none" stroke="#B96D7C" stroke-width="1.8"/>';
+  s += '<g fill="#EFD9C6" opacity=".6"><circle cx="44" cy="86" r="1.9"/><circle cx="56" cy="91" r="1.5"/></g>';
+  const bi = brazo(38, 73, ...P.bI, 5.4, CV.tela);
+  s += bi.svg + mano(bi.x, bi.y, bi.ang, CV.mano, CV.manoB);
+  s += '<g fill="' + CV.pelo + '" stroke="' + CV.borde + '" stroke-width="1.2" stroke-linejoin="round">' +
+       '<path d="M36 40 Q30 49 33 59 Q38 60 39.4 55 Q35 50 38.4 40 Z"/><path d="M64 40 Q70 49 67 59 Q62 60 60.6 55 Q65 50 61.6 40 Z"/></g>';
+  s += '<ellipse cx="50" cy="44" rx="15" ry="13.8" fill="' + CV.piel + '" stroke="' + CV.borde + '" stroke-width="1.6"/>';
+  s += '<path d="M36.6 42 Q37.4 53 42.6 57.4 Q38.6 51 38.6 41 Z" fill="' + CV.sombra + '" opacity=".75"/>';
+  s += '<ellipse cx="39" cy="49" rx="3.6" ry="2.4" fill="#E39A88" opacity=".45"/><ellipse cx="61" cy="49" rx="3.6" ry="2.4" fill="#E39A88" opacity=".45"/>';
+  s += ojos([44.4, 55.6], 43.4, 4, 4.4, P.mira, P.ojo, CV.borde, CV.piel);
+  if(P.ojo !== 'feliz') s += '<g stroke="' + T + '" stroke-width="1" stroke-linecap="round" fill="none"><path d="M40.6 40.8 Q39.2 39.4 38.6 38.2"/><path d="M40.2 43 Q38.6 42.4 37.6 41.4"/><path d="M59.4 40.8 Q60.8 39.4 61.4 38.2"/><path d="M59.8 43 Q61.4 42.4 62.4 41.4"/></g>';
+  else s += '<g stroke="' + T + '" stroke-width="1" stroke-linecap="round"><path d="M40.4 43 L38.6 41.6"/><path d="M59.6 43 L61.4 41.6"/></g>';
+  s += cejas([44.4, 55.6], 37.2, P.ceja, '#8E6A4E');
+  s += '<path d="M43.4 50 Q43.2 55.6 46.6 56 Q50 56.4 50 54.2 Q50 56.4 53.4 56 Q56.8 55.6 56.6 50 Q53.6 48.4 50 48.6 Q46.4 48.4 43.4 50 Z" fill="' + CV.hocico + '" stroke="' + CV.borde + '" stroke-width="1.2" stroke-linejoin="round"/>';
+  s += '<path d="M47.6 49 Q50 48 52.4 49 Q52 51.8 50 52.6 Q48 51.8 47.6 49 Z" fill="#E39A88" stroke="#B9705F" stroke-width=".8" stroke-linejoin="round"/>';
+  const ab = P.boca;
+  if(P.redonda) s += '<ellipse cx="50" cy="58" rx="1.8" ry="' + f1(1.3 + ab * 1.2) + '" fill="#8E5A44" stroke="' + CV.borde + '" stroke-width=".8"/>';
+  else if(ab > .05) s += '<path d="M47.4 56.6 Q50 ' + f1(57.4 + ab * 3.6) + ' 52.6 56.6 Q50 57.4 47.4 56.6 Z" fill="#8E5A44" stroke="' + CV.borde + '" stroke-width=".8" stroke-linejoin="round"/>';
+  else s += '<path d="M48.6 56.8 Q50 57.8 51.4 56.8" fill="none" stroke="#8E5A44" stroke-width="1.1" stroke-linecap="round"/>';
+  s += '<path d="M47 56.2 Q46.9 57.7 47.7 58 Q48.3 57.6 48.2 56.1 Z M53 56.2 Q53.1 57.7 52.3 58 Q51.7 57.6 51.8 56.1 Z" fill="#F6EEDC" stroke="' + CV.borde + '" stroke-width=".8" stroke-linejoin="round"/>';
+  s += '<path d="M35.6 38.4 Q50 25 64.4 38.4 Q50 32 35.6 38.4 Z" fill="' + CV.rosa + '" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>';
+  s += '<path d="M35.6 38.4 Q50 32 64.4 38.4 L63.8 41 Q50 35.2 36.2 41 Z" fill="' + CV.rosaS + '" stroke="' + T + '" stroke-width="1.2" stroke-linejoin="round"/>';
+  s += '<path d="M63.4 34.6 Q68.6 33.4 70 37.4 Q66.6 39 63 37.6 Z" fill="' + CV.rosa + '" stroke="' + T + '" stroke-width="1.1" stroke-linejoin="round"/>';
+  s += '<g fill="#F6EFE2" opacity=".7"><circle cx="43" cy="33.4" r="1"/><circle cx="50" cy="31" r="1"/><circle cx="57" cy="33.4" r="1"/></g>';
+  const bd = brazo(62, 73, ...P.bD, 5.4, CV.tela);
+  s += bd.svg;
+  if(P.manga) s += en(bd.x, bd.y - 1.6, bd.ang + 90, MANGA);
+  if(P.tel) s += AURICULAR;
+  s += mano(bd.x, bd.y, bd.ang, CV.mano, CV.manoB, P.dedo);
+  return s + '</svg>';
+}
+
+const MV = {pelo: '#9A8A80', cabeza: '#B0A196', hocico: '#D9CDC2', rosa: '#E8A9B4', rosaB: '#B9707C', tela: '#F6EFE2'};
+const CORTADOR = '<path d="M0 0 L0 -14" stroke="' + T + '" stroke-width="5.6" stroke-linecap="round"/>' +
+  '<path d="M0 0 L0 -14" stroke="#B07A45" stroke-width="3.6" stroke-linecap="round"/>' +
+  '<path d="M0 -13 L0 -25" stroke="' + T + '" stroke-width="3.6" stroke-linecap="round"/><path d="M0 -13 L0 -25" stroke="#8C949E" stroke-width="2" stroke-linecap="round"/>' +
+  '<circle cx="0" cy="-27" r="11.4" fill="#C6CBD1" stroke="' + T + '" stroke-width="1.5"/>' +
+  '<circle cx="0" cy="-27" r="8.8" fill="none" stroke="#EDF1F4" stroke-width="1.2"/>' +
+  '<path d="M-7.4 -32 Q-4.4 -36.6 0.4 -37" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" opacity=".85"/>' +
+  '<circle cx="0" cy="-27" r="2.6" fill="#6E7680" stroke="' + T + '" stroke-width="1"/>';
+function migas(pose){
+  pose = pose || 'habla';
+  const P = {
+    habla:    {bI: [140, 8, 80, 8], bD: [-20, 8, -50, 8], c: true, cAng: 28, boca: .5, ojo: 'normal', mira: [.4, 0], ceja: 'normal'},
+    calla:    {bI: [140, 8, 80, 8], bD: [-20, 8, -50, 8], c: true, cAng: 28, boca: 0, ojo: 'normal', mira: [.4, 0], ceja: 'normal'},
+    senala:   {bI: [140, 8, 80, 8], bD: [-5, 8, -15, 6], c: true, cAng: 38, boca: .4, ojo: 'normal', mira: [1, 0], ceja: 'normal'},
+    sorpresa: {bI: [-150, 8, -110, 8], bD: [-30, 8, -75, 8], c: true, boca: .9, redonda: true, ojo: 'grande', mira: [0, 0], ceja: 'alta', orejas: -6},
+    celebra:  {bI: [-130, 8, -100, 8], bD: [-60, 8, -85, 9], c: true, boca: 1, ojo: 'feliz', mira: [0, 0], ceja: 'feliz', salto: 3},
+    piensa:   {bI: [140, 8, 80, 8], bD: [80, 7, -120, 10], dedo: true, boca: 0, ojo: 'normal', mira: [.6, -1], ceja: 'piensa'}
+  }[pose] || {};
+  const dy = -(P.salto || 0);
+  let s = '<svg viewBox="0 0 100 100" class="pj pj-migas pose-' + pose + '" aria-hidden="true">';
+  s += '<ellipse cx="46" cy="96" rx="' + (24 - (P.salto || 0) * 2) + '" ry="3" fill="#140F1F" opacity=".2"/>';
+  s += '<g transform="translate(0 ' + dy + ')">';
+  s += '<g class="cola"><path d="M31 84 Q12 86 10 72 Q9 61 17 59" fill="none" stroke="' + T + '" stroke-width="4" stroke-linecap="round"/>' +
+       '<path d="M31 84 Q12 86 10 72 Q9 61 17 59" fill="none" stroke="' + MV.rosa + '" stroke-width="2.3" stroke-linecap="round"/></g>';
+  s += '<g stroke="' + T + '" stroke-width="1.2" stroke-linejoin="round"><path d="M31 94.6 Q30 90.6 36.4 90.4 Q43 90.6 42.4 94.6 Z" fill="' + MV.rosa + '"/><path d="M50 94.6 Q49.4 90.6 56 90.4 Q62.4 90.6 61.4 94.6 Z" fill="' + MV.rosa + '"/></g>';
+  s += '<g stroke="' + MV.rosaB + '" stroke-width=".8" stroke-linecap="round"><path d="M34.4 94.4 V92.8 M36.8 94.4 V92.4 M39.2 94.4 V92.8 M53.4 94.4 V92.8 M55.8 94.4 V92.4 M58.2 94.4 V92.8"/></g>';
+  s += '<path d="M28.6 91 Q25 70 35 60 Q46 54 57 60 Q67 70 63.4 91 Z" fill="' + MV.pelo + '" stroke="' + T + '" stroke-width="1.6" stroke-linejoin="round"/>';
+  s += '<path d="M34 67 Q46 64 58 67 Q61 80 59.6 91 L32.4 91 Q31 80 34 67 Z" fill="' + MV.tela + '" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>';
+  s += '<path d="M34 67 Q46 70 58 67" fill="none" stroke="#DCCFB4" stroke-width="1.4"/><path d="M39 79 H53 V85 Q46 87 39 85 Z" fill="none" stroke="#DCCFB4" stroke-width="1.2" stroke-linejoin="round"/>';
+  s += '<g fill="#E4D9C4"><circle cx="37.6" cy="73" r="1.2"/><circle cx="54" cy="75" r="1"/><circle cx="48" cy="88" r="1.1"/></g>';
+  const bi = brazo(36, 66, ...P.bI, 3.6, MV.pelo);
+  s += bi.svg + mano(bi.x, bi.y, bi.ang, MV.rosa, MV.rosaB);
+  const o = P.orejas || 0;
+  s += '<g stroke="' + T + '" stroke-width="1.6"><circle cx="' + (29.6 - o * .3) + '" cy="' + (26 + o) + '" r="11.6" fill="' + MV.pelo + '"/><circle cx="' + (62.4 + o * .3) + '" cy="' + (26 + o) + '" r="11.6" fill="' + MV.pelo + '"/></g>';
+  s += '<circle cx="' + (30.4 - o * .3) + '" cy="' + (26.8 + o) + '" r="7" fill="' + MV.rosa + '"/><circle cx="' + (61.6 + o * .3) + '" cy="' + (26.8 + o) + '" r="7" fill="' + MV.rosa + '"/>';
+  s += '<path d="M46 25.6 Q63.6 25.6 62.6 42.6 Q61.4 54.4 46 58.2 Q30.6 54.4 29.4 42.6 Q28.4 25.6 46 25.6 Z" fill="' + MV.cabeza + '" stroke="' + T + '" stroke-width="1.6" stroke-linejoin="round"/>';
+  s += '<ellipse cx="46" cy="50.4" rx="8.6" ry="5.8" fill="' + MV.hocico + '"/>';
+  s += '<path d="M34.6 55.4 Q46 62.6 57.4 55.4 L58.6 59.6 Q46 67 33.4 59.6 Z" fill="#C4462F" stroke="' + T + '" stroke-width="1.2" stroke-linejoin="round"/>';
+  s += '<path d="M52.8 60.6 L58.4 67.4 L51 64.8 Z" fill="#C4462F" stroke="' + T + '" stroke-width="1.1" stroke-linejoin="round"/><circle cx="52.6" cy="61.8" r="2.1" fill="#B03C27" stroke="' + T + '" stroke-width="1"/>';
+  s += '<g fill="#F6EFE2"><circle cx="38.6" cy="59.6" r=".9"/><circle cx="44" cy="61.8" r=".9"/><circle cx="49.4" cy="61.6" r=".9"/><circle cx="55.6" cy="58.4" r=".8"/></g>';
+  s += '<ellipse cx="35.4" cy="48" rx="3" ry="1.9" fill="' + MV.rosa + '" opacity=".55"/><ellipse cx="56.6" cy="48" rx="3" ry="1.9" fill="' + MV.rosa + '" opacity=".55"/>';
+  if(P.ojo === 'feliz') s += '<path d="M36.8 41.4 Q40 37 43.2 41.4 M48.8 41.4 Q52 37 55.2 41.4" fill="none" stroke="#241C14" stroke-width="2" stroke-linecap="round"/>';
+  else{
+    const k = P.ojo === 'grande' ? 1.18 : 1, [mx, my] = P.mira;
+    [40, 52].forEach(x => { s += '<ellipse class="ojo" cx="' + x + '" cy="40.6" rx="' + f1(3.3 * k) + '" ry="' + f1(3.8 * k) + '" fill="#241C14"/>' +
+      '<circle cx="' + f1(x - 1.1 + mx * .9) + '" cy="' + f1(39.2 + my * .9) + '" r="1.3" fill="#fff"/>' +
+      '<circle cx="' + f1(x + 1 + mx * .5) + '" cy="' + f1(42.2 + my * .5) + '" r=".55" fill="#fff" opacity=".8"/>' +
+      parpado(x, 40.6, f1(3.3 * k), f1(3.8 * k), MV.cabeza, T); });
+  }
+  s += cejas([40, 52], 34.4, P.ceja, '#6E6058');
+  s += '<g fill="#8A7A6E"><circle cx="40.6" cy="50" r=".55"/><circle cx="41" cy="52" r=".55"/><circle cx="51.4" cy="50" r=".55"/><circle cx="51" cy="52" r=".55"/></g>';
+  s += '<g stroke="' + T + '" stroke-width=".75" stroke-linecap="round" fill="none" opacity=".75"><path d="M39.6 49.6 Q34 47.6 28.6 48.2"/><path d="M39.8 51.8 Q34.4 52 29 54"/><path d="M52.4 49.6 Q58 47.6 63.4 48.2"/><path d="M52.2 51.8 Q57.6 52 63 54"/></g>';
+  s += '<ellipse cx="46" cy="47.8" rx="2.3" ry="1.7" fill="#E39A88" stroke="#B9705F" stroke-width=".7"/><ellipse cx="45.3" cy="47.3" rx=".7" ry=".45" fill="#fff" opacity=".7"/>';
+  s += '<path d="M46 49.5 V50.8" stroke="' + T + '" stroke-width=".7" stroke-linecap="round"/>';
+  const ab = P.boca;
+  if(P.redonda) s += '<ellipse cx="46" cy="53.4" rx="1.9" ry="' + f1(1.4 + ab * 1.2) + '" fill="#8E4A50" stroke="' + T + '" stroke-width=".8"/>';
+  else if(ab > .05) s += '<path d="M42.8 51 Q46 ' + f1(52 + ab * 5) + ' 49.2 51 Q46 51.8 42.8 51 Z" fill="#8E4A50" stroke="' + T + '" stroke-width=".9" stroke-linejoin="round"/>';
+  else s += '<path d="M42.6 50.8 Q44.4 52.4 46 51 Q47.6 52.4 49.4 50.8" fill="none" stroke="' + T + '" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>';
+  if(!P.redonda) s += '<path d="M45 51.1 H47 V52.7 Q46 53.1 45 52.7 Z" fill="#FBF7EE" stroke="' + T + '" stroke-width=".45" stroke-linejoin="round"/><path d="M46 51.2 V52.9" stroke="' + T + '" stroke-width=".4"/>';
+  s += '<path d="M35.4 30.4 Q46 25.6 56.6 30.4 L56 34 Q46 29.8 36 34 Z" fill="#EDE6D6" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>';
+  s += '<path d="M36.2 30.6 Q33 20.4 41 20.2 Q43 15.4 46 15.6 Q49 15.4 51 20.2 Q59 20.4 55.8 30.6 Q46 26.6 36.2 30.6 Z" fill="#FBF7EE" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>';
+  s += '<path d="M41 22 Q42 25.6 41.2 28.4 M51 22 Q50 25.6 50.8 28.4" fill="none" stroke="#DCCFB4" stroke-width="1" stroke-linecap="round"/>';
+  const bd = brazo(56, 65, ...P.bD, 3.6, MV.pelo);
+  s += bd.svg;
+  if(P.c) s += en(bd.x, bd.y, (P.cAng !== undefined ? P.cAng : bd.ang + 90 + 10), CORTADOR);
+  s += mano(bd.x, bd.y, bd.ang, MV.rosa, MV.rosaB, P.dedo);
+  return s + '</g></svg>';
+}
+
+const QUESITO = (x, y, k) => '<g transform="translate(' + f1(x) + ' ' + f1(y) + ') scale(' + (k || 1) + ')">' +
+  '<path d="M-8 4 L8 4 L8 -7 Z" fill="#F4C64A" stroke="' + T + '" stroke-width="1.4" stroke-linejoin="round"/>' +
+  '<path d="M-8 4 L8 -7 L8 -10 Q1 -8.4 -8 1 Z" fill="#E2A82C" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>' +
+  '<circle cx="4" cy="0" r="1.3" fill="#D99A22"/><circle cx="1" cy="2.4" r=".8" fill="#D99A22"/></g>';
+function migasLado(pose, queso){
+  pose = pose || 'anda';
+  const P = {
+    anda:  {b: [100, 9, 115, 8], ojo: 'normal', boca: 0, ceja: 0},
+    coge:  {b: [172, 10, 178, 10], ojo: 'normal', boca: 0, ceja: -1.4, mira: [-.6, .8]},
+    salta: {b: [120, 9, 70, 8], alto: [-82, 24, -96, 24], ojo: 'feliz', boca: 1, ceja: -1}
+  }[pose] || {};
+  const m = P.mira || [-.8, 0];
+  let s = '<svg viewBox="0 0 100 100" class="pj pj-migas lado pose-' + pose + '" aria-hidden="true">';
+  s += '<ellipse cx="54" cy="96" rx="20" ry="2.6" fill="#140F1F" opacity=".2"/>';
+  s += '<path d="M66 84 Q84 89 86 76 Q87 66 80 63" fill="none" stroke="' + T + '" stroke-width="4" stroke-linecap="round"/>' +
+       '<path d="M66 84 Q84 89 86 76 Q87 66 80 63" fill="none" stroke="' + MV.rosa + '" stroke-width="2.3" stroke-linecap="round"/>';
+  if(P.alto){ const a = brazo(60, 64, ...P.alto, 3.4, '#857469');
+    s += '<g class="brazoAlto">' + (queso ? QUESITO(a.x + 1, a.y - 10, 1.2) : '') + a.svg + mano(a.x, a.y, a.ang, '#D8939F', MV.rosaB) + '</g>'; }
+  s += '<g class="pataB"><path d="M61 82 L62 92" stroke="' + T + '" stroke-width="5.6" stroke-linecap="round"/><path d="M61 82 L62 92" stroke="#857469" stroke-width="3.4" stroke-linecap="round"/>' +
+       '<path d="M55 95.2 Q55 91 61 91 Q67 91.4 66.4 95.2 Z" fill="#D8939F" stroke="' + T + '" stroke-width="1.2" stroke-linejoin="round"/></g>';
+  s += '<path d="M44 88 Q38 72 46 62 Q54 55 63 60 Q72 67 70 81 Q68 91 58 92 Q48 92 44 88 Z" fill="' + MV.pelo + '" stroke="' + T + '" stroke-width="1.6" stroke-linejoin="round"/>';
+  s += '<path d="M45.4 65 Q40.6 76 44.6 88.4 Q50 91.4 55.6 91.6 Q53 78 53.6 64 Q49 63 45.4 65 Z" fill="' + MV.tela + '" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>';
+  s += '<path d="M44 78 Q48 80 53.4 79" fill="none" stroke="#DCCFB4" stroke-width="1.2"/>';
+  s += '<g class="pataA"><path d="M52 84 L50 92" stroke="' + T + '" stroke-width="5.8" stroke-linecap="round"/><path d="M52 84 L50 92" stroke="' + MV.pelo + '" stroke-width="3.6" stroke-linecap="round"/>' +
+       '<path d="M41.6 95.4 Q41.6 91 48 90.8 Q54.4 91 54 95.4 Z" fill="' + MV.rosa + '" stroke="' + T + '" stroke-width="1.2" stroke-linejoin="round"/>' +
+       '<path d="M44 95.2 V93.8 M46.4 95.2 V93.4 M48.8 95.2 V93.8" stroke="' + MV.rosaB + '" stroke-width=".7" stroke-linecap="round"/></g>';
+  s += '<circle cx="57" cy="30" r="11" fill="' + MV.pelo + '" stroke="' + T + '" stroke-width="1.6"/><circle cx="56.2" cy="30.8" r="6.6" fill="' + MV.rosa + '"/>';
+  s += '<path d="M60 45 Q61 30 49 28 Q37 27 33.6 36 Q30.6 42 22.6 45.6 Q18.6 48.6 22.4 51.6 Q30 56.4 41 56.6 Q57 57 60 45 Z" fill="' + MV.cabeza + '" stroke="' + T + '" stroke-width="1.6" stroke-linejoin="round"/>';
+  s += '<path d="M24 51 Q31 55.6 40 55.4 Q34 52 30 47 Q26 48.6 24 51 Z" fill="' + MV.hocico + '"/>';
+  s += '<ellipse cx="42" cy="50" rx="3" ry="1.9" fill="' + MV.rosa + '" opacity=".55"/>';
+  s += '<ellipse cx="21.4" cy="48.2" rx="2.5" ry="2" fill="#E39A88" stroke="#B9705F" stroke-width=".7"/><ellipse cx="20.8" cy="47.6" rx=".7" ry=".45" fill="#fff" opacity=".7"/>';
+  if(P.ojo === 'feliz') s += '<path d="M34.6 41.6 Q38 37.4 41.4 41.6" fill="none" stroke="#241C14" stroke-width="2" stroke-linecap="round"/>';
+  else s += '<ellipse class="ojo" cx="38" cy="40.4" rx="3" ry="3.6" fill="#241C14"/>' +
+    '<circle cx="' + f1(37 + m[0] * .7) + '" cy="' + f1(39 + m[1] * .7) + '" r="1.2" fill="#fff"/>' + parpado(38, 40.4, 3, 3.6, MV.cabeza, T);
+  s += '<path d="M34.4 ' + f1(34.6 + P.ceja) + ' Q38 ' + f1(32.6 + P.ceja) + ' 41.6 ' + f1(34.2 + P.ceja) + '" fill="none" stroke="#6E6058" stroke-width="1.5" stroke-linecap="round"/>';
+  s += '<g stroke="' + T + '" stroke-width=".75" stroke-linecap="round" fill="none" opacity=".75"><path d="M27 48.6 Q20 45 14 45.4"/><path d="M27.4 50.4 Q20.4 50.6 14.6 53"/></g>';
+  if(P.boca) s += '<path d="M25.4 52.4 Q30 59 35 53.4 Q30 54.6 25.4 52.4 Z" fill="#8E4A50" stroke="' + T + '" stroke-width=".9" stroke-linejoin="round"/>';
+  else s += '<path d="M25.6 52.6 Q30 55.2 34.4 53.2" fill="none" stroke="' + T + '" stroke-width="1" stroke-linecap="round"/>';
+  s += '<path d="M27 53 H29 V55 Q28 55.4 27 55 Z" fill="#FBF7EE" stroke="' + T + '" stroke-width=".45" stroke-linejoin="round"/>';
+  s += '<path d="M40 56 Q51 62 61 55 L62.4 59.4 Q51 67 40.4 60.4 Z" fill="#C4462F" stroke="' + T + '" stroke-width="1.2" stroke-linejoin="round"/>';
+  s += '<path d="M60.6 57 L67 61.6 L61 63 Z" fill="#C4462F" stroke="' + T + '" stroke-width="1.1" stroke-linejoin="round"/>';
+  s += '<g fill="#F6EFE2"><circle cx="45" cy="60" r=".8"/><circle cx="51" cy="61.6" r=".8"/><circle cx="57" cy="59.6" r=".8"/></g>';
+  s += '<g transform="rotate(12 48 30)"><path d="M37.4 31 Q48 26.4 58.6 31 L58 34.4 Q48 30.4 38 34.6 Z" fill="#EDE6D6" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/>' +
+       '<path d="M38.2 31.2 Q35 21 43 20.8 Q45 16 48 16.2 Q51 16 53 20.8 Q61 21 57.8 31.2 Q48 27.2 38.2 31.2 Z" fill="#FBF7EE" stroke="' + T + '" stroke-width="1.3" stroke-linejoin="round"/></g>';
+  const b = brazo(50, 66, ...P.b, 3.6, MV.pelo);
+  let mano_ = b.svg + mano(b.x, b.y, b.ang, MV.rosa, MV.rosaB);
+  if(queso && !P.alto) mano_ = '<g class="qMano">' + QUESITO(b.x - 10.5, b.y + .9, 1.19) + '</g>' + mano_;
+  s += '<g class="brazoLado">' + mano_ + '</g>';
+  return s + '</svg>';
+}
+
+const DIBUJA = {nick, nicoleta, migas};
+const REDUCIDO = raiz.matchMedia && raiz.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function ponCara(c, quien, pose, hablar){
+  if(!c) return;
+  clearInterval(c._parla);
+  const pinta = p => { c.innerHTML = DIBUJA[quien](p); const vb = c.dataset.vb, sv = c.firstElementChild; if(vb && sv) sv.setAttribute('viewBox', vb); };
+  pinta(pose);
+  c.dataset.pose = pose;
+  if(!hablar || REDUCIDO || !['habla', 'senala', 'telefono'].includes(pose)) return;
+  let n = 0;
+  c._parla = setInterval(() => {
+    n++;
+    pinta(n % 2 ? 'calla' : pose);
+    if(n >= 7){ clearInterval(c._parla); pinta(pose); }
+  }, 170);
+}
+const toca = new WeakMap();
+function parpadea(){
+  const ahora = Date.now();
+  document.querySelectorAll('svg.pj').forEach(sv => {
+    const hueco = sv.parentElement || sv, t = toca.get(hueco);
+    if(!t){ toca.set(hueco, ahora + 800 + Math.random() * 3000); return; }
+    if(ahora < t || !sv.getClientRects().length) return;
+    const doble = Math.random() < .2;
+    toca.set(hueco, ahora + 2500 + Math.random() * 3000 + (doble ? 300 : 0));
+    sv.querySelectorAll('.parpado').forEach(p => {
+      const arriba = 'translateY(-' + p.dataset.h + 'px)', abajo = 'translateY(-' + p.dataset.c + 'px)';
+      const k = doble ? [{transform: arriba}, {transform: abajo, offset: .2}, {transform: arriba, offset: .45}, {transform: abajo, offset: .7}, {transform: arriba}]
+                      : [{transform: arriba}, {transform: abajo, offset: .45}, {transform: arriba}];
+      p.animate(k, {duration: doble ? 380 : 170, easing: 'ease-in-out'});
+    });
+  });
+}
+if(!REDUCIDO && raiz.document) setInterval(parpadea, 120);
+const POSES = {nick: ['habla', 'senala', 'grapa', 'sorpresa', 'celebra', 'piensa'], nicoleta: ['habla', 'senala', 'telefono', 'sorpresa', 'celebra', 'piensa'], migas: ['habla', 'senala', 'sorpresa', 'celebra', 'piensa']};
+raiz.Personajes = {nick, nicoleta, migas, migasLado, DIBUJA, POSES, ponCara,
+  get NICK(){ return nick('habla'); }, get NICOLETA(){ return nicoleta('habla'); }, get MIGAS(){ return migas('habla'); }};
+})(window);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const M = raiz.Motor, PZ = raiz.Pizza, S = raiz.Sonido;
+const VISTA = 'grapadora.inicio';
+function escena(el, alAcabar){
+  try{ raiz.sessionStorage.setItem(VISTA, 'visto'); }catch(err){}
+  const h = document.documentElement;
+  h.dataset.inicio = 'si';
+  el.hidden = false;
+  const caja = el.querySelector('.inCaja'), titulo = el.querySelector('.inTitulo');
+  const c = M.nuevaCaja(1);
+  const pinta = () => { caja.innerHTML = ''; caja.appendChild(PZ.dibuja(c)); };
+  pinta();
+  const ts = [];
+  let hecho = false;
+  const luego = (ms, fn) => ts.push(setTimeout(fn, ms));
+  function fin(){
+    if(hecho) return;
+    hecho = true;
+    ts.forEach(clearTimeout);
+    removeEventListener('keydown', tecla, true);
+    el.classList.add('fuera');
+    setTimeout(() => {
+      el.hidden = true; delete h.dataset.inicio;
+      const m = document.querySelector('main');
+      if(m && m.animate) m.animate([{opacity: 0}, {opacity: 1}], {duration: 350, easing: 'ease-out'});
+      if(alAcabar) alAcabar();
+    }, 480);
+  }
+  function tecla(ev){ ev.stopPropagation(); if(['Enter', ' ', 'Escape'].includes(ev.key)){ ev.preventDefault(); fin(); } }
+  el.addEventListener('click', fin);
+  addEventListener('keydown', tecla, true);
+  luego(900, () => { M.recorta(c, 4); pinta(); if(S) S.toca('corte'); });
+  luego(1700, () => { M.toca(c, 0); pinta(); });
+  luego(2100, () => { M.toca(c, 1); pinta(); });
+  luego(2700, () => { M.grapa(c); pinta(); if(S) S.toca('grapa'); });
+  luego(3200, () => titulo.classList.add('ve'));
+  luego(3350, () => {
+    const PJ = raiz.Personajes; if(!PJ) return;
+    [['.inNick', 'nick'], ['.inMigas', 'migas']].forEach(([sel, q], i) => {
+      const a = el.querySelector(sel); if(!a) return;
+      a.innerHTML = PJ.DIBUJA[q]('celebra');
+      setTimeout(() => a.classList.add('ve'), i * 180);
+    });
+  });
+  luego(5000, fin);
+}
+raiz.Arranque = {escena};
+})(window);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const REDUCIDO = raiz.matchMedia && raiz.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ENTREVISTAS = {
+  nick: {nombre: 'Nick', cargo: 'pizzero, y dueño de la grapadora',
+    hola: 'Pregunte, pregunte, que el horno no espera. Y si le sobra un minuto, le grapo algo.',
+    preguntas: [
+      {id: 'n1', pose: 'senala', p: '¿Por qué grapa las pizzas?',
+       r: 'Porque el cliente siempre quiere su pedido <b>en una pieza</b>. Dos cuartos grapados son media pizza: la misma cantidad, con otro nombre. Grapar de dos en dos es <b>dividir arriba y abajo entre 2</b>: 2/4 = 1/2.'},
+      {id: 'n1b', pose: 'piensa', tras: 'n1', p: '¿Y si grapo tres octavos?',
+       r: 'Sale una pieza, sí, pero 3 no cabe en 8: esa pieza no es <b>un trozo de nada entero</b>. No hay división que enseñar. La grapadora grapa lo que le echen; las cuentas, no.'},
+      {id: 'n2', pose: 'celebra', p: '¿No se notan las grapas al comer?', feliz: true,
+       r: 'Se quitan antes de servir. Casi siempre. Lo que importa es que, grapada o suelta, <b>la pizza pesa lo mismo</b>: ni grapar ni cortar cambia la cantidad. Solo el nombre.'},
+      {id: 'n3', pose: 'senala', p: '¿Por qué todas sus pizzas miden lo mismo?',
+       r: 'Porque si una fuera más grande, un cuarto de esa no sería un cuarto de las otras, y no habría manera de comparar. En esta casa <b>el 1 es la superficie de una pizza</b>. Sin la misma unidad, las fracciones no se hablan.'},
+      {id: 'n4', pose: 'senala', p: '¿Por qué 1/4 es menos que 1/3, si 4 es más que 3?',
+       r: 'Esa me la hacen todos los días. El 4 de abajo dice <b>en cuántos trozos se corta</b>, no cuánto te llevas. Pizza para cuatro, trozo pequeño; pizza para tres, trozo más grande. <b>Más comensales, menos ración.</b>'},
+      {id: 'n5', pose: 'celebra', p: '¿Es verdad que es usted una morsa?', feliz: true,
+       r: 'Y a mucha honra. El bigote de pizzero lo traía de serie. Lo malo son los colmillos: para probar la salsa hay que tener <b>mucho pulso</b>.'},
+      {id: 'n6', pose: 'sorpresa', p: '¿Qué es eso de «sumar como Nick»?',
+       r: '…Eso lo dice mi hermana. Una vez, para doblar una receta de 4 personas a 8, <b>le sumé 4 a cada cosa</b> en vez de multiplicar por 2. Salió una masa con ocho huevos para dos tazas de harina. No se hable más del tema.'},
+      {id: 'n7', pose: 'celebra', p: '¿Qué hace un ratón en su cocina?', feliz: true,
+       r: '¿Migas? Es el ratón del obrador de mi hermana, pero los días de mucho lío me lo presta. Es el mejor con el cortador: yo <b>junto</b>, él <b>reparte</b>. Entre los dos, cualquier fracción. Y no se come el queso. Casi nunca.'}
+    ]},
+  nicoleta: {nombre: 'Nicoleta', cargo: 'pastelera, hermana de Nick, dos portales más allá',
+    hola: 'Te atiendo, pero rápido: tengo magdalenas en el horno y a mi hermano al teléfono.',
+    preguntas: [
+      {id: 'c1', pose: 'telefono', p: '¿Por qué siempre encarga por teléfono?',
+       r: 'Porque mis encargos son de los difíciles: <b>7/8 contra 6/7</b>. Harían falta 56 trozos, y el cortador de Nick no hila tan fino. Así que lo cortamos <b>sobre el papel</b>.'},
+      {id: 'c2', pose: 'senala', p: '¿Qué es eso de multiplicar en cruz?', tras: 'c1',
+       r: 'Nada de trucos. Para ponerlas en la misma secuencia, cada una se multiplica arriba y abajo por el denominador de la otra: <b>7/8 = 49/56</b> y <b>6/7 = 48/56</b>. Y fíjate: 49 = 7×7, 48 = 8×6. Esos son <b>los productos en cruz</b>.'},
+      {id: 'c3', pose: 'celebra', p: '¿Quién cocina mejor, usted o Nick?', feliz: true,
+       r: 'Él hace pizzas y yo hago pasteles. Pero yo <b>multiplico</b> las recetas y él las suma. Saca tus propias conclusiones.'},
+      {id: 'c4', pose: 'habla', p: '¿Qué tienen que ver las fracciones con la pastelería?',
+       r: 'Todo. Media receta, un tercio de azúcar, tres huevos por cada dos tazas… Una pastelería es el sitio donde <b>las razones se usan sin llamarlas así</b>.'},
+      {id: 'c5', pose: 'senala', p: '¿Y cómo sabe quién se lleva más?',
+       r: 'Cuando las dos están en la misma secuencia, <b>gana el numerador mayor</b>: 49 trozos de 56 son más que 48 de 56. Antes de igualarlas, contar trozos no sirve de nada.'},
+      {id: 'c6', pose: 'celebra', p: '¿Le cae bien Migas?', feliz: true,
+       r: 'Es mi ratón del obrador: vive debajo del mostrador y se come lo que sobra de cada reparto, por eso sabe tanto de porcentajes. Se lo presto a Nick, con una condición: que no <b>corte las magdalenas en quinceavos</b>, que se me desmoronan.'}
+    ]},
+  migas: {nombre: 'Migas', cargo: 'el ratón del obrador de Nicoleta, que baja a llevar el cortador',
+    hola: '¡Hola! ¿Es para mí? ¡Nadie me pregunta nunca nada! ¿Quiere que le corte algo?',
+    preguntas: [
+      {id: 'm1', pose: 'celebra', p: '¿Por qué te llamas Migas?', feliz: true,
+       r: 'Porque de pequeño cortaba las pizzas en tantos trozos que al final solo quedaban migas. Pero aprendí una cosa: <b>cortar más fino no cambia la cantidad</b>. La pizza entera sigue siendo 1, esté en 4 trozos o en 400.'},
+      {id: 'm2', pose: 'senala', p: '¿Qué hace exactamente el cortador?',
+       r: 'Si una pizza está en cuartos y la corto en 8, cada cuarto se hace dos octavos: <b>hay el doble de trozos y cada uno es la mitad</b>. Por eso 3/4 = 6/8: se multiplica arriba y abajo por 2.'},
+      {id: 'm3', pose: 'sorpresa', p: '¿Por qué a veces el cortador avisa?',
+       r: 'Porque pasar de cuartos a tercios <b>no respeta las piezas</b>: los cortes nuevos caen donde no había, y se pierde lo grapado. Si el corte nuevo es un múltiplo del viejo —de 4 a 8, a 12—, lo grapado aguanta.'},
+      {id: 'm4', pose: 'senala', p: '¿Qué es un denominador?',
+       r: 'El número de trozos en que corto la pizza: el de <b>abajo</b>. El de arriba, el numerador, es cuántos trozos te llevas tú. Yo me encargo del de abajo; de lo que te llevas, se encarga tu hambre.'},
+      {id: 'm5', pose: 'piensa', p: '¿Cuál es el máximo de trozos?',
+       r: 'Quince. Más allá, los trozos se me hacen <b>migas</b> y el jefe se enfada. Para 56 trozos, lo que hace Nicoleta: <b>se corta sobre el papel</b>, que ahí no se desmorona nada.'},
+      {id: 'm6', pose: 'senala', p: '¿Cómo se comparan dos pizzas cortadas distinto?',
+       r: 'Primero las corto <b>igual</b>, donde quepan los dos cortes. Tercios y quintos: en 15. Entonces los trozos son del mismo tamaño y ya solo hay que <b>contar</b>. Eso es el denominador común.'},
+      {id: 'm7', pose: 'sorpresa', p: '¿Te comes el queso?', feliz: true,
+       r: '¡Yo no! …Bueno, alguna hebra que se queda en el cortador. Eso no cuenta: es <b>menos de un quinceavo</b>.'}
+    ]}
+};
+
+function monta(el, PJ){
+  const q = el.querySelector('.ev-quien'), cartel = el.querySelector('.ev-cartel'), cara = el.querySelector('.ev-cara'),
+        pre = el.querySelector('.ev-pregunta'), txt = el.querySelector('.ev-respuesta'), lista = el.querySelector('.ev-lista');
+  const CARAS = {nick: PJ.nick('habla'), nicoleta: PJ.nicoleta('habla'), migas: PJ.migas('habla')};
+  const ev = {quien: 'nick', hechas: new Set(), tok: 0};
+  q.innerHTML = Object.keys(ENTREVISTAS).map(k => '<button type="button" data-q="' + k + '"><span class="ev-mini" aria-hidden="true">' + CARAS[k] + '</span>' + ENTREVISTAS[k].nombre + '</button>').join('');
+  q.querySelectorAll('button').forEach(b => b.addEventListener('click', () => elige(b.dataset.q)));
+  function elige(k){
+    ev.quien = k; ev.tok++;
+    const E = ENTREVISTAS[k];
+    q.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.q === k)));
+    el.dataset.quien = k;
+    cartel.innerHTML = '<b>' + E.nombre + '</b>, ' + E.cargo + '.';
+    cara.dataset.q = k;
+    pre.textContent = '';
+    habla(E.hola, k === 'migas' ? 'celebra' : 'habla');
+    pintaLista();
+  }
+  function pintaLista(){
+    const E = ENTREVISTAS[ev.quien];
+    lista.innerHTML = '';
+    E.preguntas.filter(p => !p.tras || ev.hechas.has(p.tras)).forEach(p => {
+      const b = document.createElement('button'); b.type = 'button';
+      b.className = 'ev-p' + (ev.hechas.has(p.id) ? ' hecha' : '') + (p.tras ? ' repregunta' : '');
+      b.innerHTML = (p.tras ? '<span class="ev-re">Y además… </span>' : '') + p.p;
+      b.addEventListener('click', () => {
+        ev.hechas.add(p.id); pre.textContent = '—' + p.p;
+        habla(p.r, p.pose || (p.feliz ? 'celebra' : 'habla')); pintaLista();
+        if(raiz.Sonido) raiz.Sonido.toca(p.feliz ? 'bien' : 'tiza');
+      });
+      lista.appendChild(b);
+    });
+  }
+  const HABLAN = ['habla', 'senala', 'telefono'];
+  function habla(html, pose){
+    const tok = ++ev.tok, quien = ev.quien, dibu = PJ.DIBUJA[quien];
+    const trozos = html.split(/(<[^>]+>)/).filter(Boolean);
+    const total = trozos.reduce((s, t) => s + (t[0] === '<' ? 0 : t.length), 0);
+    const mientras = HABLAN.includes(pose) ? pose : 'habla';
+    const cierre = () => { if(ev.tok !== tok) return; txt.innerHTML = html; cara.innerHTML = dibu(pose); cara.classList.toggle('feliz', pose === 'celebra'); };
+    cara.classList.remove('feliz');
+    if(REDUCIDO){ cierre(); return; }
+    let n = 0;
+    const paso = () => {
+      if(ev.tok !== tok) return;
+      n = Math.min(total, n + 2);
+      let quedan = n, h = '';
+      for(const t of trozos){ if(t[0] === '<'){ h += t; continue; } if(quedan <= 0) break; h += t.slice(0, quedan); quedan -= t.length; }
+      txt.innerHTML = h;
+      cara.innerHTML = dibu(Math.floor(n / 6) % 2 ? 'calla' : mientras);
+      if(n < total) setTimeout(paso, 26); else cierre();
+    };
+    paso();
+  }
+  return {abre: () => elige(ev.quien), calla: () => { ev.tok++; }};
+}
+raiz.Entrevistas = {ENTREVISTAS, monta};
+})(window);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const T = '#3A2E22';
+const HINGE = [86, 136];
+const TABLA =
+  '<path d="M28 142 H142 Q146 142 146 146 V156 Q146 160 142 160 H28 Q24 160 24 156 V146 Q24 142 28 142 Z" fill="#C99A5E" stroke="' + T + '" stroke-width="3" stroke-linejoin="round"/>' +
+  '<path d="M26 147 H144" stroke="#E2BE86" stroke-width="2.4" stroke-linecap="round"/>' +
+  '<path d="M38 152 Q56 150 74 153 M96 151 Q114 154 134 151" fill="none" stroke="#A97A42" stroke-width="1.6" stroke-linecap="round"/>' +
+  '<path d="M79 142 V137 H93 V142" fill="none" stroke="#6E7680" stroke-width="2.6" stroke-linejoin="round"/>';
+const MUELLE =
+  '<g fill="none" stroke="#8C949E" stroke-width="2.4"><ellipse cx="86" cy="136" rx="7" ry="5"/><ellipse cx="86" cy="136" rx="4" ry="2.8"/></g>' +
+  '<circle cx="86" cy="136" r="1.8" fill="#6E7680"/>';
+const CEBO =
+  '<path d="M96 142 V138 H122 V142" fill="#B6BCC4" stroke="' + T + '" stroke-width="2" stroke-linejoin="round"/>';
+const QUESO =
+  '<path d="M99 137 L119 137 L119 124 Z" fill="#F4C64A" stroke="' + T + '" stroke-width="2.2" stroke-linejoin="round"/>' +
+  '<path d="M99 137 L119 124 L119 120 Q110 122 99 133 Z" fill="#E2A82C" stroke="' + T + '" stroke-width="2" stroke-linejoin="round"/>' +
+  '<g fill="#D99A22"><circle cx="113" cy="132" r="1.8"/><circle cx="116" cy="127.4" r="1.2"/><circle cx="108" cy="134" r="1.1"/></g>';
+const ARCO =
+  '<path d="M86 136 L38 136" stroke="' + T + '" stroke-width="5.4" stroke-linecap="round"/>' +
+  '<path d="M86 136 L38 136" stroke="#C6CBD1" stroke-width="3" stroke-linecap="round"/>' +
+  '<path d="M40 131 V141" stroke="' + T + '" stroke-width="5.4" stroke-linecap="round"/>' +
+  '<path d="M40 131 V141" stroke="#C6CBD1" stroke-width="3" stroke-linecap="round"/>';
+const RAYOS = [[100, 82, 100, 66], [128, 92, 140, 80], [72, 92, 60, 80], [146, 112, 162, 106], [54, 112, 38, 106]]
+  .map(([a, b, c, d]) => '<path d="M' + (a - 14) + ' ' + b + ' L' + (c - 14) + ' ' + d + '"/>').join('');
+
+const PIE =
+  '<g transform="translate(-2 0)"><path d="M150 -20 L150 82 Q150 96 138 100 L112 106 Q100 108 100 118 Q100 128 112 128 L150 128 Q172 128 176 108 L178 -20 Z" fill="#C9A17C" stroke="' + T + '" stroke-width="3" stroke-linejoin="round"/>' +
+  '<path d="M156 -20 Q154 40 160 70" fill="none" stroke="#B08A6A" stroke-width="2.4" stroke-linecap="round" opacity=".7"/>' +
+  '<g fill="#C9A17C" stroke="' + T + '" stroke-width="2.4"><circle cx="122" cy="126" r="5"/><circle cx="133" cy="127" r="4.6"/><circle cx="143" cy="127.4" r="4.2"/></g>' +
+  '<g class="dedo"><ellipse cx="108" cy="122" rx="9" ry="8" fill="#C9A17C" stroke="' + T + '" stroke-width="2.6"/>' +
+  '<path d="M102 118 Q105 115 109 116" fill="none" stroke="#E6CDB2" stroke-width="2" stroke-linecap="round"/></g></g>';
+const AY =
+  '<g class="ay"><path d="M34 46 Q36 28 58 28 L86 28 Q106 28 106 46 Q106 64 86 64 L72 64 L80 78 L60 64 Q34 64 34 46 Z" fill="#FFF8E8" stroke="' + T + '" stroke-width="3" stroke-linejoin="round"/>' +
+  '<text x="70" y="55" text-anchor="middle" font-family="Bree Serif,Georgia,serif" font-size="25" fill="#B0442C">¡AY!</text></g>';
+
+const LS = 1.05, LX = 120 - 30.1 * LS, LY = 131 - 67.7 * LS, ATRAS_L = 5;
+function migasDeLado(PJ){
+  const pon = (cls, pose, queso, vis) => '<g class="' + cls + '"' + (vis ? '' : ' opacity="0"') + '><svg x="' + f(LX) + '" y="' + f(LY) + '" width="' + f(100 * LS) + '" height="' + f(100 * LS) + '" viewBox="0 0 100 100" overflow="visible">' +
+    PJ.migasLado(pose, queso).replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '') + '</svg></g>';
+  return '<g class="mLado">' + pon('lAnda', 'anda', false, true) + pon('lCoge', 'coge', true, false) + pon('lSalta', 'salta', true, false) + '</g>';
+}
+const f = x => +x.toFixed(1);
+function svg(escena, PJ){
+  const fondo = escena === 'fallo' ? ['#FBE3D8', '#F2C2B0'] : ['#E6F0D4', '#CFE0B0'];
+  const g = (cls, html) => '<g class="' + cls + '">' + html + '</g>';
+  return '<svg viewBox="0 0 200 200" aria-hidden="true"><defs><clipPath id="trCirculo"><circle cx="100" cy="100" r="94"/></clipPath>' +
+    '<radialGradient id="trFondo-' + escena + '" cx=".4" cy=".3" r=".8"><stop offset="0" stop-color="' + fondo[0] + '"/><stop offset="1" stop-color="' + fondo[1] + '"/></radialGradient></defs>' +
+    '<circle cx="100" cy="100" r="94" fill="url(#trFondo-' + escena + ')"/>' +
+    '<g clip-path="url(#trCirculo)">' +
+      '<ellipse cx="100" cy="164" rx="84" ry="7" fill="rgba(60,35,10,.18)"/>' +
+      (escena === 'acierto' ? migasDeLado(PJ) : '') +
+      g('trampa', TABLA + CEBO + MUELLE + g('queso', QUESO) +
+        (escena === 'fallo' ? g('pie', PIE) : '') + g('arco', ARCO)) +
+      g('rayos', '<g fill="none" stroke="#E8A93A" stroke-width="4" stroke-linecap="round">' + RAYOS + '</g>') +
+      (escena === 'fallo' ? AY : '') +
+    '</g><circle cx="100" cy="100" r="94" fill="none" stroke="' + T + '" stroke-width="5"/></svg>';
+}
+
+function animaDeLado(v, D, o, anima){
+  const tr = (x, y, r) => 'translate(' + x + 'px,' + y + 'px)' + (r ? ' rotate(' + r + 'deg)' : '');
+  const k = [{transform: tr(92, 0), offset: 0}, {transform: tr(92, 0), offset: o(150)}];
+  for(let t = 225, i = 1; t <= 600; t += 75, i++) k.push({transform: tr(+(92 * (1 - (t - 150) / 450)).toFixed(1), i % 2 ? -2.6 : 0), offset: o(t)});
+  k.push({transform: tr(0, 0), offset: 1});
+  anima('.mLado', k);
+  const paso = (sel, origen, a) => { v.querySelectorAll('.lAnda ' + sel).forEach(e => {
+    e.style.transformBox = 'view-box'; e.style.transformOrigin = origen;
+    e.animate([{transform: 'rotate(' + a + 'deg)'}, {transform: 'rotate(' + (-a) + 'deg)'}], {duration: 75, iterations: 6, direction: 'alternate', delay: 150, easing: 'ease-in-out'}); }); };
+  paso('.pataA', '52px 84px', 24); paso('.pataB', '61px 82px', -24); paso('.brazoLado', '50px 66px', -20);
+  const turno = (sel, de, a) => anima(sel, [
+    ...(de > 0 ? [{opacity: 0, offset: 0}, {opacity: 0, offset: o(de)}] : []), {opacity: 1, offset: o(de + 1)},
+    {opacity: 1, offset: o(a)}, ...(a < D ? [{opacity: 0, offset: o(a + 1)}, {opacity: 0, offset: 1}] : [])]);
+  turno('.lAnda', -1, 600); turno('.lCoge', 600, 860); turno('.lSalta', 860, D);
+  anima('.queso', [{opacity: 1, offset: 0}, {opacity: 1, offset: o(660)}, {opacity: 0, offset: o(661)}, {opacity: 0, offset: 1}]);
+  anima('.lCoge .qMano', [{opacity: 0, offset: 0}, {opacity: 0, offset: o(660)}, {opacity: 1, offset: o(661)}, {opacity: 1, offset: 1}]);
+  const pie = (LX + 54 * LS) + 'px ' + (LY + 95 * LS) + 'px';
+  anima('.lCoge', [{transform: tr(0, 0), offset: 0}, {transform: tr(0, 0), offset: o(660)},
+    {transform: tr(ATRAS_L, 0, 7), offset: o(800), easing: 'ease-in'}, {transform: tr(ATRAS_L, 0, 7), offset: 1}], pie);
+  anima('.lSalta', [{transform: tr(ATRAS_L, 0), offset: 0}, {transform: tr(ATRAS_L, 0), offset: o(860)},
+    {transform: tr(ATRAS_L, -18), offset: o(1000), easing: 'ease-out'}, {transform: tr(ATRAS_L, 0), offset: o(1130), easing: 'ease-in'},
+    {transform: tr(ATRAS_L, -7), offset: o(1220), easing: 'ease-out'}, {transform: tr(ATRAS_L, 0), offset: o(1310), easing: 'ease-in'},
+    {transform: tr(ATRAS_L, 0), offset: 1}], pie);
+}
+
+let nT = 0;
+function lanza(escena, PJ, opts){
+  opts = opts || {};
+  if(opts.quieto) return null;
+  document.querySelectorAll('.trampa-vineta').forEach(v => v.remove());
+  const S = Math.round(opts.tam || Math.min(230, innerWidth * .56));
+  const v = document.createElement('div');
+  v.className = 'trampa-vineta ' + escena;
+  v.innerHTML = svg(escena, PJ).replace(/trCirculo/g, 'trCirculo' + (++nT));
+  const ref = opts.cerca && opts.cerca.getBoundingClientRect();
+  const cx = opts.punto ? opts.punto.x : ref ? ref.left + ref.width / 2 : innerWidth / 2;
+  const cy = opts.punto ? opts.punto.y : ref ? Math.max(S / 2 + 10, Math.min(innerHeight - S / 2 - 10, ref.top + ref.height / 2)) : innerHeight / 2;
+  v.style.cssText = 'left:' + Math.round(cx - S / 2) + 'px;top:' + Math.round(cy - S / 2) + 'px;width:' + S + 'px;height:' + S + 'px';
+  document.body.appendChild(v);
+  const D = 1700;
+  const o = x => x / D;
+  const anima = (sel, kf, origen) => {
+    const e = v.querySelector(sel); if(!e) return;
+    if(origen){ e.style.transformBox = 'view-box'; e.style.transformOrigin = origen; }
+    return e.animate(kf, {duration: D, fill: 'forwards'});
+  };
+  const anV = v.animate([
+    {transform: 'scale(.4) rotate(-8deg)', opacity: 0, offset: 0},
+    {transform: 'scale(1.06) rotate(2deg)', opacity: 1, offset: o(170), easing: 'ease-out'},
+    {transform: 'scale(1) rotate(0)', opacity: 1, offset: o(270)},
+    {transform: 'scale(1) rotate(0)', opacity: 1, offset: o(1500), easing: 'ease-in'},
+    {transform: 'scale(.5) rotate(6deg)', opacity: 0, offset: 1}
+  ], {duration: D, fill: 'forwards'});
+  const salto = escena === 'fallo' ? 640 : 820;
+  anima('.arco', [
+    {transform: 'rotate(0deg)', offset: 0}, {transform: 'rotate(0deg)', offset: o(salto)},
+    {transform: 'rotate(172deg)', offset: o(salto + 70), easing: 'ease-in'},
+    {transform: 'rotate(166deg)', offset: o(salto + 110)}, {transform: 'rotate(172deg)', offset: o(salto + 150)},
+    {transform: 'rotate(172deg)', offset: 1}], HINGE[0] + 'px ' + HINGE[1] + 'px');
+  anima('.rayos', [{opacity: 0, offset: 0}, {opacity: 0, offset: o(salto + 60)}, {opacity: 1, offset: o(salto + 80)}, {opacity: 0, offset: o(salto + 300)}, {opacity: 0, offset: 1}]);
+  if(escena === 'fallo'){
+    const pie = [
+      {transform: 'translate(0,-130px)', offset: 0}, {transform: 'translate(0,-130px)', offset: o(260)},
+      {transform: 'translate(0,2px)', offset: o(560), easing: 'ease-in'}, {transform: 'translate(0,0)', offset: o(640)},
+      {transform: 'translate(0,0)', offset: 1}];
+    anima('.pie', pie, '138px 120px');
+    anima('.trampa', [
+      {transform: 'translate(0,0)', offset: 0}, {transform: 'translate(0,0)', offset: o(760)},
+      {transform: 'translate(-4px,-30px) rotate(-6deg)', offset: o(900), easing: 'ease-out'},
+      {transform: 'translate(4px,-26px) rotate(7deg)', offset: o(1020)},
+      {transform: 'translate(-3px,-28px) rotate(-5deg)', offset: o(1140)},
+      {transform: 'translate(0,-27px) rotate(2deg)', offset: o(1260)}, {transform: 'translate(0,-27px) rotate(2deg)', offset: 1}], '106px 128px');
+    const dedo = v.querySelector('.dedo ellipse');
+    if(dedo) dedo.animate([{fill: '#C9A17C', offset: 0}, {fill: '#C9A17C', offset: o(660)}, {fill: '#E0705A', offset: o(760)}, {fill: '#E0705A', offset: 1}], {duration: D, fill: 'forwards'});
+    anima('.ay', [{transform: 'scale(0)', opacity: 0, offset: 0}, {transform: 'scale(0)', opacity: 0, offset: o(700)},
+      {transform: 'scale(1.15)', opacity: 1, offset: o(800), easing: 'ease-out'}, {transform: 'scale(1)', opacity: 1, offset: o(880)}, {transform: 'scale(1)', opacity: 1, offset: 1}], '72px 70px');
+  }else animaDeLado(v, D, o, anima);
+  if(raiz.Sonido){
+    if(escena === 'fallo'){ raiz.Sonido.toca('trampa', salto / 1000); raiz.Sonido.toca('ay', (salto + 90) / 1000); }
+    else{ raiz.Sonido.toca('trampa', salto / 1000); raiz.Sonido.toca('risita', (salto + 160) / 1000); }
+  }
+  const fin = () => v.remove();
+  anV.finished.then(fin, fin);
+  return v;
+}
+raiz.Trampa = {lanza, svg};
+})(window);
+</script>
+<script>
+(function(){
+'use strict';
+const M = window.Motor, PD = window.Pedidos, PZ = window.Pizza, PJ = window.Personajes;
+const $ = id => document.getElementById(id);
+const sonar = n => { if(window.Sonido) window.Sonido.toca(n); };
+const casi = M.casi, fTxt = M.fTxt, fVal = M.fVal;
+const ro = t => '<b class="fA">' + t + '</b>', az = t => '<b class="fB">' + t + '</b>';
+const MESAS = ['Mesa 4', 'Mesa 7'];
+
+const AJ = 'grapadora.ajustes.v1';
+const aj = {tema: 'dia', aula: false, apuesta: true, sonido: true, inicio: true, trampa: true};
+try{ Object.assign(aj, JSON.parse(localStorage.getItem(AJ) || '{}')); }catch(err){}
+const guardaAjustes = () => { try{ localStorage.setItem(AJ, JSON.stringify(aj)); }catch(err){} };
+function aplicaAjustes(){
+  const h = document.documentElement;
+  h.dataset.tema = aj.tema;
+  if(aj.aula) h.dataset.aula = 'si'; else delete h.dataset.aula;
+  const v = {tema: aj.tema, apuesta: aj.apuesta ? 'si' : 'no', sonido: aj.sonido ? 'si' : 'no', inicio: aj.inicio ? 'si' : 'no', trampa: aj.trampa ? 'si' : 'no'};
+  document.querySelectorAll('.ajustes [data-aj]').forEach(g => g.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(v[g.dataset.aj] === b.dataset.v))));
+  $('bAula').setAttribute('aria-pressed', String(aj.aula)); $('bAula').textContent = aj.aula ? 'Salir del aula' : 'Aula';
+  if(window.Sonido) window.Sonido.activo(aj.sonido);
+}
+document.querySelectorAll('.ajustes [data-aj]').forEach(g => g.addEventListener('click', ev => {
+  const b = ev.target.closest('button'); if(!b) return;
+  const k = g.dataset.aj, v = b.dataset.v;
+  aj[k] = k === 'tema' ? v : v === 'si';
+  guardaAjustes(); aplicaAjustes();
+  if(k === 'apuesta') pintaPizarra();
+}));
+const ajustes = si => { $('ajustes').hidden = !si; $('bAjustes').setAttribute('aria-pressed', String(si)); };
+$('bAjustes').addEventListener('click', () => ajustes($('ajustes').hidden));
+$('ajCierra').addEventListener('click', () => ajustes(false));
+$('bAula').addEventListener('click', () => { aj.aula = !aj.aula; guardaAjustes(); aplicaAjustes(); pintaRegla(); });
+addEventListener('resize', () => pintaRegla());
+
+const TURNO = 'grapadora.turno.v1', CADUCA = 4 * 60 * 60 * 1000;
+const nuevoTurno = () => ({juego: 'servir', ruta: {servir: 0, comparar: 0, telefono: 0}, practica: false, dif: 1, nombre: '', t0: Date.now(), ts: Date.now(),
+  stats: {servir: {ruta: 0, bien: 0, mal: 0}, comparar: {ruta: 0, bien: 0, mal: 0}, telefono: {ruta: 0, bien: 0, mal: 0}}, ejercicios: []});
+let est = nuevoTurno();
+try{ const d = JSON.parse(localStorage.getItem(TURNO) || 'null'); if(d && d.v === 1 && Date.now() - d.ts < CADUCA) est = Object.assign(nuevoTurno(), d); }catch(err){}
+let deEnlace = null;
+try{ const q = new URLSearchParams(location.search);
+  if(q.get('j')){ deEnlace = PD.aMedida(q); if(deEnlace){ est.juego = q.get('j'); est.practica = true; } history.replaceState(null, '', location.pathname); } }catch(err){}
+const vieneDeEnlace = !!deEnlace;
+const guarda = () => { est.ts = Date.now(); est.v = 1; try{ localStorage.setItem(TURNO, JSON.stringify(est)); }catch(err){} };
+
+let P = null, cajas = [], activa = 0, resuelto = false, prediccion = null, armado = null, ultimaOp = null, papel = {A: null, B: null}, fallos = 0, tPedido = 0, reloj = 0;
+const enRuta = () => PD.RUTA[est.juego], rutaHecha = () => est.ruta[est.juego] >= enRuta().length;
+const esCompara = () => est.juego === 'comparar', esTel = () => est.juego === 'telefono';
+function montaPedido(){
+  resuelto = false; prediccion = null; armado = null; ultimaOp = null; papel = {A: null, B: null}; fallos = 0; tPedido = Date.now(); clearTimeout(reloj);
+  if(deEnlace){ P = deEnlace; deEnlace = null; }
+  else if(est.practica) P = PD.GENERA[est.juego](est.dif);
+  else P = rutaHecha() ? null : enRuta()[est.ruta[est.juego]];
+  cajas = P && !esTel() ? (P.cajas || [P.fA[1], P.fB[1]]).map(M.nuevaCaja) : [];
+  activa = 0;
+  if(P && esTel()) sonar('timbre');
+  pintaEncargo(); pintaMesa(); lee();
+  const cara = P && esTel() && !menosMovimiento() && $('cliente').querySelector('.cara');
+  if(cara){ cara.classList.add('suena'); setTimeout(() => cara.classList.remove('suena'), 1300); }
+}
+function pintaPestanas(){
+  document.querySelectorAll('.juegos button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.j === est.juego)));
+  $('bPracticar').setAttribute('aria-pressed', String(est.practica));
+  $('practica').hidden = !est.practica;
+  $('difOps').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.d) === est.dif)));
+}
+document.querySelectorAll('.juegos button').forEach(b => b.addEventListener('click', () => { est.juego = b.dataset.j; guarda(); pintaPestanas(); montaPedido(); }));
+$('bPracticar').addEventListener('click', () => { est.practica = !est.practica; guarda(); pintaPestanas(); montaPedido(); });
+$('difOps').addEventListener('click', ev => { const b = ev.target.closest('button'); if(!b) return; est.dif = Number(b.dataset.d); guarda(); pintaPestanas(); montaPedido(); });
+$('bOtro').addEventListener('click', montaPedido);
+$('bSiguiente').addEventListener('click', () => { est.ruta[est.juego]++; guarda(); montaPedido(); });
+$('bSaltar').addEventListener('click', () => { if(est.practica) montaPedido(); else if(!rutaHecha()){ est.ruta[est.juego]++; guarda(); montaPedido(); } });
+
+function pintaEncargo(){
+  const R = enRuta(), i = est.ruta[est.juego];
+  $('encCab').textContent = est.practica ? 'Practicar · ' + PD.NOMBRE_J[est.juego] : P ? 'Pedido ' + (i + 1) + ' de ' + R.length : PD.NOMBRE_J[est.juego] + ' · ruta hecha';
+  $('puntos').innerHTML = est.practica ? '' : R.map((q, k) => '<i class="' + (k < i ? 'hecho' : k === i ? 'aqui' : '') + '"></i>').join('');
+  $('bSiguiente').hidden = true; $('bOtro').hidden = true; $('bSaltar').hidden = est.practica || !P;
+  if(!P){
+    $('cliente').innerHTML = '<span class="quien">El mostrador</span>Los ' + R.length + ' pedidos de la ruta están servidos.';
+    nickDice('Ruta hecha. Si quieres más, en <b>Practicar</b> hay pedidos nuevos sin fin; y en las otras pestañas, más trabajo.', false);
+    $('pizarra').innerHTML = ''; return;
+  }
+  const quien = esTel() ? 'Al teléfono · Nicoleta, desde la pastelería' : esCompara() ? 'Dos clientes · ' + MESAS[0] + ' y ' + MESAS[1] : 'Cliente';
+  $('cliente').className = 'cliente' + (esTel() ? ' tel' : '');
+  $('cliente').innerHTML = esTel() ? '<span class="cara" data-vb="20 16 64 64" aria-hidden="true"></span><span><span class="quien">' + quien + '</span>' + P.cli + '</span>'
+    : '<span class="quien">' + quien + '</span>' + P.cli;
+  if(esTel()) PJ.ponCara($('cliente').querySelector('.cara'), 'nicoleta', 'telefono', true);
+  nickDice(P.nick, false);
+  pintaPizarra();
+}
+function nickDice(html, feliz, pose){
+  const n = $('nick'); n.classList.toggle('feliz', !!feliz);
+  PJ.ponCara($('caraNick'), 'nick', pose || (feliz ? 'celebra' : 'habla'), true);
+  $('nickTxt').innerHTML = html;
+}
+function clac(){
+  const c = $('caraNick'), antes = c.dataset.pose || 'habla';
+  PJ.ponCara(c, 'nick', 'grapa');
+  clearTimeout(clac.t); clac.t = setTimeout(() => { if(c.dataset.pose === 'grapa') PJ.ponCara(c, 'nick', antes === 'grapa' ? 'habla' : antes); }, 380);
+}
+
+const signoReal = () => M.signo(P.fA, P.fB);
+const TRAZOS = {'>': ['M8 7 L28 18 L8 29'], '<': ['M28 7 L8 18 L28 29'], '=': ['M7 13 H29', 'M7 23 H29']};
+function tiza(sg, escribe){
+  const t = (TRAZOS[sg] || []).map((d, i) => '<path d="' + d + '" pathLength="1" style="animation-delay:' + (i * 260) + 'ms"/>').join('');
+  return '<span class="signo" role="img" aria-label="' + ({'>': 'mayor que', '<': 'menor que', '=': 'igual a'}[sg] || sg) + '">' +
+    '<svg viewBox="0 0 36 36" class="' + (escribe ? 'escribe' : '') + '" aria-hidden="true"><defs><filter id="tizaGrano" x="-20%" y="-20%" width="140%" height="140%">' +
+    '<feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="3" result="r"/><feDisplacementMap in="SourceGraphic" in2="r" scale="1.6" result="d"/>' +
+    '<feColorMatrix in="r" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.7" result="h"/><feComposite in="d" in2="h" operator="in"/></filter></defs><g filter="url(#tizaGrano)">' + t + '</g></svg></span>';
+}
+function pintaPizarra(escribe){
+  const el = $('pizarra');
+  if(!P || !(esCompara() || esTel()) || !aj.apuesta){ el.innerHTML = ''; return; }
+  const izq = '<span class="fA">' + fTxt(P.fA) + '</span>', der = '<span class="fB">' + fTxt(P.fB) + '</span>';
+  if(!prediccion){
+    el.innerHTML = '<div class="pizarra"><div class="rot">LA PIZARRA DE NICK</div><div class="linea">' + izq + '<span class="hueco-signo">?</span>' + der + '</div>' +
+      '<div class="bots"><button type="button" data-s="&gt;" aria-label="mayor">&gt;</button><button type="button" data-s="=" aria-label="igual">=</button><button type="button" data-s="&lt;" aria-label="menor">&lt;</button></div>' +
+      '<div class="apuesta">SIN CORTAR NADA TODAVÍA: ¿QUÉ CREES?</div></div>';
+    el.querySelectorAll('.bots button').forEach(b => b.addEventListener('click', () => { prediccion = b.dataset.s; sonar('tiza'); pintaPizarra(true); }));
+  }else{
+    const bien = prediccion === signoReal();
+    el.innerHTML = '<div class="pizarra"><div class="rot">LA PIZARRA DE NICK</div><div class="linea">' + izq + tiza(prediccion, escribe) + der + '</div>' +
+      '<div class="apuesta">' + (resuelto ? (bien ? '¡ACERTASTE!' : 'NO ERA ESO') : 'ESO DICE LA PIZARRA. LA CUENTA LO DIRÁ.') + '</div></div>';
+  }
+}
+
+function migas(html, pose){
+  const a = $('aviso');
+  a.innerHTML = html ? '<span class="cara" data-vb="14 10 68 68" aria-hidden="true"></span><div><span class="quien">Migas, el pinche</span>' + html + '</div>' : '';
+  if(html) PJ.ponCara(a.querySelector('.cara'), 'migas', pose || 'sorpresa', true);
+}
+
+function pintaMesa(){
+  const tel = esTel();
+  $('cajas').hidden = tel || !P; $('mandos').hidden = tel || !P; $('papel').hidden = !tel || !P;
+  migas('');
+  if(!P) return;
+  if(tel){ pintaPapel(); return; }
+  const cont = $('cajas'); cont.innerHTML = '';
+  cajas.forEach((c, i) => {
+    const caja = document.createElement('div');
+    caja.className = 'cajaP' + (i === activa && cajas.length > 1 ? ' activa' : '') + (esCompara() ? (i ? ' mB' : ' mA') : '');
+    const tapa = document.createElement('div'); tapa.className = 'tapa';
+    tapa.textContent = (esCompara() ? MESAS[i].toUpperCase() : 'CAJA ' + (i + 1)) + ' · EN ' + c.cortes;
+    caja.appendChild(tapa);
+    caja.appendChild(PZ.dibuja(c, k => { if(ocupado) return; activa = i; M.toca(c, k); ultimaOp = null; pintaMesa(); lee(); }));
+    caja.addEventListener('click', () => { if(activa !== i){ activa = i; pintaMesa(); } });
+    cont.appendChild(caja);
+  });
+  const c = cajas[activa];
+  const bc = $('botCortes'); bc.innerHTML = '';
+  const enJuego = c.sel.size > 0 || c.grapas.some(Boolean);
+  P.menu.forEach(n => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = n;
+    const rompe = n !== c.cortes && n % c.cortes !== 0 && enJuego;
+    if(rompe) b.classList.add('rompe');
+    if(armado && armado.caja === activa && armado.n === n) b.classList.add('avisa');
+    b.setAttribute('aria-pressed', String(c.cortes === n));
+    b.addEventListener('click', () => corta(n));
+    bc.appendChild(b);
+  });
+  const bm = $('botMaq'); bm.innerHTML = '';
+  const xs = [2, 3, 4, 5].filter(x => c.cortes % x === 0 && c.cortes / x >= 1);
+  $('filaMaq').hidden = !xs.length;
+  xs.forEach(x => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = 'de ' + x + ' en ' + x;
+    b.addEventListener('click', () => {
+      if(ocupado) return;
+      const r = M.industrial(c, x); if(!r.ok) return;
+      ultimaOp = r.op; grapaAnimada(c); clac(); pintaMesa(); lee();
+      if(r.nota) migas('La máquina une la pizza <b>entera</b> de ' + x + ' en ' + x + ': tus ' + r.nota.kAntes + '/' + r.nota.bAntes + ' no llenaban piezas enteras, así que te quedas con las piezas que los contienen. Aquí no hay división que enseñar.');
+      else if(!c.sel.size) migas('La pizza queda en <b>' + M.grupos(c).length + '</b> piezas iguales. Ahora elige la tuya.', 'senala');
+      quitaGrapasLuego();
+    });
+    bm.appendChild(b);
+  });
+}
+function corta(n){
+  const c = cajas[activa];
+  if(ocupado || n === c.cortes) return;
+  const destruye = n % c.cortes !== 0 && (c.sel.size > 0 || c.grapas.some(Boolean));
+  if(destruye && !(armado && armado.caja === activa && armado.n === n)){
+    armado = {caja: activa, n};
+    clearTimeout(corta.aviso); corta.aviso = setTimeout(() => { armado = null; pintaMesa(); }, 3200);
+    pintaMesa(); sonar('mal');
+    migas('De ' + c.cortes + ' a ' + n + ' el cortador <b>no respeta las piezas</b>: se pierde lo grapado y lo elegido. Toca otra vez para cortar de cero.');
+    return;
+  }
+  armado = null;
+  const hecho = () => { ocupado = false; const r = M.recorta(c, n); ultimaOp = r.op; pintaMesa(); lee(); };
+  if(menosMovimiento()){ sonar('corte'); hecho(); return; }
+  const svg = document.querySelectorAll('.cajaP')[activa]?.querySelector('svg.pizza');
+  ocupado = true; migas('');
+  animaHasta = Date.now() + PZ.cortador(svg, c.cortes, n, hecho);
+}
+$('bGrapar').addEventListener('click', () => {
+  const c = cajas[activa]; if(!c || ocupado) return;
+  const r = M.grapa(c);
+  if(!r.ok){
+    migas(r.por === 'pocas' ? 'La grapadora necesita <b>dos piezas o más</b>, y pegadas.' : 'Esas piezas <b>no están pegadas</b>: sueltas suman lo mismo, pero no forman una.');
+    sonar('mal'); return;
+  }
+  ultimaOp = r.op; grapaAnimada(c); clac(); pintaMesa(); lee();
+  if(!r.op && r.m > 1) migas('Una pieza de <b>' + r.m + '/' + c.cortes + '</b>… pero ' + r.m + ' no cabe en ' + c.cortes + ': esa pieza no es 1 de nada entero, y por eso aquí no hay división que enseñar.');
+  quitaGrapasLuego();
+});
+function quitaGrapasLuego(){ clearTimeout(reloj); reloj = setTimeout(() => { cajas.forEach(x => x.recien.clear()); pintaMesa(); }, Math.max(0, animaHasta - Date.now()) + 2600); }
+let ocupado = false, animaHasta = 0;
+const menosMovimiento = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+function grapaAnimada(c){
+  if(menosMovimiento()){ sonar('grapa'); return; }
+  c.animar = 'grapa';
+  animaHasta = Date.now() + PZ.duraGrapa(c.recien.size);
+}
+$('bSoltar').addEventListener('click', () => { const c = cajas[activa]; if(!c || ocupado) return; M.suelta(c); ultimaOp = null; pintaMesa(); lee(); });
+$('bLimpiar').addEventListener('click', () => { if(!P || resuelto || ocupado) return; cajas = (P.cajas || [P.fA[1], P.fB[1]]).map(M.nuevaCaja); activa = 0; ultimaOp = null; armado = null; pintaMesa(); lee(); });
+
+const stackSVG = (k, b, col, x, y, tam) => '<text x="' + x + '" y="' + (y - 6) + '" font-size="' + tam + '" fill="' + col + '">' + k + '</text>' +
+  '<text x="' + x + '" y="' + (y + tam - 2) + '" font-size="' + tam + '" fill="' + col + '">' + b + '</text>' +
+  '<path d="M' + (x - tam * .7) + ' ' + (y + 4) + ' H' + (x + tam * .7) + '" stroke="' + col + '" stroke-width="2.4" stroke-linecap="round"/>';
+function pintaPapel(){
+  const cont = $('papel'); cont.innerHTML = '';
+  [['A', P.fA, P.fB, 'mA', 'var(--tomate)'], ['B', P.fB, P.fA, 'mB', 'var(--azul)']].forEach(([L, f, otra, cls, col]) => {
+    const m = papel[L];
+    const fr = document.createElement('div'); fr.className = 'fr ' + cls;
+    const svg = '<svg viewBox="0 0 150 70" aria-hidden="true"><g font-family="Bree Serif,serif" text-anchor="middle">' + stackSVG(f[0], f[1], col, 30, 34, 24) +
+      (m ? '<text x="70" y="42" font-size="22" fill="var(--tinta)">=</text>' + stackSVG(f[0] * m, f[1] * m, col, 112, 34, 24) : '') + '</g>' +
+      (m ? '<path d="M44 16 Q70 0 96 14" fill="none" stroke="' + col + '" stroke-width="2.2" stroke-linecap="round"/><text x="70" y="8" font-size="12" fill="' + col + '" text-anchor="middle" font-family="Bree Serif,serif">·' + m + '</text>' : '') + '</svg>';
+    fr.innerHTML = '<span class="quien">' + (L === 'A' ? 'Nicoleta' : 'El pinche') + ' · ' + fTxt(f) + '</span>' + svg + '<div class="tiras"></div>';
+    const t = fr.querySelector('.tiras');
+    if(m){
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.textContent = 'Deshacer';
+      b.addEventListener('click', () => { papel[L] = null; pintaPapel(); lee(); }); t.appendChild(b);
+    }else{
+      t.innerHTML = '<span class="etq">multiplicar arriba y abajo por</span>';
+      [...new Set([2, f[1], otra[1]])].sort((a, b) => a - b).forEach(x => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = '×' + x;
+        b.addEventListener('click', () => { papel[L] = x; sonar('corte'); pintaPapel(); lee(); }); t.appendChild(b);
+      });
+    }
+    cont.appendChild(fr);
+  });
+}
+const denPapel = L => (L === 'A' ? P.fA[1] : P.fB[1]) * (papel[L] || 1);
+const numPapel = L => (L === 'A' ? P.fA[0] : P.fB[0]) * (papel[L] || 1);
+
+function lee(){
+  const lec = $('lec'), des = $('des');
+  $('pregunta').hidden = true; $('pregunta').innerHTML = '';
+  if(!P){ lec.innerHTML = '—'; des.innerHTML = ''; $('opera').hidden = true; pintaRegla(); return; }
+  if(esTel()){
+    const igual = papel.A && papel.B && denPapel('A') === denPapel('B');
+    lec.innerHTML = ro(numPapel('A') + '/' + denPapel('A')) + ' frente a ' + az(numPapel('B') + '/' + denPapel('B'));
+    des.innerHTML = igual ? 'Misma secuencia de ' + denPapel('A') + ': ahora sí se comparan.' : (papel.A || papel.B) && !igual && papel.A && papel.B ? 'Todavía no están en la <b>misma secuencia</b>: ' + denPapel('A') + ' y ' + denPapel('B') + ' no casan.' : 'El cortador no llega a ' + P.fA[1] * P.fB[1] + '. Se corta sobre el papel: cada una, arriba y abajo.';
+    $('opera').hidden = true;
+    pintaRegla(); pintaPizarra();
+    if(igual && !resuelto) ponPregunta();
+    return;
+  }
+  if(esCompara()){
+    const a = M.trozosDe(cajas[0]), b = M.trozosDe(cajas[1]);
+    lec.innerHTML = MESAS[0] + ': ' + ro(a ? a + '/' + cajas[0].cortes : '—') + ' &nbsp;·&nbsp; ' + MESAS[1] + ': ' + az(b ? b + '/' + cajas[1].cortes : '—');
+    des.innerHTML = a && b ? 'Dos pedidos distintos: no se suman, se comparan.' : 'Prepara los dos pedidos, uno en cada caja.';
+    pintaRegla(); pintaOperacion(); pintaPizarra(); revisa(); return;
+  }
+  const ps = M.partes(cajas);
+  if(!ps.length){ lec.innerHTML = '—'; des.innerHTML = 'Toca los trozos que te llevas.'; }
+  else if(ps.length === 1){
+    lec.innerHTML = 'Te llevas <b>' + ps[0].k + '/' + ps[0].b + '</b>';
+    const g = M.grupos(cajas[activa]), s = g[0].length, uniforme = g.length > 1 && s > 1 && g.every(t => t.length === s);
+    des.innerHTML = uniforme ? 'La pizza está en <b>' + g.length + '</b> piezas iguales: has dividido arriba y abajo entre ' + s + '.' : 'de pizza.';
+  }else if(M.mismoCorte(ps)){
+    const k = ps.reduce((s2, t) => s2 + t.k, 0), b = ps[0].b;
+    lec.innerHTML = 'Te llevas <b>' + k + '/' + b + '</b>';
+    des.innerHTML = ps.map(t => t.k + '/' + t.b).join(' + ') + ' = ' + k + '/' + b + (k > b ? ' · más de una pizza entera' : '');
+  }else{
+    lec.innerHTML = ps.map(t => '<b>' + t.k + '/' + t.b + '</b>').join(' &nbsp;y&nbsp; ');
+    des.innerHTML = 'Trozos distintos: todavía no se juntan. Pásales el <b>mismo cortador</b>.';
+  }
+  pintaRegla(); pintaOperacion(); revisa();
+}
+function pintaRegla(){
+  const cinta = $('cinta'), marcas = $('marcas');
+  cinta.innerHTML = ''; marcas.innerHTML = '';
+  if(!P) return;
+  const an = cinta.getBoundingClientRect().width || 300;
+  const compara = esCompara() || esTel();
+  const tope = compara ? 1 : Math.max(cajas.length, 1);
+  const raya = (x, st) => { const i = document.createElement('div'); Object.assign(i.style, {position: 'absolute', left: x + 'px', width: '1px'}, st); cinta.appendChild(i); };
+  const peines = (bA, bB) => {
+    if(bA === bB) for(let k = 1; k < bA; k++) raya(k * an / bA, {top: '0', height: '26px', background: 'rgba(110,98,80,.45)'});
+    else{ for(let k = 1; k < bA; k++) raya(k * an / bA, {top: '0', height: '11px', background: 'rgba(196,70,47,.65)'});
+          for(let k = 1; k < bB; k++) raya(k * an / bB, {bottom: '0', height: '11px', background: 'rgba(47,110,140,.7)'}); }
+  };
+  if(esTel()) peines(denPapel('A'), denPapel('B'));
+  else if(esCompara()) peines(cajas[0].cortes, cajas[1].cortes);
+  else for(let u = 0; u < tope; u++){ const fin = (cajas[u] || cajas[0]).cortes; for(let k = 1; k < fin; k++) raya((u + k / fin) * an / tope, {top: '0', height: '14px', background: '#8A7A63'}); }
+  for(let u = 0; u <= tope; u++){ raya(u * an / tope, {top: '0', height: '26px', background: '#6E6250'}); const b = document.createElement('b'); b.textContent = u; b.style.left = (u * an / tope) + 'px'; cinta.appendChild(b); }
+  const marca = (v, clase, txt) => { if(v <= 0) return; const m = document.createElement('div'); m.className = 'marca ' + clase; m.style.left = (v * an / tope) + 'px'; m.innerHTML = '<em></em><u>' + txt + '</u>'; marcas.appendChild(m); };
+  let kA = 0, kB = 0, den = 0;
+  if(esTel()){ kA = numPapel('A'); kB = numPapel('B'); den = denPapel('A') === denPapel('B') ? denPapel('A') : 0;
+    marca(fVal(P.fA), '', numPapel('A') + '/' + denPapel('A')); marca(fVal(P.fB), 'dos', numPapel('B') + '/' + denPapel('B')); }
+  else if(esCompara()){ kA = M.trozosDe(cajas[0]); kB = M.trozosDe(cajas[1]); den = cajas[0].cortes === cajas[1].cortes ? cajas[0].cortes : 0;
+    marca(M.valor(cajas[0]), '', kA + '/' + cajas[0].cortes); marca(M.valor(cajas[1]), 'dos', kB + '/' + cajas[1].cortes); }
+  else{ const ps = M.partes(cajas); if(ps.length && M.mismoCorte(ps)) marca(M.total(cajas), '', ps.reduce((s, t) => s + t.k, 0) + '/' + ps[0].b); }
+  if(compara && resuelto && den && kA !== kB && kA > 0 && kB > 0){
+    const x0 = Math.min(kA, kB) / den * an, x1 = Math.max(kA, kB) / den * an;
+    const h = document.createElement('div'); h.className = 'hueco'; h.style.left = x0 + 'px'; h.style.width = (x1 - x0) + 'px';
+    if(x1 - x0 >= 16){ const s = document.createElement('span'); s.textContent = Math.abs(kA - kB) + '/' + den; h.appendChild(s); }
+    cinta.appendChild(h);
+  }
+  const ms = marcas.querySelectorAll('.marca');
+  if(ms.length === 2 && Math.abs(parseFloat(ms[0].style.left) - parseFloat(ms[1].style.left)) < 52) ms[1].classList.add('baja');
+  const visto = pintaRegla.visto, mismo = visto && visto.P === P && visto.an === an && !menosMovimiento();
+  const ahora = {P, an, x: {}, hueco: !!cinta.querySelector('.hueco')};
+  ms.forEach(m => {
+    const k = m.classList.contains('dos') ? 'B' : 'A', x = parseFloat(m.style.left); ahora.x[k] = x;
+    const x0 = mismo ? (k in visto.x ? visto.x[k] : 0) : x;
+    if(Math.abs(x0 - x) > .5 && m.animate) m.animate([{left: x0 + 'px'}, {left: x + 'px'}], {duration: 420, easing: 'cubic-bezier(.3,1.25,.5,1)'});
+  });
+  const h = cinta.querySelector('.hueco');
+  if(h && mismo && !visto.hueco && h.animate) h.animate([{transform: 'scaleX(0)'}, {transform: 'scaleX(1)'}], {duration: 520, delay: 120, easing: 'ease-out', fill: 'backwards'});
+  pintaRegla.visto = ahora;
+}
+function punta(x1, y1, cx, cy, col, largo){
+  largo = largo || 13;
+  const tx = x1 - cx, ty = y1 - cy, L = Math.hypot(tx, ty), ux = tx / L, uy = ty / L, ang = 24 * Math.PI / 180;
+  const Pt = s => [(x1 - largo * (ux * Math.cos(s * ang) - uy * Math.sin(s * ang))).toFixed(1), (y1 - largo * (ux * Math.sin(s * ang) + uy * Math.cos(s * ang))).toFixed(1)];
+  const [ax, ay] = Pt(1), [bx, by] = Pt(-1);
+  return '<path d="M' + x1 + ' ' + y1 + ' L' + ax + ' ' + ay + ' L' + bx + ' ' + by + ' Z" fill="' + col + '"/>';
+}
+function pintaOperacion(){
+  const cont = $('opera');
+  if(esCompara() && cajas[0].cortes === cajas[1].cortes){
+    const kA = M.trozosDe(cajas[0]), kB = M.trozosDe(cajas[1]), b = cajas[0].cortes;
+    if(kA && kB && casi(M.valor(cajas[0]), fVal(P.fA)) && casi(M.valor(cajas[1]), fVal(P.fB))){
+      cont.hidden = false;
+      cont.innerHTML = '<div class="rot">MISMOS TROZOS · SE PUEDE COMPARAR</div><svg viewBox="0 0 300 110"><g font-family="Bree Serif,serif" text-anchor="middle">' +
+        stackSVG(kA, b, 'var(--tomate)', 88, 50, 36) + stackSVG(kB, b, 'var(--azul)', 212, 50, 36) +
+        '<text x="150" y="60" font-size="9" letter-spacing="2" fill="var(--tenue)" font-family="Space Mono,monospace">FRENTE A</text></g></svg>' +
+        '<div class="frase">' + (kA === kB ? 'Mismo numerador también: el <b>mismo punto</b> con dos nombres.' : 'Misma secuencia de ' + b + ': gana el numerador mayor.') + '</div>';
+      return;
+    }
+  }
+  if(!ultimaOp){ cont.hidden = true; cont.innerHTML = ''; return; }
+  const {tipo, c, ka, ba, kd, bd} = ultimaOp;
+  const signo = tipo === 'corte' ? '·' : ':', col = tipo === 'corte' ? 'var(--tomate)' : 'var(--albahaca)';
+  const flecha = (y, dy, txt) => { const x0 = 92, x1 = 208, cx = 150, cy = y + dy;
+    return '<path d="M' + x0 + ' ' + y + ' Q' + cx + ' ' + cy + ' ' + (x1 - 6) + ' ' + y + '" fill="none" stroke="' + col + '" stroke-width="3" stroke-linecap="round"/>' + punta(x1, y, cx, cy, col) +
+      '<text x="150" y="' + (dy < 0 ? 24 : 150) + '" text-anchor="middle" font-family="Bree Serif,serif" font-size="19" fill="' + col + '">' + txt + '</text>'; };
+  cont.hidden = false;
+  cont.innerHTML = '<div class="rot">' + (tipo === 'corte' ? 'HAS CORTADO' : 'HAS GRAPADO') + '</div><svg viewBox="0 0 300 156"><g font-family="Bree Serif,serif" text-anchor="middle">' +
+    stackSVG(ka, ba, 'var(--tinta)', 80, 84, 27) + '<text x="150" y="94" font-size="27" fill="var(--tinta)">=</text>' + stackSVG(kd, bd, 'var(--tinta)', 220, 84, 27) + '</g>' +
+    flecha(56, -30, signo + c) + flecha(114, 30, signo + c) + '</svg>' +
+    '<div class="frase">' + (tipo === 'corte' ? 'Cortar en ' + c + ' <b>multiplica arriba y abajo por ' + c + '</b>.' : 'Grapar de ' + c + ' en ' + c + ' <b>divide arriba y abajo entre ' + c + '</b>.') + '</div>';
+}
+
+function revisa(){
+  if(resuelto) return;
+  if(esCompara()){
+    const okA = casi(M.valor(cajas[0]), fVal(P.fA)), okB = casi(M.valor(cajas[1]), fVal(P.fB)), igual = cajas[0].cortes === cajas[1].cortes;
+    if(okA && okB && (P.tipo === 'num' || igual)) ponPregunta();
+    else if(okA && okB && !igual) migas('Los dos pedidos están listos: ahora pásales el <b>mismo cortador</b>. Con trozos distintos no hay cuenta que valga.', 'senala');
+    return;
+  }
+  const ps = M.partes(cajas), juntable = ps.length < 2 || M.mismoCorte(ps), v = M.total(cajas);
+  const pieza = !P.pieza || cajas.some(c => M.piezaDe(c, P.f[1]));
+  if(juntable && casi(v, fVal(P.f)) && pieza) acierta(P.ok);
+  else if(juntable && casi(v, fVal(P.f)) && !pieza) migas('Suman ' + fTxt(P.f) + ', sí. Pero el cliente quiere <b>una pieza</b>: grápalos.');
+}
+function ponPregunta(){
+  const q = $('pregunta'); if(!q.hidden) return;
+  q.hidden = false; q.innerHTML = '<span class="etq">¿quién se lleva más?</span>';
+  const va = fVal(P.fA), vb = fVal(P.fB), iguales = casi(va, vb);
+  [['El de ' + fTxt(P.fA), !iguales && va > vb, 'A'], ['El de ' + fTxt(P.fB), !iguales && vb > va, 'B'], ['Los dos igual', iguales, 'ig']].forEach(([txt, bien, clave]) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.textContent = txt;
+    b.addEventListener('click', () => {
+      if(bien){
+        const guiño = !prediccion ? '' : prediccion === signoReal() ? 'Lo que apuntaste en la pizarra iba bien encaminado. ' : 'La pizarra decía otra cosa, ¿eh? Por algo se cuenta antes de cobrar. ';
+        acierta(guiño + P.ok);
+      }else{
+        fallos++; est.stats[est.juego].mal += fallos === 1 ? 1 : 0;
+        if(!trampa('fallo')) sonar('mal');
+        b.disabled = true; b.classList.add('no');
+        replica(b, (P.rep || {})[clave] || 'Mira la regla: se lleva más el que cae más a la derecha.');
+      }
+    });
+    q.appendChild(b);
+  });
+}
+function replica(boton, html){
+  const q = $('pregunta');
+  let r = q.querySelector('.replica');
+  if(!r){
+    r = document.createElement('div'); r.className = 'replica'; r.setAttribute('role', 'status');
+    r.innerHTML = '<span class="cara" data-vb="14 14 72 72" aria-hidden="true"></span><p class="bocadillo"></p>';
+    q.appendChild(r);
+  }
+  const t = r.querySelector('.bocadillo');
+  t.innerHTML = '<b class="quien">Nick</b> ' + html;
+  const rq = q.getBoundingClientRect(), rb = boton.getBoundingClientRect();
+  const x = rb.left + rb.width / 2 - rq.left;
+  r.style.setProperty('--cola', Math.round(Math.max(76, Math.min(rq.width - 18, x))) + 'px');
+  r.classList.remove('entra'); void r.offsetWidth; r.classList.add('entra');
+  PJ.ponCara(r.querySelector('.cara'), 'nick', 'senala', true);
+  PJ.ponCara($('caraNick'), 'nick', 'piensa');
+}
+function acierta(txt){
+  resuelto = true;
+  const espera = Math.max(0, animaHasta - Date.now()) + (animaHasta > Date.now() ? 250 : 0);
+  setTimeout(() => { if(!trampa('acierto')) sonar('bien'); }, espera);
+  nickDice(txt, true);
+  $('pregunta').hidden = true; $('pregunta').innerHTML = ''; migas('');
+  const s = est.stats[est.juego];
+  if(est.practica){ if(!fallos) s.bien++; }
+  else s.ruta = Math.max(s.ruta, est.ruta[est.juego] + 1);
+  est.ejercicios.push({t: Date.now(), j: est.juego, c: esTel() || esCompara() ? fTxt(P.fA) + ' y ' + fTxt(P.fB) : fTxt(P.f), p: est.practica ? 1 : 0, f: fallos, s: Math.round((Date.now() - tPedido) / 1000)});
+  guarda();
+  if(est.practica) $('bOtro').hidden = false;
+  else{ $('bSiguiente').hidden = false; $('bSaltar').hidden = true; }
+  pintaRegla(); pintaOperacion(); pintaPizarra();
+}
+
+const quieto = () => !aj.trampa || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+function trampa(escena){
+  if(quieto() || !window.Trampa) return false;
+  if(escena === 'acierto') return !!window.Trampa.lanza(escena, PJ, sitioLibre());
+  const r = $('mesa').getBoundingClientRect(), seVeLaMesa = r.top >= 0 && r.bottom <= innerHeight;
+  return !!window.Trampa.lanza(escena, PJ, {cerca: seVeLaMesa ? $('mesa') : null});
+}
+function sitioLibre(){
+  const S = Math.round(Math.min(230, innerWidth * .56)), r = $('cajas').getBoundingClientRect();
+  const abajo = innerHeight - Math.max(0, r.bottom), arriba = Math.min(innerHeight, r.top);
+  if(abajo >= S * .8) return {punto: {x: innerWidth / 2, y: innerHeight - abajo / 2}, tam: Math.min(S, abajo - 12)};
+  if(arriba >= S * .8) return {punto: {x: innerWidth / 2, y: arriba / 2}, tam: Math.min(S, arriba - 12)};
+  const t = Math.round(S * .7);
+  return {punto: {x: innerWidth - t / 2 - 10, y: innerHeight - t / 2 - 10}, tam: t};
+}
+
+const firma = txt => { let h = 2166136261; for(let i = 0; i < txt.length; i++){ h ^= txt.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } const x = h.toString(16).toUpperCase().padStart(8, '0'); return x.slice(0, 4) + '-' + x.slice(4); };
+const hora = t => { const d = new Date(t), dos = x => String(x).padStart(2, '0'); return dos(d.getHours()) + ':' + dos(d.getMinutes()); };
+const tiempo = ms => { const m = Math.round(ms / 60000); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + (m % 60) + ' min'; };
+function textoActa(){
+  const J = ['servir', 'comparar', 'telefono'];
+  const l = ['LA GRAPADORA DE NICK · ACTA', 'Nombre: ' + (est.nombre || '—'), 'Fecha: ' + new Date().toLocaleString('es-ES'), 'Tiempo: ' + tiempo(Date.now() - est.t0), ''];
+  J.forEach(j => { const s = est.stats[j]; l.push(PD.NOMBRE_J[j] + ': ruta ' + s.ruta + '/' + PD.RUTA[j].length + ' · practicar ' + s.bien + ' a la primera, ' + s.mal + ' con fallos'); });
+  l.push('');
+  est.ejercicios.forEach(e => l.push(hora(e.t) + ' ' + PD.NOMBRE_J[e.j] + (e.p ? ' (practicar)' : '') + ' ' + e.c + ' · ' + (e.f ? e.f + ' fallo' + (e.f > 1 ? 's' : '') : 'a la primera') + ' · ' + e.s + ' s'));
+  return l.join('\n');
+}
+function pintaActa(){
+  const J = ['servir', 'comparar', 'telefono'], dato = (n, v) => '<div><span class="etq">' + n + '</span><b>' + v + '</b></div>';
+  const ruta = J.reduce((s, j) => s + est.stats[j].ruta, 0), total = J.reduce((s, j) => s + PD.RUTA[j].length, 0);
+  const pb = J.reduce((s, j) => s + est.stats[j].bien, 0), pm = J.reduce((s, j) => s + est.stats[j].mal, 0);
+  $('acDatos').innerHTML = dato('La ruta', ruta + ' / ' + total) + dato('Practicar', pb + ' a la primera') + dato('Con fallos', pm) + dato('Tiempo', tiempo(Date.now() - est.t0));
+  $('acFilas').innerHTML = J.map(j => { const s = est.stats[j]; return '<tr><td><b>' + PD.NOMBRE_J[j] + '</b></td><td>' + s.ruta + ' de ' + PD.RUTA[j].length + '</td><td>' + (s.bien + s.mal ? s.bien + ' a la primera · ' + s.mal + ' con fallos' : '—') + '</td></tr>'; }).join('');
+  $('acDet').hidden = !est.ejercicios.length;
+  $('acDet').querySelector('summary').textContent = 'Pedido a pedido (' + est.ejercicios.length + ')';
+  $('acEj').innerHTML = est.ejercicios.map(e => '<li class="' + (e.f ? 'no' : 'ok') + '"><span class="ac-h">' + hora(e.t) + '</span><span>' + PD.NOMBRE_J[e.j] + (e.p ? ' · practicar' : '') + '</span><span class="ac-c">' + e.c + '</span><span class="ac-como">' + (e.f ? e.f + ' fallo' + (e.f > 1 ? 's' : '') : 'a la primera') + '</span></li>').join('');
+  $('acNombre').value = est.nombre || '';
+  $('acFirma').textContent = firma(textoActa());
+}
+function abreActa(){ ajustes(false); $('acMsg').textContent = ''; pintaActa(); $('mActa').hidden = false; $('mActa').querySelector('.caja2').focus(); }
+const cierraActa = () => { $('mActa').hidden = true; $('bActa').focus(); };
+$('bActa').addEventListener('click', abreActa);
+$('acCierra').addEventListener('click', cierraActa);
+$('mActa').addEventListener('click', ev => { if(ev.target.id === 'mActa') cierraActa(); });
+$('acNombre').addEventListener('input', () => { est.nombre = $('acNombre').value; guarda(); $('acFirma').textContent = firma(textoActa()); });
+$('acCopia').addEventListener('click', () => {
+  const t = textoActa() + '\n\nCódigo de verificación: ' + firma(textoActa()), no = () => { $('acMsg').textContent = 'No se ha podido copiar: usa «Descargar .txt».'; };
+  try{ navigator.clipboard.writeText(t).then(() => { $('acMsg').textContent = '✓ Acta copiada: pégala donde te diga tu profesor.'; }, no); }catch(err){ no(); }
+});
+$('acBaja').addEventListener('click', () => {
+  const f = new Date(), dos = x => String(x).padStart(2, '0');
+  const nombre = (est.nombre || 'sin-nombre').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'sin-nombre';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([textoActa() + '\n\nCódigo de verificación: ' + firma(textoActa())], {type: 'text/plain;charset=utf-8'}));
+  a.download = 'acta-grapadora-' + nombre + '-' + f.getFullYear() + dos(f.getMonth() + 1) + dos(f.getDate()) + '.txt';
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  $('acMsg').textContent = '✓ Acta descargada.';
+});
+
+const EV = window.Entrevistas.monta($('entrevista'), PJ);
+function abreEntrevista(){ ajustes(false); $('mEntrevista').hidden = false; EV.abre(); $('entrevista').focus(); }
+const cierraEntrevista = () => { EV.calla(); $('mEntrevista').hidden = true; $('bEntrevista').focus(); };
+$('bEntrevista').addEventListener('click', abreEntrevista);
+$('evCierra').addEventListener('click', cierraEntrevista);
+$('mEntrevista').addEventListener('click', ev => { if(ev.target.id === 'mEntrevista') cierraEntrevista(); });
+
+let cero = 0;
+$('ajCero').addEventListener('click', () => {
+  if(!cero){ cero = setTimeout(() => { cero = 0; $('ajCero').classList.remove('seguro'); $('ajCero').textContent = 'Borrar todo'; }, 5000);
+    $('ajCero').classList.add('seguro'); $('ajCero').textContent = 'Pulsa otra vez para borrarlo'; return; }
+  clearTimeout(cero); cero = 0; $('ajCero').classList.remove('seguro'); $('ajCero').textContent = 'Borrar todo';
+  try{ localStorage.removeItem(TURNO); }catch(err){}
+  est = nuevoTurno(); ajustes(false); pintaPestanas(); montaPedido();
+});
+
+const GUIA = [
+  {sel: '.juegos', c: 'Los tres juegos', t: '<b>Servir</b> lo que pide el cliente aunque la pizza venga cortada de otra manera; <b>comparar</b> dos pedidos, la escalera de la comparación; y <b>por teléfono</b>, cuando el cortador no llega y se corta sobre el papel.'},
+  {sel: '#cliente', c: 'El encargo', t: 'Lo que pide el cliente. Debajo, Nick te dice por dónde ir; y los puntos, por dónde va la ruta.'},
+  {sel: '#pizarra', c: 'La pizarra', t: 'Antes de cortar nada, <b>di qué signo crees</b>: &gt;, = o &lt;. Cuando la cuenta esté hecha, verás si acertaste.'},
+  {sel: '#cajas', c: 'Las cajas', t: 'Toca un trozo y se levanta: es lo que te llevas. Si hay dos cajas, la que tiene el borde dorado es la que mandan los botones.'},
+  {sel: '#botCortes', c: 'El cortador', t: 'Vuelve a cortar la pizza. <b>Lo grapado aguanta</b>: media pizza sigue siendo una pieza, solo cambia de nombre. Un corte punteado no respeta las piezas y pide un segundo toque.'},
+  {sel: '#botMaq', c: 'La máquina', t: 'Grapa la pizza <b>entera</b> de 2 en 2, de 3 en 3… Es lo contrario de cortar: cambia en cuántas partes está la pizza. Luego eliges tu pieza.'},
+  {sel: '#bGrapar', c: 'La grapadora', t: 'Une los trozos elegidos, si están <b>pegados</b>. Dos cuartos grapados son media pizza: la misma cantidad con otro nombre.'},
+  {sel: '#papel', c: 'El papel', t: 'Aquí no hay pizza que valga. Multiplica cada fracción <b>arriba y abajo</b> hasta que las dos estén en la misma secuencia; entonces se comparan.'},
+  {sel: '#tique', c: 'El tique', t: 'La regla es la que manda: <b>el 1 es una pizza entera</b>, y cada pedido acaba en su marca. Debajo, la operación que ha hecho tu gesto: cortar multiplica, grapar divide.'},
+  {sel: '#bEntrevista', c: 'Las entrevistas', t: 'Pregúntales lo que quieras a <b>Nick</b>, a su hermana <b>Nicoleta</b> y a <b>Migas</b>, el pinche del cortador.'},
+  {sel: '#bPracticar', c: 'Practicar', t: 'Pedidos <b>nuevos cada vez</b>, sin fin, con tres dificultades.'},
+  {sel: '#bActa', c: 'El acta', t: 'Un resumen de lo que has hecho, con tu nombre y un código, para <b>entregárselo a tu profesor</b>.'},
+  {sel: '#bAjustes', c: 'Ajustes', t: 'La encimera o la pizarra, decir el signo antes de comparar, el sonido, la animación y la trampa para ratones.'},
+  {sel: '#bAula', c: 'El aula', t: 'Todo más grande y en una sola pantalla, para la pizarra digital. <b>A servir.</b>'}
+];
+let guiaI = -1, guiaParadas = [], guiaRetoque = 0;
+const seVe = e => !!(e && e.offsetParent !== null && e.getBoundingClientRect().height > 0);
+function cierraGuia(){ $('guia').hidden = true; guiaI = -1; clearTimeout(guiaRetoque); try{ localStorage.setItem('grapadora.guia', 'vista'); }catch(err){} $('bGuia').focus(); }
+function vaGuia(i){
+  if(i >= guiaParadas.length) return cierraGuia();
+  guiaI = i;
+  const g = guiaParadas[i], e = document.querySelector(g.sel);
+  if(!seVe(e)) return vaGuia(i + 1);
+  $('guiaTit').textContent = g.c; $('guiaTxt').innerHTML = g.t;
+  $('guiaNum').textContent = (i + 1) + ' de ' + guiaParadas.length;
+  $('guiaSig').textContent = i === guiaParadas.length - 1 ? 'A servir' : 'Siguiente';
+  $('guia').hidden = false;
+  e.scrollIntoView({block: 'center', behavior: 'instant'});
+  colocaGuia(); requestAnimationFrame(() => requestAnimationFrame(colocaGuia));
+  clearTimeout(guiaRetoque); guiaRetoque = setTimeout(colocaGuia, 180);
+}
+function colocaGuia(){
+  const g = guiaParadas[guiaI]; if(!g || $('guia').hidden) return;
+  const e = document.querySelector(g.sel); if(!seVe(e)) return;
+  const r = e.getBoundingClientRect(), m = 7, f = $('guiaFoco'), gl = $('guiaGlobo');
+  f.style.top = (r.top - m) + 'px'; f.style.left = (r.left - m) + 'px'; f.style.width = (r.width + 2 * m) + 'px'; f.style.height = (r.height + 2 * m) + 'px';
+  const alto = gl.offsetHeight || 180, ancho = gl.offsetWidth || 320;
+  const abajo = r.bottom + m + 12, arriba = r.top - m - 12 - alto;
+  gl.style.top = (abajo + alto < innerHeight - 8 ? abajo : arriba > 8 ? arriba : Math.max(8, innerHeight - alto - 8)) + 'px';
+  gl.style.left = Math.min(Math.max(12, r.left + r.width / 2 - ancho / 2), innerWidth - ancho - 12) + 'px';
+}
+function abreGuia(){ ajustes(false); guiaParadas = GUIA.filter(g => seVe(document.querySelector(g.sel))); vaGuia(0); $('guiaGlobo').focus(); }
+$('bGuia').addEventListener('click', abreGuia);
+$('guiaSig').addEventListener('click', ev => { ev.stopPropagation(); vaGuia(guiaI + 1); });
+$('guiaSalir').addEventListener('click', ev => { ev.stopPropagation(); cierraGuia(); });
+$('guiaGlobo').addEventListener('click', ev => ev.stopPropagation());
+$('guia').addEventListener('click', () => vaGuia(guiaI + 1));
+addEventListener('keydown', ev => { if(!$('guia').hidden){ ev.stopPropagation(); if(ev.key === 'Escape') cierraGuia(); else if(ev.key === 'ArrowRight' || ev.key === 'Enter'){ ev.preventDefault(); vaGuia(guiaI + 1); } return; }
+  if(ev.key === 'Escape' && !$('mActa').hidden) cierraActa();
+  if(ev.key === 'Escape' && !$('mEntrevista').hidden) cierraEntrevista(); }, true);
+addEventListener('scroll', colocaGuia, {passive: true});
+addEventListener('resize', colocaGuia);
+
+aplicaAjustes(); pintaPestanas(); montaPedido();
+const primeraVez = (() => { try{ return localStorage.getItem('grapadora.guia') !== 'vista'; }catch(err){ return false; } })();
+const arranca = () => { if(primeraVez && !vieneDeEnlace) setTimeout(abreGuia, 400); };
+if(document.documentElement.dataset.inicio === 'si' && window.Arranque) window.Arranque.escena($('escenaInicio'), arranca);
+else arranca();
+})();
+</script>
+</body>
+</html>
