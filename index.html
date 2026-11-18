@@ -1,0 +1,2422 @@
+<!doctype html>
+<html lang="es">
+<head>
+<!--
+  La grapadora de Nick · versión 1.2
+  © Andrés Asensio · CC BY-NC-ND 4.0 · https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es
+  Versión de aula generada el 2026-11-18 a partir del original d1b7bd8+cambios sin guardar.
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta name="author" content="Andrés Asensio">
+<title>La grapadora de Nick</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Besley:wght@600;700;800&family=Nunito:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap">
+<style>
+:root{--ppP:#F5EDD8; --lnP:#1E1A17; --rjP:#C9301C; --pp:#FBF5E4; --ln:#1E1A17; --rj:#C9301C}
+html[data-tema="noche"]{--pp:#2B241F; --ln:#F1E7D0; --rj:#F2705A}
+html[data-tema="proyector"]{--ppP:#FFFFFF; --lnP:#000000; --rjP:#C01F10; --pp:#FFFFFF; --ln:#000000; --rj:#C01F10}
+.papel{--pp:var(--ppP); --ln:var(--lnP); --rj:var(--rjP)}
+:root, .papel{--lw:2px; --lf:1.15px; --lg:1.9px;
+  --t0:var(--pp); --t1:var(--pp); --t2:var(--rj); --t3:var(--ln); --t4:var(--pp); --t5:var(--pp); --t9:var(--pp); --ta:var(--ln); --tb:var(--pp); --tk:var(--rj)}
+:root{--t6:url(#trR); --t7:url(#trN3); --tc:url(#trN2); --td:url(#trR); --tn:url(#trRaya); --trSuelo:url(#trN2)}
+.papel{--t6:url(#trRp); --t7:url(#trN3p); --tc:url(#trN2p); --td:url(#trRp); --tn:url(#trRayap); --trSuelo:url(#trN2p)}
+.trP{fill:var(--pp)} .trK{fill:var(--ln)} .trJ{fill:var(--rj)}
+.trPp{fill:var(--ppP)} .trKp{fill:var(--lnP)} .trJp{fill:var(--rjP)}
+
+.fg{display:block;overflow:visible}
+.fg .L{stroke:var(--ln);stroke-width:var(--lw);stroke-linejoin:round;stroke-linecap:round;fill:none}
+.fg .l{fill:none;stroke:var(--ln);stroke-width:var(--lf);stroke-linejoin:round;stroke-linecap:round}
+.fg .l.g{stroke-width:var(--lg)} .fg .l.r{stroke:var(--rj)} .fg .l.p{stroke:var(--pp)}
+.fg .pelos .l{stroke-width:.9px}
+.fg .pes{stroke-width:1.5px} .fg .onda{stroke-width:2.3px}
+.fg .k{fill:var(--pp);stroke:none}
+.fg .w{stroke:none;transform:translate(1.4px,1px)}
+.fg .t0{fill:var(--t0)} .fg .t1{fill:var(--t1)} .fg .t2{fill:var(--t2)} .fg .t3{fill:var(--t3)} .fg .t4{fill:var(--t4)} .fg .t5{fill:var(--t5)} .fg .t6{fill:var(--t6)}
+.fg .t7{fill:var(--t7)} .fg .t9{fill:var(--t9)} .fg .ta{fill:var(--ta)} .fg .tb{fill:var(--tb)} .fg .tc{fill:var(--tc)} .fg .tk{fill:var(--tk)} .fg .td{fill:var(--td)} .fg .tn{fill:var(--tn)}
+.fg .bo{fill:none;stroke:var(--ln);stroke-width:calc(var(--g) * 1px + 2 * var(--lw));stroke-linecap:round;stroke-linejoin:round}
+.fg .bi{fill:none;stroke-width:calc(var(--g) * 1px);stroke-linecap:round;stroke-linejoin:round}
+.fg .bi.t0{stroke:var(--t0)} .fg .bi.t1{stroke:var(--t1)} .fg .bi.t5{stroke:var(--t5)} .fg .bi.t6{stroke:var(--t6)} .fg .bi.t7{stroke:var(--t7)}
+.fg .ojo, .fg .pt, .fg .peca{fill:var(--ln)}
+.fg .lunar{fill:var(--pp)}
+.fg .cola{fill:none;stroke:var(--ln);stroke-width:3px;stroke-linecap:round}
+.fg .auri{fill:none;stroke:var(--t3);stroke-width:4.6px;stroke-linecap:round}
+.fg .auriK{fill:none;stroke:var(--pp);stroke-width:8px;stroke-linecap:round} .fg .copa{fill:var(--t3);stroke:var(--pp);stroke-width:1.6px}
+.fg .suelo{fill:var(--trSuelo)}
+.fg .pzT{stroke:none}
+.fg .arco{fill:none;stroke:var(--ln);stroke-width:3.4px;stroke-linecap:round}
+.fg .rayos{fill:none;stroke:var(--rj);stroke-width:2.6px;stroke-linecap:round}
+.fg .vnFondo{fill:var(--pp)} .fg .vnSuelo{fill:var(--trSuelo)}
+.fg .vnAro{fill:none;stroke:var(--ln);stroke-width:4px} .fg .vnAro2{fill:none;stroke:var(--rj);stroke-width:1.4px}
+.fg-trampa .t9{fill:var(--td)}
+.fg .selloAro{fill:var(--pp);stroke:var(--ln);stroke-width:2.6px} .fg .selloBrazo{fill:var(--rj);stroke:var(--ln);stroke-width:1.6px;stroke-linejoin:round}
+.fg .selloBase{fill:none;stroke:var(--ln);stroke-width:4px;stroke-linecap:round} .fg .selloEje{fill:var(--pp)}
+
+.pzBorde{fill:var(--pp);stroke:var(--ln);stroke-width:3px}
+.pzTueste{fill:var(--ln)}
+.pzTomate{fill:var(--rj);transform:translate(1.8px,1.3px)}
+.pzTomateL{fill:none;stroke:var(--ln);stroke-width:1.4px}
+.pzMozza{fill:var(--pp);stroke:var(--ln);stroke-width:1.6px}
+.pzMozzaL{fill:none;stroke:var(--ln);stroke-width:1.2px;stroke-linecap:round}
+.pzHoja{fill:var(--ln);stroke:var(--pp);stroke-width:.9px;stroke-linejoin:round}
+.pzNervio{fill:none;stroke:var(--pp);stroke-width:1px;stroke-linecap:round}
+
+.pj .ojo{transform-box:fill-box;transform-origin:center}
+.pj.calla .boca{opacity:0}
+.pj.parla .boca{animation:parla .34s steps(1) 4}
+@keyframes parla{50%{opacity:0}}
+@media (prefers-reduced-motion: reduce){ .pj.parla .boca{animation:none} }
+</style>
+<style>
+:root{
+  --fondo1:#EFE9DD; --fondo2:#DED5C4; --luz:rgba(255,252,240,.7);
+  --veta:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='520'><filter id='v'><feTurbulence type='fractalNoise' baseFrequency='.004 .012' numOctaves='3' seed='11' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .40  0 0 0 0 .34  0 0 0 9 -4.2'/></filter><rect width='520' height='520' filter='url(%23v)' opacity='.16'/></svg>");
+  --harina:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='h'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='1' seed='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 7 -4.6'/></filter><rect width='180' height='180' filter='url(%23h)' opacity='.5'/></svg>");
+  --noche:#F3E9D0; --panel:#FBF5E4; --panel2:#F8F0DC; --linea:#CDBD98;
+  --tinta:#1E1A17; --tenue:#5E5244;
+  --oro:var(--rj); --morado:var(--tinta); --rojo:var(--rj); --verde:var(--tinta);
+  --sombra:rgba(70,45,20,.22); --brillo:rgba(201,48,28,.10);
+  --tomate:var(--rj); --tomateO:#A52414; --azul:var(--ln); --albahaca:var(--tinta);
+  --rotulo:'Besley','Rockwell','Roboto Slab','Georgia',serif; --letra:'Nunito',system-ui,sans-serif; --mono:'Space Mono',ui-monospace,'Courier New',monospace;
+}
+html[data-tema="noche"]{
+  --fondo1:#2C3D33; --fondo2:#1E2B24; --luz:rgba(240,240,220,.10);
+  --veta:none;
+  --harina:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='h'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' seed='5' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 .95  0 0 0 5 -3.2'/></filter><rect width='180' height='180' filter='url(%23h)' opacity='.35'/></svg>");
+  --noche:#1F1A16; --panel:#2B241F; --panel2:#342C26; --linea:#57493D;
+  --tinta:#F4EADB; --tenue:#C4B29A; --tomateO:#F2705A;
+  --sombra:rgba(0,0,0,.45); --brillo:rgba(242,112,90,.14);
+  color-scheme:dark}
+html[data-tema="proyector"]{
+  --noche:#F4F4F4; --panel:#FFFFFF; --panel2:#FFFFFF; --linea:#1A1A1A;
+  --tinta:#000000; --tenue:#2B2B2B; --tomateO:#C01F10;
+  --sombra:rgba(0,0,0,.12); --brillo:rgba(192,31,16,.08)}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{background:var(--fondo2)}
+body{margin:0;color:var(--tinta);font-family:var(--letra);font-size:15px;line-height:1.5;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% 0%, var(--luz), transparent 70%),
+    var(--harina),
+    var(--veta),
+    linear-gradient(180deg, var(--fondo1), var(--fondo2));
+  background-size:auto, 180px 180px, 520px 520px, auto;
+  background-attachment:fixed;-webkit-text-size-adjust:100%;min-height:100vh}
+html[data-tema="proyector"], html[data-tema="proyector"] body{background:#FFFFFF}
+.lienzo{max-width:760px;margin:0 auto;padding:12px 12px 36px;display:flex;flex-direction:column}
+html[data-movimiento="menos"] *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+
+.cab{padding:13px 14px 0;border:1px solid var(--linea);border-radius:13px;overflow:hidden;position:relative;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 6px 18px var(--sombra)}
+.cab::before{content:"";position:absolute;left:0;right:0;top:0;height:9px;border-top:4px solid var(--ln);border-bottom:1.2px solid var(--ln);box-sizing:border-box}
+.rotulo{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.rotulo > div{flex:1 1 0;min-width:0}
+.cab .sello{width:34px;height:34px;flex:0 0 34px;display:block}
+.cab .sello svg{width:100%;height:100%}
+.cab h1{font-family:var(--rotulo);font-weight:800;font-size:17px;letter-spacing:.6px;text-transform:uppercase;margin:0;color:var(--oro);line-height:1.1}
+.cab .sub{font-family:var(--mono);font-size:9.5px;letter-spacing:0;text-transform:uppercase;color:var(--tinta);margin:0}
+.cab .acc{margin-left:auto;display:flex;gap:16px}
+.cab .acc button{font-family:var(--rotulo);font-weight:600;font-size:11.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--tinta);
+  background:none;border:0;border-bottom:1px solid transparent;padding:3px 0;cursor:pointer}
+.cab .acc button:hover,.cab .acc button:focus-visible,.cab .acc button[aria-pressed="true"]{color:var(--oro);border-bottom-color:var(--oro);outline:none}
+@media (min-width:481px){ .cab h1{font-size:20px;letter-spacing:1.2px} .cab .acc button{font-size:12.5px;letter-spacing:1.2px} }
+@media (max-width:620px){
+  .cab .acc{width:100%;margin:5px 0 0;padding-top:4px;border-top:1px solid var(--linea);justify-content:space-around;gap:6px}
+}
+.juegos{display:grid;grid-template-columns:repeat(3,1fr);margin:8px -14px 0;border-top:1.2px solid var(--ln)}
+.juegos button{font:inherit;cursor:pointer;text-align:center;color:var(--tinta);background:none;border:0;border-bottom:3px solid transparent;
+  border-radius:0;padding:6px 4px 4px;line-height:1.2}
+.juegos button + button{border-left:1.2px solid var(--ln)}
+.juegos button b{display:block;font-family:var(--rotulo);font-weight:800;font-size:15px;letter-spacing:1.3px;text-transform:uppercase;color:var(--tinta)}
+.juegos button span{display:block;font-size:11.5px;color:var(--tenue)}
+.juegos button:hover{background:var(--brillo)}
+.juegos button[aria-pressed="true"]{border-bottom-color:var(--rj);background:var(--ln)}
+.juegos button[aria-pressed="true"] b{color:var(--pp)} .juegos button[aria-pressed="true"] span{color:var(--pp);opacity:.75}
+@media (max-width:480px){ .juegos button span{display:none} .juegos button b{font-size:11px;letter-spacing:0} .juegos button{padding:8px 2px 6px} }
+
+.panel{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--linea);border-radius:13px;
+  padding:12px 13px;margin-top:9px;box-shadow:0 6px 18px var(--sombra)}
+.panel h2, .etq{font-family:var(--rotulo);font-weight:700;font-size:11.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--tinta);margin:0}
+.panel > h2{margin-bottom:8px}
+.caja{border:1px solid var(--linea);border-radius:12px;background:var(--noche);padding:9px 10px}
+
+.botones{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px;align-items:center}
+button.b{font-family:var(--rotulo);font-weight:700;font-size:11.5px;letter-spacing:.3px;text-transform:uppercase;
+  padding:8px 11px;min-height:42px;border-radius:5px;border:1.4px solid var(--ln);cursor:pointer;
+  background:var(--panel);color:var(--tinta);box-shadow:2.5px 2.5px 0 var(--ln)}
+@media (min-width:481px){ button.b{font-size:13px;letter-spacing:.8px;padding:8px 14px} }
+button.b:hover{background:var(--brillo)}
+button.b:active{transform:translate(2px,2px);box-shadow:none}
+button.b.ok{background:var(--ln);color:var(--pp);box-shadow:2.5px 2.5px 0 var(--rj)}
+button.b.ok:hover{background:var(--ln);opacity:.88}
+button.b:disabled{opacity:.4;cursor:default;transform:none}
+button.b.borrar.seguro{background:var(--rojo);border-color:var(--ln);color:#fff}
+button.b:focus-visible{outline:2px solid var(--oro);outline-offset:2px}
+button.enlace{background:none;border:0;color:var(--tenue);text-decoration:underline;font:inherit;font-size:13.5px;cursor:pointer;padding:6px 4px}
+button.enlace:hover{color:var(--oro)}
+
+.ajustes .aj{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:6px 0;border-bottom:1px dashed var(--linea)}
+.ajustes .aj > .etq{min-width:130px}
+.ajustes .aj small{flex-basis:100%;color:var(--tenue);font-size:12.5px;margin-top:-2px}
+.ops{display:inline-flex;border:1.4px solid var(--ln);border-radius:5px;overflow:hidden;flex-wrap:wrap}
+.ops button{font-family:var(--rotulo);font-weight:600;font-size:12px;letter-spacing:.6px;text-transform:uppercase;cursor:pointer;
+  background:none;border:0;color:var(--tinta);padding:6px 11px;min-height:34px}
+.ops button + button{border-left:1.2px solid var(--ln)}
+@media (max-width:480px){ .ops button{font-size:10.5px;letter-spacing:0;padding:6px 8px} }
+.ops button[aria-pressed="true"]{background:var(--ln);color:var(--pp)}
+
+.enc-cab{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.enc-cab .puntos{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto;align-items:center}
+.puntos i{width:10px;height:10px;border-radius:50%;box-shadow:inset 0 0 0 1.4px var(--ln);display:block}
+.puntos i.hecho{background:var(--ln)}
+.puntos i.aqui{background:var(--rj)}
+.cliente{margin:0;padding:7px 10px;border-left:5px solid var(--tomate);border-top:1.2px solid var(--ln);border-bottom:1.2px solid var(--ln);font-size:16px;line-height:1.45}
+.cliente .quien{display:block;font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--tomate);margin-bottom:1px}
+.cliente.tel{border-left-color:var(--ln);display:grid;grid-template-columns:58px 1fr;column-gap:10px;align-items:start}
+.cliente.tel .cara{width:58px;height:58px;display:block}
+.cliente.tel .cara svg{width:100%;height:100%;display:block} .cliente.tel .quien{color:var(--tinta)}
+.cliente .fA, .habla .fA, .tique .fA, .opera .fA{color:var(--tomate)}
+.tique .fB{color:var(--pp);background:var(--ln);padding:0 4px;border-radius:2px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.cliente .fB, .habla .fB{color:var(--ln);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.habla{display:grid;grid-template-columns:66px 1fr;gap:10px;align-items:start;margin-top:9px;padding:9px 12px;
+  border:1.4px solid var(--ln);border-radius:5px;background:var(--panel)}
+.habla .cara{width:66px;height:66px;display:block;margin-top:-4px;overflow:hidden}
+.habla .cara svg{display:block;width:100%;height:auto;overflow:hidden}
+.habla .quien{font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--tinta)}
+.habla p{margin:2px 0 0;font-size:15.5px;line-height:1.45}
+.habla p b{color:var(--oro)}
+.habla.feliz .quien{color:var(--oro)}
+.practica{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px dashed var(--linea)}
+.practica .etq{min-width:0}
+
+.habla.feliz .cara svg{animation:salta .55s cubic-bezier(.3,1.5,.5,1)}
+@keyframes salta{30%{transform:translateY(-6px) rotate(-3deg)}60%{transform:translateY(1px)}}
+.cara.suena svg{animation:tiembla .07s linear infinite alternate}
+@keyframes tiembla{from{transform:rotate(-1.4deg)}to{transform:rotate(1.4deg)}}
+@media (prefers-reduced-motion: reduce){ .cara.suena svg,.habla.feliz .cara svg{animation:none} }
+
+.modal{position:fixed;inset:0;background:rgba(12,8,20,.82);display:grid;place-items:center;padding:16px;z-index:60;overflow:auto}
+.modal .caja2{width:min(600px,100%);max-height:92vh;overflow:auto;border:1px solid var(--linea);border-radius:16px;padding:18px 20px;
+  background:linear-gradient(180deg,var(--panel2),var(--panel));box-shadow:0 24px 60px rgba(0,0,0,.55)}
+.modal .caja2:focus{outline:none}
+.modal h2{font-family:var(--rotulo);font-weight:800;color:var(--oro);letter-spacing:1px;text-transform:uppercase;font-size:17px;margin:0 0 8px;padding-bottom:5px;border-bottom:3px double var(--ln)}
+.modal h3{font-family:var(--rotulo);font-weight:700;color:var(--oro);font-size:15px;letter-spacing:1px;margin:14px 0 4px}
+.modal p,.modal li{font-size:14.5px}
+.acta .actaSub{margin:0 0 10px;color:var(--tenue)}
+.actaNombre{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.actaNombre input{flex:1;font:inherit;font-size:16px;padding:8px 10px;border-radius:5px;border:1.4px solid var(--ln);background:var(--panel);color:var(--tinta)}
+.actaDatos{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:6px;margin-bottom:10px}
+.actaDatos div{background:var(--panel);border:1.4px solid var(--ln);border-radius:5px;padding:6px 9px}
+.actaDatos b{display:block;font-family:var(--mono);font-size:18px}
+.actaTabla{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:10px}
+.actaTabla th{font-family:var(--rotulo);font-weight:700;font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--tinta);text-align:left;padding:4px 6px;border-bottom:1.4px solid var(--ln)}
+.actaTabla td{padding:6px;border-bottom:1px dashed var(--linea);vertical-align:top}
+.actaTabla td b{color:var(--oro)}
+.actaCodigos{display:grid;gap:6px;margin:6px 0 4px}
+.actaCodigos b{white-space:nowrap;font-family:var(--mono);font-size:18px;letter-spacing:2px;color:var(--oro);margin-left:8px}
+.actaMsg{min-height:20px;color:var(--verde);margin:6px 0 0}
+.ac-det{margin:0 0 6px} .ac-det summary{cursor:pointer;color:var(--tenue);font-size:13.5px}
+.ac-ej{margin:6px 0 0;padding-left:0;list-style:none;font-size:13px}
+.ac-ej li{display:flex;gap:8px;padding:3px 0;border-bottom:1px dashed var(--linea);flex-wrap:wrap}
+.ac-ej .ac-h{font-family:var(--mono);color:var(--tenue);font-size:11px;min-width:44px}
+.ac-ej .ac-c{font-family:var(--mono)}
+.ac-ej li.ok .ac-como::before{content:"✓ ";color:var(--verde)} .ac-ej li.no .ac-como::before{content:"✗ ";color:var(--rojo)}
+
+.guia{position:fixed;inset:0;z-index:80;cursor:pointer}
+.guia-foco{position:fixed;border-radius:8px;border:3px solid var(--rj);pointer-events:none;
+  box-shadow:0 0 0 9999px rgba(30,26,23,.74);
+  transition:top .28s ease,left .28s ease,width .28s ease,height .28s ease}
+.guia-globo{position:fixed;z-index:81;width:min(340px,calc(100vw - 32px));cursor:default;
+  background:var(--panel);border:1.6px solid var(--ln);border-radius:6px;padding:13px 15px;
+  box-shadow:5px 5px 0 var(--ln);transition:top .28s ease,left .28s ease}
+.guia-globo .tit{font-family:var(--rotulo);font-weight:800;font-size:14.5px;letter-spacing:1px;text-transform:uppercase;color:var(--oro);margin-bottom:5px;padding-bottom:4px;border-bottom:3px double var(--ln)}
+.guia-globo:focus{outline:none}
+.guia-globo p{margin:0;font-size:14.5px;line-height:1.5}
+.guia-globo p b{color:var(--oro)}
+.guia-pie{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:11px}
+.guia-pie span{font-family:var(--mono);font-size:11px;color:var(--tenue)}
+.guia-pie .botones{margin:0}
+.guia-pie button.b{min-height:36px;padding:5px 12px}
+
+footer{margin-top:26px;padding-top:12px;border-top:3px double var(--ln);text-align:center;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--tinta)}
+footer a{color:var(--tinta)}
+footer .ancla{display:block;margin:0 0 7px;letter-spacing:1px}
+html[data-tema="noche"] footer{border-top-color:var(--tenue)}
+
+@media (min-width:1100px){
+  .lienzo{max-width:1248px;display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1fr);gap:0 12px;align-items:stretch;padding-top:8px;padding-bottom:10px}
+  .lienzo > *{grid-column:1 / -1}
+  .lienzo > .cab{grid-row:1} .lienzo > .ajustes{grid-row:2} .lienzo > #tique{grid-row:4} .lienzo > footer{grid-row:5;margin-top:10px;padding-top:8px}
+  .lienzo > #encargo{grid-column:1;grid-row:3}
+  .lienzo > #mesa{grid-column:2;grid-row:3}
+  .cab{padding-top:12px} .juegos{margin-top:5px} .juegos button{padding:4px 4px 3px}
+  .panel{margin-top:8px;padding:10px 13px}
+  .habla{grid-template-columns:92px 1fr} .habla .cara{width:92px;height:92px}
+  .habla p, .cliente{font-size:17px}
+  html[data-juego="telefono"] .habla p, html[data-juego="telefono"] .cliente{font-size:15.5px}
+  html[data-juego="telefono"] .pizarra{padding:9px 14px 10px}
+  html[data-juego="telefono"] .pizarra .bots{margin-top:6px}
+}
+@media (min-width:900px){ html[data-aula="si"] body{zoom:var(--aula,1.32)} }
+html[data-aula="si"] .lienzo{max-width:860px}
+@media (min-width:1100px){ html[data-aula="si"] .lienzo{max-width:1248px} html[data-aula="si"] footer{display:none} }
+@media print{
+  body{background:#fff} .cab .acc,.mandos,.botones,.guia,.modal,.inicio{display:none !important}
+  .panel{box-shadow:none;break-inside:avoid}
+}
+</style>
+<style>
+.mesa .cajas{display:flex;gap:10px;justify-content:center;align-items:flex-start;padding:10px;border-radius:4px;
+  background:#EFE4C6;box-shadow:inset 0 0 0 3px var(--ln), inset 0 0 0 5.4px #EFE4C6, inset 0 0 0 6.4px var(--ln)}
+html[data-tema="noche"] .mesa .cajas{background:#14110E;box-shadow:inset 0 0 0 3px var(--ln), inset 0 0 0 5.4px #14110E, inset 0 0 0 6.4px var(--ln)}
+html[data-tema="proyector"] .mesa .cajas{background:#EEE;box-shadow:inset 0 0 0 3px #000, inset 0 0 0 5.4px #EEE, inset 0 0 0 6.4px #000}
+.cajaP{flex:1;max-width:280px;background:var(--pp);border:2px solid var(--ln);border-radius:3px;padding:5px;
+  box-shadow:3px 3px 0 var(--ln);cursor:pointer}
+html[data-tema="noche"] .cajaP{box-shadow:3px 3px 0 #000}
+.cajaP .tapa{font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:1px;color:var(--ln);text-align:center;margin-bottom:3px}
+.cajaP.activa{box-shadow:3px 3px 0 var(--ln), 0 0 0 3px var(--rj)}
+.cajaP.mA{border-color:var(--rj);box-shadow:3px 3px 0 var(--rj)} .cajaP.mA .tapa{color:var(--pp);background:var(--rj);margin:-5px -5px 3px;padding:2px 0}
+.cajaP.mB{border-color:var(--ln);box-shadow:3px 3px 0 var(--ln)} .cajaP.mB .tapa{color:var(--pp);background:var(--ln);margin:-5px -5px 3px;padding:2px 0}
+.cajaP.mA.activa{box-shadow:3px 3px 0 var(--rj), 0 0 0 3px rgba(201,48,28,.5)}
+.cajaP.mB.activa{box-shadow:3px 3px 0 var(--ln), 0 0 0 3px rgba(30,26,23,.42)}
+html[data-tema="noche"] .cajaP.mB.activa{box-shadow:3px 3px 0 #000, 0 0 0 3px rgba(241,231,208,.7)}
+svg.pizza{display:block;width:100%;height:auto;touch-action:manipulation}
+.corte{cursor:pointer}
+.corte .filo{fill:none;stroke:var(--pp);stroke-width:3.2px;stroke-linejoin:round}
+.corte.elegida .filo{stroke:var(--ln);stroke-width:3.6px}
+.corte .sombraP{fill:var(--ln);opacity:.85}
+.corte.apagada{opacity:.45}
+.grapa-nueva{animation:seva 2.6s ease-out forwards;transform-box:view-box}
+.grapaK{fill:none;stroke:var(--pp);stroke-width:9px;stroke-linecap:round;stroke-linejoin:round}
+.grapaT{fill:none;stroke:var(--ln);stroke-width:5.2px;stroke-linecap:round;stroke-linejoin:round}
+.costura-nueva{fill:none;stroke:var(--ln);stroke-width:2.4px;stroke-dasharray:6 5;animation:seCose 2.6s ease-out forwards}
+.rayaCorte{fill:none;stroke:var(--pp);stroke-width:3.4px;stroke-linecap:round}
+@keyframes seva{0%{opacity:0;transform:scale(1.7)}8%{opacity:1;transform:scale(1)}82%{opacity:1}100%{opacity:0}}
+@keyframes seCose{0%{opacity:0}8%{opacity:.85}48%{opacity:.85}66%{opacity:0}100%{opacity:0}}
+@keyframes sevaQ{0%{opacity:0}8%{opacity:1}82%{opacity:1}100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){ .grapa-nueva{animation-name:sevaQ} }
+
+.mandos .fila{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.mandos .fila .etq{min-width:86px}
+.mandos .tiras{display:flex;gap:6px;flex-wrap:wrap}
+button.n{font-family:var(--mono);font-weight:700;font-size:15px;min-width:42px;min-height:42px;padding:5px 10px;border-radius:4px;
+  border:1.4px solid var(--ln);background:var(--panel);color:var(--tinta);cursor:pointer;box-shadow:2.5px 2.5px 0 var(--ln)}
+button.n:hover{background:var(--brillo)}
+button.n:active{transform:translate(2px,2px);box-shadow:none}
+button.n[aria-pressed="true"]{background:var(--ln);color:var(--pp);box-shadow:2.5px 2.5px 0 var(--rj)}
+button.n.rompe{border-style:dashed;border-color:var(--rj);color:var(--tomateO)}
+button.n.avisa{background:var(--rj);color:#fff;border-color:var(--ln);border-style:solid;animation:tiemblaB .28s}
+@keyframes tiemblaB{25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+.mandos .botones{margin-top:10px}
+@media (min-width:1100px){
+  .cajaP{max-width:282px} .mesa .cajas{padding-top:8px;padding-bottom:8px}
+  .mandos{display:grid;grid-template-columns:auto 1fr;gap:0 18px;align-items:start}
+  .mandos .fila{margin-top:8px}
+  .mandos .botones{grid-column:2;grid-row:1 / span 2;justify-content:flex-end;margin-top:8px;gap:6px}
+  .mandos .botones button.b{min-height:38px;padding:6px 12px}
+  .mesa:has(.cajas > .cajaP:only-child){display:grid;grid-template-columns:376px minmax(0,1fr);gap:0 16px;align-content:start}
+  .mesa:has(.cajas > .cajaP:only-child) .cajaP{max-width:356px}
+  .mesa:has(.cajas > .cajaP:only-child) > .cajas{grid-column:1;grid-row:1 / span 2}
+  .mesa:has(.cajas > .cajaP:only-child) > .mandos{grid-column:2;grid-row:1;display:block}
+  .mesa:has(.cajas > .cajaP:only-child) > .mandos .botones{justify-content:flex-start}
+  .mesa:has(.cajas > .cajaP:only-child) > .aviso{grid-column:2;grid-row:2;align-self:start}
+}
+
+.pizarra{margin-top:10px;background:#1E1A17;border-radius:3px;padding:15px 16px 16px;
+  box-shadow:inset 0 0 0 3px #1E1A17, inset 0 0 0 4.4px var(--rjP);text-align:center;--tiza:#F5EDD8;--tizaV:#D8CDB4}
+html[data-tema="noche"] .pizarra{background:#0E0C0A;box-shadow:inset 0 0 0 3px #0E0C0A, inset 0 0 0 4.4px var(--rj)}
+.pizarra .rot{font-family:var(--mono);font-weight:700;font-size:10px;letter-spacing:2px;color:var(--tizaV);margin-bottom:6px}
+.pizarra .linea{font-family:var(--rotulo);font-weight:700;font-size:23px;color:var(--tiza);display:flex;gap:11px;align-items:center;justify-content:center;flex-wrap:wrap}
+.pizarra .fA{color:#FF8F7A} .pizarra .fB{color:var(--tiza)}
+.pizarra .hueco-signo{display:inline-block;min-width:44px;padding:1px 8px;border-radius:4px;border:2px dashed #8C8272;color:var(--tizaV)}
+.pizarra .signo{display:inline-block;min-width:44px;color:#FFE9A8;line-height:0}
+.pizarra .signo svg{width:36px;height:36px;overflow:visible}
+.pizarra .signo path{fill:none;stroke:currentColor;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+.pizarra .signo svg.escribe path{stroke-dasharray:1;stroke-dashoffset:1;animation:tizaEscribe .32s ease-out forwards}
+@keyframes tizaEscribe{to{stroke-dashoffset:0}}
+@media (prefers-reduced-motion: reduce){ .pizarra .signo svg.escribe path{animation:none;stroke-dashoffset:0} }
+.pizarra .apuesta{font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--tizaV);margin-top:6px}
+.pizarra .bots{display:flex;gap:8px;justify-content:center;margin-top:9px}
+.pizarra .bots button{font-family:var(--rotulo);font-weight:700;font-size:21px;width:56px;min-height:42px;border-radius:4px;border:1.4px solid var(--tiza);
+  background:none;color:var(--tiza);cursor:pointer}
+.pizarra .bots button:hover{background:rgba(255,255,255,.14)}
+html[data-tema="proyector"] .pizarra{background:#FFF;box-shadow:inset 0 0 0 3px #000, inset 0 0 0 5px #FFF, inset 0 0 0 6px #000;--tiza:#000;--tizaV:#333}
+html[data-tema="proyector"] .pizarra .fA{color:var(--rj)} html[data-tema="proyector"] .pizarra .signo{color:#000}
+html[data-tema="proyector"] .pizarra .hueco-signo{border-color:#555}
+html[data-tema="proyector"] .pizarra .bots button:hover{background:#EEE}
+
+.papel-tel{display:grid;gap:10px}
+.papel-tel .fr{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:center;padding:0 10px 9px;border:1.4px solid var(--ln);border-radius:3px;background:var(--panel);box-shadow:3px 3px 0 var(--ln)}
+.papel-tel .fr .quien{grid-column:1 / -1;font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--pp);margin:0 -10px;padding:3px 10px}
+.papel-tel .fr.mA{border-color:var(--rj);box-shadow:3px 3px 0 var(--rj)} .papel-tel .fr.mA .quien{background:var(--rj)}
+.papel-tel .fr.mB .quien{background:var(--ln)}
+.papel-tel .fr svg{width:150px;height:auto;display:block}
+.papel-tel .fr .tiras{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.papel-tel .fr .tiras .etq{flex-basis:100%}
+@media (min-width:1100px){ .papel-tel{grid-template-columns:1fr 1fr;align-items:start} }
+
+.tique{position:relative;border-color:transparent;border-radius:0;padding:12px 13px 13px;
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/12px 51% repeat-x, conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/12px 51% repeat-x;
+  mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/12px 51% repeat-x, conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/12px 51% repeat-x}
+.tique h2{text-align:center;font-size:13px;letter-spacing:5px;font-weight:800;border-top:3px solid var(--ln);border-bottom:1.2px solid var(--ln);padding:1px 0 0;margin-bottom:6px;line-height:1.35}
+.lectura{font-family:var(--mono);font-size:14.5px;margin:0 0 2px;text-align:center}
+.lectura b{font-family:var(--rotulo);font-size:22px;font-weight:800;color:var(--oro)}
+.desglose{font-family:var(--mono);font-size:11.5px;letter-spacing:-.2px;color:var(--tenue);text-align:center;margin:0 0 8px;min-height:18px}
+.desglose b{color:var(--tinta)}
+.regla{position:relative;height:84px;margin:6px 4px 0}
+.cinta{position:absolute;left:0;right:0;top:30px;height:28px;background:var(--pp);box-shadow:inset 0 0 0 2px var(--ln)}
+.cinta i{position:absolute;top:0;width:1.6px;margin-left:-.8px;background:var(--ln)}
+.cinta i.u{height:24px;width:2.4px;margin-left:-1.2px} .cinta i.m{height:24px} .cinta i.c{height:13px}
+.cinta i.pA{height:10px;background:var(--rj)} .cinta i.pB{top:auto;bottom:0;height:10px}
+.cinta i.f{width:.8px;margin-left:-.4px} .cinta i.m.f{height:14px}
+.cinta b{position:absolute;top:28px;font-family:var(--mono);font-size:13px;color:var(--tinta);transform:translateX(-50%);font-weight:700}
+.marca{position:absolute;top:2px;transform:translateX(-50%);text-align:center;pointer-events:none}
+.marca em{display:block;width:4px;height:52px;margin:0 auto;background:var(--rj)}
+.marca u{display:block;font-family:var(--mono);font-weight:700;font-size:12.5px;color:var(--pp);text-decoration:none;background:var(--rj);padding:0 4px;border-radius:2px;line-height:1.3;white-space:nowrap}
+.marca.dos em{background:var(--ln)} .marca.dos u{background:var(--ln)}
+.marca.baja u{transform:translateY(17px)}
+.hueco{position:absolute;top:0;height:24px;transform-origin:left center;background:repeating-linear-gradient(45deg,rgba(201,48,28,.5) 0 3px,rgba(201,48,28,.12) 3px 6px)}
+.hueco span{position:absolute;left:50%;top:-21px;transform:translateX(-50%);font-family:var(--mono);font-weight:700;font-size:11px;color:var(--tomateO);
+  background:var(--panel);padding:0 3px;border-radius:2px;border:1.2px solid var(--rj);white-space:nowrap}
+.nota{font-family:var(--mono);font-size:10.5px;letter-spacing:-.2px;color:var(--tenue);margin:10px 0 0;line-height:1.5;text-align:center}
+.opera{margin-top:10px;padding:8px 10px 4px;border-top:1px dashed var(--linea)}
+.opera .rot{font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:2px;color:var(--tinta);text-align:center;margin-bottom:2px}
+.opera svg{display:block;width:100%;max-width:320px;margin:0 auto;height:auto}
+.opera .frase{font-size:13px;color:var(--tenue);text-align:center;margin:2px 0 4px}
+.opera .frase b{color:var(--tinta)}
+.pregunta{margin-top:10px;padding-top:10px;border-top:1px dashed var(--linea);display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
+.pregunta .etq{flex-basis:100%;text-align:center}
+.pregunta button.b.no{opacity:.5;text-decoration:line-through;text-decoration-color:var(--rojo)}
+.replica{flex-basis:100%;display:grid;grid-template-columns:50px 1fr;gap:8px;align-items:start;margin-top:10px;position:relative}
+.replica .cara{width:50px;height:50px;display:block;overflow:hidden}
+.replica .cara svg{width:100%;height:100%;display:block;overflow:hidden}
+.bocadillo{margin:0;padding:9px 12px;background:var(--panel);border:1.4px solid var(--ln);border-radius:5px;font-size:15px;line-height:1.45;position:static}
+.bocadillo .quien{font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--tinta);margin-right:4px}
+.bocadillo b{color:var(--oro)}
+.replica::before{content:"";position:absolute;top:-7px;left:var(--cola,50%);width:12px;height:12px;margin-left:-6px;transform:rotate(45deg);
+  background:var(--panel);border-left:1.4px solid var(--ln);border-top:1.4px solid var(--ln);z-index:1}
+.replica.entra{animation:replica .32s cubic-bezier(.3,1.4,.5,1)}
+@keyframes replica{from{opacity:0;transform:translateY(-6px) scale(.97)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){ .replica.entra{animation:none} }
+@media (min-width:1100px){
+  .tique{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.72fr) minmax(0,.9fr);column-gap:20px;align-items:start;padding-top:10px;padding-bottom:10px}
+  html[data-juego="servir"] .tique{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}
+  .tique > *{grid-column:1}
+  .tique > h2{grid-row:1;justify-self:start;margin:0;padding-right:10px;text-align:left} .tique > .lectura{grid-row:1;margin:0}
+  .tique .desglose{margin-bottom:2px} .regla{margin-top:0}
+  .tique > .opera{grid-column:2;grid-row:1 / span 5;margin:0;padding:0 0 0 18px;border-top:0;border-left:1px dashed var(--linea);align-self:stretch}
+  .tique > .opera svg{max-width:170px} .tique > .opera .frase{margin:0}
+  .tique > .pregunta{grid-column:3;grid-row:1 / span 5;margin:0;padding:0 0 0 18px;border-top:0;border-left:1px dashed var(--linea);align-self:stretch;align-content:center}
+  .tique > .nota{grid-column:1 / -1;grid-row:6;margin-top:2px}
+}
+</style>
+<style>
+.inicio{position:fixed;inset:0;z-index:36;display:none;cursor:pointer;overflow:hidden;transition:opacity .48s ease;
+  -webkit-user-select:none;user-select:none}
+html[data-inicio="si"] .inicio{display:block}
+html[data-inicio="si"] main{visibility:hidden}
+.inicio[hidden]{display:none !important}
+.inicio.fuera{opacity:0}
+.inLienzo{position:absolute;left:0;top:0;transform-origin:0 0}
+.inLienzo div{position:absolute;box-sizing:border-box}
+.inLienzo svg{display:block;width:100%;height:100%;overflow:visible}
+.inPapel{background:var(--pp);will-change:transform;
+  -webkit-mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/12px 51% repeat-x, conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/12px 51% repeat-x;
+  mask:conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/12px 51% repeat-x, conic-gradient(from 135deg at top,#0000,#000 1deg 89deg,#0000 90deg) top/12px 51% repeat-x}
+.inFilete{height:0;border-top:1.2px solid var(--ln)}
+.inFilete.doble{border-top:3.4px solid var(--ln);border-bottom:1.2px solid var(--ln)}
+.inAncla{font-family:var(--mono);letter-spacing:1px;text-align:center;color:var(--ln);white-space:nowrap}
+.inQ, .inL, .inRueda, .inGrapadora, .inGr, .inMarca, .inTitulo, .inQuien, .inLema{will-change:transform,opacity}
+.inFilo{fill:none;stroke-linejoin:round;opacity:0}
+.inFilo.q{stroke:var(--pp);stroke-width:3.4px} .inFilo.e{stroke:var(--ln);stroke-width:3.8px}
+.inSom{fill:var(--ln)}
+.inSom0, .inSom1, .inSomH, .inMitad, .inCostura, .inGr, .inRueda, .inGrapadora{opacity:0}
+.inL{background:var(--pp)}
+.inGira{inset:0}
+.inCinta{background:var(--pp);box-shadow:inset 0 0 0 2.4px var(--ln)}
+.inRaya{width:0;border-left:1.8px solid var(--ln);margin-left:-.9px;opacity:0}
+.inNum{font-family:var(--mono);font-weight:700;text-align:center;color:var(--ln)}
+.inMarca{background:var(--rj);opacity:0}
+.inEtq{text-align:center} .inEtq b{font-family:var(--mono);font-weight:700;color:var(--pp);background:var(--rj);border-radius:2px;padding:0 5px}
+.inEtq1{opacity:0}
+.inLema{font-family:var(--mono);font-weight:700;letter-spacing:1.2px;color:var(--ln);white-space:nowrap;opacity:0;transform-origin:0 50%}
+.inLema2{transform:translateX(-100%);translate:-100% 0;transform:none}
+.inQuien{opacity:0} .inQuien span{position:absolute;left:-30px;right:-30px;top:100%;margin-top:4px;text-align:center;font-family:var(--mono);font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--ln);white-space:nowrap}
+.inTitulo{font-family:var(--rotulo);font-weight:800;letter-spacing:.6px;line-height:1.2;text-transform:uppercase;text-align:center;color:var(--rj);opacity:0}
+.inSalta{font-family:var(--rotulo);font-weight:600;letter-spacing:2px;text-transform:uppercase;text-align:center;color:var(--tenue)}
+@media (prefers-reduced-motion: reduce){ .inicio{display:none !important} html[data-inicio="si"] main{visibility:visible} }
+</style>
+<style>
+.micro{width:12px;height:15px;display:inline-block;vertical-align:-2px}
+.entrevista .ev-quien{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 8px}
+.ev-quien button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px 5px;
+  font:inherit;font-family:var(--rotulo);font-weight:700;letter-spacing:.6px;text-transform:uppercase;font-size:11.5px;
+  color:var(--tinta);background:var(--panel);border:1.4px solid var(--ln);border-radius:5px;cursor:pointer;box-shadow:2.5px 2.5px 0 var(--ln)}
+.ev-quien button[aria-pressed="true"]{box-shadow:2.5px 2.5px 0 var(--rj), inset 0 0 0 1.6px var(--ln)}
+.ev-mini{width:48px;height:48px;display:block}
+.ev-mini svg{width:100%;height:100%;display:block;overflow:hidden}
+.ev-cartel{font-size:13px;color:var(--tenue);margin:2px 0 8px;font-style:italic}
+.ev-cartel b{color:var(--tinta)}
+.ev-escena{display:flex;gap:10px;align-items:flex-end;margin:0 0 10px}
+.ev-cara{flex:0 0 auto;width:132px;height:165px}
+.ev-cara svg{width:100%;height:100%;display:block;overflow:visible}
+.ev-cara[data-q="migas"]{width:112px;height:140px}
+.ev-cara.feliz svg{animation:salta .55s cubic-bezier(.3,1.5,.5,1)}
+.ev-globo{flex:1;min-width:0;position:relative;min-height:112px;padding:10px 13px;border-radius:5px;
+  background:var(--panel);border:1.4px solid var(--ln);margin-bottom:18px}
+.ev-globo::before{content:'';position:absolute;left:-9px;bottom:16px;width:14px;height:14px;
+  background:inherit;border-left:1.4px solid var(--ln);border-bottom:1.4px solid var(--ln);transform:rotate(45deg)}
+.ev-pregunta{margin:0 0 5px;font-size:12px;color:var(--tenue);font-family:var(--rotulo);font-weight:600;letter-spacing:.2px}
+.ev-respuesta{margin:0;font-size:15.5px;line-height:1.5;color:var(--tinta);min-height:1.5em}
+.ev-respuesta b{color:var(--oro)}
+.ev-rotulo{font-family:var(--rotulo);font-weight:700;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--tinta);margin:0 0 6px}
+.ev-lista{display:flex;flex-direction:column;gap:6px}
+.ev-p{text-align:left;font:inherit;font-size:14px;padding:9px 12px;min-height:44px;color:var(--tinta);background:var(--panel);
+  border:1.4px solid var(--ln);border-radius:5px;cursor:pointer}
+.ev-p:hover{background:var(--brillo)}
+.ev-p.hecha{opacity:.55}
+.ev-p.repregunta{border-style:dashed;border-color:var(--oro)}
+.ev-re{font-family:var(--rotulo);font-weight:700;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--oro)}
+@media (max-width:420px){ .ev-cara{width:104px;height:130px} .ev-cara[data-q="migas"]{width:92px;height:115px} .ev-respuesta{font-size:14.5px} }
+@media (prefers-reduced-motion: reduce){ .ev-cara.feliz svg{animation:none} }
+
+.aviso{display:grid;grid-template-columns:48px 1fr;gap:9px;align-items:center;margin:10px 0 0;padding:7px 10px;
+  border:1.4px solid var(--ln);border-radius:5px;background:var(--panel);font-size:14px;color:var(--tinta)}
+.aviso:empty{display:none}
+.aviso .cara{width:48px;height:48px;display:block;overflow:hidden}
+.aviso .cara svg{width:100%;height:100%;display:block;overflow:hidden}
+.aviso .quien{display:block;font-family:var(--mono);font-weight:700;font-size:10.5px;letter-spacing:1px;text-transform:uppercase;color:var(--tinta)}
+.aviso b{color:var(--oro)}
+</style>
+<style>
+.trampa-vineta{position:fixed;z-index:43;pointer-events:none;border-radius:50%;box-shadow:5px 6px 0 rgba(30,26,23,.3)}
+.trampa-vineta > svg{width:100%;height:100%;display:block;overflow:visible}
+@media print{ .trampa-vineta{display:none} }
+</style>
+<script>
+  document.documentElement.dataset.tema = 'dia';
+  try{ const a = JSON.parse(localStorage.getItem('grapadora.ajustes.v1') || '{}');
+    if(a.tema === 'noche' || a.tema === 'proyector') document.documentElement.dataset.tema = a.tema;
+    if(a.aula) document.documentElement.dataset.aula = 'si';
+    const vista = sessionStorage.getItem('grapadora.inicio') === 'visto';
+    const quieto = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(a.inicio !== false && !vista && !quieto) document.documentElement.dataset.inicio = 'si'; }catch(err){}
+</script>
+</head>
+<body>
+<div class="inicio" id="escenaInicio" hidden></div>
+<main class="lienzo">
+  <header class="cab">
+    <div class="rotulo">
+      <span class="sello" aria-hidden="true"></span>
+      <div><h1>La grapadora de Nick</h1><p class="sub">fracciones ◆ cortar reparte, grapar junta</p></div>
+      <nav class="acc" aria-label="Acciones">
+        <button type="button" id="bGuia">Guía</button>
+        <button type="button" id="bPracticar" aria-pressed="false">Practicar</button>
+        <button type="button" id="bAjustes" aria-pressed="false" aria-controls="ajustes">Ajustes</button>
+        <button type="button" id="bAula" aria-pressed="false">Aula</button>
+        <button type="button" id="bActa">Acta</button>
+        <button type="button" id="bEntrevista" aria-label="Entrevistas"><svg class="micro" viewBox="0 0 16 20" aria-hidden="true"><rect x="5" y="1" width="6" height="11" rx="3" fill="currentColor"/><path d="M2.5 9 Q2.5 15 8 15 Q13.5 15 13.5 9 M8 15 V19 M5 19 H11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
+      </nav>
+    </div>
+    <div class="juegos" role="group" aria-label="Los tres juegos">
+      <button type="button" data-j="servir" aria-pressed="true"><b>Servir</b><span>la misma cantidad</span></button>
+      <button type="button" data-j="comparar" aria-pressed="false"><b>Comparar</b><span>¿quién se lleva más?</span></button>
+      <button type="button" data-j="telefono" aria-pressed="false"><b>Por teléfono</b><span>sobre el papel</span></button>
+    </div>
+  </header>
+
+  <section class="panel ajustes" id="ajustes" hidden aria-label="Ajustes">
+    <div class="aj"><span class="etq">El fondo</span>
+      <span class="ops" data-aj="tema" role="group" aria-label="El fondo"><button type="button" data-v="dia">La encimera</button><button type="button" data-v="noche">La pizarra</button><button type="button" data-v="proyector">Proyector</button></span>
+      <small>El mármol de la encimera, con algo de harina. La pizarra del local, para un aula con poca luz. Proyector: papel blanco y tinta negra.</small></div>
+    <div class="aj"><span class="etq">Antes de comparar</span>
+      <span class="ops" data-aj="apuesta" role="group" aria-label="La pizarra"><button type="button" data-v="si">Decir el signo antes</button><button type="button" data-v="no">Sin pizarra</button></span>
+      <small>Con la pizarra, cada comparación empieza diciendo qué signo crees (&gt;, = o &lt;) antes de poder contar nada.</small></div>
+    <div class="aj"><span class="etq">El sonido</span>
+      <span class="ops" data-aj="sonido" role="group" aria-label="El sonido"><button type="button" data-v="si">Con sonido</button><button type="button" data-v="no">Sin sonido</button></span>
+      <small>Bajito: el clac de la grapadora, el cortador, la tiza y el teléfono.</small></div>
+    <div class="aj"><span class="etq">Al abrir</span>
+      <span class="ops" data-aj="inicio" role="group" aria-label="La animación de inicio"><button type="button" data-v="si">Con animación</button><button type="button" data-v="no">Sin animación</button></span></div>
+    <div class="aj"><span class="etq">La trampa</span>
+      <span class="ops" data-aj="trampa" role="group" aria-label="La trampa para ratones"><button type="button" data-v="si">Con trampa</button><button type="button" data-v="no">Sin trampa</button></span>
+      <small>Al fallar una respuesta, la trampa para ratones salta sobre el cebo vacío. Al acertar, Migas se lleva el queso antes de que salte.</small></div>
+    <div class="aj"><span class="etq">Empezar de cero</span>
+      <small id="ajCeroTxt">Borra de este aparato los pedidos servidos y el acta de este turno, para el siguiente alumno o la siguiente clase. Hay que pulsar dos veces. Los ajustes se quedan.</small>
+      <button type="button" class="b borrar" id="ajCero">Borrar todo</button></div>
+    <div class="botones"><button type="button" class="b ok" id="ajCierra">Cerrar</button></div>
+  </section>
+
+  <section class="panel encargo" id="encargo" aria-label="El encargo">
+    <div class="enc-cab"><h2 id="encCab">Pedido 1 de 5</h2><div class="puntos" id="puntos"></div></div>
+    <p class="cliente" id="cliente"></p>
+    <div class="habla" id="nick"><span class="cara" id="caraNick" data-vb="12 4 76 76" aria-hidden="true"></span><div><div class="quien">Nick, el pizzero</div><p id="nickTxt" role="status"></p></div></div>
+    <div id="pizarra"></div>
+    <div class="botones" id="encBotones">
+      <button type="button" class="b ok" id="bSiguiente" hidden>Siguiente pedido</button>
+      <button type="button" class="b ok" id="bOtro" hidden>Otro pedido</button>
+      <button type="button" class="enlace" id="bSaltar">Saltar este pedido</button>
+    </div>
+    <div class="practica" id="practica" hidden><span class="etq">Dificultad</span>
+      <span class="ops" id="difOps" role="group" aria-label="Dificultad"><button type="button" data-d="0">Fácil</button><button type="button" data-d="1">Media</button><button type="button" data-d="2">Difícil</button></span></div>
+  </section>
+
+  <section class="panel mesa" id="mesa" aria-label="La mesa">
+    <div class="cajas" id="cajas"></div>
+    <div class="papel-tel" id="papel" hidden></div>
+    <div class="mandos" id="mandos">
+      <div class="fila"><span class="etq">cortar en</span><span class="tiras" id="botCortes"></span></div>
+      <div class="fila" id="filaMaq"><span class="etq">la máquina</span><span class="tiras" id="botMaq"></span></div>
+      <div class="botones"><button type="button" class="b ok" id="bGrapar">Grapar lo elegido</button><button type="button" class="b" id="bSoltar">Quitar grapas</button><button type="button" class="b" id="bLimpiar">Empezar el pedido</button></div>
+    </div>
+    <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="panel tique" id="tique" aria-label="El tique">
+    <h2>Tique</h2>
+    <p class="lectura" id="lec">—</p>
+    <p class="desglose" id="des"></p>
+    <div class="regla"><div class="cinta" id="cinta"></div><div id="marcas"></div></div>
+    <div class="opera" id="opera" hidden></div>
+    <div class="pregunta" id="pregunta" hidden></div>
+    <p class="nota">El 1 es la superficie de una pizza entera de la casa. La pizza es el envase; el número vive en la regla.</p>
+  </section>
+
+  <footer>
+    <span class="ancla">La Margherita: Nápoles, 1889, según la tradición ◆ El oficio del pizzaiuolo, patrimonio inmaterial (UNESCO, 2017)</span>
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.es" rel="license">© 2026 Andrés Asensio ◆ CC BY-NC-ND 4.0</a>
+    ◆ <a href="https://diazepamina-creator.github.io/pizzeria-de-nick/">La pizzería de Nick (anterior)</a>
+    ◆ <a href="https://diazepamina-creator.github.io/">Materiales</a>
+    ◆ versión 1.2
+  </footer>
+</main>
+
+<div class="guia" id="guia" hidden>
+  <div class="guia-foco" id="guiaFoco"></div>
+  <div class="guia-globo" id="guiaGlobo" role="dialog" aria-modal="true" aria-labelledby="guiaTit" tabindex="-1">
+    <div class="tit" id="guiaTit"></div>
+    <p id="guiaTxt"></p>
+    <div class="guia-pie"><span id="guiaNum"></span>
+      <span class="botones"><button type="button" class="b" id="guiaSalir">Salir</button><button type="button" class="b ok" id="guiaSig">Siguiente</button></span></div>
+  </div>
+</div>
+<div class="modal" id="mEntrevista" hidden>
+  <div class="caja2 entrevista" id="entrevista" role="dialog" aria-modal="true" aria-labelledby="evTit" tabindex="-1">
+    <h2 id="evTit">Entrevistas en la cocina</h2>
+    <div class="ev-quien" role="group" aria-label="A quién entrevistar"></div>
+    <p class="ev-cartel"></p>
+    <div class="ev-escena">
+      <div class="ev-cara" aria-hidden="true"></div>
+      <div class="ev-globo"><p class="ev-pregunta"></p><p class="ev-respuesta" aria-live="polite"></p></div>
+    </div>
+    <p class="ev-rotulo">Pregúntale:</p>
+    <div class="ev-lista"></div>
+    <div class="botones"><button type="button" class="b" id="evCierra">Volver al mostrador</button></div>
+  </div>
+</div>
+<div class="modal" id="mActa" hidden>
+  <div class="caja2 acta" role="dialog" aria-modal="true" aria-labelledby="actaTit" tabindex="-1">
+    <h2 id="actaTit">El acta del mostrador</h2>
+    <p class="actaSub">Lo que has hecho en este turno. Cópiala o descárgala para dársela a tu profesor.</p>
+    <label class="actaNombre"><span class="etq">Tu nombre</span><input id="acNombre" autocomplete="name" placeholder="Escribe tu nombre"></label>
+    <div class="actaDatos" id="acDatos"></div>
+    <table class="actaTabla"><thead><tr><th>Juego</th><th>La ruta</th><th>Practicar</th></tr></thead><tbody id="acFilas"></tbody></table>
+    <details class="ac-det" id="acDet"><summary>Pedido a pedido</summary><ol class="ac-ej" id="acEj"></ol></details>
+    <div class="actaCodigos"><div><span class="etq">Código de verificación</span><b id="acFirma">—</b></div></div>
+    <div class="botones"><button type="button" class="b ok" id="acCopia">Copiar el acta</button><button type="button" class="b" id="acBaja">Descargar .txt</button><button type="button" class="b" id="acCierra">Volver al mostrador</button></div>
+    <p class="actaMsg" id="acMsg" role="status"></p>
+  </div>
+</div>
+
+<script>
+(function (raiz) {
+'use strict';
+const casi = (a, b) => Math.abs(a - b) < 1e-9;
+const mcd = (a, b) => b ? mcd(b, a % b) : a;
+const mcm = (a, b) => a / mcd(a, b) * b;
+
+const nuevaCaja = c => ({cortes: c, grapas: new Array(c).fill(false), sel: new Set(), recien: new Set()});
+
+function grupos(c){
+  const n = c.cortes, g = [], usados = new Array(n).fill(false);
+  for(let i = 0; i < n; i++){
+    if(usados[i] || (c.grapas[(i - 1 + n) % n] && n > 1)) continue;
+    const t = [i]; usados[i] = true;
+    let j = i;
+    while(c.grapas[j] && t.length < n){ j = (j + 1) % n; if(usados[j]) break; t.push(j); usados[j] = true; }
+    g.push(t);
+  }
+  if(!g.length) g.push([...Array(n).keys()]);
+  return g;
+}
+const elegidas = c => grupos(c).filter(t => c.sel.has(t[0]));
+const trozosDe = c => elegidas(c).reduce((s, t) => s + t.length, 0);
+const valor = c => trozosDe(c) / c.cortes;
+const piezaDe = (c, b) => elegidas(c).some(t => t.length * b === c.cortes);
+
+function toca(c, i){
+  const t = grupos(c).find(t => t.includes(i));
+  if(!t) return;
+  if(c.sel.has(t[0])) c.sel.delete(t[0]); else c.sel.add(t[0]);
+}
+
+function recorta(c, nuevo){
+  const b = c.cortes;
+  if(nuevo === b) return {op: null, rompe: false};
+  if(nuevo % b !== 0){
+    const rompe = c.sel.size > 0 || c.grapas.some(Boolean);
+    c.cortes = nuevo; c.grapas = new Array(nuevo).fill(false); c.sel.clear(); c.recien.clear();
+    return {op: null, rompe};
+  }
+  const f = nuevo / b, ka = trozosDe(c), g2 = new Array(nuevo).fill(false), sel2 = new Set();
+  grupos(c).forEach(t => {
+    const unida = t.length > 1;
+    t.forEach((i, idx) => {
+      for(let k = 0; k < f - 1; k++) g2[i * f + k] = unida;
+      if(idx < t.length - 1) g2[i * f + f - 1] = true;
+    });
+    if(!c.sel.has(t[0])) return;
+    if(unida) sel2.add(t[0] * f);
+    else for(let k = 0; k < f; k++) sel2.add(t[0] * f + k);
+  });
+  c.cortes = nuevo; c.grapas = g2; c.sel = sel2; c.recien.clear();
+  return {op: ka ? {tipo: 'corte', c: f, ka, ba: b, kd: ka * f, bd: nuevo} : null, rompe: false};
+}
+
+function grapa(c){
+  const n = c.cortes, gs = elegidas(c);
+  if(gs.length < 2) return {ok: false, por: 'pocas'};
+  const todos = gs.flat(), dentro = new Set(todos);
+  let ini = -1;
+  for(let i = 0; i < n && ini < 0; i++){
+    if(!dentro.has(i)) continue;
+    let sigue = true;
+    for(let k = 0; k < todos.length; k++) if(!dentro.has((i + k) % n)){ sigue = false; break; }
+    if(sigue) ini = i;
+  }
+  if(ini < 0) return {ok: false, por: 'sueltas'};
+  c.recien.clear();
+  for(let k = 0; k < todos.length - 1; k++){
+    const j = (ini + k) % n;
+    if(!c.grapas[j]) c.recien.add(j);
+    c.grapas[j] = true;
+  }
+  c.sel.clear(); c.sel.add(ini);
+  const m = todos.length, divide = n % m === 0;
+  return {ok: true, m, op: divide ? {tipo: 'grapa', c: m, ka: m, ba: n, kd: 1, bd: n / m} : null};
+}
+
+function industrial(c, x){
+  if(c.cortes % x !== 0) return {ok: false};
+  const finos = elegidas(c).flat(), kAntes = finos.length, bAntes = c.cortes, vAntes = valor(c);
+  c.recien.clear(); c.grapas = new Array(c.cortes).fill(false);
+  for(let i = 0; i < c.cortes; i++) if((i + 1) % x !== 0){ c.grapas[i] = true; c.recien.add(i); }
+  c.sel.clear();
+  grupos(c).forEach(t => { if(t.some(i => finos.includes(i))) c.sel.add(t[0]); });
+  const exacta = kAntes > 0 && kAntes % x === 0 && casi(vAntes, valor(c));
+  return {ok: true, op: exacta ? {tipo: 'grapa', c: x, ka: kAntes, ba: bAntes, kd: kAntes / x, bd: bAntes / x} : null,
+          nota: kAntes && !exacta ? {kAntes, bAntes, x} : null};
+}
+function suelta(c){ c.grapas = new Array(c.cortes).fill(false); c.sel.clear(); c.recien.clear(); }
+
+const fVal = f => f[0] / f[1];
+const fTxt = f => f[0] + '/' + f[1];
+const signo = (a, b) => casi(fVal(a), fVal(b)) ? '=' : (fVal(a) > fVal(b) ? '>' : '<');
+const simplifica = f => { const d = mcd(f[0], f[1]); return [f[0] / d, f[1] / d]; };
+const partes = cajas => cajas.map(c => ({k: trozosDe(c), b: c.cortes})).filter(t => t.k > 0);
+const mismoCorte = ps => ps.every(t => t.b === ps[0].b);
+const total = cajas => cajas.reduce((s, c) => s + valor(c), 0);
+
+const M = {casi, mcd, mcm, nuevaCaja, grupos, elegidas, trozosDe, valor, piezaDe, toca, recorta, grapa, industrial, suelta,
+           fVal, fTxt, signo, simplifica, partes, mismoCorte, total};
+if(typeof module !== 'undefined' && module.exports) module.exports = M;
+else raiz.Motor = M;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const M = typeof require === 'function' && typeof module !== 'undefined' ? require('./motor.js') : raiz.Motor;
+let azar = Math.random;
+const elige = xs => xs[Math.floor(azar() * xs.length)];
+const entre = (a, b) => a + Math.floor(azar() * (b - a + 1));
+const fTxt = M.fTxt, az = t => '<b class="fB">' + t + '</b>', ro = t => '<b class="fA">' + t + '</b>';
+const CARTA = [2, 3, 4, 5, 6, 8, 9, 10, 12, 15];
+const NOMBRE = {2: 'mitades', 3: 'tercios', 4: 'cuartos', 5: 'quintos', 6: 'sextos', 7: 'séptimos', 8: 'octavos', 9: 'novenos', 10: 'décimos', 12: 'doceavos', 15: 'quinceavos'};
+const UNO = {2: 'media pizza', 3: 'un tercio', 4: 'un cuarto', 5: 'un quinto', 6: 'un sexto', 7: 'un séptimo', 8: 'un octavo', 9: 'un noveno', 10: 'un décimo', 12: 'un doceavo', 15: 'un quinceavo'};
+const enLetra = f => f[0] === 1 ? UNO[f[1]] : f[0] + ' ' + NOMBRE[f[1]];
+
+const SERVIR = [
+  {id: 's1', f: [1, 2], cajas: [4], pieza: true, menu: [2, 4, 8],
+   cli: '—Perdone… yo la quería <b>en mitades</b>, no en cuartos. ¿Y ahora qué me llevo?',
+   nick: 'Es lo mismo, pero el cliente quiere <b>una pieza</b>. Toca dos cuartos pegados y grápalos.',
+   ok: '¡Media! Dos cuartos grapados ocupan lo mismo que una mitad: <b>2/4 y 1/2 son la misma cantidad</b>. Y mira la regla: la marca no se ha movido.'},
+  {id: 's2', f: [3, 8], cajas: [4], menu: [2, 4, 8],
+   cli: '—Yo quiero <b>tres octavos</b>. Y no me diga que no, que lo pone en la carta.',
+   nick: 'Viene en cuartos, pero el cortador vuelve a pasar cuando hace falta. Córtala en 8 y quédate con tres trozos.',
+   ok: 'Tres de ocho, ni uno más. Al cortar más fino, cada cuarto se ha hecho <b>dos octavos</b>: hay más trozos y son más pequeños.'},
+  {id: 's3', f: [5, 4], cajas: [4, 4], menu: [2, 4, 8],
+   cli: '—Somos cinco. Póngame <b>cinco cuartos</b>… si es que eso existe.',
+   nick: 'Existe, pero no cabe en una caja: he traído otra. Una pizza entera y un cuarto de la segunda.',
+   ok: 'Claro que existe: una pizza entera y un cuarto. Cuando el de arriba pasa al de abajo hace falta <b>más de una unidad</b>, y en la regla se ve pasado el 1.'},
+  {id: 's4', f: [1, 3], cajas: [6], pieza: true, menu: [3, 6, 12],
+   cli: '—Un <b>tercio</b> de pizza, por favor. Pero la veo cortada en seis…',
+   nick: 'Seis sextos, sí. Con la máquina de <b>2 en 2</b> quedan tercios, y luego eliges tu pieza. O grapa dos sextos pegados: es lo mismo.',
+   ok: 'Un tercio. Grapando de dos en dos, 2/6 se ha convertido en 1/3: <b>has dividido arriba y abajo entre 2</b>.'},
+  {id: 's5', f: [3, 4], cajas: [4, 4], menu: [2, 4, 8],
+   cli: '—Quiero <b>media pizza y un cuarto</b>. Todo junto, si puede ser.',
+   nick: 'Media y un cuarto no se juntan: no son del mismo tamaño. Media pizza son dos cuartos: tres cuartos en total.',
+   ok: 'Tres cuartos. Para juntar dos trozos hay que <b>cortarlos igual</b> primero: buscar el mismo denominador no es un capricho, es poder graparlos.'}
+];
+
+const COMPARAR = [
+  {id: 'c1', tipo: 'den', fA: [3, 8], fB: [5, 8], menu: [2, 4, 8],
+   cli: '—Mesa 4 quiere ' + ro('tres octavos') + '; mesa 7, ' + az('cinco octavos') + '. ¿Quién se lleva más?',
+   nick: 'Las dos cajas ya vienen en octavos: trozos <b>iguales</b>. Prepara 3/8 y 5/8, y esto se cuenta solo.',
+   ok: 'Mesa 7, y de calle: cinco octavos contra tres. Con trozos iguales <b>basta contar los trozos</b>, y en la regla se ve la diferencia: dos octavos.',
+   rep: {A: '¿Tres trozos más que cinco? Son octavos los dos, del mismo tamaño exacto: gana quien tenga más trozos.',
+         ig: 'Iguales no: mira la regla, las dos marcas están en sitios distintos. Cuenta los octavos de cada caja.'}},
+  {id: 'c2', tipo: 'num', fA: [1, 3], fB: [1, 4], menu: [3, 4, 6, 12],
+   cli: '—Mesa 4 pide ' + ro('un tercio') + ' y mesa 7 ' + az('un cuarto') + ', y discuten: que si 4 es más que 3, que si el cuarto gana…',
+   nick: 'Más comensales tocan a menos, te lo digo yo. Pero prepáralo: un trozo en cada caja, y mira el tamaño de cada uno.',
+   ok: 'El del tercio. Cuantas <b>más</b> partes se hace una pizza, más pequeño toca cada trozo: por eso <b>1/4 &lt; 1/3 aunque 4 &gt; 3</b>. Si alguien protesta, córtalas las dos en 12 y cuenta: 4/12 contra 3/12.',
+   rep: {B: 'Ya sé lo que has pensado: que 4 es más que 3. Pero ese número dice <b>en cuántas partes se corta</b>, no cuánto toca. Más comensales, menos ración. Mira el tamaño de los dos trozos.',
+         ig: '¿Iguales? Pon un trozo encima del otro: el de la mesa 4 sobra por todas partes.'}},
+  {id: 'c3', tipo: 'cabe', fA: [3, 4], fB: [5, 8], menu: [2, 4, 8],
+   cli: '—Mesa 4, ' + ro('tres cuartos') + '; mesa 7, ' + az('cinco octavos') + '. A ver quién tiene razón.',
+   nick: 'Cuartos contra octavos: trozos distintos, y con trozos distintos no hay cuenta que valga. Pero los cuartos se dejan recortar: pasa el cortador por <b>una</b> caja y quedan igualadas.',
+   ok: 'Mesa 4: seis octavos contra cinco. Bastaba recortar <b>una</b> caja, porque los cuartos caben justos en los octavos. Un octavo de diferencia.',
+   rep: {B: 'Cinco trozos contra tres, sí. Pero de distinto tamaño: <b>un octavo es la mitad de un cuarto</b>. Contar trozos que no miden lo mismo no vale para nada. Iguálalos y hablamos.',
+         ig: 'No caen en el mismo punto. Ponlas en octavos las dos y lo verás.'}},
+  {id: 'c4', tipo: 'nadie', fA: [2, 3], fB: [3, 5], menu: [3, 5, 6, 10, 15],
+   cli: '—Mesa 4 quiere ' + ro('dos tercios') + ' y mesa 7 quiere ' + az('tres quintos') + '. ¿Quién se lleva más pizza?',
+   nick: 'Tercios y quintos: ni unos caben en los otros ni al revés. Aquí toca cortar <b>las dos</b>… y hay un número de trozos donde caben los dos cortes.',
+   ok: 'Mesa 4, por un pelo: diez quinceavos contra nueve. Ponerlas en la <b>misma secuencia de trozos</b>: eso, y no otra cosa, es el denominador común. Un quinceavo de diferencia.',
+   rep: {B: 'Ya veo el razonamiento: 3 es más que 2 y 5 es más que 3, así que gana. Pues eso mismo pasaba hace dos pedidos con 1/3 y 1/4, y <b>ganaba el tercio</b>. Con trozos distintos, contar no sirve.',
+         ig: 'Iguales no, pero por poco: un solo quinceavo los separa. Córtalas las dos y cuenta.'}},
+  {id: 'c5', tipo: 'igual', fA: [2, 4], fB: [3, 6], menu: [2, 3, 4, 6, 8, 12],
+   cli: '—Mesa 4 pide ' + ro('dos cuartos') + '; mesa 7, ' + az('tres sextos') + '. Cada una dice que la suya es más grande.',
+   nick: 'Pues las dos no pueden tener razón. Córtalas igual y se acaba la discusión.',
+   ok: 'Las dos tenían razón: 6/12 y 6/12, <b>el mismo punto de la regla con dos nombres</b>. Comparar también puede acabar en empate.',
+   rep: {A: '¿Seguro? Córtalas las dos igual y mira las marcas de la regla antes de contestar.',
+         B: '¿Porque 3 es más que 2? Pero también 6 es más que 4. Córtalas igual y verás la sorpresa.'}}
+];
+
+const TELEFONO = [
+  {id: 't1', fA: [7, 8], fB: [6, 7],
+   cli: '—Nick, soy Nicoleta. Dos encargos para la pastelería: ' + ro('siete octavos') + ' para mí y ' + az('seis séptimos') + ' para el pinche, que jura que lo suyo es más. ¿Quién tiene razón?',
+   nick: '¿Octavos contra séptimos? Harían falta 56 trozos y el cortador no hila tan fino. Esto se corta <b>sobre el papel</b>: multiplica cada una arriba y abajo por lo que haga falta hasta que estén en la misma secuencia.',
+   ok: 'El de 7/8, por un trozo de 56: 49 contra 48. Y fíjate en los números: <b>49 = 7×7 y 48 = 8×6</b>. Has multiplicado <b>en cruz</b> sin querer: la regla famosa no es un truco, es este corte sobre el papel.',
+   rep: {B: 'El pinche dice lo mismo, y por lo mismo: que a 6/7 le falta un séptimo y a 7/8 un octavo. Pero <b>al que le falta menos, se lleva más</b>, y un octavo es más pequeño que un séptimo.',
+         ig: 'Ni hablar: 49 y 48 no son el mismo número, por muy cerca que anden.'}}
+];
+
+function carta(obligados, relleno){
+  const c = new Set(obligados);
+  for(const n of relleno) if(c.size < 6) c.add(n);
+  return [...c].filter(n => CARTA.includes(n)).sort((a, b) => a - b);
+}
+const IGUALES = [[[1, 2], [2, 4]], [[2, 4], [3, 6]], [[2, 4], [4, 8]], [[1, 3], [2, 6]], [[1, 3], [4, 12]], [[2, 6], [4, 12]], [[1, 4], [2, 8]],
+                 [[1, 4], [3, 12]], [[3, 4], [6, 8]], [[1, 5], [2, 10]], [[2, 5], [4, 10]], [[1, 6], [2, 12]], [[5, 6], [10, 12]], [[3, 6], [6, 12]]];
+const NADIE = [[2, 3], [2, 5], [3, 4], [3, 5], [4, 6]];
+const CABE = [[2, 4], [2, 6], [3, 6], [4, 8], [2, 8], [3, 9], [5, 10], [4, 12], [6, 12], [3, 12]];
+function generaServir(d){
+  let f, cajas, pieza = false, tipo;
+  if(d === 0){
+    tipo = elige(['grapa', 'corta']);
+    if(tipo === 'grapa'){ const b = elige([2, 3, 4]), c = b * elige([2, 3].filter(x => b * x <= 12)); f = [1, b]; cajas = [c]; pieza = true; }
+    else{ const c = elige([2, 3, 4]), m = elige([2, 3].filter(x => c * x <= 12)), b = c * m; f = [entre(1, b - 1), b]; cajas = [c]; }
+  }else if(d === 1){
+    tipo = elige(['mas', 'suma']);
+    const b = tipo === 'mas' ? elige([2, 3, 4, 6, 8]) : elige([4, 6, 8]);
+    if(tipo === 'mas'){ f = [b + entre(1, b - 1), b]; cajas = [b, b]; }
+    else{ f = [entre(2, b - 1), b]; cajas = [b / 2, b]; }
+  }else{
+    tipo = 'mixto';
+    const b = elige([3, 4, 5, 6]), c = elige([2, 3, 4].filter(x => x !== b && M.mcm(x, b) <= 15));
+    f = [entre(1, b - 1), b]; cajas = [c]; pieza = f[0] === 1;
+  }
+  return servirDe(f, cajas, pieza, d > 0 ? CARTA.filter(n => n % cajas[0] === 0 && n <= 12) : []);
+}
+function servirDe(f, cajas, pieza, relleno){
+  const menu = carta([cajas[0], f[1], M.mcm(cajas[0], f[1])], relleno || []);
+  return {id: 'sp' + Date.now(), f, cajas, pieza, menu, practica: true,
+    cli: '—Póngame <b>' + enLetra(f) + '</b>' + (cajas.length > 1 ? '. Y traiga otra caja, que no me cabe' : ', que la veo cortada en ' + NOMBRE[cajas[0]]) + '.',
+    nick: pieza ? 'Lo quiere de <b>una pieza</b>: corta o grapa lo que haga falta, y prepárala.' : 'Prepara <b>' + fTxt(f) + '</b>' + (cajas.length > 1 ? ' con las dos cajas' : '') + ': el cortador y la grapadora son tuyos.',
+    ok: 'Eso es: <b>' + fTxt(f) + '</b>. La marca de la regla no miente.'};
+}
+function generaComparar(d){
+  const tipo = elige([['den', 'num'], ['cabe', 'igual', 'den'], ['nadie', 'igual', 'cabe']][d]);
+  let fA, fB;
+  if(tipo === 'den'){ const b = elige([5, 6, 8, 10, 12]); let a = entre(1, b - 1), c = entre(1, b - 1); while(c === a) c = entre(1, b - 1); fA = [a, b]; fB = [c, b]; }
+  else if(tipo === 'num'){ const [b, c] = elige(NADIE.concat(CABE)), k = d && Math.min(b, c) > 2 ? elige([1, 2]) : 1; fA = [k, b]; fB = [k, c]; }
+  else if(tipo === 'cabe'){ const [b, c] = elige(CABE); let a = entre(1, b - 1), e = entre(1, c - 1); while(a * c === e * b) e = entre(1, c - 1); fA = [a, b]; fB = [e, c]; }
+  else if(tipo === 'nadie'){ const [b, c] = elige(NADIE); let a = entre(1, b - 1), e = entre(1, c - 1); while(a * c === e * b) e = entre(1, c - 1); fA = [a, b]; fB = [e, c]; }
+  else{ [fA, fB] = elige(IGUALES); }
+  if(azar() < .5) [fA, fB] = [fB, fA];
+  return compararDe(fA, fB, tipo);
+}
+function tipoDe(fA, fB){
+  if(fA[0] * fB[1] === fB[0] * fA[1]) return 'igual';
+  if(fA[1] === fB[1]) return 'den';
+  if(fA[0] === fB[0]) return 'num';
+  if(fA[1] % fB[1] === 0 || fB[1] % fA[1] === 0) return 'cabe';
+  return 'nadie';
+}
+function compararDe(fA, fB, tipo){
+  tipo = tipo || tipoDe(fA, fB);
+  const m = M.mcm(fA[1], fB[1]);
+  const menu = carta([fA[1], fB[1], m], tipo === 'nadie' ? CARTA.filter(n => n % fA[1] === 0 || n % fB[1] === 0) : []);
+  const NICK = {den: 'Las dos cajas vienen en ' + NOMBRE[fA[1]] + ': trozos iguales. Prepara los dos pedidos y cuenta.',
+    num: 'Un trozo del mismo tamaño no es: mira cuál toca a más. Prepáralos y compara los trozos.',
+    cabe: 'Trozos distintos, pero unos caben en los otros: pasa el cortador por <b>una</b> caja y quedan igualadas.',
+    nadie: 'Ni unos caben en los otros ni al revés: hay que cortar <b>las dos</b> donde quepan los dos cortes.',
+    igual: 'Córtalas igual, y luego mira bien las dos marcas de la regla.'};
+  const OK = {den: 'Con trozos iguales <b>basta contar los trozos</b>.', num: 'Cuantas más partes, más pequeño toca cada trozo: <b>gana el denominador pequeño</b>.',
+    cabe: 'Bastaba recortar una caja: un corte cabía en el otro.', nadie: 'Las dos en la <b>misma secuencia de trozos</b>: eso es el denominador común.',
+    igual: '<b>El mismo punto con dos nombres.</b> Comparar también puede acabar en empate.'};
+  const REP = {den: 'Son ' + NOMBRE[fA[1]] + ' los dos, del mismo tamaño: gana quien tenga <b>más trozos</b>.',
+    num: 'Ese número dice en <b>cuántas partes</b> se corta la pizza, no cuánto toca. Más partes, menos ración.',
+    cabe: 'Trozos de distinto tamaño: contar no vale. <b>Iguálalos</b> y cuenta.', nadie: 'Trozos de distinto tamaño: contar no vale. <b>Iguálalos</b> y cuenta.',
+    igual: 'Córtalas igual y mira las marcas: caen en el <b>mismo punto</b>.'};
+  return {id: 'cp' + Date.now(), tipo, fA, fB, menu, practica: true,
+    cli: '—Mesa 4 quiere ' + ro(enLetra(fA)) + '; mesa 7, ' + az(enLetra(fB)) + '. ¿Quién se lleva más?',
+    nick: NICK[tipo], ok: OK[tipo], rep: {A: REP[tipo], B: REP[tipo], ig: REP[tipo]}};
+}
+const LEJOS = [[5, 7], [5, 8], [7, 8], [6, 7], [4, 7], [3, 7], [5, 9], [7, 9], [8, 9], [4, 9], [5, 6], [7, 10], [3, 8]];
+function generaTelefono(d){
+  const [b, c] = elige(LEJOS.filter(([x, y]) => M.mcm(x, y) > 15));
+  let a, e, dif;
+  do{ a = entre(1, b - 1); e = entre(1, c - 1); dif = Math.abs(a / b - e / c); }
+  while(dif === 0 || (d === 0 ? dif < .2 : d === 1 ? dif < .06 || dif > .25 : dif > .08));
+  return telefonoDe([a, b], [e, c]);
+}
+function telefonoDe(fA, fB){
+  const [a, b] = fA, [e, c] = fB;
+  return {id: 'tp' + Date.now(), fA, fB, practica: true,
+    cli: '—Nick, soy Nicoleta. ' + ro(enLetra(fA)) + ' para mí y ' + az(enLetra(fB)) + ' para el pinche. ¿Quién se lleva más?',
+    nick: NOMBRE[b] + ' contra ' + NOMBRE[c] + ': harían falta ' + b * c + ' trozos. Sobre el papel: multiplica cada una arriba y abajo por el denominador de la otra.',
+    ok: 'En la secuencia de ' + b * c + ': <b>' + a * c + ' contra ' + e * b + '</b>. Y ' + a * c + ' = ' + a + '×' + c + ', ' + e * b + ' = ' + e + '×' + b + ': los <b>productos en cruz</b>.',
+    rep: {A: 'En la secuencia de ' + b * c + ': ¿quién va más lejos, ' + a * c + ' o ' + e * b + '?', B: 'En la secuencia de ' + b * c + ': ¿quién va más lejos, ' + a * c + ' o ' + e * b + '?', ig: 'No son el mismo número, por muy cerca que anden.'}};
+}
+
+const frac = t => { const m = /^(\d{1,2})\/(\d{1,2})$/.exec(String(t || '').trim()); return m && +m[1] > 0 && +m[2] > 1 ? [+m[1], +m[2]] : null; };
+function aMedida(q){
+  const get = k => typeof q.get === 'function' ? q.get(k) : q[k];
+  const j = get('j');
+  if(j === 'servir'){
+    const f = frac(get('f')); if(!f || !CARTA.includes(f[1])) return null;
+    const cajas = String(get('c') || f[1]).split(',').map(Number);
+    if(!cajas.length || cajas.length > 3 || cajas.some(c => !CARTA.includes(c))) return null;
+    if(f[0] > f[1] * cajas.length) return null;
+    if(!CARTA.includes(M.mcm(cajas[0], f[1]))) return null;
+    return servirDe(f, cajas, get('p') === '1' || (f[0] === 1 && cajas[0] !== f[1]));
+  }
+  if(j === 'comparar' || j === 'telefono'){
+    const fA = frac(get('a')), fB = frac(get('b')); if(!fA || !fB) return null;
+    if(fA[0] > fA[1] || fB[0] > fB[1]) return null;
+    if(j === 'telefono') return fA[1] <= 12 && fB[1] <= 12 ? telefonoDe(fA, fB) : null;
+    if(!CARTA.includes(fA[1]) || !CARTA.includes(fB[1]) || !CARTA.includes(M.mcm(fA[1], fB[1]))) return null;
+    return compararDe(fA, fB);
+  }
+  return null;
+}
+
+const RUTA = {servir: SERVIR, comparar: COMPARAR, telefono: TELEFONO};
+const GENERA = {servir: generaServir, comparar: generaComparar, telefono: generaTelefono};
+const NOMBRE_J = {servir: 'Servir', comparar: 'Comparar', telefono: 'Por teléfono'};
+const P = {RUTA, GENERA, NOMBRE_J, CARTA, NOMBRE, enLetra, aMedida, tipoDe, conAzar: f => { azar = f; }};
+if(typeof module !== 'undefined' && module.exports) module.exports = P;
+else raiz.Pedidos = P;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+let activo = true, A = null;
+function prepara(){
+  if(A) return A;
+  const AC = raiz.AudioContext || raiz.webkitAudioContext;
+  if(!AC) return null;
+  const ctx = new AC(), salida = ctx.createGain(); salida.gain.value = .8; salida.connect(ctx.destination);
+  const ruido = ctx.createBuffer(1, ctx.sampleRate * .5, ctx.sampleRate), d = ruido.getChannelData(0);
+  for(let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  return A = {ctx, salida, ruido};
+}
+function rafaga(t, f, dur, vol, q){
+  const s = A.ctx.createBufferSource(); s.buffer = A.ruido;
+  const fl = A.ctx.createBiquadFilter(); fl.type = 'bandpass'; fl.frequency.value = f; fl.Q.value = q || 1.2;
+  const g = A.ctx.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  s.connect(fl); fl.connect(g); g.connect(A.salida); s.start(t); s.stop(t + dur + .02);
+}
+function tono(t, f, dur, vol, tipo){
+  const o = A.ctx.createOscillator(); o.type = tipo || 'sine'; o.frequency.value = f;
+  const g = A.ctx.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .01);
+  g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  o.connect(g); g.connect(A.salida); o.start(t); o.stop(t + dur + .02);
+}
+const SONIDOS = {
+  grapa(t){ rafaga(t, 1400, .05, .35, 1.2); rafaga(t + .04, 600, .08, .3, 1); },
+  corte(t){ rafaga(t, 3200, .12, .16, .8); rafaga(t + .05, 4200, .08, .1, .8); },
+  tiza(t){ rafaga(t, 2400, .05, .14, 2); },
+  timbre(t){ for(let k = 0; k < 6; k++) tono(t + k * .08, k % 2 ? 1180 : 980, .07, .08, 'square'); },
+  bien(t){ tono(t, 659, .18, .14, 'triangle'); tono(t + .11, 988, .26, .12, 'triangle'); },
+  mal(t){ tono(t, 160, .22, .16, 'square'); },
+  trampa(t){ rafaga(t, 3800, .04, .5, 1.4); rafaga(t + .005, 1600, .06, .4, 1.2); tono(t, 180, .12, .22, 'triangle'); },
+  risita(t){ [0, .11, .22].forEach((d, i) => { tono(t + d, 1700 + i * 140, .07, .1, 'triangle'); tono(t + d + .02, 2300 + i * 160, .05, .05, 'sine'); }); }
+};
+function toca(nombre, retraso){
+  if(!activo || !SONIDOS[nombre]) return;
+  try{
+    if(!prepara()) return;
+    if(A.ctx.state === 'suspended') A.ctx.resume();
+    SONIDOS[nombre](A.ctx.currentTime + .02 + (retraso || 0));
+  }catch(err){}
+}
+if(raiz.addEventListener) raiz.addEventListener('pointerdown', () => {
+  if(activo) try{ const a = prepara(); if(a && a.ctx.state === 'suspended') a.ctx.resume(); }catch(err){}
+}, {once: true});
+raiz.Sonido = {toca, activo: v => { activo = !!v; }};
+})(window);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const f = x => +(+x).toFixed(1);
+const P = (cls, d, mas) => '<path class="' + cls + '" d="' + d + '"' + (mas || '') + '/>';
+const C = (cls, x, y, r, mas) => '<circle class="' + cls + '" cx="' + f(x) + '" cy="' + f(y) + '" r="' + f(r) + '"' + (mas || '') + '/>';
+const E = (cls, x, y, rx, ry, mas) => '<ellipse class="' + cls + '" cx="' + f(x) + '" cy="' + f(y) + '" rx="' + f(rx) + '" ry="' + f(ry) + '"' + (mas || '') + '/>';
+const G = (cls, html, mas) => '<g' + (cls ? ' class="' + cls + '"' : '') + (mas || '') + '>' + html + '</g>';
+const en = (x, y, ang, html, k) => '<g transform="translate(' + f(x) + ' ' + f(y) + ')' + (ang ? ' rotate(' + f(ang) + ')' : '') + (k ? ' scale(' + k + ')' : '') + '">' + html + '</g>';
+const F = (tono, d) => P('k', d) + P('w ' + tono, d) + P('L', d);
+function azar(s){ return () => { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; }
+function blob(cx, cy, r, amp, n, fase){
+  let d = ''; const k = 40;
+  for(let i = 0; i < k; i++){
+    const a = i / k * Math.PI * 2, rr = r + amp * (Math.sin(a * n + fase) * .6 + Math.sin(a * (n + 3) + fase * 2) * .4);
+    d += (i ? 'L' : 'M') + f(cx + rr * Math.cos(a)) + ' ' + f(cy + rr * Math.sin(a));
+  }
+  return d + 'Z';
+}
+
+const CX = 150, CY = 148, R = 126;
+const MOZZA = [[-52, -40, 17], [10, -64, 15], [60, -30, 16], [-72, 14, 14], [-16, 4, 18], [40, 24, 17], [-40, 62, 16], [22, 74, 14], [76, 38, 12]];
+const HOJAS = [[-28, -74, 20, 1.2], [36, -8, -35, 1.25], [-54, 24, 100, 1.1], [62, 62, 40, 1.2], [-12, -32, -55, 1], [0, 46, 170, 1.15], [80, -4, 80, 1], [-80, -22, 60, 1]];
+function pizza(){
+  const az = azar(11); let s = '';
+  s += C('pzBorde', CX, CY, R - 1.5);
+  for(let i = 0; i < 30; i++){
+    const a = az() * Math.PI * 2, d = R - 5 - az() * 9, rr = 1.2 + az() * 2.6, x = CX + d * Math.cos(a), y = CY + d * Math.sin(a);
+    s += E('pzTueste', x, y, rr, rr * .62, ' transform="rotate(' + f(a * 180 / Math.PI + 90) + ' ' + f(x) + ' ' + f(y) + ')"');
+  }
+  const tom = blob(CX, CY, 108, 2, 9, .7);
+  s += P('pzTomate', tom) + P('pzTomateL', tom);
+  MOZZA.forEach(([x, y, r], i) => {
+    s += P('pzMozza', blob(CX + x, CY + y, r, r * .16, 3 + i % 3, i * 1.3));
+    s += P('pzMozzaL', 'M' + f(CX + x - r * .45) + ' ' + f(CY + y - r * .2) + ' q' + f(r * .3) + ' ' + f(-r * .4) + ' ' + f(r * .7) + ' ' + f(-r * .25));
+  });
+  HOJAS.forEach(([x, y, g, k]) => { s += en(CX + x, CY + y, g, P('pzHoja', 'M-11 0 Q-4 -9 11 0 Q-4 9 -11 0 Z') + P('pzNervio', 'M-8 0 H8'), k); });
+  return s;
+}
+
+function grapadora(){
+  return P('L t4', 'M-30 -3 H6 Q9 -3 9 0 Q9 3 6 3 H-30 Q-33 3 -33 0 Q-33 -3 -30 -3 Z') +
+    P('L t3', 'M-31 -5 Q-33 -16 -22 -17 L2 -15 Q9 -14 9 -7 L9 -5 Z') +
+    P('l p', 'M-24 -12.5 L2 -11') + C('L t4', -26, -9, 2.4) + P('L t4', 'M2 -5 H8 V-2 H2 Z');
+}
+function grapadoraArriba(){
+  return P('L t4', 'M-8 -50 Q-8 -54 -4 -54 H4 Q8 -54 8 -50 V1 Q8 5 4 5 H-4 Q-8 5 -8 1 Z') +
+    P('L t3', 'M-6 -49 Q-6 -52 -3 -52 H3 Q6 -52 6 -49 V-3 Q6 2 0 2 Q-6 2 -6 -3 Z') + P('l p', 'M-2.6 -44 V-8') + C('L t4', 0, -47, 2.2);
+}
+const mangoRueda = r => P('L t5', 'M-3 ' + f(-r - 26) + ' Q0 ' + f(-r - 30) + ' 3 ' + f(-r - 26) + ' L2.4 ' + f(-r - 8) + ' H-2.4 Z') +
+  P('L t4', 'M-2.4 ' + f(-r - 8) + ' H2.4 L4 ' + f(-r * .3) + ' Q0 ' + f(-r * .05) + ' -4 ' + f(-r * .3) + ' Z');
+const cuchilla = r => C('L t4', 0, 0, r) + C('l', 0, 0, r - 2.6) + P('l', 'M0 ' + f(-r + 3.6) + ' V' + f(r - 3.6) + ' M' + f(-r + 3.6) + ' 0 H' + f(r - 3.6)) + C('L t3', 0, 0, 2.2);
+const rueda = r => mangoRueda(r || 13) + cuchilla(r || 13);
+function pala(largo){
+  return P('L t5', 'M-1.6 0 H1.6 V' + largo + ' H-1.6 Z') +
+    P('L t5', 'M-14 -31 Q-15 -35 -11 -35 H11 Q15 -35 14 -31 L10 -3 Q9.6 0 6 0 H-6 Q-9.6 0 -10 -3 Z') + P('l', 'M-8 -30 L-6 -6 M0 -31 V-5 M8 -30 L6 -6');
+}
+function manga(){
+  return P('L t0', 'M0 0 L-2.2 -5 L-8 -24 Q-9 -29 -4 -30 L4 -30 Q9 -29 8 -24 L2.2 -5 Z') + P('L t4', 'M0 .6 L-2.4 -5 H2.4 Z') +
+    P('L t0', 'M-4 -30 Q-6 -36 -1 -38 Q5 -37 4 -30 Z') + P('l', 'M-5.4 -22 H5.4 M-3 -31.6 Q0 -33 3 -31.6');
+}
+function auricular(){
+  return P('auriK', 'M-3 -10 Q7 0 -5 11') + P('auri', 'M-3 -10 Q7 0 -5 11') + C('copa', -4, -11, 5.4) + C('copa', -7, 11.6, 5) +
+    P('l', 'M-7 16 q-3 3 0 5 q3 2 0 5 q-3 3 0 5 q3 2 0 5 q-3 3 0 5');
+}
+function queso(k){
+  return '<g' + (k ? ' transform="scale(' + k + ')"' : '') + '>' + P('L t9', 'M0 0 L22 0 L22 -14 Z') + P('L t9', 'M0 0 L22 -14 L22 -18 Q11 -15 0 -4 Z') +
+    C('l', 15.4, -5, 1.9) + C('l', 18.6, -10.4, 1.2) + C('l', 9.6, -3, 1.1) + '</g>';
+}
+
+function brazo(x0, y0, mano_, l1, l2, g, tono, tono2){
+  let dx = mano_[0] - x0, dy = mano_[1] - y0, d = Math.hypot(dx, dy) || .01;
+  const max = l1 + l2 - .05, min = Math.abs(l1 - l2) + .05;
+  if(d > max || d < min){ const k = (d > max ? max : min) / d; dx *= k; dy *= k; d *= k; }
+  const a1 = Math.atan2(dy, dx) + (mano_[2] || 1) * Math.acos((l1 * l1 + d * d - l2 * l2) / (2 * l1 * d));
+  const xc = x0 + Math.cos(a1) * l1, yc = y0 + Math.sin(a1) * l1, x1 = x0 + dx, y1 = y0 + dy;
+  const cd = 'M' + f(xc) + ' ' + f(yc), todo = 'M' + f(x0) + ' ' + f(y0) + ' L' + f(xc) + ' ' + f(yc) + ' L' + f(x1) + ' ' + f(y1), st = ' style="--g:' + g + '"';
+  const dos = tono2 ? P('bi ' + tono2, cd + ' L' + f(x1) + ' ' + f(y1), ' style="--g:' + (g - 1.6) + '"') + P('bo', cd + ' l.01 0', ' style="--g:' + (g + .6) + '"') + P('bi ' + tono, cd + ' l.01 0', ' style="--g:' + (g + .6) + '"') : '';
+  return {x: x1, y: y1, ang: Math.atan2(y1 - yc, x1 - xc) * 180 / Math.PI, svg: P('bo', todo, st) + P('bi ' + tono, tono2 ? 'M' + f(x0) + ' ' + f(y0) + ' L' + f(xc) + ' ' + f(yc) : todo, st) + dos};
+}
+function mano(x, y, tono, r, dedo){
+  let s = '';
+  if(dedo != null){ const a = dedo * Math.PI / 180, d = 'M' + f(x) + ' ' + f(y) + ' L' + f(x + Math.cos(a) * 8.6) + ' ' + f(y + Math.sin(a) * 8.6);
+    s += P('bo', d, ' style="--g:2.4"') + P('bi ' + tono, d, ' style="--g:2.4"'); }
+  return s + C('L ' + tono, x, y, r || 4.6);
+}
+
+function morsa(o){
+  o = o || {}; const mx = (o.mira || [0, 0])[0] * 1.1, my = (o.mira || [0, 0])[1] * 1;
+  let s = '';
+  s += P('L t1', 'M41 47 Q38 23 60 22 Q82 23 79 47 Q85 53 82.6 61 Q78 71 60 71 Q42 71 37.4 61 Q35 53 41 47 Z');
+  if(!o.ella) s += P('l', 'M52 30.4 Q60 28.6 68 30.4 M54.6 33.6 Q60 32.4 65.4 33.6');
+  else [[42.8, 44.6], [45.8, 46.2], [42.4, 47.6]].forEach(([x, y]) => { s += C('peca', x, y, .95) + C('peca', 120 - x, y, .95); });
+  const b = o.boca || 0;
+  if(b) s += E('L t3 boca', 60, 66.4, o.ella ? 2.3 : 3, 1 + b * (o.ella ? 2.2 : 3));
+  const c = o.colmillo || 17;
+  s += P('L t0', 'M47.4 61 Q46.4 ' + f(61 + c * .6) + ' 48.8 ' + f(61 + c) + ' Q52.2 ' + f(61 + c * .55) + ' 52.8 61 Z');
+  s += P('L t0', 'M72.6 61 Q73.6 ' + f(61 + c * .6) + ' 71.2 ' + f(61 + c) + ' Q67.8 ' + f(61 + c * .55) + ' 67.2 61 Z');
+  if(!o.ella){
+    s += P('L tb', 'M40 54.6 Q44 48.6 52 49.2 Q57 49.6 60 51.8 Q63 49.6 68 49.2 Q76 48.6 80 54.6 Q83.4 58.6 81 62.6 Q78 65.4 74.8 63.6 Q71.6 66.6 67.6 64.2 Q64 66.8 60 64.8 Q56 66.8 52.4 64.2 Q48.4 66.6 45.2 63.6 Q42 65.4 39 62.6 Q36.6 58.6 40 54.6 Z');
+    s += G('pelos', P('l', 'M45.6 57.4 L45 61.6 M50.4 56.4 L50 61.8 M55.2 56.8 L55 62.4 M64.8 56.8 L65 62.4 M69.6 56.4 L70 61.8 M74.4 57.4 L75 61.6'));
+    s += G('pelos', P('l', 'M41.6 57 L34.6 55.6 M41.4 59.8 L34.4 60.6 M42.6 62.4 L36.4 65.4') + P('l', 'M78.4 57 L85.4 55.6 M78.6 59.8 L85.6 60.6 M77.4 62.4 L83.6 65.4'));
+  }else{
+    s += P('L tb', 'M44 55 Q47.6 50.4 53.6 50.8 Q57.6 51.2 60 53 Q62.4 51.2 66.4 50.8 Q72.4 50.4 76 55 Q78.2 58.4 76.2 61.2 Q72 63.6 66.6 62.2 Q63.4 63.8 60 62.6 Q56.6 63.8 53.4 62.2 Q48 63.6 43.8 61.2 Q41.8 58.4 44 55 Z');
+    s += G('pelos', P('l', 'M50.4 57.4 L50.2 60.4 M55.4 57.6 L55.3 60.8 M64.6 57.6 L64.7 60.8 M69.6 57.4 L69.8 60.4'));
+    s += G('pelos', P('l', 'M44.4 57.6 L38.6 56.6 M44.8 60 L39.4 61.6') + P('l', 'M75.6 57.6 L81.4 56.6 M75.2 60 L80.6 61.6'));
+  }
+  s += P('L t3', 'M56.6 47.6 Q60 46 63.4 47.6 Q62.8 50.4 60 51 Q57.2 50.4 56.6 47.6 Z');
+  const arco = o.ojo === 'feliz' || o.ojo === 'baja';
+  const ojo = x => o.ojo === 'feliz' ? P('l g', 'M' + (x - 3) + ' 41.6 Q' + x + ' 37.6 ' + (x + 3) + ' 41.6')
+    : o.ojo === 'baja' ? P('l g', 'M' + (x - 3) + ' 40.4 Q' + x + ' 43 ' + (x + 3) + ' 40.4')
+    : E('ojo', x + mx, 40.6 + my, (o.ojo === 'grande' ? 2.5 : 2.1) + (o.ella ? .3 : 0), (o.ojo === 'grande' ? 3 : 2.5) + (o.ella ? .3 : 0));
+  s += ojo(50) + ojo(70);
+  if(o.ella) s += P('l pes', arco ? 'M46.8 41.4 L43.6 39.4 M47.4 39.6 L45.4 37 M73.2 41.4 L76.4 39.4 M72.6 39.6 L74.6 37'
+    : 'M47.6 39 L44.2 36.2 M47 40.8 L42.8 39.6 M47.4 42.6 L44 43.4 M72.4 39 L75.8 36.2 M73 40.8 L77.2 39.6 M72.6 42.6 L76 43.4');
+  const cj = {normal: [0, 0], alta: [-2.4, 0], seria: [.6, 1.6], piensa: [-1.6, -1.4], feliz: [-1, 0]}[o.ceja || 'normal'] || [0, 0];
+  s += P('l g', 'M46 ' + f(36 + cj[0] - cj[1]) + ' Q50 ' + f(34 + cj[0]) + ' 54 ' + f(36 + cj[0] + cj[1])) + P('l g', 'M66 ' + f(36 + cj[0] + cj[1]) + ' Q70 ' + f(34 + cj[0]) + ' 74 ' + f(36 + cj[0] - cj[1]));
+  return s;
+}
+const CARA = {
+  habla: {boca: .5, mira: [.5, 0]}, senala: {boca: .4, mira: [1, 0]}, sorpresa: {boca: .9, ojo: 'grande', ceja: 'alta'},
+  celebra: {boca: .8, ojo: 'feliz', ceja: 'feliz'}, piensa: {mira: [.6, -1], ceja: 'piensa'}, grapa: {ojo: 'baja', ceja: 'seria'},
+  telefono: {boca: .4, mira: [-.6, 0]}, mostrador: {ojo: 'baja', ceja: 'seria'}, manga: {ojo: 'baja'}, brazos: {ojo: 'baja', ceja: 'seria'}
+};
+const abre = (clase, pose, quien) => '<svg viewBox="0 0 120 150" class="fg pj pj-' + quien + ' pose-' + pose + (clase ? ' ' + clase : '') + '" aria-hidden="true">';
+
+const NICK = {
+  habla:     {i: [26, 65, -1], d: [103, 78, 1], g: 'i', pala: true},
+  senala:    {i: [27, 96, -1], d: [108, 72, 1], g: 'i', dedo: -6},
+  sorpresa:  {i: [22, 60, -1], d: [100, 58, 1], g: 'i'},
+  celebra:   {i: [20, 52, -1], d: [101, 50, 1], g: 'i'},
+  piensa:    {i: [27, 96, -1], d: [80, 66, 1], g: 'i'},
+  grapa:     {i: [48, 92, 1], d: [66, 82, 1], g: 'c'},
+  mostrador: {i: [22, 119, 1], d: [61, 101, 1]}
+};
+function nick(pose, o){
+  o = o || {}; pose = NICK[pose] ? pose : pose === 'calla' ? 'habla' : 'habla';
+  const N = NICK[pose], mostrador = pose === 'mostrador';
+  let s = abre(o.clase, pose, 'nick');
+  s += E('suelo', 60, 145, 40, 3);
+  if(N.pala && !o.busto) s += en(103, 46, 0, pala(98));
+  if(!mostrador){
+    s += P('L t7', 'M43 122 H57 V139 H43 Z') + P('L t7', 'M63 122 H77 V139 H63 Z');
+    s += P('L t3', 'M39 144 Q38 137 46 137 H56 Q59 137 59 141 V144 Z') + P('L t3', 'M61 144 V141 Q61 137 64 137 H74 Q82 137 81 144 Z');
+  }
+  s += P('L t0', 'M30 80 Q30 68 45 66 L75 66 Q90 68 90 80 Q98 102 94 126 Q92 131 60 131 Q28 131 26 126 Q22 102 30 80 Z');
+  [75, 82, 89].forEach(y => { s += C('pt', 54, y, 1.1) + C('pt', 66, y, 1.1); });
+  s += P('l', 'M60 72 V96');
+  s += F('tn', 'M26.4 97 Q60 103 93.6 97 Q97.4 114 93.4 133 Q60 139 26.6 133 Q22.6 114 26.4 97 Z');
+  s += P('L t2', 'M26.4 97 Q60 103 93.6 97 L94.4 101 Q60 107 25.6 101 Z');
+  s += P('L t2', 'M88 98 Q95 92 98 97 Q95 101 88 100 Z') + P('L t2', 'M88 100 Q93 106 91 112 L87.4 110 Q88.6 105 86 101 Z');
+  s += P('L t0', 'M70 66.6 Q82 64 86 72 Q84 82 78 90 L72.6 87 Q76 78 70 66.6 Z') + P('l r', 'M75.4 80.6 L80.6 83.4 M76.6 77.4 L82 80');
+  s += P('L t2', 'M45 65 Q60 71 75 65 L72 73 Q60 78 48 73 Z') + P('L t2', 'M56.6 72 L60 81 L63.4 72 Z');
+  if(mostrador){
+    s += P('L tc', 'M2 127 H118 V150 H2 Z') + P('l', 'M2 131 H118');
+    s += E('L t9', 60, 122, 50, 9.4) + E('pzT t2', 60, 121.6, 42, 7.2) + P('l', 'M60 112.6 V131.4 M10 122 H110 M25 115 L95 129 M95 115 L25 129');
+  }
+  const bi = brazo(36, 77, N.i, mostrador ? 22 : 13, mostrador ? 24 : 14, 9, 't0'), bd = brazo(84, 77, N.d, mostrador ? 16 : 13, mostrador ? 26 : 14, 9, 't0');
+  if(mostrador) s += bi.svg + mano(bi.x, bi.y, 't1', 5) + en(72, 117, -4, grapadora()) + bd.svg + mano(bd.x, bd.y, 't1', 5);
+  else if(N.g === 'c') s += bi.svg + en(66, 90, -4, grapadora(), .7) + mano(bi.x, bi.y, 't1', 5) + bd.svg + mano(bd.x, bd.y, 't1', 5);
+  else{
+    s += bi.svg + en(bi.x + 9, bi.y - 5, -8, grapadora(), .66) + mano(bi.x, bi.y, 't1', 5);
+    s += N.pala && o.busto ? brazo(84, 77, [88, 98, -1], 13, 14, 9, 't0').svg : bd.svg + mano(bd.x, bd.y, 't1', 5, N.dedo);
+  }
+  s += '<g' + (mostrador ? ' transform="translate(0 3) rotate(4 60 60)"' : '') + '>';
+  s += morsa(Object.assign({}, CARA[pose], o.cara));
+  s += P('L t0', 'M41.4 31 Q37 17.6 51 15.6 Q60 11.6 69 15.6 Q83 17.6 78.6 31 Q60 24.6 41.4 31 Z') + P('l', 'M50.6 17.4 Q52 21 51.4 25 M69.4 17.4 Q68 21 68.6 25');
+  s += P('L t0', 'M39.6 30 Q60 22.6 80.4 30 L80.6 36 Q60 28.6 39.4 36 Z') + P('l r', 'M40 33 Q60 25.6 80 33');
+  return s + '</g></svg>';
+}
+
+function cabezaMigas(o){
+  o = o || {}; let s = '';
+  s += C('L t7', 37, 36, 15) + C('L t6', 37.6, 36.6, 9) + C('L t7', 83, 36, 15) + C('L t6', 82.4, 36.6, 9);
+  s += P('L t7', 'M41 50 Q40 34 60 33 Q80 34 79 50 Q79 64 68 71 Q60 76 52 71 Q41 64 41 50 Z');
+  s += P('L tb', 'M50 62 Q50 55 60 55 Q70 55 70 62 Q70 70 60 73.4 Q50 70 50 62 Z');
+  s += P('L t0', 'M57.6 68 H62.4 V72 Q60 73.4 57.6 72 Z') + P('l', 'M60 68 V72.4');
+  s += P('l', 'M56 65.6 Q60 68.6 64 65.6') + (o.boca ? E('L t3 boca', 60, 66.6, 3, 1.6 + o.boca * 2) : '');
+  s += E('L t6', 60, 59, 3.4, 2.5);
+  s += G('pelos', P('l', 'M51 61 L39 58.6 M51 63.6 L40 65.6 M69 61 L81 58.6 M69 63.6 L80 65.6'));
+  const mx = (o.mira || [0, 0])[0], my = (o.mira || [0, 0])[1];
+  const ojo = x => o.ojo === 'feliz' ? P('l g', 'M' + (x - 3) + ' 49.6 Q' + x + ' 45.6 ' + (x + 3) + ' 49.6') : E('ojo', x + mx, 48.6 + my, o.ojo === 'grande' ? 3 : 2.5, o.ojo === 'grande' ? 3.6 : 3);
+  s += ojo(51.4) + ojo(68.6);
+  if(o.ceja) s += P('l g', o.ceja === 'piensa' ? 'M48 41.6 Q51.4 40 54.6 42 M65.4 43.4 Q68.6 42 72 43.6' : 'M48 43 Q51.4 41 54.6 42.6 M65.4 42.6 Q68.6 41 72 43');
+  s += P('L t0', 'M47 34 Q41 24 48.6 19 Q50 11 58 13.4 Q64 9 69 14.4 Q78 14 76.6 23 Q79 29 73 34 Z') + P('l', 'M54.6 16 Q55.6 22 54.6 27 M65 15.6 Q64.6 22 66 27');
+  s += P('L t0', 'M46 31.6 Q60 28 74 31.6 L74 37.6 Q60 34 46 37.6 Z');
+  return s;
+}
+const MIGAS = {
+  habla:    {i: [68, 110, -1], d: [84, 104, -1], r: 'suelo', cara: {boca: .5, mira: [.6, .2]}},
+  senala:   {i: [34, 74, -1], d: [88, 76, 1], r: 'hombro', dedo: -90, cara: {boca: .6, ceja: true, mira: [0, -.4]}},
+  sorpresa: {i: [33, 76, -1], d: [87, 76, 1], r: 'lado', cara: {boca: .9, ojo: 'grande', ceja: true}},
+  celebra:  {i: [32, 72, -1], d: [90, 70, 1], r: 'alto', cara: {boca: .8, ojo: 'feliz'}},
+  piensa:   {i: [50, 104, 1], d: [66, 78, -1], r: 'lado', cara: {mira: [.6, -1], ceja: 'piensa'}}
+};
+function migas(pose, o){
+  o = o || {}; pose = MIGAS[pose] ? pose : 'habla';
+  const M = MIGAS[pose];
+  let s = abre(o.clase, pose, 'migas');
+  s += E('suelo', 60, 145, 36, 3);
+  s += P('cola', 'M46 124 Q22 130 18 114 Q15.4 100 27 100');
+  s += E('L t6', 50, 142, 8, 3.4) + E('L t6', 70, 142, 8, 3.4);
+  if(M.r === 'lado') s += en(99, 131, 14, rueda(13));
+  s += P('L t7', 'M44 80 Q60 73 76 80 Q86 104 80 132 Q78 139 60 139 Q42 139 40 132 Q34 104 44 80 Z');
+  s += P('L t0', 'M48.6 84 H71.4 L72.6 97 Q82 100 81.4 118 Q81.4 132 78 135 Q60 139 42 135 Q38.6 132 38.6 118 Q38 100 47.4 97 Z');
+  s += P('l', 'M52 112 H68 V122 Q60 124.6 52 122 Z') + P('l', 'M47.6 97 Q60 100 72.4 97');
+  s += P('L t2', 'M44.6 76 Q60 83 75.4 76 L73 84 Q60 89 47 84 Z') + P('L t2', 'M71 82 L80 86.6 L74 90.6 Z');
+  s += G('', C('lunar', 51, 81.6, 1) + C('lunar', 57, 83.6, 1) + C('lunar', 63, 83.6, 1) + C('lunar', 69, 81.6, 1));
+  const bi = brazo(45, 89, M.i, 10, 11, 6, 't7'), bd = brazo(75, 89, M.d, 10, 11, 6, 't7');
+  if(M.r === 'suelo') s += en(97, 131, -32, rueda(13));
+  if(M.r === 'hombro') s += en(bd.x + 13, bd.y - 32, 152, rueda(12));
+  if(M.r === 'alto') s += en(bd.x + 2, bd.y - 30, 180, rueda(12));
+  s += bi.svg + mano(bi.x, bi.y, 't6', 3.8, M.dedo) + bd.svg + mano(bd.x, bd.y, 't6', 3.8);
+  s += cabezaMigas(Object.assign({}, M.cara, o.cara));
+  return s + '</svg>';
+}
+function migasLado(){
+  let s = '';
+  s += P('cola', 'M76 128 Q100 134 102 116 Q103 104 93 104');
+  s += G('pataA', E('L t6', 54, 142, 9, 3.2)) + G('pataB', E('L t6', 72, 142.4, 8, 3));
+  s += P('L t7', 'M56 86 Q74 80 80 98 Q86 120 78 134 Q72 140 62 139 Q50 138 50 124 Q48 100 56 86 Z');
+  s += P('L t0', 'M52.6 94 Q59 90 65 93 L67 133 Q59 138 53 135 Q49.6 116 52.6 94 Z');
+  s += C('L t7', 60, 40, 9);
+  s += P('L t7', 'M31 68 Q45 50 62 45 Q81 45 82 61 Q82 77 66 79 Q50 80.6 40 75 Q33 73.6 31 68 Z');
+  s += P('L tb', 'M31 68 Q39 61.6 47 65 Q50 73 41 75.4 Q33 73.6 31 68 Z') + E('L t6', 32, 67.6, 3, 2.6);
+  s += G('pelos', P('l', 'M42 71 L29 75 M43 73.6 L32 80')) + P('L t0', 'M40.6 75 H45 V79 Q42.6 80 40.6 78.6 Z');
+  s += P('l g', 'M52 60.6 Q55 56.6 58 60.6');
+  s += C('L t7', 75, 44, 13) + C('L t6', 75.4, 44.4, 7.6);
+  s += P('L t0', 'M47 44 Q42 34 50 30 Q52 22 60 25 Q67 22 70 29 Q77 31 73 40 Z') + P('L t0', 'M45 42 Q59 37 73 40.6 L73.4 46.6 Q59 43 46 48 Z');
+  s += P('L t2', 'M50 80 Q64 86 80 78 L79 86 Q64 93 52 88 Z') + P('L t2', 'M78 82 L88 85 L81 91 Z');
+  const b = brazo(60, 95, [45.4, 105, 1], 9, 9, 6, 't7');
+  s += G('qMano', en(22, 106, 0, queso(1.15))) + b.svg + mano(b.x, b.y, 't6', 4) + mano(b.x - 5, b.y + 5, 't6', 3.6);
+  return s;
+}
+
+function peloNico(){
+  const lado = 'M41 30 Q28.6 32 30 41 Q25.6 46 28.8 52 Q25.4 58 30.6 63.4 Q32 70 39.4 68.4 Q43.6 66.4 40.8 62.4 Q37.6 64 36.6 61 L41.6 42 Z';
+  const onda = 'M33.6 39.6 Q31 44.6 33.6 49 M32.4 54 Q30.6 58.6 34 62 M38.6 45 Q36.6 50.4 38.8 55.6';
+  return P('L ta', lado) + P('l p onda', onda) + '<g transform="translate(120 0) scale(-1 1)">' + P('L ta', lado) + P('l p onda', onda) + '</g>';
+}
+function panueloNico(){
+  let s = '';
+  s += P('L tk', 'M70.6 23.4 Q68.6 10.6 75.4 9 Q78.6 11 75.6 23.6 Z') + P('L tk', 'M74 24.6 Q83.4 14.4 88.6 17.4 Q89 21.6 76.6 27 Z');
+  s += P('L tk', 'M38.4 38 Q36.6 20 60 19.4 Q83.4 20 81.6 38 Q70.6 30.4 60 30.8 Q49.4 30.4 38.4 38 Z');
+  s += P('L tk', 'M38.4 38 Q49.4 30.4 60 30.8 Q70.6 30.4 81.6 38 L81 41.4 Q70.6 34 60 34.2 Q49.4 34 39 41.4 Z') + E('L tk', 74.4, 25, 3.6, 3);
+  [[46, 31.4], [53.4, 26], [62.4, 24.6], [69.4, 29], [42.4, 27.4], [57.4, 21.6], [78.4, 33.4], [74.6, 14.4], [83.4, 19.4]].forEach(([x, y]) => { s += C('lunar', x, y, 1.35); });
+  return s;
+}
+const NICO = {
+  habla:    {i: [31, 101, 1], d: [97, 68, 1], m: true},
+  senala:   {i: [35, 99, 1], d: [107, 74, 1], dedo: -8},
+  sorpresa: {i: [23, 61, 1], d: [97, 61, -1]},
+  celebra:  {i: [23, 56, -1], d: [97, 54, 1], m: true},
+  piensa:   {i: [50, 99, 1], d: [79, 67, 1]},
+  telefono: {i: [31, 96, 1], d: [93, 56, 1]},
+  brazos:   {i: [53, 97, -1], d: [67, 99, 1]},
+  manga:    {i: [35, 99, 1], d: [56, 96, 1]}
+};
+function nicoleta(pose, o){
+  o = o || {}; pose = NICO[pose] ? pose : 'habla';
+  const N = NICO[pose], tarta = pose === 'manga' && !o.busto, gira = pose === 'manga' ? ' transform="rotate(-5 60 60) translate(-1 2)"' : '';
+  let s = abre(o.clase, pose, 'nicoleta');
+  s += E('suelo', 60, 145, 38, 3);
+  if(tarta){
+    s += P('L t0', 'M6 122 H34 V125 H23 L24.6 142 H30 V145 H10 V142 H15.4 L17 125 H6 Z');
+    s += P('L td', 'M9 122 V110 Q9 106 13 106 H27 Q31 106 31 110 V122 Z') + P('L t0', 'M9 112 Q12 116 14.6 112 Q17.4 116 20 112 Q22.6 116 25.4 112 Q28 116 31 112 V109 Q31 106 27 106 H13 Q9 106 9 109 Z');
+    s += C('L t2', 20, 103, 2.6);
+  }
+  s += P('L t3', 'M43 144 Q42 138 49 138 H57 Q59 138 59 141 V144 Z') + P('L t3', 'M61 144 V141 Q61 138 63 138 H71 Q78 138 77 144 Z');
+  s += '<g' + gira + '>' + peloNico() + '</g>';
+  s += P('L t0', 'M34 83 Q34 70 47 67 L73 67 Q86 70 86 83 Q94 110 92 134 Q60 141 28 134 Q26 110 34 83 Z');
+  s += P('L td', 'M47.6 68 L50.6 80 H54.6 L52 67 Z') + P('L td', 'M72.4 68 L69.4 80 H65.4 L68 67 Z');
+  s += P('L td', 'M49.6 79 H70.4 Q72 87 72.6 94 H47.4 Q48 87 49.6 79 Z');
+  s += F('td', 'M35 99 Q60 103 85 99 Q89.6 116 89.4 134.6 Q60 141 30.6 134.6 Q30.4 116 35 99 Z');
+  s += P('L tk', 'M36 93.6 Q60 97.6 84 93.6 L85 99.4 Q60 103.4 35 99.4 Z');
+  s += en(60, 86.6, 0, P('L t2', 'M-3.4 -1.6 Q-3.6 2.8 0 4.6 Q3.6 2.8 3.4 -1.6 Q0 -3.2 -3.4 -1.6 Z') + P('l', 'M-2.6 -2 L-1 -3.6 L0 -2.2 L1 -3.6 L2.6 -2'));
+  s += P('bo', 'M70.6 113 L73.6 103', ' style="--g:1.6"') + P('bi t5', 'M70.6 113 L73.6 103', ' style="--g:1.6"') + E('L t5', 74.4, 100.4, 2.4, 3.3, ' transform="rotate(16 74.4 100.4)"');
+  s += P('L td', 'M64 109 L79 108.4 L78.2 120 Q71 121.4 64.8 120.4 Z') + P('L t0', 'M64 109 Q65.9 112 67.8 108.9 Q69.7 111.9 71.6 108.7 Q73.5 111.7 75.4 108.6 Q77.2 111.6 79 108.4 L79 107 H64 Z');
+  s += P('L tk', 'M32.6 96.4 L28.4 108 L32.6 106 L35 108.6 L36.4 97.4 Z') + P('L tk', 'M35 96.2 Q25.4 88.6 24 94.2 Q23.8 99.6 35 97 Z') + P('L tk', 'M35.2 96.4 Q28 104 31.4 106 Q35.2 106.8 36.4 97.6 Z') + E('L tk', 35.4, 96.8, 2.4, 2.7);
+  s += P('L t0', 'M60 70.4 Q51 68.6 48.6 71.6 Q48.6 79 55.4 78.6 Q59.2 77.8 60 73.6 Q60.8 77.8 64.6 78.6 Q71.4 79 71.4 71.6 Q69 68.6 60 70.4 Z') + P('l r', 'M50 73 Q51 77 55.4 77 M70 73 Q69 77 64.6 77');
+  const bi = brazo(38, 77, N.i, 12, 13, 8, 't0', 't1'), bd = brazo(82, 78, N.d, 12, 13, 8, 't0', 't1');
+  const cara = '<g' + gira + '>' + morsa(Object.assign({ella: true, colmillo: 11}, CARA[pose], o.cara)) + panueloNico() + '</g>';
+  if(pose === 'telefono'){
+    s += bi.svg + en(bi.x + 5, bi.y + 2, -14, P('L t0', 'M-8 -10 H8 V10 H-8 Z') + P('l', 'M-5 -5 H5 M-5 -1 H5 M-5 3 H2') + P('L t3', 'M-8 -10 H8 V-7 H-8 Z')) + mano(bi.x, bi.y + 3, 't1', 4.4);
+    s += cara + en(93, 52, 6, auricular()) + bd.svg + mano(bd.x, bd.y, 't1', 4.4);
+  }else if(pose === 'manga'){
+    s += bd.svg + en(24, 98, -38, manga()) + C('L t0', 23, 100.4, 2) + bi.svg + mano(bi.x, bi.y, 't1', 4.4) + mano(bd.x, bd.y, 't1', 4.4) + cara;
+  }else{
+    s += bi.svg + mano(bi.x, bi.y, 't1', 4.4) + bd.svg + (N.m ? en(bd.x + 1, bd.y - 31, 184, manga(), .9) : '') + mano(bd.x, bd.y, 't1', 4.4, N.dedo) + cara;
+  }
+  return s + '</svg>';
+}
+
+const TABLA = P('L t5', 'M28 142 H142 Q146 142 146 146 V156 Q146 160 142 160 H28 Q24 160 24 156 V146 Q24 142 28 142 Z') +
+  P('l', 'M38 152 Q56 150 74 153 M96 151 Q114 154 134 151') + P('L t4', 'M96 142 V138 H122 V142 Z') +
+  C('L t4', 86, 136, 6) + C('l', 86, 136, 3) + P('l g', 'M79 142 V137 M93 142 V137');
+const ARCO = G('trArco', P('arco', 'M86 136 H38 M40 130 V142'));
+const rayos = (x, y, k) => [[0, -8, 0, -22], [10, -5, 20, -15], [-10, -5, -20, -15], [16, 3, 30, -2], [-16, 3, -30, -2]].map(([a, b, c, d]) => 'M' + f(x + a * k) + ' ' + f(y + b * k) + ' L' + f(x + c * k) + ' ' + f(y + d * k)).join(' ');
+const ESCENA = {fallo: {suelo: 142, trampa: [-10.5, -66, 1.3], rayos: [132, 88, 1.4]}, acierto: {suelo: 156, trampa: [-14, -4, 1], rayos: [96, 100, 1], migas: [57.6, 39.1, .86]}};
+let nTr = 0;
+function trampa(escena){
+  const Z = ESCENA[escena] || ESCENA.fallo, id = 'trC' + (++nTr);
+  let s = '<svg viewBox="0 0 200 200" class="fg fg-trampa esc-' + escena + '" aria-hidden="true"><defs><clipPath id="' + id + '"><circle cx="100" cy="100" r="92"/></clipPath></defs>';
+  s += C('vnFondo', 100, 100, 94) + '<g clip-path="url(#' + id + ')">' + P('vnSuelo', 'M0 ' + Z.suelo + ' H200 V200 H0 Z') + P('l', 'M6 ' + Z.suelo + ' H194');
+  const [tx, ty, tk] = Z.trampa;
+  s += G('trTrampa', '<g transform="translate(' + tx + ' ' + ty + ') scale(' + tk + ')">' + TABLA + (Z.migas ? G('trQueso', en(99, 137, 0, queso(.95))) : '') + ARCO + '</g>');
+  s += P('rayos trRayos', rayos(...Z.rayos));
+  if(Z.migas) s += G('trMigas', '<g transform="translate(' + Z.migas[0] + ' ' + Z.migas[1] + ') scale(' + Z.migas[2] + ')">' + G('trAnda', migasLado()) + '</g>');
+  return s + '</g>' + C('vnAro', 100, 100, 94) + C('vnAro2', 100, 100, 88.6) + '</svg>';
+}
+
+function sello(){
+  return '<svg viewBox="0 0 40 40" class="fg fg-sello" aria-hidden="true">' + C('selloAro', 20, 20, 17.4) +
+    P('selloBrazo', 'M31.6 22.6 Q33 13.6 25 12.6 L12 14.6 Q7.6 15.4 7.6 19.4 L7.6 22.6 Z') + P('selloBase', 'M8 26.4 H32') + C('selloEje', 27.4, 18.4, 1.7) + '</svg>';
+}
+
+const trama = (id, paso, grueso, tinta, giro, p) => '<pattern id="' + id + '" width="' + paso + '" height="' + paso + '" patternUnits="userSpaceOnUse"' + (giro ? ' patternTransform="rotate(' + giro + ')"' : '') + '><rect class="trP' + p + '" width="' + paso + '" height="' + paso + '"/><rect class="' + tinta + p + '" width="' + (giro ? paso : grueso) + '" height="' + (giro ? grueso : paso) + '"/></pattern>';
+function tramas(){
+  if(!raiz.document || raiz.document.getElementById('fgTramas')) return;
+  const juego = p => trama('trN' + p, 2.4, 1, 'trK', 45, p) + trama('trN2' + p, 3, .7, 'trK', 45, p) + trama('trN3' + p, 2.6, .55, 'trK', 45, p) + trama('trR' + p, 2.4, 1.1, 'trJ', -45, p) + trama('trRaya' + p, 7, 3.6, 'trJ', 0, p);
+  raiz.document.body.insertAdjacentHTML('beforeend', '<svg id="fgTramas" width="0" height="0" aria-hidden="true" style="position:absolute"><defs>' + juego('') + juego('p') + '</defs></svg>');
+}
+
+const F_ = {pizza, nick, migas, nicoleta, migasLado, trampa, grapadora, grapadoraArriba, rueda, mangoRueda, cuchilla, pala, manga, auricular, queso, sello, tramas, CX, CY, R,
+  POSES: {nick: Object.keys(NICK), nicoleta: Object.keys(NICO), migas: Object.keys(MIGAS)}};
+if(typeof module !== 'undefined' && module.exports) module.exports = F_;
+else raiz.Figuras = F_;
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const M = raiz.Motor, FG = raiz.Figuras, NS = 'http://www.w3.org/2000/svg';
+const el = (tag, at) => { const e = document.createElementNS(NS, tag); for(const k in at) e.setAttribute(k, at[k]); return e; };
+const CX = 150, CY = 148, R = 126;
+const QUIETO = !!(raiz.matchMedia && raiz.matchMedia('(prefers-reduced-motion: reduce)').matches);
+function prepara(){
+  if(document.getElementById('pzDefs')) return;
+  FG.tramas();
+  const d = document.createElementNS(NS, 'svg');
+  d.setAttribute('id', 'pzDefs'); d.setAttribute('width', '0'); d.setAttribute('height', '0');
+  d.setAttribute('aria-hidden', 'true'); d.style.position = 'absolute';
+  d.innerHTML = '<defs><symbol id="pzEntera" viewBox="0 0 300 300">' + FG.pizza() + '</symbol></defs>';
+  document.body.appendChild(d);
+}
+function sector(cx, cy, r, a0, a1){
+  const rad = a => (a - 90) * Math.PI / 180;
+  if(a1 - a0 >= 359.9) return `M${cx - r} ${cy} a${r} ${r} 0 1 0 ${2 * r} 0 a${r} ${r} 0 1 0 ${-2 * r} 0 Z`;
+  const x0 = cx + r * Math.cos(rad(a0)), y0 = cy + r * Math.sin(rad(a0));
+  const x1 = cx + r * Math.cos(rad(a1)), y1 = cy + r * Math.sin(rad(a1));
+  return `M${cx} ${cy} L${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${(a1 - a0) > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z`;
+}
+let nP = 0;
+function dibuja(c, alTocar){
+  prepara();
+  const id = 'pz' + (++nP);
+  const svg = el('svg', {viewBox: '0 0 300 300', class: 'pizza'});
+  const paso = 360 / c.cortes, hueco = Math.min(1.1, paso * .035);
+  const defs = el('defs', {});
+  svg.appendChild(defs);
+  const animar = c.animar === 'grapa'; c.animar = null;
+  const juntas = [...c.recien].sort((a, b) => a - b), cada = Math.min(260, 1100 / Math.max(1, juntas.length));
+  const retraso = j => animar ? Math.round(juntas.indexOf(j) * cada + 170) : 0;
+  const antes = !c.levantadas ? new Set() : c.levantadas.cortes === c.cortes ? c.levantadas : c.sel, ahora = new Set();
+  const hoy = Date.now(), gestos = c.gestos = (c.gestos || []).filter(x => hoy - x.t < 300 && x.cortes === c.cortes);
+  M.grupos(c).forEach((t, n) => {
+    const a0 = t[0] * paso, a1 = a0 + t.length * paso, ele = c.sel.has(t[0]);
+    const g = el('g', {class: 'corte' + (ele ? ' elegida' : (c.sel.size ? ' apagada' : ''))});
+    const bis = ((a0 + a1) / 2 - 90) * Math.PI / 180, dx = 10 * Math.cos(bis), dy = 10 * Math.sin(bis);
+    if(ele) g.setAttribute('transform', `translate(${dx.toFixed(1)} ${dy.toFixed(1)})`);
+    if(ele !== antes.has(t[0])) gestos.push({i: t[0], ele, t: hoy, cortes: c.cortes});
+    const gesto = gestos.filter(x => x.i === t[0] && x.ele === ele).pop();
+    if(gesto && !QUIETO && g.animate){
+      const tr = k => 'translate(' + (dx * k).toFixed(1) + 'px,' + (dy * k).toFixed(1) + 'px)';
+      const a = g.animate(ele ? [{transform: tr(0)}, {transform: tr(1.35), offset: .6}, {transform: tr(1)}] : [{transform: tr(1)}, {transform: tr(0)}],
+                {duration: ele ? 260 : 180, easing: 'ease-out'});
+      a.currentTime = hoy - gesto.t;
+    }
+    if(ele) ahora.add(t[0]);
+    const forma = sector(CX, CY, R + 1, a0 + hueco, a1 - hueco);
+    const cp = el('clipPath', {id: id + 's' + n}); cp.appendChild(el('path', {d: forma})); defs.appendChild(cp);
+    if(ele) g.appendChild(el('path', {d: forma, class: 'sombraP', transform: 'translate(3.6 3.6)'}));
+    const vista = el('g', {'clip-path': `url(#${id}s${n})`});
+    vista.appendChild(el('use', {href: '#pzEntera', x: 0, y: 0, width: 300, height: 300}));
+    g.appendChild(vista);
+    g.appendChild(el('path', {d: forma, class: 'filo'}));
+    for(let k = 0; k < t.length - 1; k++){
+      if(!c.recien.has(t[k])) continue;
+      const gr = (t[k] + 1) * paso, a = (gr - 90) * Math.PI / 180;
+      const ms = retraso(t[k]);
+      g.appendChild(el('path', {d: `M${CX} ${CY} L${(CX + R * Math.cos(a)).toFixed(1)} ${(CY + R * Math.sin(a)).toFixed(1)}`, class: 'costura-nueva', style: 'animation-delay:' + ms + 'ms'}));
+      [[.38, 1], [.72, -1]].forEach(([d, lado], q) => {
+        const px = CX + R * d * Math.cos(a), py = CY + R * d * Math.sin(a);
+        const fuera = el('g', {transform: `translate(${px.toFixed(1)} ${py.toFixed(1)}) rotate(${gr + (q ? 8 : -8)})`});
+        const dentro = el('g', {class: 'grapa-nueva', style: 'animation-delay:' + ms + 'ms'});
+        const f = `M-12 ${6.5 * lado} L-12 0 L12 0 L12 ${6.5 * lado}`;
+        dentro.appendChild(el('path', {d: f, class: 'grapaK'}));
+        dentro.appendChild(el('path', {d: f, class: 'grapaT'}));
+        fuera.appendChild(dentro); g.appendChild(fuera);
+      });
+    }
+    if(alTocar){ g.setAttribute('role', 'button'); g.setAttribute('tabindex', '0'); g.setAttribute('aria-label', 'trozo ' + (t[0] + 1) + (ele ? ', elegido' : ''));
+      g.addEventListener('click', ev => { ev.stopPropagation(); alTocar(t[0]); });
+      g.addEventListener('keydown', ev => { if(ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); alTocar(t[0]); } }); }
+    svg.appendChild(g);
+  });
+  ahora.cortes = c.cortes; c.levantadas = ahora;
+  if(animar && juntas.length) grapadora(svg, juntas, paso, cada);
+  return svg;
+}
+
+const GRAPADORA_SVG = '<g class="fg"><g class="gpCuerpo">' + FG.grapadoraArriba() + '</g></g>';
+function grapadora(svg, juntas, paso, cada){
+  const g = el('g', {class: 'grapadoraPasa'}); g.innerHTML = GRAPADORA_SVG;
+  svg.appendChild(g);
+  if(!g.animate) return;
+  const sitio = j => { const gr = (j + 1) * paso, a = (gr - 90) * Math.PI / 180, d = R * .55;
+    return {x: CX + d * Math.cos(a), y: CY + d * Math.sin(a), gr}; };
+  const pos = (x, y, gr, alto) => 'translate(' + x.toFixed(1) + 'px,' + (y - alto).toFixed(1) + 'px) rotate(' + gr.toFixed(0) + 'deg) scale(' + (1.05 + alto / 220).toFixed(3) + ')';
+  const total = 170 + juntas.length * cada + 260, o = ms => Math.min(1, ms / total), K = [];
+  const p0 = sitio(juntas[0]);
+  K.push({transform: pos(p0.x + 90, p0.y - 70, p0.gr, 30), opacity: 0, offset: 0});
+  juntas.forEach((j, i) => {
+    const p = sitio(j), t = 170 + i * cada;
+    K.push({transform: pos(p.x, p.y, p.gr, 22), opacity: 1, offset: o(t - cada * .45), easing: 'ease-out'});
+    K.push({transform: pos(p.x, p.y, p.gr, 2), opacity: 1, offset: o(t), easing: 'ease-in'});
+    K.push({transform: pos(p.x, p.y, p.gr, 16), opacity: 1, offset: o(t + cada * .4)});
+  });
+  const pz = sitio(juntas[juntas.length - 1]);
+  K.push({transform: pos(pz.x + 90, pz.y - 70, pz.gr, 30), opacity: 0, offset: 1});
+  for(let i = 1; i < K.length; i++) if(K[i].offset <= K[i - 1].offset) K[i].offset = Math.min(1, K[i - 1].offset + .001);
+  const an = g.animate(K, {duration: total, fill: 'forwards'});
+  const cu = g.querySelector('.gpCuerpo'), KC = [{transform: 'scale(1)', offset: 0}];
+  cu.style.transformBox = 'fill-box'; cu.style.transformOrigin = '50% 90%';
+  juntas.forEach((j, i) => { const t = 170 + i * cada; KC.push({transform: 'scale(1)', offset: o(t - 40)}, {transform: 'scale(.9)', offset: o(t)}, {transform: 'scale(1)', offset: o(t + 70)}); });
+  KC.push({transform: 'scale(1)', offset: 1});
+  for(let i = 1; i < KC.length; i++) if(KC[i].offset <= KC[i - 1].offset) KC[i].offset = Math.min(1, KC[i - 1].offset + .001);
+  cu.animate(KC, {duration: total, fill: 'forwards'});
+  if(raiz.Sonido) juntas.forEach((j, i) => raiz.Sonido.toca('grapa', (170 + i * cada) / 1000));
+  an.finished.then(() => g.remove(), () => {});
+}
+const duraGrapa = n => n ? 170 + n * Math.min(260, 1100 / n) + 260 : 0;
+
+function cortador(svg, antes, nuevo, alAcabar){
+  const nuevos = [];
+  for(let k = 0; k < nuevo; k++){
+    const a = k * 360 / nuevo, viejo = (k * antes) % nuevo === 0;
+    if(!viejo || nuevo % antes !== 0) nuevos.push(a);
+  }
+  if(!svg || !svg.animate || !nuevos.length){ alAcabar(); return 0; }
+  const pasadas = [], usado = new Set();
+  nuevos.forEach(a => { if(usado.has(a)) return; const op = (a + 180) % 360;
+    if(nuevos.some(b => Math.abs(b - op) < .01) && !usado.has(op)){ pasadas.push([a, op]); usado.add(op); } else pasadas.push([a]); usado.add(a); });
+  const dur = Math.max(130, Math.min(360, 900 / pasadas.length)), paso = dur * .75, total = paso * (pasadas.length - 1) + dur + 80;
+  const capa = el('g', {class: 'cortadorPasa'}); svg.appendChild(capa);
+  const borde = a => { const r = (a - 90) * Math.PI / 180; return [CX + (R + 4) * Math.cos(r), CY + (R + 4) * Math.sin(r)]; };
+  pasadas.forEach((pa, i) => {
+    const [x0, y0] = borde(pa[0]), [x1, y1] = pa.length > 1 ? borde(pa[1]) : [CX, CY];
+    const largo = Math.hypot(x1 - x0, y1 - y0), t0 = i * paso;
+    const ang = Math.atan2(y1 - y0, x1 - x0) * 180 / Math.PI;
+    const marco = el('g', {transform: 'translate(' + x0.toFixed(1) + ' ' + y0.toFixed(1) + ') rotate(' + ang.toFixed(1) + ')'});
+    const raya = el('path', {d: 'M0 0 H' + largo.toFixed(1), class: 'rayaCorte'});
+    marco.appendChild(raya); capa.appendChild(marco);
+    raya.style.transformOrigin = '0 0';
+    raya.animate([{transform: 'scaleX(0)'}, {transform: 'scaleX(1)'}], {duration: dur, delay: t0, fill: 'both', easing: 'ease-in-out'});
+    const rueda = el('g', {opacity: 0, class: 'fg'});
+    rueda.innerHTML = '<g class="rMango" transform="rotate(118)">' + FG.mangoRueda(13) + '</g><g class="rGira">' + FG.cuchilla(13) + '</g>';
+    capa.appendChild(rueda);
+    const tr = (x, y) => 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + ang.toFixed(0) + 'deg) scale(1.3)';
+    rueda.animate([{transform: tr(x0, y0), opacity: 0}, {transform: tr(x0, y0), opacity: 1, offset: .1}, {transform: tr(x1, y1), opacity: 1, offset: .9}, {transform: tr(x1, y1), opacity: 0}],
+      {duration: dur, delay: t0, fill: 'forwards', easing: 'ease-in-out'});
+    rueda.querySelector('.rGira').animate([{transform: 'rotate(0deg)'}, {transform: 'rotate(' + Math.round(largo * 3) + 'deg)'}], {duration: dur, delay: t0, fill: 'forwards', easing: 'ease-in-out'});
+    if(raiz.Sonido) raiz.Sonido.toca('corte', t0 / 1000);
+  });
+  setTimeout(alAcabar, total);
+  return total;
+}
+raiz.Pizza = {dibuja, cortador, duraGrapa, prepara};
+})(window);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const FG = raiz.Figuras;
+const dentro = svg => svg.replace(/^<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
+const ENCAJE = {nick: [-1.2, -2, .92], nicoleta: [.4, 8.4, .86], migas: [6.8, 4.6, .72]};
+const calla = pose => pose === 'calla';
+function busto(quien, pose){
+  const [x, y, k] = ENCAJE[quien], p = calla(pose) ? 'habla' : pose || 'habla';
+  return '<svg viewBox="0 0 100 100" class="fg pj pj-' + quien + ' pose-' + p + (calla(pose) ? ' calla' : '') + '" aria-hidden="true"><g transform="translate(' + x + ' ' + y + ') scale(' + k + ')">' +
+    dentro(FG[quien](p, {busto: true})) + '</g></svg>';
+}
+const entero = (quien, pose) => FG[quien](calla(pose) ? 'habla' : pose || 'habla', {clase: calla(pose) ? 'calla' : ''});
+const nick = pose => busto('nick', pose), nicoleta = pose => busto('nicoleta', pose), migas = pose => busto('migas', pose);
+const DIBUJA = {nick, nicoleta, migas};
+const REDUCIDO = raiz.matchMedia && raiz.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const HABLAN = ['habla', 'senala', 'telefono'];
+function ponCara(c, quien, pose, hablar){
+  if(!c) return;
+  c.innerHTML = DIBUJA[quien](pose);
+  const sv = c.firstElementChild, vb = c.dataset.vb;
+  if(vb && sv) sv.setAttribute('viewBox', vb);
+  c.dataset.pose = pose;
+  if(hablar && !REDUCIDO && HABLAN.includes(pose) && sv) sv.classList.add('parla');
+}
+const toca = new WeakMap();
+function parpadea(){
+  const ahora = Date.now();
+  document.querySelectorAll('svg.pj').forEach(sv => {
+    const hueco = sv.parentElement || sv, t = toca.get(hueco);
+    if(!t){ toca.set(hueco, ahora + 800 + Math.random() * 3000); return; }
+    if(ahora < t || !sv.getClientRects().length) return;
+    const doble = Math.random() < .2;
+    toca.set(hueco, ahora + 2500 + Math.random() * 3000 + (doble ? 300 : 0));
+    const abre = 'scaleY(1)', cierra = 'scaleY(.12)';
+    const k = doble ? [{transform: abre}, {transform: cierra, offset: .2}, {transform: abre, offset: .45}, {transform: cierra, offset: .7}, {transform: abre}]
+                    : [{transform: abre}, {transform: cierra, offset: .45}, {transform: abre}];
+    sv.querySelectorAll('.ojo').forEach(o => { if(o.animate) o.animate(k, {duration: doble ? 380 : 170, easing: 'ease-in-out'}); });
+  });
+}
+if(!REDUCIDO && raiz.document) setInterval(parpadea, 120);
+const POSES = {nick: ['habla', 'senala', 'grapa', 'sorpresa', 'celebra', 'piensa'], nicoleta: ['habla', 'senala', 'telefono', 'sorpresa', 'celebra', 'piensa'], migas: ['habla', 'senala', 'sorpresa', 'celebra', 'piensa']};
+raiz.Personajes = {nick, nicoleta, migas, entero, DIBUJA, POSES, ponCara,
+  get NICK(){ return nick('habla'); }, get NICOLETA(){ return nicoleta('habla'); }, get MIGAS(){ return migas('habla'); }};
+})(window);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const FG = raiz.Figuras, PZ = raiz.Pizza, S = raiz.Sonido;
+const VISTA = 'grapadora.inicio', DUR = 5000, FUNDIDO = 480;
+const CX = 150, CY = 148, R = 126;
+const GEO = {
+  pie: {an: 390, al: 844, papel: [40, 30, 310, 760], pizza: [195, 318, 112], regla: [66, 324, 484], nick: [64, 560, 112], migas: [238, 596, 84],
+    titulo: [195, 70, 25.5], lema: [62, 328, 164, 11.5], filetes: [[16, 294, 124], [16, 294, 154], [16, 294, 516], [16, 294, 708]], doble: [16, 294, 26],
+    ancla: [155, 722, 9], cifra: 13, etq: 15, pie: 9.5, salta: [195, 816, 12.5]},
+  ancha: {an: 1280, al: 800, papel: [150, 56, 980, 688], pizza: [420, 404, 205], regla: [694, 1086, 376], nick: [716, 462, 150], migas: [936, 524, 100],
+    titulo: [890, 128, 39], lema: [694, 1086, 262, 15], filetes: [[540, 940, 190], [540, 940, 230], [540, 940, 634]], doble: [20, 960, 26],
+    ancla: [740, 650, 12], cifra: 17, etq: 19, pie: 12, salta: [640, 772, 14]}
+};
+function sector(a0, a1, r){
+  const rad = a => (a - 90) * Math.PI / 180, x0 = CX + r * Math.cos(rad(a0)), y0 = CY + r * Math.sin(rad(a0)), x1 = CX + r * Math.cos(rad(a1)), y1 = CY + r * Math.sin(rad(a1));
+  return 'M' + CX + ' ' + CY + ' L' + x0.toFixed(1) + ' ' + y0.toFixed(1) + ' A' + r + ' ' + r + ' 0 ' + (a1 - a0 > 180 ? 1 : 0) + ' 1 ' + x1.toFixed(1) + ' ' + y1.toFixed(1) + ' Z';
+}
+function monta(el){
+  const G = GEO[innerWidth >= 700 && innerWidth / innerHeight > 1.15 ? 'ancha' : 'pie'];
+  const [hx, hy, hw, hh] = G.papel, [pcx, pcy, pr] = G.pizza, k = pr / R, [rx0, rx1, ry] = G.regla, an = rx1 - rx0;
+  const capa = (cls, x, y, w, h, html, mas) => '<div class="' + cls + '" style="left:' + x.toFixed(1) + 'px;top:' + y.toFixed(1) + 'px;' + (w ? 'width:' + w.toFixed(1) + 'px;' : '') + (h ? 'height:' + h.toFixed(1) + 'px;' : '') + (mas || '') + '">' + (html || '') + '</div>';
+  const lienzo = html => '<svg viewBox="0 0 300 300" class="fg" aria-hidden="true">' + html + '</svg>';
+  let nC = 0;
+  const trozo = (a0, a1, cls) => { const id = 'inC' + (++nC), d = sector(a0, a1, R + 1);
+    return lienzo('<defs><clipPath id="' + id + '"><path d="' + d + '"/></clipPath></defs><g clip-path="url(#' + id + ')"><use href="#pzEntera" width="300" height="300"/></g><path class="inFilo ' + cls + '" d="' + d + '"/>'); };
+  const sombra = (a0, a1) => lienzo('<path class="inSom" d="' + sector(a0, a1, R + 1) + '"/>');
+  const D = 300 * k, px0 = pcx - CX * k - hx, py0 = pcy - CY * k - hy;
+  const u = n => n * k;
+  let s = '';
+  s += capa('inFilete doble', G.doble[0], G.doble[2], G.doble[1] - G.doble[0], 5);
+  G.filetes.forEach(([x0, x1, y]) => { s += capa('inFilete', x0, y, x1 - x0, 0); });
+  s += capa('inAncla', G.ancla[0] - 200, G.ancla[1], 400, 0, 'MARGHERITA ◆ NÁPOLES, 1889', 'font-size:' + G.ancla[2] + 'px');
+  let p = '';
+  p += capa('inQ inQ2', 0, 0, D, D, trozo(180, 270, 'q')) + capa('inQ inQ3', 0, 0, D, D, trozo(270, 360, 'q'));
+  p += capa('inQ inSom0', 0, 0, D, D, sombra(0, 90)) + capa('inQ inSom1', 0, 0, D, D, sombra(90, 180)) + capa('inQ inSomH', 0, 0, D, D, sombra(0, 180));
+  p += capa('inQ inQ0', 0, 0, D, D, trozo(0, 90, 'e')) + capa('inQ inQ1', 0, 0, D, D, trozo(90, 180, 'e'));
+  p += capa('inQ inMitad', 0, 0, D, D, trozo(0, 180, 'e'));
+  p += capa('inQ inCostura', 0, 0, D, D, lienzo('<path class="costura-nueva" style="animation:none" d="M' + CX + ' ' + CY + ' H' + (CX + R) + '"/>'));
+  [[.38, 1, -8], [.72, -1, 8]].forEach(([d, lado, g], i) => { const f = 'M-12 ' + (6.5 * lado) + ' L-12 0 L12 0 L12 ' + (6.5 * lado);
+    p += capa('inGr inGr' + i, u(CX + R * d - 20), u(CY - 20), u(40), u(40), '<svg viewBox="-20 -20 40 40" class="fg"><g transform="rotate(' + (90 + g) + ')"><path class="grapaK" d="' + f + '"/><path class="grapaT" d="' + f + '"/></g></svg>'); });
+  p += capa('inL inL1', u(CX - 1.7), u(CY - R - 1), u(3.4), u(2 * R + 2)) + capa('inL inL2', u(CX - R - 1), u(CY - 1.7), u(2 * R + 2), u(3.4));
+  const rueda = (cls, giro) => capa('inRueda ' + cls, u(-40), u(-40), u(80), u(80), '<svg viewBox="-40 -40 80 80" class="fg"><g transform="rotate(' + giro + ') scale(1.25)">' + FG.mangoRueda(13) + '</g></svg>' +
+    '<div class="inGira"><svg viewBox="-40 -40 80 80" class="fg"><g transform="scale(1.25)">' + FG.cuchilla(13) + '</g></svg></div>');
+  p += rueda('inW1', 26) + rueda('inW2', -64);
+  p += capa('inGrapadora', u(-45), u(-80), u(90), u(90), '<svg viewBox="-45 -80 90 90" class="fg"><g transform="scale(1.3)">' + FG.grapadoraArriba() + '</g></svg>');
+  s += capa('inPizza', px0, py0, D, D, p);
+  let r = capa('inCinta', 0, 0, an, 28, capa('inRaya inR4', an / 4, 0, 0, 13) + capa('inRaya inR4', an * 3 / 4, 0, 0, 13) + capa('inRaya inR2', an / 2, 0, 0, 13));
+  r += capa('inNum', -20, 30, 40, 0, '0', 'font-size:' + G.cifra + 'px') + capa('inNum', an - 20, 30, 40, 0, '1', 'font-size:' + G.cifra + 'px');
+  r += capa('inMarca', -2, -20, 4, 52, capa('inEtq inEtq0', -28, 54, 60, 0, '<b>2/4</b>', 'font-size:' + G.etq + 'px') + capa('inEtq inEtq1', -58, 54, 120, 0, '<b>2/4 = 1/2</b>', 'font-size:' + G.etq + 'px;white-space:nowrap'));
+  s += capa('inRegla', rx0 - hx, ry - hy, an, 0, r);
+  const [lx0, lx1, ly, lt] = G.lema;
+  s += capa('inLema inLema1', lx0 - hx, ly - hy, 0, 0, 'CORTAR REPARTE', 'font-size:' + lt + 'px') + capa('inLema inLema2', lx1 - hx, ly - hy, 0, 0, 'GRAPAR JUNTA', 'font-size:' + lt + 'px;transform-origin:100% 50%');
+  const quien = (cls, [x, y, w], fig, pie) => capa('inQuien ' + cls, x - hx, y - hy, w, w * 1.25, fig + '<span style="font-size:' + G.pie + 'px">' + pie + '</span>');
+  s += quien('inNick', G.nick, FG.nick('habla'), 'Nick, el pizzero') + quien('inMigas', G.migas, FG.migas('habla'), 'Migas, el pinche');
+  const [tx, ty, tt] = G.titulo;
+  s += capa('inTitulo', tx - hx - 300, ty - hy, 600, 0, 'La grapadora<br>de Nick', 'font-size:' + tt + 'px');
+  el.innerHTML = '<div class="inLienzo" style="width:' + G.an + 'px;height:' + G.al + 'px">' + capa('inPapel papel', hx, hy, hw, hh, s) +
+    capa('inSalta', G.salta[0] - 200, G.salta[1], 400, 0, 'toca para empezar', 'font-size:' + G.salta[2] + 'px') + '</div>';
+  const li = el.firstElementChild, coloca = () => { const z = Math.min(innerWidth / G.an, innerHeight / G.al);
+    li.style.transform = 'translate(' + ((innerWidth - G.an * z) / 2).toFixed(1) + 'px,' + ((innerHeight - G.al * z) / 2).toFixed(1) + 'px) scale(' + z.toFixed(4) + ')'; };
+  coloca();
+  return {G, k, an, hh, hy, coloca};
+}
+function guion(el, m){
+  const A = [], u = n => n * m.k, o = ms => Math.min(1, ms / DUR);
+  const anima = (sel, kf, origen) => {
+    kf = kf.map(f => { const g = Object.assign({}, f, {offset: o(f.t)}); delete g.t; return g; });
+    if(kf[0].offset > 0) kf.unshift(Object.assign({}, kf[0], {offset: 0}));
+    if(kf[kf.length - 1].offset < 1){ const z = Object.assign({}, kf[kf.length - 1], {offset: 1}); delete z.easing; kf.push(z); }
+    for(let i = 1; i < kf.length; i++) if(kf[i].offset < kf[i - 1].offset) kf[i].offset = kf[i - 1].offset;
+    el.querySelectorAll(sel).forEach(e => { if(origen) e.style.transformOrigin = origen; const a = e.animate(kf.map(f => Object.assign({}, f)), {duration: DUR, fill: 'both'}); a.pause(); A.push(a); });
+  };
+  const ve = (sel, t0, t1) => anima(sel, [{t: t0, opacity: 0}, {t: t1 || t0 + 1, opacity: 1}]);
+  const tr = (x, y, mas) => 'translate(' + u(x).toFixed(1) + 'px,' + u(y).toFixed(1) + 'px)' + (mas || '');
+  anima('.inPapel', [{t: 0, transform: 'translateY(' + (-(m.hh + m.hy + 40)) + 'px)', easing: 'cubic-bezier(.2,.8,.3,1)'}, {t: 520, transform: 'translateY(0)'}]);
+  const pasa = (sel, x0, y0, x1, y1, t0, t1) => {
+    anima(sel, [{t: t0 - 120, opacity: 0, transform: tr(x0, y0)}, {t: t0, opacity: 1, transform: tr(x0, y0), easing: 'ease-in-out'}, {t: t1, opacity: 1, transform: tr(x1, y1)}, {t: t1 + 140, opacity: 0, transform: tr(x1, y1)}]);
+    anima(sel + ' .inGira', [{t: t0, transform: 'rotate(0deg)', easing: 'ease-in-out'}, {t: t1, transform: 'rotate(640deg)'}]); };
+  pasa('.inW1', CX, CY - R - 6, CX, CY + R + 6, 700, 1400); pasa('.inW2', CX - R - 6, CY, CX + R + 6, CY, 1560, 2200);
+  const D0 = 2420, T1 = 3380, d = 7.1;
+  anima('.inL1', [{t: 700, opacity: 1, transform: 'scaleY(0)', easing: 'ease-in-out'}, {t: 1400, opacity: 1, transform: 'scaleY(1)'}, {t: D0, opacity: 1, transform: 'scaleY(1)'}, {t: D0 + 1, opacity: 0, transform: 'scaleY(1)'}], '50% 0');
+  anima('.inL2', [{t: 1560, opacity: 1, transform: 'scaleX(0)', easing: 'ease-in-out'}, {t: 2200, opacity: 1, transform: 'scaleX(1)'}, {t: D0, opacity: 1, transform: 'scaleX(1)'}, {t: D0 + 1, opacity: 0, transform: 'scaleX(1)'}], '0 50%');
+  anima('.inLema1', [{t: 800, opacity: 0, transform: 'scale(1.1)'}, {t: 980, opacity: 1, transform: 'scale(1)', easing: 'ease-in'}]);
+  ve('.inR2', 1400, 1500); anima('.inR4', [{t: 2200, opacity: 0}, {t: 2320, opacity: 1}, {t: 3660, opacity: 1}, {t: 3900, opacity: 0}]);
+  anima('.inQ2, .inQ3', [{t: D0, opacity: 1}, {t: D0 + 200, opacity: .45}]);
+  anima('.inQ .inFilo', [{t: D0, opacity: 0}, {t: D0 + 1, opacity: 1}]);
+  [['.inQ0', '.inSom0', -1], ['.inQ1', '.inSom1', 1]].forEach(([q, som, sy]) => {
+    anima(q, [{t: D0, opacity: 1, transform: tr(0, 0), easing: 'ease-out'}, {t: D0 + 160, opacity: 1, transform: tr(d * 1.35, sy * d * 1.35)}, {t: D0 + 260, opacity: 1, transform: tr(d, sy * d)},
+      {t: T1, opacity: 1, transform: tr(d, sy * d), easing: 'ease-in'}, {t: T1 + 110, opacity: 1, transform: tr(10, 0)}, {t: T1 + 111, opacity: 0, transform: tr(10, 0)}]);
+    anima(som, [{t: D0, opacity: 0, transform: tr(0, 0), easing: 'ease-out'}, {t: D0 + 260, opacity: .85, transform: tr(d + 3.6, sy * d + 3.6)},
+      {t: T1, opacity: .85, transform: tr(d + 3.6, sy * d + 3.6), easing: 'ease-in'}, {t: T1 + 110, opacity: .85, transform: tr(13.6, 3.6)}, {t: T1 + 111, opacity: 0, transform: tr(13.6, 3.6)}]); });
+  anima('.inMarca', [{t: D0 + 80, opacity: 0, transform: 'translateX(0)'}, {t: D0 + 120, opacity: 1, transform: 'translateX(0)', easing: 'cubic-bezier(.3,1.25,.5,1)'}, {t: D0 + 560, opacity: 1, transform: 'translateX(' + (m.an / 2).toFixed(1) + 'px)'}]);
+  const g0 = CX + R * .38, g1 = CX + R * .72, gp = (x, alto, z) => tr(x, CY - alto, ' rotate(90deg) scale(' + z + ')');
+  anima('.inGrapadora', [{t: 2960, opacity: 0, transform: gp(g0 + 30, 70, 1.12)}, {t: 3200, opacity: 1, transform: gp(g0, 20, 1.08), easing: 'ease-in'}, {t: 3300, opacity: 1, transform: gp(g0, 0, 1), easing: 'ease-out'},
+    {t: 3420, opacity: 1, transform: gp(g1, 18, 1.08), easing: 'ease-in'}, {t: 3540, opacity: 1, transform: gp(g1, 0, 1), easing: 'ease-out'}, {t: 3680, opacity: 1, transform: gp(g1, 22, 1.08)}, {t: 3900, opacity: 0, transform: gp(g1 + 30, 80, 1.12)}], '50% 88.9%');
+  anima('.inMitad', [{t: T1 + 110, opacity: 0, transform: tr(10, 0)}, {t: T1 + 111, opacity: 1, transform: tr(10, 0)}]);
+  anima('.inSomH', [{t: T1 + 110, opacity: 0, transform: tr(13.6, 3.6)}, {t: T1 + 111, opacity: .85, transform: tr(13.6, 3.6)}]);
+  [['.inGr0', 3300], ['.inGr1', 3540]].forEach(([sel, t]) => anima(sel, [{t: t - 1, opacity: 0, transform: tr(d, 0, ' scale(1.7)')}, {t: t + 90, opacity: 1, transform: tr(d, 0, ' scale(1)')}, {t: T1, opacity: 1, transform: tr(d, 0)}, {t: T1 + 110, opacity: 1, transform: tr(10, 0)}]));
+  anima('.inCostura', [{t: 3299, opacity: 0, transform: tr(d, 0)}, {t: 3300, opacity: .85, transform: tr(d, 0)}, {t: T1, opacity: .85, transform: tr(d, 0)}, {t: T1 + 110, opacity: .85, transform: tr(10, 0)}, {t: 4300, opacity: .85, transform: tr(10, 0)}, {t: 4700, opacity: 0, transform: tr(10, 0)}]);
+  anima('.inLema2', [{t: 3120, opacity: 0, transform: 'scale(1.1)'}, {t: 3300, opacity: 1, transform: 'scale(1)', easing: 'ease-in'}]);
+  anima('.inEtq0', [{t: 3660, opacity: 1}, {t: 3860, opacity: 0}]); ve('.inEtq1', 3760, 3960);
+  anima('.inTitulo', [{t: 3950, opacity: 0, transform: 'scale(1.14)'}, {t: 4130, opacity: 1, transform: 'scale(1)', easing: 'ease-in'}]);
+  anima('.inNick', [{t: 4050, opacity: 0, transform: 'translate(-16px,6px)'}, {t: 4420, opacity: 1, transform: 'translate(0,0)', easing: 'cubic-bezier(.3,1.3,.5,1)'}]);
+  anima('.inMigas', [{t: 4230, opacity: 0, transform: 'translate(16px,6px)'}, {t: 4600, opacity: 1, transform: 'translate(0,0)', easing: 'cubic-bezier(.3,1.3,.5,1)'}]);
+  return A;
+}
+function escena(el, alAcabar){
+  try{ raiz.sessionStorage.setItem(VISTA, 'visto'); }catch(err){}
+  const h = document.documentElement;
+  h.dataset.inicio = 'si';
+  el.hidden = false;
+  if(PZ && PZ.prepara) PZ.prepara();
+  const m = monta(el), A = guion(el, m);
+  const ts = [];
+  let hecho = false;
+  const luego = (ms, fn) => ts.push(setTimeout(fn, ms));
+  function fin(){
+    if(hecho) return;
+    hecho = true;
+    ts.forEach(clearTimeout);
+    removeEventListener('keydown', tecla, true); removeEventListener('resize', m.coloca);
+    el.classList.add('fuera');
+    setTimeout(() => {
+      el.hidden = true; el.innerHTML = ''; el.classList.remove('fuera'); delete h.dataset.inicio;
+      const mn = document.querySelector('main');
+      if(mn && mn.animate) mn.animate([{opacity: 0}, {opacity: 1}], {duration: 350, easing: 'ease-out'});
+      if(alAcabar) alAcabar();
+    }, FUNDIDO);
+  }
+  function tecla(ev){ ev.stopPropagation(); if(['Enter', ' ', 'Escape'].includes(ev.key)){ ev.preventDefault(); fin(); } }
+  el.addEventListener('click', fin, {once: true});
+  addEventListener('keydown', tecla, true); addEventListener('resize', m.coloca);
+  A.forEach(a => a.play());
+  if(S){ luego(700, () => S.toca('corte')); luego(1560, () => S.toca('corte')); luego(3300, () => S.toca('grapa')); luego(3540, () => S.toca('grapa')); }
+  luego(DUR, fin);
+  return {animaciones: A, fin};
+}
+raiz.Arranque = {escena, monta, guion, DUR, FUNDIDO};
+})(window);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const REDUCIDO = raiz.matchMedia && raiz.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ENTREVISTAS = {
+  nick: {nombre: 'Nick', cargo: 'pizzero, y dueño de la grapadora',
+    hola: 'Pregunte, pregunte, que el horno no espera. Y si le sobra un minuto, le grapo algo.',
+    preguntas: [
+      {id: 'n1', pose: 'senala', p: '¿Por qué grapa las pizzas?',
+       r: 'Porque el cliente siempre quiere su pedido <b>en una pieza</b>. Dos cuartos grapados son media pizza: la misma cantidad, con otro nombre. Grapar de dos en dos es <b>dividir arriba y abajo entre 2</b>: 2/4 = 1/2.'},
+      {id: 'n1b', pose: 'piensa', tras: 'n1', p: '¿Y si grapo tres octavos?',
+       r: 'Sale una pieza, sí, pero 3 no cabe en 8: esa pieza no es <b>un trozo de nada entero</b>. No hay división que enseñar. La grapadora grapa lo que le echen; las cuentas, no.'},
+      {id: 'n2', pose: 'celebra', p: '¿No se notan las grapas al comer?', feliz: true,
+       r: 'Se quitan antes de servir. Casi siempre. Lo que importa es que, grapada o suelta, <b>la pizza pesa lo mismo</b>: ni grapar ni cortar cambia la cantidad. Solo el nombre.'},
+      {id: 'n3', pose: 'senala', p: '¿Por qué todas sus pizzas miden lo mismo?',
+       r: 'Porque si una fuera más grande, un cuarto de esa no sería un cuarto de las otras, y no habría manera de comparar. En esta casa <b>el 1 es la superficie de una pizza</b>. Sin la misma unidad, las fracciones no se hablan.'},
+      {id: 'n4', pose: 'senala', p: '¿Por qué 1/4 es menos que 1/3, si 4 es más que 3?',
+       r: 'Esa me la hacen todos los días. El 4 de abajo dice <b>en cuántos trozos se corta</b>, no cuánto te llevas. Pizza para cuatro, trozo pequeño; pizza para tres, trozo más grande. <b>Más comensales, menos ración.</b>'},
+      {id: 'n5', pose: 'celebra', p: '¿Es verdad que es usted una morsa?', feliz: true,
+       r: 'Y a mucha honra. El bigote de pizzero lo traía de serie. Lo malo son los colmillos: para probar la salsa hay que tener <b>mucho pulso</b>.'},
+      {id: 'n6', pose: 'sorpresa', p: '¿Qué es eso de «sumar como Nick»?',
+       r: '…Eso lo dice mi hermana. Una vez, para doblar una receta de 4 personas a 8, <b>le sumé 4 a cada cosa</b> en vez de multiplicar por 2. Salió una masa con ocho huevos para dos tazas de harina. No se hable más del tema.'},
+      {id: 'n7', pose: 'celebra', p: '¿Qué hace un ratón en su cocina?', feliz: true,
+       r: '¿Migas? Es el ratón del obrador de mi hermana, pero los días de mucho lío me lo presta. Es el mejor con el cortador: yo <b>junto</b>, él <b>reparte</b>. Entre los dos, cualquier fracción. Y no se come el queso. Casi nunca.'}
+    ]},
+  nicoleta: {nombre: 'Nicoleta', cargo: 'pastelera, hermana de Nick, dos portales más allá',
+    hola: 'Te atiendo, pero rápido: tengo magdalenas en el horno y a mi hermano al teléfono.',
+    preguntas: [
+      {id: 'c1', pose: 'telefono', p: '¿Por qué siempre encarga por teléfono?',
+       r: 'Porque mis encargos son de los difíciles: <b>7/8 contra 6/7</b>. Harían falta 56 trozos, y el cortador de Nick no hila tan fino. Así que lo cortamos <b>sobre el papel</b>.'},
+      {id: 'c2', pose: 'senala', p: '¿Qué es eso de multiplicar en cruz?', tras: 'c1',
+       r: 'Nada de trucos. Para ponerlas en la misma secuencia, cada una se multiplica arriba y abajo por el denominador de la otra: <b>7/8 = 49/56</b> y <b>6/7 = 48/56</b>. Y fíjate: 49 = 7×7, 48 = 8×6. Esos son <b>los productos en cruz</b>.'},
+      {id: 'c3', pose: 'celebra', p: '¿Quién cocina mejor, usted o Nick?', feliz: true,
+       r: 'Él hace pizzas y yo hago pasteles. Pero yo <b>multiplico</b> las recetas y él las suma. Saca tus propias conclusiones.'},
+      {id: 'c4', pose: 'habla', p: '¿Qué tienen que ver las fracciones con la pastelería?',
+       r: 'Todo. Media receta, un tercio de azúcar, tres huevos por cada dos tazas… Una pastelería es el sitio donde <b>las razones se usan sin llamarlas así</b>.'},
+      {id: 'c5', pose: 'senala', p: '¿Y cómo sabe quién se lleva más?',
+       r: 'Cuando las dos están en la misma secuencia, <b>gana el numerador mayor</b>: 49 trozos de 56 son más que 48 de 56. Antes de igualarlas, contar trozos no sirve de nada.'},
+      {id: 'c6', pose: 'celebra', p: '¿Le cae bien Migas?', feliz: true,
+       r: 'Es mi ratón del obrador: vive debajo del mostrador y se come lo que sobra de cada reparto, por eso sabe tanto de porcentajes. Se lo presto a Nick, con una condición: que no <b>corte las magdalenas en quinceavos</b>, que se me desmoronan.'}
+    ]},
+  migas: {nombre: 'Migas', cargo: 'el ratón del obrador de Nicoleta, que baja a llevar el cortador',
+    hola: '¡Hola! ¿Es para mí? ¡Nadie me pregunta nunca nada! ¿Quiere que le corte algo?',
+    preguntas: [
+      {id: 'm1', pose: 'celebra', p: '¿Por qué te llamas Migas?', feliz: true,
+       r: 'Porque de pequeño cortaba las pizzas en tantos trozos que al final solo quedaban migas. Pero aprendí una cosa: <b>cortar más fino no cambia la cantidad</b>. La pizza entera sigue siendo 1, esté en 4 trozos o en 400.'},
+      {id: 'm2', pose: 'senala', p: '¿Qué hace exactamente el cortador?',
+       r: 'Si una pizza está en cuartos y la corto en 8, cada cuarto se hace dos octavos: <b>hay el doble de trozos y cada uno es la mitad</b>. Por eso 3/4 = 6/8: se multiplica arriba y abajo por 2.'},
+      {id: 'm3', pose: 'sorpresa', p: '¿Por qué a veces el cortador avisa?',
+       r: 'Porque pasar de cuartos a tercios <b>no respeta las piezas</b>: los cortes nuevos caen donde no había, y se pierde lo grapado. Si el corte nuevo es un múltiplo del viejo —de 4 a 8, a 12—, lo grapado aguanta.'},
+      {id: 'm4', pose: 'senala', p: '¿Qué es un denominador?',
+       r: 'El número de trozos en que corto la pizza: el de <b>abajo</b>. El de arriba, el numerador, es cuántos trozos te llevas tú. Yo me encargo del de abajo; de lo que te llevas, se encarga tu hambre.'},
+      {id: 'm5', pose: 'piensa', p: '¿Cuál es el máximo de trozos?',
+       r: 'Quince. Más allá, los trozos se me hacen <b>migas</b> y el jefe se enfada. Para 56 trozos, lo que hace Nicoleta: <b>se corta sobre el papel</b>, que ahí no se desmorona nada.'},
+      {id: 'm6', pose: 'senala', p: '¿Cómo se comparan dos pizzas cortadas distinto?',
+       r: 'Primero las corto <b>igual</b>, donde quepan los dos cortes. Tercios y quintos: en 15. Entonces los trozos son del mismo tamaño y ya solo hay que <b>contar</b>. Eso es el denominador común.'},
+      {id: 'm7', pose: 'sorpresa', p: '¿Te comes el queso?', feliz: true,
+       r: '¡Yo no! …Bueno, alguna hebra que se queda en el cortador. Eso no cuenta: es <b>menos de un quinceavo</b>.'}
+    ]}
+};
+
+function monta(el, PJ){
+  const q = el.querySelector('.ev-quien'), cartel = el.querySelector('.ev-cartel'), cara = el.querySelector('.ev-cara'),
+        pre = el.querySelector('.ev-pregunta'), txt = el.querySelector('.ev-respuesta'), lista = el.querySelector('.ev-lista');
+  const VB = {nick: '14 2 72 72', nicoleta: '18 12 68 68', migas: '14 8 72 72'};
+  const CARAS = {}; Object.keys(VB).forEach(k => { CARAS[k] = PJ[k]('calla').replace('viewBox="0 0 100 100"', 'viewBox="' + VB[k] + '"'); });
+  const ev = {quien: 'nick', hechas: new Set(), tok: 0};
+  q.innerHTML = Object.keys(ENTREVISTAS).map(k => '<button type="button" data-q="' + k + '"><span class="ev-mini" aria-hidden="true">' + CARAS[k] + '</span>' + ENTREVISTAS[k].nombre + '</button>').join('');
+  q.querySelectorAll('button').forEach(b => b.addEventListener('click', () => elige(b.dataset.q)));
+  function elige(k){
+    ev.quien = k; ev.tok++;
+    const E = ENTREVISTAS[k];
+    q.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.q === k)));
+    el.dataset.quien = k;
+    cartel.innerHTML = '<b>' + E.nombre + '</b>, ' + E.cargo + '.';
+    cara.dataset.q = k;
+    pre.textContent = '';
+    habla(E.hola, k === 'migas' ? 'celebra' : 'habla');
+    pintaLista();
+  }
+  function pintaLista(){
+    const E = ENTREVISTAS[ev.quien];
+    lista.innerHTML = '';
+    E.preguntas.filter(p => !p.tras || ev.hechas.has(p.tras)).forEach(p => {
+      const b = document.createElement('button'); b.type = 'button';
+      b.className = 'ev-p' + (ev.hechas.has(p.id) ? ' hecha' : '') + (p.tras ? ' repregunta' : '');
+      b.innerHTML = (p.tras ? '<span class="ev-re">Y además… </span>' : '') + p.p;
+      b.addEventListener('click', () => {
+        ev.hechas.add(p.id); pre.textContent = '—' + p.p;
+        habla(p.r, p.pose || (p.feliz ? 'celebra' : 'habla')); pintaLista();
+        if(raiz.Sonido) raiz.Sonido.toca(p.feliz ? 'bien' : 'tiza');
+      });
+      lista.appendChild(b);
+    });
+  }
+  const HABLAN = ['habla', 'senala', 'telefono'];
+  function habla(html, pose){
+    const tok = ++ev.tok, quien = ev.quien;
+    const trozos = html.split(/(<[^>]+>)/).filter(Boolean);
+    const total = trozos.reduce((s, t) => s + (t[0] === '<' ? 0 : t.length), 0);
+    const mientras = HABLAN.includes(pose) ? pose : 'habla';
+    const cierre = () => { if(ev.tok !== tok) return; txt.innerHTML = html; if(pose !== mientras) cara.innerHTML = PJ.entero(quien, pose); else if(cara.firstElementChild) cara.firstElementChild.classList.remove('calla'); cara.classList.toggle('feliz', pose === 'celebra'); };
+    cara.classList.remove('feliz');
+    cara.innerHTML = PJ.entero(quien, mientras);
+    if(REDUCIDO){ cierre(); return; }
+    const fig = cara.firstElementChild;
+    let n = 0;
+    const paso = () => {
+      if(ev.tok !== tok) return;
+      n = Math.min(total, n + 2);
+      let quedan = n, h = '';
+      for(const t of trozos){ if(t[0] === '<'){ h += t; continue; } if(quedan <= 0) break; h += t.slice(0, quedan); quedan -= t.length; }
+      txt.innerHTML = h;
+      fig.classList.toggle('calla', Math.floor(n / 6) % 2 === 1);
+      if(n < total) setTimeout(paso, 26); else cierre();
+    };
+    paso();
+  }
+  return {abre: () => elige(ev.quien), calla: () => { ev.tok++; }};
+}
+raiz.Entrevistas = {ENTREVISTAS, monta};
+})(window);
+</script>
+<script>
+(function (raiz) {
+'use strict';
+const FG = raiz.Figuras;
+const D = 1700, o = x => Math.min(1, x / D);
+function lanza(escena, PJ, opts){
+  opts = opts || {};
+  if(opts.quieto) return null;
+  document.querySelectorAll('.trampa-vineta').forEach(v => v.remove());
+  const z = parseFloat(getComputedStyle(document.body).zoom) || 1;
+  const S = Math.round(opts.tam || Math.min(230, innerWidth * .56));
+  const v = document.createElement('div');
+  v.className = 'trampa-vineta papel ' + escena;
+  v.innerHTML = FG.trampa(escena);
+  const ref = opts.cerca && opts.cerca.getBoundingClientRect();
+  const cx = opts.punto ? opts.punto.x : ref ? ref.left + ref.width / 2 : innerWidth / 2;
+  const cy = opts.punto ? opts.punto.y : ref ? Math.max(S / 2 + 10, Math.min(innerHeight - S / 2 - 10, ref.top + ref.height / 2)) : innerHeight / 2;
+  v.style.cssText = 'left:' + Math.round((cx - S / 2) / z) + 'px;top:' + Math.round((cy - S / 2) / z) + 'px;width:' + Math.round(S / z) + 'px;height:' + Math.round(S / z) + 'px';
+  document.body.appendChild(v);
+  const anima = (sel, kf, origen) => {
+    v.querySelectorAll(sel).forEach(e => { if(origen){ e.style.transformBox = 'view-box'; e.style.transformOrigin = origen; }
+      e.animate(kf.map(k => Object.assign({}, k)), {duration: D, fill: 'both'}); });
+  };
+  const tr = (x, y, r) => 'translate(' + x + 'px,' + y + 'px)' + (r ? ' rotate(' + r + 'deg)' : '');
+  const anV = v.animate([
+    {transform: 'scale(.4) rotate(-8deg)', opacity: 0, offset: 0},
+    {transform: 'scale(1.06) rotate(2deg)', opacity: 1, offset: o(170), easing: 'ease-out'},
+    {transform: 'scale(1) rotate(0)', opacity: 1, offset: o(270)},
+    {transform: 'scale(1) rotate(0)', opacity: 1, offset: o(1500), easing: 'ease-in'},
+    {transform: 'scale(.5) rotate(6deg)', opacity: 0, offset: 1}
+  ], {duration: D, fill: 'forwards'});
+  const salto = escena === 'fallo' ? 700 : 820;
+  anima('.trArco', [
+    {transform: 'rotate(0deg)', offset: 0}, {transform: 'rotate(0deg)', offset: o(salto - 220)},
+    ...(escena === 'fallo' ? [{transform: 'rotate(5deg)', offset: o(salto - 160)}, {transform: 'rotate(-2deg)', offset: o(salto - 100)}, {transform: 'rotate(4deg)', offset: o(salto - 50)}] : []),
+    {transform: 'rotate(0deg)', offset: o(salto)},
+    {transform: 'rotate(172deg)', offset: o(salto + 70), easing: 'ease-in'},
+    {transform: 'rotate(166deg)', offset: o(salto + 110)}, {transform: 'rotate(172deg)', offset: o(salto + 150)},
+    {transform: 'rotate(172deg)', offset: 1}], '86px 136px');
+  anima('.trRayos', [{opacity: 0, offset: 0}, {opacity: 0, offset: o(salto + 60)}, {opacity: 1, offset: o(salto + 80)}, {opacity: 1, offset: o(salto + 240)}, {opacity: 0, offset: o(salto + 420)}, {opacity: 0, offset: 1}]);
+  anima('.trTrampa', [{transform: tr(0, 0), offset: 0}, {transform: tr(0, 0), offset: o(salto + 60)}, {transform: tr(0, -7, -2), offset: o(salto + 130), easing: 'ease-out'},
+    {transform: tr(0, 0), offset: o(salto + 250), easing: 'ease-in'}, {transform: tr(0, 0), offset: 1}], '100px 150px');
+  if(escena === 'acierto'){
+    const k = [{transform: tr(74, 0), offset: 0}, {transform: tr(74, 0), offset: o(150)}];
+    for(let t = 225, i = 1; t <= 600; t += 75, i++) k.push({transform: tr(+(74 * (1 - (t - 150) / 450)).toFixed(1), i % 2 ? -2.6 : 0), offset: o(t)});
+    k.push({transform: tr(0, 0), offset: o(660)}, {transform: tr(6, 0, 6), offset: o(800), easing: 'ease-in'}, {transform: tr(6, 0), offset: o(860)},
+      {transform: tr(6, -18), offset: o(1000), easing: 'ease-out'}, {transform: tr(6, 0), offset: o(1130), easing: 'ease-in'},
+      {transform: tr(6, -7), offset: o(1220), easing: 'ease-out'}, {transform: tr(6, 0), offset: o(1310), easing: 'ease-in'}, {transform: tr(6, 0), offset: 1});
+    anima('.trMigas', k, '112px 164px');
+    v.querySelectorAll('.pataA, .pataB').forEach((e, i) => e.animate([{transform: 'translateY(0)'}, {transform: 'translateY(-3px)'}], {duration: 75, iterations: 6, direction: i ? 'alternate-reverse' : 'alternate', delay: 150, easing: 'ease-in-out'}));
+    anima('.trQueso', [{opacity: 1, offset: 0}, {opacity: 1, offset: o(660)}, {opacity: 0, offset: o(661)}, {opacity: 0, offset: 1}]);
+    anima('.qMano', [{opacity: 0, offset: 0}, {opacity: 0, offset: o(660)}, {opacity: 1, offset: o(661)}, {opacity: 1, offset: 1}]);
+  }
+  if(raiz.Sonido){
+    raiz.Sonido.toca('trampa', salto / 1000);
+    if(escena === 'acierto') raiz.Sonido.toca('risita', (salto + 160) / 1000);
+  }
+  const fin = () => v.remove();
+  anV.finished.then(fin, fin);
+  return v;
+}
+raiz.Trampa = {lanza, DUR: D};
+})(window);
+</script>
+<script>
+(function(){
+'use strict';
+const M = window.Motor, PD = window.Pedidos, PZ = window.Pizza, PJ = window.Personajes;
+const $ = id => document.getElementById(id);
+const sonar = n => { if(window.Sonido) window.Sonido.toca(n); };
+const casi = M.casi, fTxt = M.fTxt, fVal = M.fVal;
+const ro = t => '<b class="fA">' + t + '</b>', az = t => '<b class="fB">' + t + '</b>';
+const MESAS = ['Mesa 4', 'Mesa 7'];
+window.Figuras.tramas();
+document.querySelector('.cab .sello').innerHTML = window.Figuras.sello();
+
+const AJ = 'grapadora.ajustes.v1';
+const aj = {tema: 'dia', aula: false, apuesta: true, sonido: true, inicio: true, trampa: true};
+try{ Object.assign(aj, JSON.parse(localStorage.getItem(AJ) || '{}')); }catch(err){}
+const guardaAjustes = () => { try{ localStorage.setItem(AJ, JSON.stringify(aj)); }catch(err){} };
+function aplicaAjustes(){
+  const h = document.documentElement;
+  h.dataset.tema = aj.tema;
+  if(aj.aula) h.dataset.aula = 'si'; else delete h.dataset.aula;
+  mideAula();
+  const v = {tema: aj.tema, apuesta: aj.apuesta ? 'si' : 'no', sonido: aj.sonido ? 'si' : 'no', inicio: aj.inicio ? 'si' : 'no', trampa: aj.trampa ? 'si' : 'no'};
+  document.querySelectorAll('.ajustes [data-aj]').forEach(g => g.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(v[g.dataset.aj] === b.dataset.v))));
+  $('bAula').setAttribute('aria-pressed', String(aj.aula)); $('bAula').textContent = aj.aula ? 'Salir del aula' : 'Aula';
+  if(window.Sonido) window.Sonido.activo(aj.sonido);
+}
+document.querySelectorAll('.ajustes [data-aj]').forEach(g => g.addEventListener('click', ev => {
+  const b = ev.target.closest('button'); if(!b) return;
+  const k = g.dataset.aj, v = b.dataset.v;
+  aj[k] = k === 'tema' ? v : v === 'si';
+  guardaAjustes(); aplicaAjustes();
+  if(k === 'apuesta') pintaPizarra();
+}));
+function mideAula(){
+  const an = innerWidth, al = innerHeight;
+  const z = an >= 1100 ? Math.max(1, Math.min(2.4, an / 1272, al / 792)) : al <= 820 ? 1.12 : 1.32;
+  document.documentElement.style.setProperty('--aula', z.toFixed(3));
+}
+const ampliado = () => parseFloat(getComputedStyle(document.body).zoom) || 1;
+const ajustes = si => { $('ajustes').hidden = !si; $('bAjustes').setAttribute('aria-pressed', String(si)); };
+$('bAjustes').addEventListener('click', () => ajustes($('ajustes').hidden));
+$('ajCierra').addEventListener('click', () => ajustes(false));
+$('bAula').addEventListener('click', () => { aj.aula = !aj.aula; guardaAjustes(); aplicaAjustes(); });
+addEventListener('resize', mideAula);
+
+const TURNO = 'grapadora.turno.v1', CADUCA = 4 * 60 * 60 * 1000;
+const nuevoTurno = () => ({juego: 'servir', ruta: {servir: 0, comparar: 0, telefono: 0}, practica: false, dif: 1, nombre: '', t0: Date.now(), ts: Date.now(),
+  stats: {servir: {ruta: 0, bien: 0, mal: 0}, comparar: {ruta: 0, bien: 0, mal: 0}, telefono: {ruta: 0, bien: 0, mal: 0}}, ejercicios: []});
+let est = nuevoTurno();
+try{ const d = JSON.parse(localStorage.getItem(TURNO) || 'null'); if(d && d.v === 1 && Date.now() - d.ts < CADUCA) est = Object.assign(nuevoTurno(), d); }catch(err){}
+let deEnlace = null;
+try{ const q = new URLSearchParams(location.search);
+  if(q.get('j')){ deEnlace = PD.aMedida(q); if(deEnlace){ est.juego = q.get('j'); est.practica = true; } history.replaceState(null, '', location.pathname); } }catch(err){}
+const vieneDeEnlace = !!deEnlace;
+const guarda = () => { est.ts = Date.now(); est.v = 1; try{ localStorage.setItem(TURNO, JSON.stringify(est)); }catch(err){} };
+
+let P = null, cajas = [], activa = 0, resuelto = false, prediccion = null, armado = null, ultimaOp = null, papel = {A: null, B: null}, fallos = 0, tPedido = 0, reloj = 0;
+const enRuta = () => PD.RUTA[est.juego], rutaHecha = () => est.ruta[est.juego] >= enRuta().length;
+const esCompara = () => est.juego === 'comparar', esTel = () => est.juego === 'telefono';
+function montaPedido(){
+  resuelto = false; prediccion = null; armado = null; ultimaOp = null; papel = {A: null, B: null}; fallos = 0; tPedido = Date.now(); clearTimeout(reloj);
+  if(deEnlace){ P = deEnlace; deEnlace = null; }
+  else if(est.practica) P = PD.GENERA[est.juego](est.dif);
+  else P = rutaHecha() ? null : enRuta()[est.ruta[est.juego]];
+  cajas = P && !esTel() ? (P.cajas || [P.fA[1], P.fB[1]]).map(M.nuevaCaja) : [];
+  activa = 0;
+  if(P && esTel()) sonar('timbre');
+  pintaEncargo(); pintaMesa(); lee();
+  const cara = P && esTel() && !menosMovimiento() && $('cliente').querySelector('.cara');
+  if(cara){ cara.classList.add('suena'); setTimeout(() => cara.classList.remove('suena'), 1300); }
+}
+function pintaPestanas(){
+  document.querySelectorAll('.juegos button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.j === est.juego)));
+  document.documentElement.dataset.juego = est.juego;
+  $('bPracticar').setAttribute('aria-pressed', String(est.practica));
+  $('practica').hidden = !est.practica;
+  $('difOps').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.d) === est.dif)));
+}
+document.querySelectorAll('.juegos button').forEach(b => b.addEventListener('click', () => { est.juego = b.dataset.j; guarda(); pintaPestanas(); montaPedido(); }));
+$('bPracticar').addEventListener('click', () => { est.practica = !est.practica; guarda(); pintaPestanas(); montaPedido(); });
+$('difOps').addEventListener('click', ev => { const b = ev.target.closest('button'); if(!b) return; est.dif = Number(b.dataset.d); guarda(); pintaPestanas(); montaPedido(); });
+$('bOtro').addEventListener('click', montaPedido);
+$('bSiguiente').addEventListener('click', () => { est.ruta[est.juego]++; guarda(); montaPedido(); });
+$('bSaltar').addEventListener('click', () => { if(est.practica) montaPedido(); else if(!rutaHecha()){ est.ruta[est.juego]++; guarda(); montaPedido(); } });
+
+function pintaEncargo(){
+  const R = enRuta(), i = est.ruta[est.juego];
+  $('encCab').textContent = est.practica ? 'Practicar ◆ ' + PD.NOMBRE_J[est.juego] : P ? 'Pedido ' + (i + 1) + ' de ' + R.length : PD.NOMBRE_J[est.juego] + ' ◆ ruta hecha';
+  $('puntos').innerHTML = est.practica ? '' : R.map((q, k) => '<i class="' + (k < i ? 'hecho' : k === i ? 'aqui' : '') + '"></i>').join('');
+  $('bSiguiente').hidden = true; $('bOtro').hidden = true; $('bSaltar').hidden = est.practica || !P;
+  if(!P){
+    $('cliente').innerHTML = '<span class="quien">El mostrador</span>Los ' + R.length + ' pedidos de la ruta están servidos.';
+    nickDice('Ruta hecha. Si quieres más, en <b>Practicar</b> hay pedidos nuevos sin fin; y en las otras pestañas, más trabajo.', false);
+    $('pizarra').innerHTML = ''; return;
+  }
+  const quien = esTel() ? 'Al teléfono ◆ Nicoleta, desde la pastelería' : esCompara() ? 'Dos clientes ◆ ' + MESAS[0] + ' y ' + MESAS[1] : 'Cliente';
+  $('cliente').className = 'cliente' + (esTel() ? ' tel' : '');
+  $('cliente').innerHTML = esTel() ? '<span class="cara" data-vb="20 16 64 64" aria-hidden="true"></span><span><span class="quien">' + quien + '</span>' + P.cli + '</span>'
+    : '<span class="quien">' + quien + '</span>' + P.cli;
+  if(esTel()) PJ.ponCara($('cliente').querySelector('.cara'), 'nicoleta', 'telefono', true);
+  nickDice(P.nick, false);
+  pintaPizarra();
+}
+function nickDice(html, feliz, pose){
+  const n = $('nick'); n.classList.toggle('feliz', !!feliz);
+  PJ.ponCara($('caraNick'), 'nick', pose || (feliz ? 'celebra' : 'habla'), true);
+  $('nickTxt').innerHTML = html;
+}
+function clac(){
+  const c = $('caraNick'), antes = c.dataset.pose || 'habla';
+  PJ.ponCara(c, 'nick', 'grapa');
+  clearTimeout(clac.t); clac.t = setTimeout(() => { if(c.dataset.pose === 'grapa') PJ.ponCara(c, 'nick', antes === 'grapa' ? 'habla' : antes); }, 380);
+}
+
+const signoReal = () => M.signo(P.fA, P.fB);
+const nombre = (k, b) => {
+  const c = cajas[activa], elegidas = c ? M.grupos(c).filter(t => c.sel.has(t[0])) : [];
+  const s = elegidas.length ? elegidas[0].length : 1;
+  const igual = s > 1 && b % s === 0 && k % s === 0 && elegidas.every(t => t.length === s) && elegidas.length * s === k;
+  return k + '/' + b + (igual ? ' = ' + (k / s) + '/' + (b / s) : '');
+};
+const relacion = () => fTxt(P.fA) + ' ' + ({'>': 'ES MAYOR QUE', '<': 'ES MENOR QUE', '=': 'VALE LO MISMO QUE'}[signoReal()]) + ' ' + fTxt(P.fB);
+const TRAZOS = {'>': ['M8 7 L28 18 L8 29'], '<': ['M28 7 L8 18 L28 29'], '=': ['M7 13 H29', 'M7 23 H29']};
+function tiza(sg, escribe){
+  const t = (TRAZOS[sg] || []).map((d, i) => '<path d="' + d + '" pathLength="1" style="animation-delay:' + (i * 260) + 'ms"/>').join('');
+  return '<span class="signo" role="img" aria-label="' + ({'>': 'mayor que', '<': 'menor que', '=': 'igual a'}[sg] || sg) + '">' +
+    '<svg viewBox="0 0 36 36" class="' + (escribe ? 'escribe' : '') + '" aria-hidden="true"><defs><filter id="tizaGrano" x="-20%" y="-20%" width="140%" height="140%">' +
+    '<feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="3" result="r"/><feDisplacementMap in="SourceGraphic" in2="r" scale="1.6" result="d"/>' +
+    '<feColorMatrix in="r" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -2.2 1.7" result="h"/><feComposite in="d" in2="h" operator="in"/></filter></defs><g filter="url(#tizaGrano)">' + t + '</g></svg></span>';
+}
+function pintaPizarra(escribe){
+  const el = $('pizarra');
+  if(!P || !(esCompara() || esTel()) || !aj.apuesta){ el.innerHTML = ''; return; }
+  const izq = '<span class="fA">' + fTxt(P.fA) + '</span>', der = '<span class="fB">' + fTxt(P.fB) + '</span>';
+  if(!prediccion){
+    el.innerHTML = '<div class="pizarra"><div class="rot">LA PIZARRA DE NICK</div><div class="linea">' + izq + '<span class="hueco-signo">?</span>' + der + '</div>' +
+      '<div class="bots"><button type="button" data-s="&gt;" aria-label="mayor">&gt;</button><button type="button" data-s="=" aria-label="igual">=</button><button type="button" data-s="&lt;" aria-label="menor">&lt;</button></div>' +
+      '<div class="apuesta">SIN CORTAR NADA TODAVÍA: ¿QUÉ CREES?</div></div>';
+    el.querySelectorAll('.bots button').forEach(b => b.addEventListener('click', () => { prediccion = b.dataset.s; sonar('tiza'); pintaPizarra(true); }));
+  }else{
+    const bien = prediccion === signoReal();
+    el.innerHTML = '<div class="pizarra"><div class="rot">LA PIZARRA DE NICK</div><div class="linea">' + izq + tiza(prediccion, escribe) + der + '</div>' +
+      '<div class="apuesta">' + (resuelto ? (bien ? 'BIEN VISTO: ' : 'NO ERA ESO: ') + relacion() : 'ESO DICE LA PIZARRA. LA CUENTA LO DIRÁ.') + '</div></div>';
+  }
+}
+
+function migas(html, pose){
+  const a = $('aviso');
+  a.innerHTML = html ? '<span class="cara" data-vb="14 10 68 68" aria-hidden="true"></span><div><span class="quien">Migas, el pinche</span>' + html + '</div>' : '';
+  if(html) PJ.ponCara(a.querySelector('.cara'), 'migas', pose || 'sorpresa', true);
+}
+
+function pintaMesa(){
+  const tel = esTel();
+  $('cajas').hidden = tel || !P; $('mandos').hidden = tel || !P; $('papel').hidden = !tel || !P;
+  migas('');
+  if(!P) return;
+  if(tel){ pintaPapel(); return; }
+  const cont = $('cajas'); cont.innerHTML = '';
+  cajas.forEach((c, i) => {
+    const caja = document.createElement('div');
+    caja.className = 'cajaP papel' + (i === activa && cajas.length > 1 ? ' activa' : '') + (esCompara() ? (i ? ' mB' : ' mA') : '');
+    const tapa = document.createElement('div'); tapa.className = 'tapa';
+    tapa.textContent = (esCompara() ? MESAS[i].toUpperCase() : 'CAJA ' + (i + 1)) + ' ◆ EN ' + c.cortes;
+    caja.appendChild(tapa);
+    caja.appendChild(PZ.dibuja(c, k => { if(ocupado) return; activa = i; M.toca(c, k); ultimaOp = null; pintaMesa(); lee(); }));
+    caja.addEventListener('click', () => { if(activa !== i){ activa = i; pintaMesa(); } });
+    cont.appendChild(caja);
+  });
+  const c = cajas[activa];
+  const bc = $('botCortes'); bc.innerHTML = '';
+  const enJuego = c.sel.size > 0 || c.grapas.some(Boolean);
+  P.menu.forEach(n => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = n;
+    const rompe = n !== c.cortes && n % c.cortes !== 0 && enJuego;
+    if(rompe) b.classList.add('rompe');
+    if(armado && armado.caja === activa && armado.n === n) b.classList.add('avisa');
+    b.setAttribute('aria-pressed', String(c.cortes === n));
+    b.addEventListener('click', () => corta(n));
+    bc.appendChild(b);
+  });
+  const bm = $('botMaq'); bm.innerHTML = '';
+  const xs = [2, 3, 4, 5].filter(x => c.cortes % x === 0 && c.cortes / x >= 1);
+  $('filaMaq').hidden = !xs.length;
+  xs.forEach(x => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = 'de ' + x + ' en ' + x;
+    b.addEventListener('click', () => {
+      if(ocupado) return;
+      const r = M.industrial(c, x); if(!r.ok) return;
+      ultimaOp = r.op; grapaAnimada(c); clac(); pintaMesa(); lee();
+      if(r.nota) migas('La máquina une la pizza <b>entera</b> de ' + x + ' en ' + x + ': tus ' + r.nota.kAntes + '/' + r.nota.bAntes + ' no llenaban piezas enteras, así que te quedas con las piezas que los contienen. Aquí no hay división que enseñar.');
+      else if(!c.sel.size) migas('La pizza queda en <b>' + M.grupos(c).length + '</b> piezas iguales. Ahora elige la tuya.', 'senala');
+      quitaGrapasLuego();
+    });
+    bm.appendChild(b);
+  });
+}
+function corta(n){
+  const c = cajas[activa];
+  if(ocupado || n === c.cortes) return;
+  const destruye = n % c.cortes !== 0 && (c.sel.size > 0 || c.grapas.some(Boolean));
+  if(destruye && !(armado && armado.caja === activa && armado.n === n)){
+    armado = {caja: activa, n};
+    clearTimeout(corta.aviso); corta.aviso = setTimeout(() => { armado = null; pintaMesa(); }, 3200);
+    pintaMesa(); sonar('mal');
+    migas('De ' + c.cortes + ' a ' + n + ' el cortador <b>no respeta las piezas</b>: se pierde lo grapado y lo elegido. Toca otra vez para cortar de cero.');
+    return;
+  }
+  armado = null;
+  const hecho = () => { ocupado = false; const r = M.recorta(c, n); ultimaOp = r.op; pintaMesa(); lee(); };
+  if(menosMovimiento()){ sonar('corte'); hecho(); return; }
+  const svg = document.querySelectorAll('.cajaP')[activa]?.querySelector('svg.pizza');
+  ocupado = true; migas('');
+  animaHasta = Date.now() + PZ.cortador(svg, c.cortes, n, hecho);
+}
+$('bGrapar').addEventListener('click', () => {
+  const c = cajas[activa]; if(!c || ocupado) return;
+  const r = M.grapa(c);
+  if(!r.ok){
+    migas(r.por === 'pocas' ? 'La grapadora necesita <b>dos piezas o más</b>, y pegadas.' : 'Esas piezas <b>no están pegadas</b>: sueltas suman lo mismo, pero no forman una.');
+    sonar('mal'); return;
+  }
+  ultimaOp = r.op; grapaAnimada(c); clac(); pintaMesa(); lee();
+  if(!r.op && r.m > 1) migas('Una pieza de <b>' + r.m + '/' + c.cortes + '</b>… pero ' + r.m + ' no cabe en ' + c.cortes + ': esa pieza no es 1 de nada entero, y por eso aquí no hay división que enseñar.');
+  quitaGrapasLuego();
+});
+function quitaGrapasLuego(){ clearTimeout(reloj); reloj = setTimeout(() => { cajas.forEach(x => x.recien.clear()); pintaMesa(); }, Math.max(0, animaHasta - Date.now()) + 2600); }
+let ocupado = false, animaHasta = 0;
+const menosMovimiento = () => window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+function grapaAnimada(c){
+  if(menosMovimiento()){ sonar('grapa'); return; }
+  c.animar = 'grapa';
+  animaHasta = Date.now() + PZ.duraGrapa(c.recien.size);
+}
+$('bSoltar').addEventListener('click', () => { const c = cajas[activa]; if(!c || ocupado) return; M.suelta(c); ultimaOp = null; pintaMesa(); lee(); });
+$('bLimpiar').addEventListener('click', () => { if(!P || resuelto || ocupado) return; cajas = (P.cajas || [P.fA[1], P.fB[1]]).map(M.nuevaCaja); activa = 0; ultimaOp = null; armado = null; pintaMesa(); lee(); });
+
+const stackSVG = (k, b, col, x, y, tam) => '<text x="' + x + '" y="' + (y - 6) + '" font-size="' + tam + '" fill="' + col + '">' + k + '</text>' +
+  '<text x="' + x + '" y="' + (y + tam - 2) + '" font-size="' + tam + '" fill="' + col + '">' + b + '</text>' +
+  '<path d="M' + (x - tam * .7) + ' ' + (y + 4) + ' H' + (x + tam * .7) + '" stroke="' + col + '" stroke-width="2.4" stroke-linecap="round"/>';
+function pintaPapel(){
+  const cont = $('papel'); cont.innerHTML = '';
+  [['A', P.fA, P.fB, 'mA', 'var(--tomate)'], ['B', P.fB, P.fA, 'mB', 'var(--azul)']].forEach(([L, f, otra, cls, col]) => {
+    const m = papel[L];
+    const fr = document.createElement('div'); fr.className = 'fr ' + cls;
+    const svg = '<svg viewBox="0 0 150 70" aria-hidden="true"><g style="font-family:var(--rotulo);font-weight:700" text-anchor="middle">' + stackSVG(f[0], f[1], col, 30, 34, 24) +
+      (m ? '<text x="70" y="42" font-size="22" fill="var(--tinta)">=</text>' + stackSVG(f[0] * m, f[1] * m, col, 112, 34, 24) : '') + '</g>' +
+      (m ? '<path d="M44 16 Q70 0 96 14" fill="none" stroke="' + col + '" stroke-width="2.2" stroke-linecap="round"/><text x="70" y="8" font-size="12" fill="' + col + '" text-anchor="middle" style="font-family:var(--rotulo);font-weight:700">·' + m + '</text>' : '') + '</svg>';
+    fr.innerHTML = '<span class="quien">' + (L === 'A' ? 'Nicoleta' : 'El pinche') + ' ◆ ' + fTxt(f) + '</span>' + svg + '<div class="tiras"></div>';
+    const t = fr.querySelector('.tiras');
+    if(m){
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.textContent = 'Deshacer';
+      b.addEventListener('click', () => { papel[L] = null; pintaPapel(); lee(); }); t.appendChild(b);
+    }else{
+      t.innerHTML = '<span class="etq">multiplicar arriba y abajo por</span>';
+      [...new Set([2, f[1], otra[1]])].sort((a, b) => a - b).forEach(x => {
+        const b = document.createElement('button'); b.type = 'button'; b.className = 'n'; b.textContent = '×' + x;
+        b.addEventListener('click', () => { papel[L] = x; sonar('corte'); pintaPapel(); lee(); }); t.appendChild(b);
+      });
+    }
+    cont.appendChild(fr);
+  });
+}
+const denPapel = L => (L === 'A' ? P.fA[1] : P.fB[1]) * (papel[L] || 1);
+const numPapel = L => (L === 'A' ? P.fA[0] : P.fB[0]) * (papel[L] || 1);
+
+function lee(){
+  const lec = $('lec'), des = $('des');
+  $('pregunta').hidden = true; $('pregunta').innerHTML = '';
+  if(!P){ lec.innerHTML = '—'; des.innerHTML = ''; $('opera').hidden = true; pintaRegla(); return; }
+  if(esTel()){
+    const igual = papel.A && papel.B && denPapel('A') === denPapel('B');
+    lec.innerHTML = ro(numPapel('A') + '/' + denPapel('A')) + ' frente a ' + az(numPapel('B') + '/' + denPapel('B'));
+    des.innerHTML = igual ? 'Misma secuencia de ' + denPapel('A') + ': ahora sí se comparan.' : (papel.A || papel.B) && !igual && papel.A && papel.B ? 'Todavía no están en la <b>misma secuencia</b>: ' + denPapel('A') + ' y ' + denPapel('B') + ' no casan.' : 'El cortador no llega a ' + P.fA[1] * P.fB[1] + '. Se corta sobre el papel: cada una, arriba y abajo.';
+    $('opera').hidden = true;
+    pintaRegla(); pintaPizarra();
+    if(igual && !resuelto) ponPregunta();
+    return;
+  }
+  if(esCompara()){
+    const a = M.trozosDe(cajas[0]), b = M.trozosDe(cajas[1]);
+    lec.innerHTML = MESAS[0] + ': ' + ro(a ? a + '/' + cajas[0].cortes : '—') + ' ◆ ' + MESAS[1] + ': ' + az(b ? b + '/' + cajas[1].cortes : '—');
+    des.innerHTML = a && b ? 'Dos pedidos distintos: no se suman, se comparan.' : 'Prepara los dos pedidos, uno en cada caja.';
+    pintaRegla(); pintaOperacion(); pintaPizarra(); revisa(); return;
+  }
+  const ps = M.partes(cajas);
+  if(!ps.length){ lec.innerHTML = '—'; des.innerHTML = 'Toca los trozos que te llevas.'; }
+  else if(ps.length === 1){
+    lec.innerHTML = 'Te llevas <b>' + nombre(ps[0].k, ps[0].b) + '</b>';
+    const g = M.grupos(cajas[activa]), s = g[0].length, uniforme = g.length > 1 && s > 1 && g.every(t => t.length === s);
+    des.innerHTML = uniforme ? 'La pizza está en <b>' + g.length + '</b> piezas iguales: has dividido arriba y abajo entre ' + s + '.' : 'de pizza.';
+  }else if(M.mismoCorte(ps)){
+    const k = ps.reduce((s2, t) => s2 + t.k, 0), b = ps[0].b;
+    lec.innerHTML = 'Te llevas <b>' + nombre(k, b) + '</b>';
+    des.innerHTML = ps.map(t => t.k + '/' + t.b).join(' + ') + ' = ' + k + '/' + b + (k > b ? ', más de una pizza entera' : '');
+  }else{
+    lec.innerHTML = ps.map(t => '<b>' + t.k + '/' + t.b + '</b>').join(' &nbsp;y&nbsp; ');
+    des.innerHTML = 'Trozos distintos: todavía no se juntan. Pásales el <b>mismo cortador</b>.';
+  }
+  pintaRegla(); pintaOperacion(); revisa();
+}
+function pintaRegla(){
+  const cinta = $('cinta'), marcas = $('marcas');
+  cinta.innerHTML = ''; marcas.innerHTML = '';
+  if(!P) return;
+  const compara = esCompara() || esTel();
+  const tope = compara ? 1 : Math.max(cajas.length, 1);
+  const pc = v => (v / tope * 100).toFixed(3) + '%';
+  const raya = (v, clase) => { const i = document.createElement('i'); i.className = clase; i.style.left = pc(v); cinta.appendChild(i); };
+  const peines = (bA, bB) => {
+    const f = Math.max(bA, bB) > 24 ? ' f' : '';
+    if(bA === bB) for(let k = 1; k < bA; k++) raya(k / bA, 'm' + f);
+    else{ for(let k = 1; k < bA; k++) raya(k / bA, 'pA' + f); for(let k = 1; k < bB; k++) raya(k / bB, 'pB' + f); }
+  };
+  if(esTel()) peines(denPapel('A'), denPapel('B'));
+  else if(esCompara()) peines(cajas[0].cortes, cajas[1].cortes);
+  else for(let u = 0; u < tope; u++){ const fin = (cajas[u] || cajas[0]).cortes; for(let k = 1; k < fin; k++) raya(u + k / fin, 'c'); }
+  for(let u = 0; u <= tope; u++){ if(u > 0 && u < tope) raya(u, 'u'); const b = document.createElement('b'); b.textContent = u; b.style.left = pc(u); cinta.appendChild(b); }
+  const marca = (v, clase, txt) => { if(v <= 0) return; const m = document.createElement('div'); m.className = 'marca ' + clase; m.style.left = pc(v); m.dataset.v = v / tope; m.innerHTML = '<em></em><u>' + txt + '</u>'; marcas.appendChild(m); };
+  let kA = 0, kB = 0, den = 0;
+  if(esTel()){ kA = numPapel('A'); kB = numPapel('B'); den = denPapel('A') === denPapel('B') ? denPapel('A') : 0;
+    marca(fVal(P.fA), '', numPapel('A') + '/' + denPapel('A')); marca(fVal(P.fB), 'dos', numPapel('B') + '/' + denPapel('B')); }
+  else if(esCompara()){ kA = M.trozosDe(cajas[0]); kB = M.trozosDe(cajas[1]); den = cajas[0].cortes === cajas[1].cortes ? cajas[0].cortes : 0;
+    marca(M.valor(cajas[0]), '', kA + '/' + cajas[0].cortes); marca(M.valor(cajas[1]), 'dos', kB + '/' + cajas[1].cortes); }
+  else{ const ps = M.partes(cajas); if(ps.length && M.mismoCorte(ps)) marca(M.total(cajas), '', nombre(ps.reduce((s, t) => s + t.k, 0), ps[0].b)); }
+  if(compara && resuelto && den && kA !== kB && kA > 0 && kB > 0){
+    const v0 = Math.min(kA, kB) / den, v1 = Math.max(kA, kB) / den;
+    const h = document.createElement('div'); h.className = 'hueco'; h.style.left = pc(v0); h.style.width = pc(v1 - v0);
+    const s = document.createElement('span'); s.textContent = Math.abs(kA - kB) + '/' + den; h.appendChild(s);
+    cinta.appendChild(h);
+  }
+  const an = cinta.offsetWidth || 300;
+  const ms = marcas.querySelectorAll('.marca');
+  if(ms.length === 2 && Math.abs(ms[0].dataset.v - ms[1].dataset.v) * an < 52) ms[1].classList.add('baja');
+  const hs = cinta.querySelector('.hueco span'); if(hs && parseFloat(cinta.querySelector('.hueco').style.width) / 100 * an < 16) hs.remove();
+  const visto = pintaRegla.visto, mismo = visto && visto.P === P && !menosMovimiento();
+  const ahora = {P, v: {}, hueco: !!cinta.querySelector('.hueco')};
+  ms.forEach(m => {
+    const k = m.classList.contains('dos') ? 'B' : 'A', v = +m.dataset.v; ahora.v[k] = v;
+    const v0 = mismo ? (k in visto.v ? visto.v[k] : 0) : v, dx = (v0 - v) * an;
+    if(Math.abs(dx) > .5 && m.animate) m.animate([{transform: 'translateX(calc(-50% + ' + dx.toFixed(1) + 'px))'}, {transform: 'translateX(-50%)'}], {duration: 420, easing: 'cubic-bezier(.3,1.25,.5,1)'});
+  });
+  const h = cinta.querySelector('.hueco');
+  if(h && mismo && !visto.hueco && h.animate) h.animate([{transform: 'scaleX(0)'}, {transform: 'scaleX(1)'}], {duration: 520, delay: 120, easing: 'ease-out', fill: 'backwards'});
+  pintaRegla.visto = ahora;
+}
+function punta(x1, y1, cx, cy, col, largo){
+  largo = largo || 13;
+  const tx = x1 - cx, ty = y1 - cy, L = Math.hypot(tx, ty), ux = tx / L, uy = ty / L, ang = 24 * Math.PI / 180;
+  const Pt = s => [(x1 - largo * (ux * Math.cos(s * ang) - uy * Math.sin(s * ang))).toFixed(1), (y1 - largo * (ux * Math.sin(s * ang) + uy * Math.cos(s * ang))).toFixed(1)];
+  const [ax, ay] = Pt(1), [bx, by] = Pt(-1);
+  return '<path d="M' + x1 + ' ' + y1 + ' L' + ax + ' ' + ay + ' L' + bx + ' ' + by + ' Z" fill="' + col + '"/>';
+}
+function pintaOperacion(){
+  const cont = $('opera');
+  if(esCompara() && cajas[0].cortes === cajas[1].cortes){
+    const kA = M.trozosDe(cajas[0]), kB = M.trozosDe(cajas[1]), b = cajas[0].cortes;
+    if(kA && kB && casi(M.valor(cajas[0]), fVal(P.fA)) && casi(M.valor(cajas[1]), fVal(P.fB))){
+      cont.hidden = false;
+      cont.innerHTML = '<div class="rot">MISMOS TROZOS ◆ SE PUEDE COMPARAR</div><svg viewBox="0 0 300 110"><g style="font-family:var(--rotulo);font-weight:700" text-anchor="middle">' +
+        stackSVG(kA, b, 'var(--tomate)', 88, 50, 36) + stackSVG(kB, b, 'var(--azul)', 212, 50, 36) +
+        '<text x="150" y="60" font-size="9" letter-spacing="2" fill="var(--tenue)" style="font-family:var(--mono)">FRENTE A</text></g></svg>' +
+        '<div class="frase">' + (kA === kB ? 'Mismo numerador también: el <b>mismo punto</b> con dos nombres.' : 'Misma secuencia de ' + b + ': gana el numerador mayor.') + '</div>';
+      return;
+    }
+  }
+  if(!ultimaOp){ cont.hidden = true; cont.innerHTML = ''; return; }
+  const {tipo, c, ka, ba, kd, bd} = ultimaOp;
+  const signo = tipo === 'corte' ? '·' : ':', col = tipo === 'corte' ? 'var(--tomate)' : 'var(--albahaca)';
+  const flecha = (y, dy, txt) => { const x0 = 92, x1 = 208, cx = 150, cy = y + dy;
+    return '<path d="M' + x0 + ' ' + y + ' Q' + cx + ' ' + cy + ' ' + (x1 - 6) + ' ' + y + '" fill="none" stroke="' + col + '" stroke-width="3" stroke-linecap="round"/>' + punta(x1, y, cx, cy, col) +
+      '<text x="150" y="' + (dy < 0 ? 24 : 150) + '" text-anchor="middle" style="font-family:var(--rotulo);font-weight:700" font-size="19" fill="' + col + '">' + txt + '</text>'; };
+  cont.hidden = false;
+  cont.innerHTML = '<div class="rot">' + (tipo === 'corte' ? 'HAS CORTADO' : 'HAS GRAPADO') + '</div><svg viewBox="0 0 300 156"><g style="font-family:var(--rotulo);font-weight:700" text-anchor="middle">' +
+    stackSVG(ka, ba, 'var(--tinta)', 80, 84, 27) + '<text x="150" y="94" font-size="27" fill="var(--tinta)">=</text>' + stackSVG(kd, bd, 'var(--tinta)', 220, 84, 27) + '</g>' +
+    flecha(56, -30, signo + c) + flecha(114, 30, signo + c) + '</svg>' +
+    '<div class="frase">' + (tipo === 'corte' ? 'Cortar en ' + c + ' <b>multiplica arriba y abajo por ' + c + '</b>.' : 'Grapar de ' + c + ' en ' + c + ' <b>divide arriba y abajo entre ' + c + '</b>.') + '</div>';
+}
+
+function revisa(){
+  if(resuelto) return;
+  if(esCompara()){
+    const okA = casi(M.valor(cajas[0]), fVal(P.fA)), okB = casi(M.valor(cajas[1]), fVal(P.fB)), igual = cajas[0].cortes === cajas[1].cortes;
+    if(okA && okB && (P.tipo === 'num' || igual)) ponPregunta();
+    else if(okA && okB && !igual) migas('Los dos pedidos están listos: ahora pásales el <b>mismo cortador</b>. Con trozos distintos no hay cuenta que valga.', 'senala');
+    return;
+  }
+  const ps = M.partes(cajas), juntable = ps.length < 2 || M.mismoCorte(ps), v = M.total(cajas);
+  const pieza = !P.pieza || cajas.some(c => M.piezaDe(c, P.f[1]));
+  if(juntable && casi(v, fVal(P.f)) && pieza) acierta(P.ok);
+  else if(juntable && casi(v, fVal(P.f)) && !pieza) migas('Suman ' + fTxt(P.f) + ', sí. Pero el cliente quiere <b>una pieza</b>: grápalos.');
+}
+function ponPregunta(){
+  const q = $('pregunta'); if(!q.hidden) return;
+  q.hidden = false; q.innerHTML = '<span class="etq">¿quién se lleva más?</span>';
+  const va = fVal(P.fA), vb = fVal(P.fB), iguales = casi(va, vb);
+  [['El de ' + fTxt(P.fA), !iguales && va > vb, 'A'], ['El de ' + fTxt(P.fB), !iguales && vb > va, 'B'], ['Los dos igual', iguales, 'ig']].forEach(([txt, bien, clave]) => {
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'b'; b.textContent = txt;
+    b.addEventListener('click', () => {
+      if(bien){
+        const guiño = !prediccion ? '' : prediccion === signoReal() ? 'Lo que apuntaste en la pizarra iba bien encaminado. ' : 'La pizarra decía otra cosa, ¿eh? Por algo se cuenta antes de cobrar. ';
+        acierta(guiño + P.ok);
+      }else{
+        fallos++; est.stats[est.juego].mal += fallos === 1 ? 1 : 0;
+        if(!trampa('fallo')) sonar('mal');
+        b.disabled = true; b.classList.add('no');
+        replica(b, (P.rep || {})[clave] || 'Mira la regla: se lleva más el que cae más a la derecha.');
+      }
+    });
+    q.appendChild(b);
+  });
+}
+function replica(boton, html){
+  const q = $('pregunta');
+  let r = q.querySelector('.replica');
+  if(!r){
+    r = document.createElement('div'); r.className = 'replica'; r.setAttribute('role', 'status');
+    r.innerHTML = '<span class="cara" data-vb="12 4 76 76" aria-hidden="true"></span><p class="bocadillo"></p>';
+    q.appendChild(r);
+  }
+  const t = r.querySelector('.bocadillo');
+  t.innerHTML = '<b class="quien">Nick</b> ' + html;
+  const rq = q.getBoundingClientRect(), rb = boton.getBoundingClientRect(), z = ampliado();
+  const x = (rb.left + rb.width / 2 - rq.left) / z;
+  r.style.setProperty('--cola', Math.round(Math.max(76, Math.min(rq.width / z - 18, x))) + 'px');
+  r.classList.remove('entra'); void r.offsetWidth; r.classList.add('entra');
+  PJ.ponCara(r.querySelector('.cara'), 'nick', 'senala', true);
+  PJ.ponCara($('caraNick'), 'nick', 'piensa');
+}
+function acierta(txt){
+  resuelto = true;
+  const espera = Math.max(0, animaHasta - Date.now()) + (animaHasta > Date.now() ? 250 : 0);
+  setTimeout(() => { if(!trampa('acierto')) sonar('bien'); }, espera);
+  nickDice(txt, true);
+  $('pregunta').hidden = true; $('pregunta').innerHTML = ''; migas('');
+  const s = est.stats[est.juego];
+  if(est.practica){ if(!fallos) s.bien++; }
+  else s.ruta = Math.max(s.ruta, est.ruta[est.juego] + 1);
+  est.ejercicios.push({t: Date.now(), j: est.juego, c: esTel() || esCompara() ? fTxt(P.fA) + ' y ' + fTxt(P.fB) : fTxt(P.f), p: est.practica ? 1 : 0, f: fallos, s: Math.round((Date.now() - tPedido) / 1000)});
+  guarda();
+  if(est.practica) $('bOtro').hidden = false;
+  else{ $('bSiguiente').hidden = false; $('bSaltar').hidden = true; }
+  pintaRegla(); pintaOperacion(); pintaPizarra();
+}
+
+const quieto = () => !aj.trampa || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+function trampa(escena){
+  if(quieto() || !window.Trampa) return false;
+  if(escena === 'acierto') return !!window.Trampa.lanza(escena, PJ, sitioLibre());
+  const r = $('mesa').getBoundingClientRect(), seVeLaMesa = r.top >= 0 && r.bottom <= innerHeight;
+  return !!window.Trampa.lanza(escena, PJ, {cerca: seVeLaMesa ? $('mesa') : null});
+}
+function sitioLibre(){
+  const S = Math.round(Math.min(230, innerWidth * .56)), r = $('cajas').getBoundingClientRect();
+  const abajo = innerHeight - Math.max(0, r.bottom), arriba = Math.min(innerHeight, r.top);
+  if(abajo >= S * .8) return {punto: {x: innerWidth / 2, y: innerHeight - abajo / 2}, tam: Math.min(S, abajo - 12)};
+  if(arriba >= S * .8) return {punto: {x: innerWidth / 2, y: arriba / 2}, tam: Math.min(S, arriba - 12)};
+  const t = Math.round(S * .7);
+  return {punto: {x: innerWidth - t / 2 - 10, y: innerHeight - t / 2 - 10}, tam: t};
+}
+
+const firma = txt => { let h = 2166136261; for(let i = 0; i < txt.length; i++){ h ^= txt.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } const x = h.toString(16).toUpperCase().padStart(8, '0'); return x.slice(0, 4) + '-' + x.slice(4); };
+const hora = t => { const d = new Date(t), dos = x => String(x).padStart(2, '0'); return dos(d.getHours()) + ':' + dos(d.getMinutes()); };
+const tiempo = ms => { const m = Math.round(ms / 60000); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + (m % 60) + ' min'; };
+function textoActa(){
+  const J = ['servir', 'comparar', 'telefono'];
+  const l = ['LA GRAPADORA DE NICK ◆ ACTA', 'Nombre: ' + (est.nombre || '—'), 'Fecha: ' + new Date().toLocaleString('es-ES'), 'Tiempo: ' + tiempo(Date.now() - est.t0), ''];
+  J.forEach(j => { const s = est.stats[j]; l.push(PD.NOMBRE_J[j] + ': ruta ' + s.ruta + '/' + PD.RUTA[j].length + ' ◆ practicar ' + s.bien + ' a la primera, ' + s.mal + ' con fallos'); });
+  l.push('');
+  est.ejercicios.forEach(e => l.push(hora(e.t) + ' ' + PD.NOMBRE_J[e.j] + (e.p ? ' (practicar)' : '') + ' ' + e.c + ' ◆ ' + (e.f ? e.f + ' fallo' + (e.f > 1 ? 's' : '') : 'a la primera') + ' ◆ ' + e.s + ' s'));
+  return l.join('\n');
+}
+function pintaActa(){
+  const J = ['servir', 'comparar', 'telefono'], dato = (n, v) => '<div><span class="etq">' + n + '</span><b>' + v + '</b></div>';
+  const ruta = J.reduce((s, j) => s + est.stats[j].ruta, 0), total = J.reduce((s, j) => s + PD.RUTA[j].length, 0);
+  const pb = J.reduce((s, j) => s + est.stats[j].bien, 0), pm = J.reduce((s, j) => s + est.stats[j].mal, 0);
+  $('acDatos').innerHTML = dato('La ruta', ruta + ' / ' + total) + dato('Practicar', pb + ' a la primera') + dato('Con fallos', pm) + dato('Tiempo', tiempo(Date.now() - est.t0));
+  $('acFilas').innerHTML = J.map(j => { const s = est.stats[j]; return '<tr><td><b>' + PD.NOMBRE_J[j] + '</b></td><td>' + s.ruta + ' de ' + PD.RUTA[j].length + '</td><td>' + (s.bien + s.mal ? s.bien + ' a la primera ◆ ' + s.mal + ' con fallos' : '—') + '</td></tr>'; }).join('');
+  $('acDet').hidden = !est.ejercicios.length;
+  $('acDet').querySelector('summary').textContent = 'Pedido a pedido (' + est.ejercicios.length + ')';
+  $('acEj').innerHTML = est.ejercicios.map(e => '<li class="' + (e.f ? 'no' : 'ok') + '"><span class="ac-h">' + hora(e.t) + '</span><span>' + PD.NOMBRE_J[e.j] + (e.p ? ' ◆ practicar' : '') + '</span><span class="ac-c">' + e.c + '</span><span class="ac-como">' + (e.f ? e.f + ' fallo' + (e.f > 1 ? 's' : '') : 'a la primera') + '</span></li>').join('');
+  $('acNombre').value = est.nombre || '';
+  $('acFirma').textContent = firma(textoActa());
+}
+function abreActa(){ ajustes(false); $('acMsg').textContent = ''; pintaActa(); $('mActa').hidden = false; $('mActa').querySelector('.caja2').focus(); }
+const cierraActa = () => { $('mActa').hidden = true; $('bActa').focus(); };
+$('bActa').addEventListener('click', abreActa);
+$('acCierra').addEventListener('click', cierraActa);
+$('mActa').addEventListener('click', ev => { if(ev.target.id === 'mActa') cierraActa(); });
+$('acNombre').addEventListener('input', () => { est.nombre = $('acNombre').value; guarda(); $('acFirma').textContent = firma(textoActa()); });
+$('acCopia').addEventListener('click', () => {
+  const t = textoActa() + '\n\nCódigo de verificación: ' + firma(textoActa()), no = () => { $('acMsg').textContent = 'No se ha podido copiar: usa «Descargar .txt».'; };
+  try{ navigator.clipboard.writeText(t).then(() => { $('acMsg').textContent = '✓ Acta copiada: pégala donde te diga tu profesor.'; }, no); }catch(err){ no(); }
+});
+$('acBaja').addEventListener('click', () => {
+  const f = new Date(), dos = x => String(x).padStart(2, '0');
+  const nombre = (est.nombre || 'sin-nombre').trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'sin-nombre';
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([textoActa() + '\n\nCódigo de verificación: ' + firma(textoActa())], {type: 'text/plain;charset=utf-8'}));
+  a.download = 'acta-grapadora-' + nombre + '-' + f.getFullYear() + dos(f.getMonth() + 1) + dos(f.getDate()) + '.txt';
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  $('acMsg').textContent = '✓ Acta descargada.';
+});
+
+const EV = window.Entrevistas.monta($('entrevista'), PJ);
+function abreEntrevista(){ ajustes(false); $('mEntrevista').hidden = false; EV.abre(); $('entrevista').focus(); }
+const cierraEntrevista = () => { EV.calla(); $('mEntrevista').hidden = true; $('bEntrevista').focus(); };
+$('bEntrevista').addEventListener('click', abreEntrevista);
+$('evCierra').addEventListener('click', cierraEntrevista);
+$('mEntrevista').addEventListener('click', ev => { if(ev.target.id === 'mEntrevista') cierraEntrevista(); });
+
+let cero = 0;
+$('ajCero').addEventListener('click', () => {
+  if(!cero){ cero = setTimeout(() => { cero = 0; $('ajCero').classList.remove('seguro'); $('ajCero').textContent = 'Borrar todo'; }, 5000);
+    $('ajCero').classList.add('seguro'); $('ajCero').textContent = 'Pulsa otra vez para borrarlo'; return; }
+  clearTimeout(cero); cero = 0; $('ajCero').classList.remove('seguro'); $('ajCero').textContent = 'Borrar todo';
+  try{ localStorage.removeItem(TURNO); }catch(err){}
+  est = nuevoTurno(); ajustes(false); pintaPestanas(); montaPedido();
+});
+
+const GUIA = [
+  {sel: '.juegos', c: 'Los tres juegos', t: '<b>Servir</b> lo que pide el cliente aunque la pizza venga cortada de otra manera; <b>comparar</b> dos pedidos, la escalera de la comparación; y <b>por teléfono</b>, cuando el cortador no llega y se corta sobre el papel.'},
+  {sel: '#cliente', c: 'El encargo', t: 'Lo que pide el cliente. Debajo, Nick te dice por dónde ir; y los puntos, por dónde va la ruta.'},
+  {sel: '#pizarra', c: 'La pizarra', t: 'Antes de cortar nada, <b>di qué signo crees</b>: &gt;, = o &lt;. Cuando la cuenta esté hecha, verás si acertaste.'},
+  {sel: '#cajas', c: 'Las cajas', t: 'Toca un trozo y se levanta: es lo que te llevas. Si hay dos cajas, la que tiene el marco grueso es la que mandan los botones.'},
+  {sel: '#botCortes', c: 'El cortador', t: 'Vuelve a cortar la pizza. <b>Lo grapado aguanta</b>: media pizza sigue siendo una pieza, solo cambia de nombre. Un corte punteado no respeta las piezas y pide un segundo toque.'},
+  {sel: '#botMaq', c: 'La máquina', t: 'Grapa la pizza <b>entera</b> de 2 en 2, de 3 en 3… Es lo contrario de cortar: cambia en cuántas partes está la pizza. Luego eliges tu pieza.'},
+  {sel: '#bGrapar', c: 'La grapadora', t: 'Une los trozos elegidos, si están <b>pegados</b>. Dos cuartos grapados son media pizza: la misma cantidad con otro nombre.'},
+  {sel: '#papel', c: 'El papel', t: 'Aquí no hay pizza que valga. Multiplica cada fracción <b>arriba y abajo</b> hasta que las dos estén en la misma secuencia; entonces se comparan.'},
+  {sel: '#tique', c: 'El tique', t: 'La regla es la que manda: <b>el 1 es una pizza entera</b>, y cada pedido acaba en su marca. Debajo, la operación que ha hecho tu gesto: cortar multiplica, grapar divide.'},
+  {sel: '#bEntrevista', c: 'Las entrevistas', t: 'Pregúntales lo que quieras a <b>Nick</b>, a su hermana <b>Nicoleta</b> y a <b>Migas</b>, el pinche del cortador.'},
+  {sel: '#bPracticar', c: 'Practicar', t: 'Pedidos <b>nuevos cada vez</b>, sin fin, con tres dificultades.'},
+  {sel: '#bActa', c: 'El acta', t: 'Un resumen de lo que has hecho, con tu nombre y un código, para <b>entregárselo a tu profesor</b>.'},
+  {sel: '#bAjustes', c: 'Ajustes', t: 'La encimera o la pizarra, decir el signo antes de comparar, el sonido, la animación y la trampa para ratones.'},
+  {sel: '#bAula', c: 'El aula', t: 'Todo más grande y en una sola pantalla, para la pizarra digital. <b>A servir.</b>'}
+];
+let guiaI = -1, guiaParadas = [], guiaRetoque = 0;
+const seVe = e => !!(e && e.offsetParent !== null && e.getBoundingClientRect().height > 0);
+function cierraGuia(){ $('guia').hidden = true; guiaI = -1; clearTimeout(guiaRetoque); try{ localStorage.setItem('grapadora.guia', 'vista'); }catch(err){} $('bGuia').focus(); }
+function vaGuia(i){
+  if(i >= guiaParadas.length) return cierraGuia();
+  guiaI = i;
+  const g = guiaParadas[i], e = document.querySelector(g.sel);
+  if(!seVe(e)) return vaGuia(i + 1);
+  $('guiaTit').textContent = g.c; $('guiaTxt').innerHTML = g.t;
+  $('guiaNum').textContent = (i + 1) + ' de ' + guiaParadas.length;
+  $('guiaSig').textContent = i === guiaParadas.length - 1 ? 'A servir' : 'Siguiente';
+  $('guia').hidden = false;
+  e.scrollIntoView({block: 'center', behavior: 'instant'});
+  colocaGuia(); requestAnimationFrame(() => requestAnimationFrame(colocaGuia));
+  clearTimeout(guiaRetoque); guiaRetoque = setTimeout(colocaGuia, 180);
+}
+function colocaGuia(){
+  const g = guiaParadas[guiaI]; if(!g || $('guia').hidden) return;
+  const e = document.querySelector(g.sel); if(!seVe(e)) return;
+  const z = ampliado(), r0 = e.getBoundingClientRect(), m = 7, f = $('guiaFoco'), gl = $('guiaGlobo');
+  const r = {top: r0.top / z, left: r0.left / z, width: r0.width / z, height: r0.height / z, bottom: r0.bottom / z}, innerWidth = window.innerWidth / z, innerHeight = window.innerHeight / z;
+  f.style.top = (r.top - m) + 'px'; f.style.left = (r.left - m) + 'px'; f.style.width = (r.width + 2 * m) + 'px'; f.style.height = (r.height + 2 * m) + 'px';
+  const alto = gl.offsetHeight || 180, ancho = gl.offsetWidth || 320;
+  const abajo = r.bottom + m + 12, arriba = r.top - m - 12 - alto;
+  gl.style.top = (abajo + alto < innerHeight - 8 ? abajo : arriba > 8 ? arriba : Math.max(8, innerHeight - alto - 8)) + 'px';
+  gl.style.left = Math.min(Math.max(12, r.left + r.width / 2 - ancho / 2), innerWidth - ancho - 12) + 'px';
+}
+function abreGuia(){ ajustes(false); guiaParadas = GUIA.filter(g => seVe(document.querySelector(g.sel))); vaGuia(0); $('guiaGlobo').focus(); }
+$('bGuia').addEventListener('click', abreGuia);
+$('guiaSig').addEventListener('click', ev => { ev.stopPropagation(); vaGuia(guiaI + 1); });
+$('guiaSalir').addEventListener('click', ev => { ev.stopPropagation(); cierraGuia(); });
+$('guiaGlobo').addEventListener('click', ev => ev.stopPropagation());
+$('guia').addEventListener('click', () => vaGuia(guiaI + 1));
+addEventListener('keydown', ev => { if(!$('guia').hidden){ ev.stopPropagation(); if(ev.key === 'Escape') cierraGuia(); else if(ev.key === 'ArrowRight' || ev.key === 'Enter'){ ev.preventDefault(); vaGuia(guiaI + 1); } return; }
+  if(ev.key === 'Escape' && !$('mActa').hidden) cierraActa();
+  if(ev.key === 'Escape' && !$('mEntrevista').hidden) cierraEntrevista(); }, true);
+addEventListener('scroll', colocaGuia, {passive: true});
+addEventListener('resize', colocaGuia);
+
+aplicaAjustes(); pintaPestanas(); montaPedido();
+const primeraVez = (() => { try{ return localStorage.getItem('grapadora.guia') !== 'vista'; }catch(err){ return false; } })();
+const arranca = () => { if(primeraVez && !vieneDeEnlace) setTimeout(abreGuia, 400); };
+if(document.documentElement.dataset.inicio === 'si' && window.Arranque) window.Arranque.escena($('escenaInicio'), arranca);
+else arranca();
+})();
+</script>
+</body>
+</html>
